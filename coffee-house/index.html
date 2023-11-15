@@ -17,7 +17,6 @@
   <div class="container">
     <header class="header">
       <div class="header-logo">
-        <!-- <img src="./assets/header/logo.png" alt="coffee house logo"> -->
         <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M69 25C69 35.4934 60.4934 44 50 44C39.5066 44 31 35.4934 31 25C31 14.5066 39.5066 6 50 6C60.4934 6 69 14.5066 69 25Z"
@@ -107,7 +106,7 @@
         </a>
       </div>
     </header>
-    <section class="hero">
+    <section class="hero section">
       <div class="hero-container">
         <h1><span>Enjoy</span>premium coffee at our charming cafe</h1>
         <p class="hero-content">With its inviting atmosphere and delicious coffee options, the Coffee House Resource is
@@ -116,7 +115,51 @@
         <button class="hero-btn">Menu</button>
       </div>
     </section>
+    <section class="favorite-coffee section">
+      <h2>Choose your <span>favorite</span> coffee</h2>
+      <div class="slider">
+        <div class="slider-main">
+          <div class="slider-btn-left">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+
+          </div>
+          <div class="slider-viewport">
+            <div class="slide">
+              <div class="slide-content">
+                <div class="slide-content-img">
+                </div>
+                <div class="slide-description">
+                  <h3 class="slide-description-title">S’mores Frappuccino</h3>
+                  <p class="slide-description-content">This new drink takes an espresso and mixes it with brown sugar
+                    and cinnamon before being topped with oat milk.</p>
+                  <span class="slide-description-price">$5.50</span>
+                </div>
+              </div>
+            </div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+          </div>
+          <div class="slider-btn-right">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+
+          </div>
+        </div>
+        <div class="slider-dots">
+          <div class="slider-dots-item slider-dots__active"></div>
+          <div class="slider-dots-item"></div>
+          <div class="slider-dots-item"></div>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
