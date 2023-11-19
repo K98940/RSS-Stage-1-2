@@ -1,0 +1,48 @@
+.hero {
+  height: 644px;
+  padding-top: 100px;
+  padding-left: 100px;
+
+  border-radius: 40px;
+  background-image: url('../assets/hero/container.jpg');
+  @extend %bg-to-center;
+}
+
+.hero-container {
+  width: 530px;
+  height: 444px;
+  color: $text-light;
+}
+
+.hero-content {
+  @extend %font-body-medium;
+  margin-bottom: 40px;
+}
+
+.hero-btn {
+  @extend %btn-large;
+  @extend %flex-center-center;
+
+  &:hover .hero-btn-title {
+    transform: translateX(-10px);
+  }
+
+  &:hover .hero-btn-icon {
+    opacity: 1;
+  }
+}
+
+.hero-btn-title {
+  display: inline-block;
+  transform: translate(10px, 1px);
+  transition-duration: $transition-duration-normal;
+}
+
+.hero-btn-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('../assets/header/coffee-cup.svg');
+  opacity: 0;
+  transition-duration: $transition-duration-normal;
+}

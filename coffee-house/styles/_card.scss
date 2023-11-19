@@ -1,0 +1,51 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  color: $text-dark;
+  border: 1px solid $border-light;
+  border-radius: 40px;
+
+  & picture {
+    @extend %flex-center-center;
+    flex: 0 0 307px;
+    border-radius: 40px;
+    overflow: hidden;
+
+    & img {
+      transform: scale(1);
+      transition-duration: $transition-duration-normal;
+      transition-delay: $transition-delay-normal;
+    }
+  }
+
+  &:hover picture img {
+    transform: scale(0.91);
+  }
+}
+
+.card-description {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.card-title {
+  @extend %font-heading-3;
+  flex: 0 0 30px;
+}
+
+.card-text {
+  @extend %font-body-medium;
+  flex: 1 1 auto;
+}
+
+.card-price {
+  @extend %font-heading-3;
+  flex: 0 0 30px;
+}

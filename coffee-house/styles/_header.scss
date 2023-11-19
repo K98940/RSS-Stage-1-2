@@ -1,0 +1,97 @@
+    $menu-item-padding: 10px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header-logo {
+      width: 100px;
+      height: 60px;
+      cursor: default;
+
+      & a {
+        cursor: default;
+        transition-duration: $transition-duration-normal;
+      }
+
+      & img {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      & a[href*="html"]:hover {
+        cursor: pointer;
+        filter: brightness(1.2);
+      }
+    }
+
+    .header-menu-link {
+      display: inline-block;
+      padding-bottom: 5px;
+
+      color: $text-dark;
+      text-decoration: none;
+      @extend %font-action-link-button;
+
+      & span {
+        padding-right: 5px;
+      }
+    }
+
+    .header-nav {
+      margin-top: -4px;
+
+      & ul {
+        display: flex;
+        gap: 21px;
+        list-style-type: none;
+
+        & li {
+
+          & a {
+            @extend %font-action-link-button;
+            position: relative;
+            padding: 5px $menu-item-padding;
+            text-decoration: none;
+            color: $text-dark;
+          }
+
+          & a::after {
+            @extend %link-after;
+          }
+
+          & a:hover::after {
+            opacity: 1;
+            width: calc(100% - $menu-item-padding * 2);
+          }
+        }
+      }
+    }
+
+    .header-menu {
+      & a {
+        position: relative;
+        cursor: default;
+      }
+
+      & a::after {
+        @extend %link-after;
+      }
+
+      & a[href="#"]::after {
+        opacity: 1;
+        width: 100%;
+      }
+
+      & a[href*="html"]:hover::after {
+        opacity: 1;
+        width: 100%;
+      }
+
+      & a[href*="html"]:hover {
+        cursor: pointer;
+      }
+    }

@@ -1,0 +1,94 @@
+%mobileapp-col {
+  flex: 0 0 50%;
+}
+
+.mobileapp {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  color: $text-dark;
+}
+
+.mobileapp-offer {
+  @extend %mobileapp-col;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+
+  & h2 {
+    @extend %font-heading-2;
+
+    & span {
+      color: $text-accent;
+      @extend %font-heading-2-accent;
+      @extend %accent-correction;
+    }
+  }
+
+  p {
+    @extend %font-body-medium;
+  }
+}
+
+.mobile-screens {
+  @extend %flex-center-center;
+  flex: 0 0 630px;
+  height: 630px;
+
+  & img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.mobileapp-btn-container {
+  display: flex;
+  gap: 20px
+}
+
+.mobileapp-btn {
+  @extend %btn-large;
+  display: grid;
+  column-gap: 7px;
+  grid-template-columns: 36px auto;
+  grid-template-rows: 14px 24px;
+  grid-template-areas:
+    "icon text"
+    "icon vendor";
+
+  align-content: center;
+  justify-items: start;
+  padding: 12px 20px;
+
+  border: 1px solid $border-dark;
+
+  &:hover {
+    background-color: $background-container;
+    color: $text-light;
+  }
+
+  &:hover .mobileapp-btn-icon svg {
+    fill: $text-light;
+  }
+}
+
+.mobileapp-btn-icon {
+  grid-area: icon;
+
+  & svg {
+    fill: $text-dark;
+  }
+}
+
+.mobileapp-btn-text {
+  @extend %font-body-caption;
+  grid-area: text;
+}
+
+.mobileapp-btn-vendor {
+  @extend %font-action-link-button;
+  grid-area: vendor;
+}

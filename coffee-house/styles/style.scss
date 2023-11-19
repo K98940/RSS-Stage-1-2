@@ -1,0 +1,77 @@
+@import 'fonts';
+@import 'var';
+@import 'header';
+@import 'hero';
+@import 'common';
+@import 'favorite-coffee';
+@import 'slider';
+@import 'about';
+@import 'mobileapp';
+@import 'footer';
+@import 'menu';
+@import 'card';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  scroll-behavior: smooth;
+  // scrollbar-gutter: stable;
+}
+
+html {
+  height: 100dvh;
+}
+
+body {
+  height: 100%;
+  background: $background-body;
+}
+
+.container {
+  width: clamp(320px, 100%, 1440px);
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+}
+
+.section {
+  margin-bottom: 100px;
+}
+
+.h2-title {
+  text-align: center;
+  color: $text-dark;
+  @extend %font-heading-2;
+
+  & span {
+    color: $text-accent;
+    @extend %font-heading-2-accent;
+  }
+}
+
+h1 {
+  @extend %font-heading-1;
+  margin-bottom: 40px;
+
+  & span {
+    @extend %font-heading-1-accent;
+    @extend %accent-correction;
+    color: $text-accent;
+    padding-right: 18px;
+  }
+}
+
+h2 {
+  @extend %font-heading-2;
+
+  & span {
+    @extend %font-heading-2-accent;
+    @extend %accent-correction;
+    color: $text-accent;
+  }
+}

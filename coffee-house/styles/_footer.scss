@@ -1,0 +1,138 @@
+%contacts-before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.footer {
+  @extend %flex-center-center;
+  gap: 100px;
+  padding: 100px;
+  border-radius: 40px;
+  background: $background-container;
+  color: $text-light;
+}
+
+.footer-column {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  flex: 1 1 50%;
+  gap: 40px;
+
+  & h2 {
+    @extend %font-heading-2;
+
+    & span {
+      @extend %font-heading-2-accent;
+      @extend %accent-correction;
+      color: $text-accent;
+    }
+  }
+
+  & h3 {
+    @extend %font-heading-3;
+  }
+}
+
+.footer-column__flex-start {
+  align-self: flex-start;
+  padding-top: 33px;
+}
+
+.contacts-container {
+  $padding-left: 28px;
+  @extend %font-action-link-button;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+
+  & address {
+    position: relative;
+    padding-bottom: 4px;
+
+    &::before {
+      @extend %contacts-before;
+      background-image: url('../assets/common/icon-pin-alt.svg');
+    }
+
+    &::after {
+      @extend %link-after;
+    }
+
+    &:hover::after {
+      background-color: $border-light;
+      opacity: 1;
+      width: 100%;
+    }
+
+    &>a {
+      @extend %font-action-link-button;
+      padding-left: $padding-left;
+      color: $text-light;
+      text-decoration: none;
+    }
+  }
+
+  &>a {
+    @extend %font-action-link-button;
+    position: relative;
+    padding-bottom: 4px;
+    padding-left: $padding-left;
+    text-decoration: none;
+    color: $text-light;
+
+    &::before {
+      @extend %contacts-before;
+      left: 0;
+      background-image: url('../assets/common/icon-phone.svg');
+    }
+
+    &::after {
+      @extend %link-after;
+    }
+
+    &:hover::after {
+      background-color: $border-light;
+      opacity: 1;
+      width: 100%;
+    }
+  }
+
+  & time {
+    position: relative;
+    padding-bottom: 4px;
+    padding-left: $padding-left;
+
+    &::before {
+      @extend %contacts-before;
+      left: 0;
+      background-image: url('../assets/common/icon-clock.svg');
+    }
+  }
+}
+
+.contacts-btns-container {
+  display: flex;
+  flex: 1 1 100%;
+  gap: 12px;
+}
+
+.contacts-btn {
+  @extend %flex-center-center;
+  flex: 0 0 60px;
+  height: 60px;
+  border: 1px solid $border-light;
+  border-radius: 100%;
+  stroke: $border-light;
+  transition-duration: $transition-duration-normal;
+
+  &:hover {
+    stroke: $text-dark;
+    background-color: $background-body;
+  }
+}
