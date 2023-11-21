@@ -1,0 +1,15 @@
+.favorite-coffee {
+
+  & h2 {
+    text-align: center;
+    color: $text-dark;
+    @extend %font-heading-2;
+    margin-bottom: 40px;
+
+    & span {
+      color: $text-accent;
+      @extend %font-heading-2-accent;
+      @extend %accent-correction;
+    }
+  }
+}

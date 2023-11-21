@@ -1,0 +1,171 @@
+.menu-title {
+  @extend %font-heading-2;
+  color: $text-dark;
+  text-align: center;
+  margin-bottom: 40px;
+
+  & span {
+    @extend %font-heading-2-accent;
+    @extend %accent-correction;
+    color: $text-accent;
+  }
+}
+
+.menus-container {
+  @extend %flex-center-center;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.tab-input {
+  display: none
+}
+
+.menu-tab {
+  @extend %flex-center-center;
+
+  & label {
+    @extend %flex-center-center;
+    @extend %font-action-link-button;
+    padding: 8px 16px 8px 8px;
+    gap: 8px;
+
+    color: $text-dark;
+    border-radius: 100px;
+    border: 1px solid black;
+    transition-duration: $transition-duration-normal;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $background-container;
+    }
+  }
+
+  & input:checked+label {
+    background-color: $background-container;
+    color: $text-light;
+    cursor: default;
+
+    & .tab-icon {
+      background-color: $background-body;
+    }
+  }
+}
+
+.tab-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 3px 7px;
+
+  border-radius: 100%;
+
+  background-color: $border-light;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+.tab-icon__coffee {
+  background-image: url('../assets/tabs/cap.svg');
+}
+
+.tab-icon__tea {
+  background-image: url('../assets/tabs/tea.svg');
+}
+
+.tab-icon__dessert {
+  background-image: url('../assets/tabs/dessert.svg');
+}
+
+.menu-container {
+  width: 100%;
+  margin-bottom: 100px;
+
+  & article {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 506px;
+    gap: 40px;
+
+    width: 100%;
+    height: 0;
+    transition-duration: $transition-duration-normal, $transition-duration-slow;
+    transition-property: opacity, height;
+
+    opacity: 0;
+    overflow: hidden;
+  }
+}
+
+.tab-input[value="coffee"]:checked~.tab-container label[for=tab-coffee] {
+  background-color: $background-container;
+  color: $text-light;
+  cursor: default;
+
+  & .tab-icon {
+    background-color: $background-body;
+  }
+
+  &:hover {
+    filter: brightness(1);
+  }
+}
+
+.tab-input[value="tea"]:checked~.tab-container label[for=tab-tea] {
+  background-color: $background-container;
+  color: $text-light;
+  cursor: default;
+
+  & .tab-icon {
+    background-color: $background-body;
+  }
+
+  &:hover {
+    filter: brightness(1);
+  }
+}
+
+.tab-input[value="dessert"]:checked~.tab-container label[for=tab-dessert] {
+  background-color: $background-container;
+  color: $text-light;
+  cursor: default;
+
+  & .tab-icon {
+    background-color: $background-body;
+  }
+
+  &:hover {
+    filter: brightness(1);
+  }
+}
+
+.menu__coffee,
+.menu__tea,
+.menu__dessert {
+  &>h3 {
+    display: none;
+  }
+}
+
+.tab-input[value="coffee"]:checked~.menu-container .menu__coffee {
+  opacity: 1;
+  height: fit-content;
+}
+
+.tab-input[value="tea"]:checked~.menu-container .menu__tea {
+  opacity: 1;
+  height: fit-content;
+}
+
+.tab-input[value="dessert"]:checked~.menu-container .menu__dessert {
+  opacity: 1;
+  height: fit-content;
+}
+
+.tab-container {
+  @extend %flex-center-center;
+  gap: 14px;
+  margin-bottom: 38px
+}

@@ -1,0 +1,71 @@
+$font-family: 'Inter', sans-serif;
+
+%font-heading-1 {
+  font-family: $font-family;
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 105%;
+}
+
+%font-heading-1-accent {
+  font-family: $font-family;
+  font-size: 72px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 105%;
+}
+
+%font-heading-2 {
+  font-family: $font-family;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 125%;
+}
+
+%font-heading-2-accent {
+  font-family: $font-family;
+  font-size: 60px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 125%;
+}
+
+%font-heading-3 {
+  font-family: $font-family;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 125%;
+}
+
+%font-body-medium {
+  font-family: $font-family;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+%font-body-caption {
+  font-family: $font-family;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+%font-action-link-button {
+  font-family: $font-family;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+%font-action-burger-link {
+  font-family: $font-family;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 125%;
+}
+
+%accent-correction {
+  display: inline-block;
+  transform: skewX(5deg) translateX(-6px);
+}

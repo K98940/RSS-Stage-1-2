@@ -1,0 +1,60 @@
+%flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-left-center {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+%btn-large {
+  width: 200px;
+  height: 64px;
+  border-radius: 100px;
+  border: none;
+
+  @extend %font-action-link-button;
+  color: $text-dark;
+  background-color: $background-body;
+  cursor: pointer;
+  transition-duration: $transition-duration-normal;
+  text-decoration: none;
+}
+
+%btn-round {
+  @extend %flex-center-center;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: $transition-duration-normal;
+}
+
+%border-dark {
+  border: 1px solid $border-dark;
+}
+
+%bg-to-center {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+%link-after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  transform: translateX(-50%);
+  height: 2px;
+  background-color: $border-dark;
+  opacity: 0;
+  transition: 300ms;
+}
