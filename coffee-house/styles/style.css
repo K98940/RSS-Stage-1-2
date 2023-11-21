@@ -1,11 +1,11 @@
-h1 {
+.main-title {
   font-family: "Inter", sans-serif;
   font-size: 72px;
   font-weight: 600;
   line-height: 105%;
 }
 
-h1 span {
+.main-title span {
   font-family: "Inter", sans-serif;
   font-size: 72px;
   font-weight: 600;
@@ -13,14 +13,14 @@ h1 span {
   line-height: 105%;
 }
 
-h2, .h2-title, .footer-column h2, .mobileapp-offer h2, .about-title, .favorite-coffee h2 {
+.h2-title, .menu-title, .footer-column h2, .mobileapp-offer h2, .about-title, .favorite-coffee h2 {
   font-family: "Inter", sans-serif;
   font-size: 60px;
   font-weight: 600;
   line-height: 125%;
 }
 
-h2 span, .h2-title span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title span, .favorite-coffee h2 span {
+.h2-title span, .menu-title span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title span, .favorite-coffee h2 span {
   font-family: "Inter", sans-serif;
   font-size: 60px;
   font-weight: 600;
@@ -56,7 +56,7 @@ h2 span, .h2-title span, .footer-column h2 span, .mobileapp-offer h2 span, .abou
   line-height: 150%;
 }
 
-h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title span, .favorite-coffee h2 span {
+.main-title span, .menu-title span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title span, .favorite-coffee h2 span {
   display: inline-block;
   transform: skewX(5deg) translateX(-6px);
 }
@@ -461,6 +461,7 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   content: "";
   display: block;
   position: absolute;
+  z-index: 1;
   width: 20px;
   height: 20px;
 }
@@ -508,6 +509,8 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   width: 100%;
 }
 .contacts-container address > a {
+  position: relative;
+  z-index: 2;
   padding-left: 28px;
   color: hsl(28, 29%, 84%);
   text-decoration: none;
@@ -557,9 +560,13 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   background-color: hsl(28, 29%, 84%);
 }
 
-.menu-h1 {
+.menu-title {
+  color: hsl(40, 2%, 25%);
   text-align: center;
   margin-bottom: 40px;
+}
+.menu-title span {
+  color: hsl(24, 25%, 58%);
 }
 
 .menus-container {
@@ -582,7 +589,7 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   cursor: pointer;
 }
 .menu-tab label:hover {
-  filter: brightness(1.15);
+  background-color: hsl(35, 9%, 37%);
 }
 .menu-tab input:checked + label {
   background-color: hsl(35, 9%, 37%);
@@ -619,7 +626,7 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
 
 .menu-container {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 .menu-container article {
   display: grid;
@@ -631,6 +638,7 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   transition-duration: 300ms, 1000ms;
   transition-property: opacity, height;
   opacity: 0;
+  overflow: hidden;
 }
 
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] {
@@ -669,6 +677,12 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   filter: brightness(1);
 }
 
+.menu__coffee > h3,
+.menu__tea > h3,
+.menu__dessert > h3 {
+  display: none;
+}
+
 .tab-input[value=coffee]:checked ~ .menu-container .menu__coffee {
   opacity: 1;
   height: fit-content;
@@ -686,7 +700,7 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
 
 .tab-container {
   gap: 14px;
-  margin-bottom: 40px;
+  margin-bottom: 38px;
 }
 
 .card {
@@ -696,9 +710,10 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
   color: hsl(40, 2%, 25%);
   border: 1px solid hsl(27, 14%, 72%);
   border-radius: 40px;
+  transition-duration: 300ms;
 }
 .card picture {
-  flex: 0 0 307px;
+  flex: 0 0 309px;
   border-radius: 40px;
   overflow: hidden;
 }
@@ -709,6 +724,10 @@ h2 span, h1 span, .footer-column h2 span, .mobileapp-offer h2 span, .about-title
 }
 .card:hover picture img {
   transform: scale(0.91);
+}
+.card:hover {
+  cursor: pointer;
+  background-color: #dccfc4;
 }
 
 .card-description {
@@ -772,16 +791,12 @@ body {
   color: hsl(24, 25%, 58%);
 }
 
-h1 {
+.main-title {
   margin-bottom: 40px;
 }
-h1 span {
+.main-title span {
   color: hsl(24, 25%, 58%);
   padding-right: 18px;
-}
-
-h2 span {
-  color: hsl(24, 25%, 58%);
 }
 
 /*# sourceMappingURL=style.css.map */

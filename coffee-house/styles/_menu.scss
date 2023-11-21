@@ -1,6 +1,14 @@
-.menu-h1 {
+.menu-title {
+  @extend %font-heading-2;
+  color: $text-dark;
   text-align: center;
   margin-bottom: 40px;
+
+  & span {
+    @extend %font-heading-2-accent;
+    @extend %accent-correction;
+    color: $text-accent;
+  }
 }
 
 .menus-container {
@@ -30,7 +38,7 @@
     cursor: pointer;
 
     &:hover {
-      filter: brightness(1.15);
+      background-color: $background-container;
     }
   }
 
@@ -73,7 +81,7 @@
 
 .menu-container {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 
   & article {
     display: grid;
@@ -87,6 +95,7 @@
     transition-property: opacity, height;
 
     opacity: 0;
+    overflow: hidden;
   }
 }
 
@@ -132,6 +141,14 @@
   }
 }
 
+.menu__coffee,
+.menu__tea,
+.menu__dessert {
+  &>h3 {
+    display: none;
+  }
+}
+
 .tab-input[value="coffee"]:checked~.menu-container .menu__coffee {
   opacity: 1;
   height: fit-content;
@@ -150,5 +167,5 @@
 .tab-container {
   @extend %flex-center-center;
   gap: 14px;
-  margin-bottom: 40px
+  margin-bottom: 38px
 }

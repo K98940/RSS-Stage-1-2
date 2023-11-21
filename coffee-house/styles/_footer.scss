@@ -2,6 +2,7 @@
   content: '';
   display: block;
   position: absolute;
+  z-index: 1;
   width: 20px;
   height: 20px;
 }
@@ -72,6 +73,8 @@
 
     &>a {
       @extend %font-action-link-button;
+      position: relative;
+      z-index: 2;
       padding-left: $padding-left;
       color: $text-light;
       text-decoration: none;
