@@ -6,12 +6,11 @@
 
 .about-title {
   color: $text-dark;
+  letter-spacing: -0.08px;
   @extend %font-heading-2;
 
   & span {
-    color: $text-accent;
     @extend %font-heading-2-accent;
-    @extend %accent-correction;
   }
 }
 
@@ -19,9 +18,11 @@
   display: flex;
   gap: 40px;
 
-
-
   min-height: 800px;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
 }
 
 .about-content-col {
@@ -51,12 +52,32 @@
   &:hover img {
     transform: scale(1);
   }
+
+  @media (max-width: $tablet) {
+    & img {
+      transform: scale(1.055);
+    }
+
+    &:hover img {
+      transform: scale(1.055);
+    }
+  }
 }
 
 .about-card__590 {
-  height: 590px;
+  // height: 590px;
+  aspect-ratio: 1/0.893;
+
+  @media (max-width: $tablet) {
+    aspect-ratio: 1/0.858;
+  }
 }
 
 .about-card__430 {
-  height: 430px;
+  // height: 430px;
+  aspect-ratio: 1/0.652;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
 }

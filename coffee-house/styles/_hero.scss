@@ -6,6 +6,11 @@
   border-radius: 40px;
   background-image: url('../assets/hero/container.jpg');
   @extend %bg-to-center;
+
+  @media (max-width: $tablet) {
+    padding-left: 60px;
+    background-image: url('../assets/hero/[T]container.jpg');
+  }
 }
 
 .hero-container {
@@ -23,12 +28,32 @@
   @extend %btn-large;
   @extend %flex-center-center;
 
+  &:hover .hero-btn-icon {
+    opacity: 1;
+  }
+
   &:hover .hero-btn-title {
     transform: translateX(-10px);
   }
 
-  &:hover .hero-btn-icon {
-    opacity: 1;
+  @media (max-width: $tablet) {
+
+    & .hero-btn-icon {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    & .hero-btn-title {
+      transform: translateX(-4px);
+    }
+
+    &:hover .hero-btn-title {
+      transform: translateX(-4px);
+    }
+
+    &:hover {
+      cursor: default;
+    }
   }
 }
 

@@ -36,11 +36,20 @@
 .slider-btn-left:hover,
 .slider-btn-right:hover {
   background-color: $background-container;
+
+  @media (max-width: $tablet) {
+    background-color: transparent;
+    cursor: default;
+  }
 }
 
 .slider-btn-left:hover svg,
 .slider-btn-right:hover svg {
   stroke: $text-light;
+
+  @media (max-width: $tablet) {
+    stroke: $text-dark;
+  }
 }
 
 .slider-viewport {
@@ -116,4 +125,10 @@
 
 .slider-dots__active {
   background-color: $border-dark;
+}
+
+@media (max-width: $tablet) {
+  .slider {
+    padding: 0;
+  }
 }

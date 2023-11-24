@@ -14,6 +14,14 @@
   border-radius: 40px;
   background: $background-container;
   color: $text-light;
+
+  @media (max-width: $small-desktop) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 60px;
+    padding-right: 60px;
+    gap: 68px;
+  }
 }
 
 .footer-column {
@@ -29,8 +37,6 @@
 
     & span {
       @extend %font-heading-2-accent;
-      @extend %accent-correction;
-      color: $text-accent;
     }
   }
 
@@ -69,6 +75,10 @@
       background-color: $border-light;
       opacity: 1;
       width: 100%;
+
+      @media (max-width: $tablet) {
+        content: none;
+      }
     }
 
     &>a {
@@ -78,6 +88,10 @@
       padding-left: $padding-left;
       color: $text-light;
       text-decoration: none;
+
+      @media (max-width: $tablet) {
+        cursor: text;
+      }
     }
   }
 
@@ -103,6 +117,14 @@
       background-color: $border-light;
       opacity: 1;
       width: 100%;
+
+      @media (max-width: $tablet) {
+        content: none;
+      }
+    }
+
+    @media (max-width: $tablet) {
+      cursor: text;
     }
   }
 
@@ -137,5 +159,13 @@
   &:hover {
     stroke: $text-dark;
     background-color: $background-body;
+  }
+
+  @media (max-width: $tablet) {
+    &:hover {
+      stroke: $border-light;
+      background-color: transparent;
+      cursor: default;
+    }
   }
 }

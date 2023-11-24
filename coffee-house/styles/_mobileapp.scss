@@ -8,6 +8,11 @@
   gap: 100px;
 
   color: $text-dark;
+
+  @media (max-width: $small-desktop) {
+    flex-direction: column;
+    gap: 99px;
+  }
 }
 
 .mobileapp-offer {
@@ -22,9 +27,7 @@
     @extend %font-heading-2;
 
     & span {
-      color: $text-accent;
       @extend %font-heading-2-accent;
-      @extend %accent-correction;
     }
   }
 
@@ -35,8 +38,7 @@
 
 .mobile-screens {
   @extend %flex-center-center;
-  flex: 0 0 630px;
-  height: 630px;
+  flex: 0 0 46.33%;
 
   & img {
     width: 100%;
@@ -68,10 +70,20 @@
   &:hover {
     background-color: $background-container;
     color: $text-light;
+
+    @media (max-width: $tablet) {
+      cursor: default;
+      background-color: transparent;
+      color: $text-dark;
+    }
   }
 
   &:hover .mobileapp-btn-icon svg {
     fill: $text-light;
+
+    @media (max-width: $tablet) {}
+
+    fill: $text-dark;
   }
 }
 

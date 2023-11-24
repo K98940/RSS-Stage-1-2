@@ -28,6 +28,7 @@ $font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-style: italic;
   line-height: 125%;
+  color: $text-accent;
 }
 
 %font-heading-3 {
@@ -65,7 +66,7 @@ $font-family: 'Inter', sans-serif;
   line-height: 125%;
 }
 
-%accent-correction {
-  display: inline-block;
-  transform: skewX(5deg) translateX(-6px);
-}
+// %accent-correction {
+//   display: inline-block;
+//   transform: skewX(5deg) translateX(-6px);
+// }

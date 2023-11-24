@@ -6,8 +6,7 @@
 
   & span {
     @extend %font-heading-2-accent;
-    @extend %accent-correction;
-    color: $text-accent;
+    // @extend %accent-correction;
   }
 }
 

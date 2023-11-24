@@ -42,7 +42,7 @@
     }
 
     .header-nav {
-      margin-top: -4px;
+      margin-top: -3px;
 
       & ul {
         display: flex;
@@ -93,5 +93,24 @@
 
       & a[href*="html"]:hover {
         cursor: pointer;
+      }
+    }
+
+
+    @media (max-width: $tablet) {
+      .header-nav {
+        display: none;
+      }
+
+      .header-menu {
+        display: none;
+      }
+
+      .header-logo {
+
+        & a[href*="html"]:hover {
+          cursor: unset;
+          filter: unset;
+        }
       }
     }
