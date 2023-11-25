@@ -13,6 +13,10 @@
     flex-direction: column;
     gap: 99px;
   }
+
+  @media (max-width: $mobile) {
+    gap: 40px;
+  }
 }
 
 .mobileapp-offer {
@@ -48,7 +52,11 @@
 
 .mobileapp-btn-container {
   display: flex;
-  gap: 20px
+  gap: 20px;
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
 }
 
 .mobileapp-btn {

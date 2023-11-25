@@ -22,7 +22,7 @@ html,
 body {
   width: 100%;
   scroll-behavior: smooth;
-  // scrollbar-gutter: stable;
+  scrollbar-gutter: stable;
 }
 
 html {
@@ -38,6 +38,10 @@ body {
   width: clamp(320px, 100%, 1440px);
   margin: 0 auto;
   padding: 20px 40px 40px;
+
+  @media (max-width: $tablet) {
+    padding: 20px clamp(16px, 10vw - 36px, 40px) 40px;
+  }
 }
 
 .section {
@@ -60,18 +64,6 @@ body {
 
   & span {
     @extend %font-heading-1-accent;
-    // @extend %accent-correction;
     color: $text-accent;
-    padding-right: 18px;
-  }
-
-  // @media (max-width: $tablet) {
-  //   margin-bottom: 41px;
-  // }
-}
-
-@media (max-width: $mobile) {
-  .container {
-    padding: 20px 16px 40px;
   }
 }

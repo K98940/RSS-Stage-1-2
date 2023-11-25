@@ -32,7 +32,7 @@
 
     color: $text-dark;
     border-radius: 100px;
-    border: 1px solid black;
+    border: 1px solid $border-light;
     transition-duration: $transition-duration-normal;
     cursor: pointer;
 
@@ -178,7 +178,11 @@
 .tab-container {
   @extend %flex-center-center;
   gap: 14px;
-  margin-bottom: 38px
+  margin-bottom: 38px;
+
+  @media (max-width: $mobile) {
+    gap: 6px;
+  }
 }
 
 .btn-refresh-container {

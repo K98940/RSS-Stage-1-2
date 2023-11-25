@@ -8,13 +8,16 @@
   @extend %bg-to-center;
 
   @media (max-width: $tablet) {
-    padding-left: 60px;
+    height: clamp(552px, 100vw - 124px, 644px);
+    padding-top: clamp(60px, 20vw - 52px, 101px);
+    padding-right: clamp(16px, 20vw - 93px, 60px);
+    padding-left: clamp(16px, 20vw - 93px, 60px);
     background-image: url('../assets/hero/[T]container.jpg');
   }
 }
 
 .hero-container {
-  width: 530px;
+  width: clamp(200px, 100%, 530px);
   height: 444px;
   color: $text-light;
 }

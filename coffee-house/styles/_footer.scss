@@ -22,6 +22,11 @@
     padding-right: 60px;
     gap: 68px;
   }
+
+  @media (max-width: $mobile) {
+    padding: 60px 16px;
+    gap: 8px;
+  }
 }
 
 .footer-column {

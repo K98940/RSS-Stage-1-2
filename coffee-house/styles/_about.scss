@@ -71,6 +71,19 @@
   @media (max-width: $tablet) {
     aspect-ratio: 1/0.858;
   }
+
+  @media (max-width: $mobile) {
+    aspect-ratio: 1/1.693;
+
+    & img {
+      height: 100%;
+      transform: scale(1.23);
+
+      &:hover {
+        transform: scale(1.23);
+      }
+    }
+  }
 }
 
 .about-card__430 {
