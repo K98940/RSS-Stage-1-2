@@ -693,6 +693,12 @@
 .menu-tab label:hover {
   background-color: hsl(35, 9%, 37%);
 }
+@media (max-width: 768px) {
+  .menu-tab label:hover {
+    cursor: default;
+    background-color: hsl(28, 29%, 84%);
+  }
+}
 .menu-tab input:checked + label {
   background-color: hsl(35, 9%, 37%);
   color: hsl(28, 29%, 84%);
@@ -732,8 +738,9 @@
 }
 .menu-container article {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, 310px);
   grid-auto-rows: 506px;
+  justify-content: center;
   gap: 40px;
   width: 100%;
   height: 0;
@@ -741,6 +748,11 @@
   transition-property: opacity, height;
   opacity: 0;
   overflow: hidden;
+}
+@media (max-width: 768px) {
+  .menu-container {
+    margin-bottom: 40px;
+  }
 }
 
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] {
@@ -805,6 +817,25 @@
   margin-bottom: 38px;
 }
 
+.btn-refresh-container {
+  display: none;
+  margin-bottom: 100px;
+}
+.btn-refresh-container button {
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: 1px solid hsl(35, 9%, 37%);
+  border-radius: 100%;
+}
+@media (max-width: 768px) {
+  .btn-refresh-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -815,21 +846,39 @@
   transition-duration: 500ms;
 }
 .card picture {
-  flex: 0 0 309px;
+  flex: 0 0 auto;
+  width: 100%;
+  align-self: center;
   border-radius: 40px;
   overflow: hidden;
 }
 .card picture img {
-  transform: scale(1);
+  width: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
   transition-duration: 500ms;
-  transition-delay: 500ms;
 }
 .card:hover picture img {
-  transform: scale(0.91);
+  transform: scale(1);
 }
 .card:hover {
   cursor: pointer;
   background-color: #dccfc4;
+}
+@media (max-width: 768px) {
+  .card {
+    display: none;
+  }
+  .card:nth-child(-1n+5) {
+    display: flex;
+  }
+  .card:hover picture img {
+    transform: scale(1.1);
+  }
+  .card:hover {
+    cursor: default;
+    background-color: hsl(28, 29%, 84%);
+  }
 }
 
 .card-description {
@@ -847,7 +896,13 @@
 }
 
 .card-text {
-  flex: 1 1 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: clamp(24px, 100%, 72px);
 }
 
 .card-price {

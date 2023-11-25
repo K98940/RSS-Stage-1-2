@@ -10,24 +10,46 @@
 
   & picture {
     @extend %flex-center-center;
-    flex: 0 0 309px;
+    // flex: 0 0 309px;
+    flex: 0 0 auto;
+    width: 100%;
+    align-self: center;
     border-radius: 40px;
     overflow: hidden;
 
     & img {
-      transform: scale(1);
+      width: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
       transition-duration: $transition-duration-normal;
-      transition-delay: $transition-delay-normal;
+      // transition-delay: $transition-delay-normal;
     }
   }
 
   &:hover picture img {
-    transform: scale(0.91);
+    transform: scale(1);
   }
 
   &:hover {
     cursor: pointer;
     background-color: mix($background-body, $background-container, 95%);
+  }
+
+  @media (max-width: $tablet) {
+    display: none;
+
+    &:nth-child(-1n+5) {
+      display: flex;
+    }
+
+    &:hover picture img {
+      transform: scale(1.1);
+    }
+
+    &:hover {
+      cursor: default;
+      background-color: $background-body;
+    }
   }
 }
 
@@ -48,7 +70,14 @@
 
 .card-text {
   @extend %font-body-medium;
-  flex: 1 1 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: clamp(24px, 100%, 72px);
 }
 
 .card-price {
