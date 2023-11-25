@@ -3,10 +3,12 @@
   color: $text-dark;
   text-align: center;
   margin-bottom: 40px;
+  padding: 0 clamp(0px, calc(100% - 1115px), 245px);
+
+  // 1440 / 5.9 = 245
 
   & span {
     @extend %font-heading-2-accent;
-    // @extend %accent-correction;
   }
 }
 
