@@ -6,15 +6,15 @@
   display: flex;
   align-items: center;
   gap: 100px;
-
   color: $text-dark;
 
   @media (max-width: $small-desktop) {
     flex-direction: column;
-    gap: 99px;
+    gap: 101px;
   }
 
   @media (max-width: $mobile) {
+    padding-top: 5px;
     gap: 40px;
   }
 }
@@ -48,6 +48,10 @@
     width: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: $tablet) {
+    margin-bottom: -4px;
+  }
 }
 
 .mobileapp-btn-container {
@@ -75,23 +79,15 @@
 
   border: 1px solid $border-dark;
 
-  &:hover {
-    background-color: $background-container;
-    color: $text-light;
-
-    @media (max-width: $tablet) {
-      cursor: default;
-      background-color: transparent;
-      color: $text-dark;
+  @media (hover: hover) {
+    &:hover {
+      background-color: $background-container;
+      color: $text-light;
     }
-  }
 
-  &:hover .mobileapp-btn-icon svg {
-    fill: $text-light;
-
-    @media (max-width: $tablet) {}
-
-    fill: $text-dark;
+    &:hover .mobileapp-btn-icon svg {
+      fill: $text-light;
+    }
   }
 }
 

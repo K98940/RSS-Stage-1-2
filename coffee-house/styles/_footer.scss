@@ -11,6 +11,7 @@
   @extend %flex-center-center;
   gap: 100px;
   padding: 100px;
+  margin-top: 0;
   border-radius: 40px;
   background: $background-container;
   color: $text-light;
@@ -76,13 +77,11 @@
       @extend %link-after;
     }
 
-    &:hover::after {
-      background-color: $border-light;
-      opacity: 1;
-      width: 100%;
-
-      @media (max-width: $tablet) {
-        content: none;
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: $border-light;
+        opacity: 1;
+        width: 100%;
       }
     }
 
@@ -93,10 +92,6 @@
       padding-left: $padding-left;
       color: $text-light;
       text-decoration: none;
-
-      @media (max-width: $tablet) {
-        cursor: text;
-      }
     }
   }
 
@@ -118,19 +113,14 @@
       @extend %link-after;
     }
 
-    &:hover::after {
-      background-color: $border-light;
-      opacity: 1;
-      width: 100%;
-
-      @media (max-width: $tablet) {
-        content: none;
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: $border-light;
+        opacity: 1;
+        width: 100%;
       }
     }
 
-    @media (max-width: $tablet) {
-      cursor: text;
-    }
   }
 
   & time {
@@ -161,16 +151,10 @@
   stroke: $border-light;
   transition-duration: $transition-duration-normal;
 
-  &:hover {
-    stroke: $text-dark;
-    background-color: $background-body;
-  }
-
-  @media (max-width: $tablet) {
+  @media (hover: hover) {
     &:hover {
-      stroke: $border-light;
-      background-color: transparent;
-      cursor: default;
+      stroke: $text-dark;
+      background-color: $background-body;
     }
   }
 }

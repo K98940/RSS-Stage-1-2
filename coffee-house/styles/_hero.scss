@@ -1,10 +1,10 @@
 .hero {
   height: 644px;
-  padding-top: 100px;
+  padding-top: 101px;
   padding-left: 100px;
 
   border-radius: 40px;
-  background-image: url('../assets/hero/container.jpg');
+  background-image: url('../assets/hero/img-hero-1440.webp');
   @extend %bg-to-center;
 
   @media (max-width: $tablet) {
@@ -12,7 +12,11 @@
     padding-top: clamp(60px, 20vw - 52px, 101px);
     padding-right: clamp(16px, 20vw - 93px, 60px);
     padding-left: clamp(16px, 20vw - 93px, 60px);
-    background-image: url('../assets/hero/[T]container.jpg');
+    background-image: url('../assets/hero/img-hero-768.webp');
+  }
+
+  @media (max-width: $mobile) {
+    background-image: url('../assets/hero/img-hero-425.webp');
   }
 }
 
@@ -31,31 +35,30 @@
   @extend %btn-large;
   @extend %flex-center-center;
 
-  &:hover .hero-btn-icon {
-    opacity: 1;
+  & .hero-btn-title {
+    transform: translateX(-4px);
   }
 
-  &:hover .hero-btn-title {
-    transform: translateX(-10px);
+  & .hero-btn-icon {
+    transform: translateX(4px);
   }
 
-  @media (max-width: $tablet) {
+  @media (hover: hover) {
 
     & .hero-btn-icon {
-      opacity: 1;
-      transform: translateX(4px);
+      opacity: 0;
     }
 
     & .hero-btn-title {
-      transform: translateX(-4px);
+      transform: translateX(10px);
+    }
+
+    &:hover .hero-btn-icon {
+      opacity: 1;
     }
 
     &:hover .hero-btn-title {
-      transform: translateX(-4px);
-    }
-
-    &:hover {
-      cursor: default;
+      transform: translateX(-10px);
     }
   }
 }
@@ -71,6 +74,5 @@
   width: 20px;
   height: 20px;
   background-image: url('../assets/header/coffee-cup.svg');
-  opacity: 0;
   transition-duration: $transition-duration-normal;
 }

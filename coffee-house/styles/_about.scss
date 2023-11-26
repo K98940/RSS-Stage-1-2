@@ -16,7 +16,7 @@
 
 .about-content {
   display: flex;
-  gap: 40px;
+  gap: 39px;
 
   min-height: 800px;
 
@@ -49,23 +49,27 @@
     transform: scale(1.1);
   }
 
-  &:hover img {
-    transform: scale(1);
+  @media (hover: hover) {
+
+    &:hover img {
+      transform: scale(1);
+    }
   }
 
   @media (max-width: $tablet) {
     & img {
       transform: scale(1.055);
     }
+  }
 
-    &:hover img {
-      transform: scale(1.055);
+  @media (max-width: $mobile) {
+    & picture {
+      height: 100%;
     }
   }
 }
 
 .about-card__590 {
-  // height: 590px;
   aspect-ratio: 1/0.893;
 
   @media (max-width: $tablet) {
@@ -78,16 +82,11 @@
     & img {
       height: 100%;
       transform: scale(1.23);
-
-      &:hover {
-        transform: scale(1.23);
-      }
     }
   }
 }
 
 .about-card__430 {
-  // height: 430px;
   aspect-ratio: 1/0.652;
 
   @media (max-width: $tablet) {

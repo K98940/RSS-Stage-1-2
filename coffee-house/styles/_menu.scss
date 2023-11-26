@@ -36,16 +36,12 @@
     transition-duration: $transition-duration-normal;
     cursor: pointer;
 
-    &:hover {
-      background-color: $background-container;
-    }
-
-    @media (max-width: $tablet) {
+    @media (hover: hover) {
       &:hover {
-        cursor: default;
-        background-color: $background-body;
+        background-color: $background-container;
       }
     }
+
   }
 
   & input:checked+label {
@@ -119,9 +115,12 @@
     background-color: $background-body;
   }
 
-  &:hover {
-    filter: brightness(1);
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(1);
+    }
   }
+
 }
 
 .tab-input[value="tea"]:checked~.tab-container label[for=tab-tea] {
@@ -133,8 +132,10 @@
     background-color: $background-body;
   }
 
-  &:hover {
-    filter: brightness(1);
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(1);
+    }
   }
 }
 
@@ -147,8 +148,10 @@
     background-color: $background-body;
   }
 
-  &:hover {
-    filter: brightness(1);
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(1);
+    }
   }
 }
 

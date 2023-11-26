@@ -10,7 +10,6 @@
 
   & picture {
     @extend %flex-center-center;
-    // flex: 0 0 309px;
     flex: 0 0 auto;
     width: 100%;
     align-self: center;
@@ -22,17 +21,18 @@
       object-fit: cover;
       transform: scale(1.1);
       transition-duration: $transition-duration-normal;
-      // transition-delay: $transition-delay-normal;
     }
   }
 
-  &:hover picture img {
-    transform: scale(1);
-  }
+  @media (hover: hover) {
+    &:hover picture img {
+      transform: scale(1);
+    }
 
-  &:hover {
-    cursor: pointer;
-    background-color: mix($background-body, $background-container, 95%);
+    &:hover {
+      cursor: pointer;
+      background-color: mix($background-body, $background-container, 95%);
+    }
   }
 
   @media (max-width: $tablet) {
@@ -40,15 +40,6 @@
 
     &:nth-child(-1n+5) {
       display: flex;
-    }
-
-    &:hover picture img {
-      transform: scale(1.1);
-    }
-
-    &:hover {
-      cursor: default;
-      background-color: $background-body;
     }
   }
 }
