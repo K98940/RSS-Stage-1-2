@@ -343,6 +343,7 @@
 
 .about-title {
   color: hsl(40, 2%, 25%);
+  letter-spacing: -0.056px;
 }
 .about-title span {
   color: hsl(24, 25%, 58%);
@@ -584,11 +585,12 @@
   gap: 8px;
   color: hsl(40, 2%, 25%);
   border-radius: 100px;
-  border: 1px solid black;
+  border: 1px solid hsl(27, 14%, 72%);
   transition-duration: 300ms;
   cursor: pointer;
 }
 .menu-tab label:hover {
+  color: hsl(28, 29%, 84%);
   background-color: hsl(35, 9%, 37%);
 }
 .menu-tab input:checked + label {

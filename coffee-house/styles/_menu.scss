@@ -33,11 +33,12 @@
 
     color: $text-dark;
     border-radius: 100px;
-    border: 1px solid black;
+    border: 1px solid $border-light;
     transition-duration: $transition-duration-normal;
     cursor: pointer;
 
     &:hover {
+      color: $text-light;
       background-color: $background-container;
     }
   }
