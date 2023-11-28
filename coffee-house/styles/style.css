@@ -343,6 +343,7 @@
 
 .about-title {
   color: hsl(40, 2%, 25%);
+  letter-spacing: -0.056px;
 }
 .about-title span {
   color: hsl(24, 25%, 58%);
