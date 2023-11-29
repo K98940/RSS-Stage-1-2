@@ -6,7 +6,8 @@
 
 .about-title {
   color: $text-dark;
-  letter-spacing: -0.08px;
+  letter-spacing: -0.15px;
+
   @extend %font-heading-2;
 
   & span {
