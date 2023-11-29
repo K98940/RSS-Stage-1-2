@@ -651,9 +651,6 @@
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] .tab-icon {
   background-color: hsl(28, 29%, 84%);
 }
-.tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee]:hover {
-  filter: brightness(1);
-}
 
 .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea] {
   background-color: hsl(35, 9%, 37%);
@@ -663,9 +660,6 @@
 .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea] .tab-icon {
   background-color: hsl(28, 29%, 84%);
 }
-.tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea]:hover {
-  filter: brightness(1);
-}
 
 .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert] {
   background-color: hsl(35, 9%, 37%);
@@ -674,9 +668,6 @@
 }
 .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert] .tab-icon {
   background-color: hsl(28, 29%, 84%);
-}
-.tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert]:hover {
-  filter: brightness(1);
 }
 
 .menu__coffee > h3,
