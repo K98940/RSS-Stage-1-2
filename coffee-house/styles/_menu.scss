@@ -38,6 +38,7 @@
 
     @media (hover: hover) {
       &:hover {
+        color: $text-light;
         background-color: $background-container;
       }
     }
@@ -114,13 +115,6 @@
   & .tab-icon {
     background-color: $background-body;
   }
-
-  @media (hover: hover) {
-    &:hover {
-      filter: brightness(1);
-    }
-  }
-
 }
 
 .tab-input[value="tea"]:checked~.tab-container label[for=tab-tea] {
@@ -131,12 +125,6 @@
   & .tab-icon {
     background-color: $background-body;
   }
-
-  @media (hover: hover) {
-    &:hover {
-      filter: brightness(1);
-    }
-  }
 }
 
 .tab-input[value="dessert"]:checked~.tab-container label[for=tab-dessert] {
@@ -146,12 +134,6 @@
 
   & .tab-icon {
     background-color: $background-body;
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      filter: brightness(1);
-    }
   }
 }
 
