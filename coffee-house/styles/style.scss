@@ -33,15 +33,19 @@ html {
 body {
   height: 100%;
   background: $background-body;
+
+  &:has(#burgerBtn.burger-btn__active) {
+    overflow: hidden;
+  }
 }
 
 .container {
   width: clamp(320px, 100%, 1440px);
   margin: 0 auto;
-  padding: 20px 40px 40px;
+  padding: $container-padding-top 40px 40px;
 
   @media (max-width: $tablet) {
-    padding: 20px clamp(16px, 10vw - 36px, 40px) 40px;
+    padding: $container-padding-top clamp(16px, 10vw - 36px, 40px) 40px;
   }
 }
 

@@ -7,6 +7,7 @@
   left: 50%;
   top: 50%;
   background-color: $text-dark;
+  transition-duration: $transition-duration-fast;
 }
 
 .burger-menu {
@@ -28,10 +29,19 @@
     @extend %burger-pseudo-elements;
     transform: translate(-50%, calc(-50% + 4px));
   }
+
+  @media (max-width: $tablet) {
+    display: inline-block;
+  }
 }
 
-@media (max-width: $tablet) {
-  .burger-menu {
-    display: inline-block;
+
+.burger-btn__active {
+  &::before {
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, 0) rotate(-45deg);
   }
 }

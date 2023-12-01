@@ -9,13 +9,19 @@ $text-dark: hsla(40, 2%, 25%, 1);
 $text-light: hsla(28, 29%, 84%, 1);
 $blank: hsla(0, 0%, 100%, 1);
 
+$transition-duration-fast: 250ms;
 $transition-duration-normal: 500ms;
 $transition-duration-slow: 1000ms;
 
 $transition-delay-normal: 500ms;
 
-// $mobile: 380px;
 $mobile: 425px;
 $tablet: 768px;
 $small-desktop: 1024px;
 $desktop: 1440px;
+
+$z-index-modal: 10;
+$z-index-backdrop: -1;
+
+$header-logo-height: 60px;
+$container-padding-top: 20px;
