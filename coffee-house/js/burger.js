@@ -8,8 +8,7 @@ export const initBurgerMenu = () => {
   }
 
   const clickMenuHandle = (e) => {
-    console.log(e.target.href);
-    const isLinkTouched = e.target.href;
+    const isLinkTouched = e.target.parentElement.href || e.target.href;
     if (isLinkTouched) clickBurgerHandle();
   }
 
