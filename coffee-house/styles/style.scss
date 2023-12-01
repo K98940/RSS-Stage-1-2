@@ -40,7 +40,7 @@ body {
 }
 
 .container {
-  width: clamp(320px, 100%, 1440px);
+  width: clamp(320px, 100%, $max-width-content);
   margin: 0 auto;
   padding: $container-padding-top 40px 40px;
 
