@@ -843,15 +843,20 @@
   justify-content: center;
   gap: 40px;
   width: 100%;
-  height: 0;
+  height: fit-content;
   transition-duration: 500ms, 1000ms;
   transition-property: opacity, height;
-  opacity: 0;
   overflow: hidden;
 }
 @media (max-width: 768px) {
   .menu-container {
     margin-bottom: 40px;
+  }
+  .menu-container [T-only-4] .card {
+    display: none;
+  }
+  .menu-container [T-only-4] .card:nth-child(-1n+4) {
+    display: flex;
   }
 }
 
@@ -880,12 +885,6 @@
 }
 .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert] .tab-icon {
   background-color: hsl(28, 29%, 84%);
-}
-
-.menu__coffee > h3,
-.menu__tea > h3,
-.menu__dessert > h3 {
-  display: none;
 }
 
 .tab-input[value=coffee]:checked ~ .menu-container .menu__coffee {
@@ -921,8 +920,15 @@
   width: 60px;
   height: 60px;
   background-color: transparent;
+  transition-duration: 500ms;
   border: 1px solid hsl(35, 9%, 37%);
   border-radius: 100%;
+}
+@media (hover: hover) {
+  .btn-refresh-container button:hover {
+    cursor: pointer;
+    background-color: hsl(35, 9%, 37%);
+  }
 }
 @media (max-width: 768px) {
   .btn-refresh-container {
@@ -930,6 +936,10 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.show-all-elements {
+  display: flex;
 }
 
 .card {
@@ -961,14 +971,6 @@
   .card:hover {
     cursor: pointer;
     background-color: #dccfc4;
-  }
-}
-@media (max-width: 768px) {
-  .card {
-    display: none;
-  }
-  .card:nth-child(-1n+5) {
-    display: flex;
   }
 }
 

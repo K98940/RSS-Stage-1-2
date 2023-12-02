@@ -94,15 +94,22 @@
     gap: 40px;
 
     width: 100%;
-    height: 0;
+    height: fit-content;
     transition-duration: $transition-duration-normal, $transition-duration-slow;
     transition-property: opacity, height;
 
-    opacity: 0;
     overflow: hidden;
   }
 
   @media (max-width: $tablet) {
+    & [T-only-4] .card {
+      display: none;
+
+      &:nth-child(-1n+4) {
+        display: flex;
+      }
+    }
+
     margin-bottom: 40px;
   }
 }
@@ -134,14 +141,6 @@
 
   & .tab-icon {
     background-color: $background-body;
-  }
-}
-
-.menu__coffee,
-.menu__tea,
-.menu__dessert {
-  &>h3 {
-    display: none;
   }
 }
 
@@ -178,8 +177,16 @@
     width: 60px;
     height: 60px;
     background-color: transparent;
+    transition-duration: $transition-duration-normal;
     border: 1px solid $border-dark;
     border-radius: 100%;
+
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: $background-container;
+      }
+    }
   }
 
   @media (max-width: $tablet) {
@@ -187,4 +194,8 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.show-all-elements {
+  display: flex;
 }

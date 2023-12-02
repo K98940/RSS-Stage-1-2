@@ -35,13 +35,13 @@
     }
   }
 
-  @media (max-width: $tablet) {
-    display: none;
+  // @media (max-width: $tablet) {
+  //   display: none;
 
-    &:nth-child(-1n+5) {
-      display: flex;
-    }
-  }
+  //   &:nth-child(-1n+5) {
+  //     display: flex;
+  //   }
+  // }
 }
 
 .card-description {
