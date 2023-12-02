@@ -3,6 +3,13 @@ export const initSlider = () => {
     'left': 1,
     'rigth': -1,
   };
+  const touch = {
+    startX: null,
+    startY: null,
+    endX: null,
+    endY: null,
+    sensetive: 20,
+  };
   const dots = document.querySelectorAll('.slider-dots-item');
   if (dots.length < 1) return;
   const slider = document.querySelector('.slider');
@@ -32,10 +39,29 @@ export const initSlider = () => {
     nextDot.setAttribute('pointer', '');
   }
 
+  const touchStart = (e) => {
+    touch.startX = e.changedTouches[0].pageX
+    touch.startY = e.changedTouches[0].pageY
+  }
+
+  const touchEnd = (e) => {
+    touch.endX = e.changedTouches[0].pageX
+    touch.endY = e.changedTouches[0].pageY
+    const directionX = touch.startX - touch.endX
+    if (Math.abs(directionX) < touch.sensetive) return
+    if (directionX > 0) {
+      doSlide(null, DIRECTION_SLIDE.left);
+    } else {
+      doSlide(null, DIRECTION_SLIDE.rigth);
+    }
+  }
+
   try {
     dots.forEach(dot => { dot.addEventListener('animationend', (e) => doSlide(e)) });
     btnLeft.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.rigth));
     btnRight.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.left));
+    slider.addEventListener('touchstart', touchStart);
+    slider.addEventListener('touchend', touchEnd);
   } catch (error) {
     console.error(error);
   }
