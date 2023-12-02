@@ -145,6 +145,7 @@
   height: 4px;
 
   border-radius: 100px;
+  overflow: hidden;
   background-color: $border-light;
 
   & .dot-bar {
@@ -168,7 +169,7 @@
 
 @keyframes dots-filling {
   0% {
-    width: 0;
+    width: 10%;
   }
 
   100% {

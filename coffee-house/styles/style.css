@@ -458,6 +458,7 @@
   width: 40px;
   height: 4px;
   border-radius: 100px;
+  overflow: hidden;
   background-color: hsl(27, 14%, 72%);
 }
 .slider-dots-item .dot-bar {
@@ -478,7 +479,7 @@
 }
 @keyframes dots-filling {
   0% {
-    width: 0;
+    width: 10%;
   }
   100% {
     width: 100%;
