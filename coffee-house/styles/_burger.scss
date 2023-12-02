@@ -19,6 +19,7 @@
   background-color: transparent;
   border-radius: 50%;
   border: 1px solid $border-dark;
+  transition-duration: $transition-duration-fast;
 
   &::before {
     @extend %burger-pseudo-elements;
@@ -33,6 +34,21 @@
   @media (max-width: $tablet) {
     display: inline-block;
   }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $background-container;
+      cursor: pointer;
+
+      &::before {
+        background-color: $border-light;
+      }
+
+      &::after {
+        background-color: $border-light;
+      }
+    }
+  }
 }
 
 
@@ -43,5 +59,32 @@
 
   &::after {
     transform: translate(-50%, 0) rotate(-45deg);
+  }
+}
+
+.menu-item__burger {
+  display: none;
+  position: relative;
+
+  & svg {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-left: 6px;
+    transform: translateY(7px);
+  }
+
+  & a[href="#"] {
+    cursor: default;
+
+    &::after {
+      width: calc(100% - $menu-item-padding * 2);
+      opacity: 1;
+      transform: translate(-50%, calc(-50% - 4px));
+    }
+  }
+
+  @media (max-width: $tablet) {
+    display: flex;
   }
 }

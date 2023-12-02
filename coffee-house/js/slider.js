@@ -4,6 +4,7 @@ export const initSlider = () => {
     'rigth': -1,
   };
   const dots = document.querySelectorAll('.slider-dots-item');
+  if (dots.length < 1) return;
   const slider = document.querySelector('.slider');
   const btnLeft = document.querySelector('.slider-btn-left');
   const btnRight = document.querySelector('.slider-btn-right');
@@ -33,8 +34,8 @@ export const initSlider = () => {
 
   try {
     dots.forEach(dot => { dot.addEventListener('animationend', (e) => doSlide(e)) });
-    btnLeft.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.left));
-    btnRight.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.rigth));
+    btnLeft.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.rigth));
+    btnRight.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.left));
   } catch (error) {
     console.error(error);
   }
