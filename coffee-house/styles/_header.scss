@@ -22,9 +22,11 @@
         object-fit: cover;
       }
 
-      & a[href*="html"]:hover {
-        cursor: pointer;
-        filter: brightness(1.2);
+      @media (hover: hover) {
+        & a[href*="html"]:hover {
+          cursor: pointer;
+          filter: brightness(1.2);
+        }
       }
     }
 
@@ -42,7 +44,7 @@
     }
 
     .header-nav {
-      margin-top: -4px;
+      margin-top: -3px;
 
       & ul {
         display: flex;
@@ -63,9 +65,11 @@
             @extend %link-after;
           }
 
-          & a:hover::after {
-            opacity: 1;
-            width: calc(100% - $menu-item-padding * 2);
+          @media (hover: hover) {
+            & a:hover::after {
+              opacity: 1;
+              width: calc(100% - $menu-item-padding * 2);
+            }
           }
         }
       }
@@ -86,12 +90,25 @@
         width: 100%;
       }
 
-      & a[href*="html"]:hover::after {
-        opacity: 1;
-        width: 100%;
+      @media (hover: hover) {
+        & a[href*="html"]:hover::after {
+          opacity: 1;
+          width: 100%;
+        }
+
+        & a[href*="html"]:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+
+    @media (max-width: $tablet) {
+      .header-nav {
+        display: none;
       }
 
-      & a[href*="html"]:hover {
-        cursor: pointer;
+      .header-menu {
+        display: none;
       }
     }

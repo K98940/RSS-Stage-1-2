@@ -3,11 +3,10 @@
   color: $text-dark;
   text-align: center;
   margin-bottom: 40px;
+  padding: 0 clamp(0px, calc(100% - 1115px), 245px);
 
   & span {
     @extend %font-heading-2-accent;
-    @extend %accent-correction;
-    color: $text-accent;
   }
 }
 
@@ -37,10 +36,13 @@
     transition-duration: $transition-duration-normal;
     cursor: pointer;
 
-    &:hover {
-      color: $text-light;
-      background-color: $background-container;
+    @media (hover: hover) {
+      &:hover {
+        color: $text-light;
+        background-color: $background-container;
+      }
     }
+
   }
 
   & input:checked+label {
@@ -86,8 +88,9 @@
 
   & article {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, 310px);
     grid-auto-rows: 506px;
+    justify-content: center;
     gap: 40px;
 
     width: 100%;
@@ -97,6 +100,10 @@
 
     opacity: 0;
     overflow: hidden;
+  }
+
+  @media (max-width: $tablet) {
+    margin-bottom: 40px;
   }
 }
 
@@ -156,5 +163,28 @@
 .tab-container {
   @extend %flex-center-center;
   gap: 14px;
-  margin-bottom: 38px
+  margin-bottom: 38px;
+
+  @media (max-width: $mobile) {
+    gap: 6px;
+  }
+}
+
+.btn-refresh-container {
+  display: none;
+  margin-bottom: 100px;
+
+  & button {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: 1px solid $border-dark;
+    border-radius: 100%;
+  }
+
+  @media (max-width: $tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

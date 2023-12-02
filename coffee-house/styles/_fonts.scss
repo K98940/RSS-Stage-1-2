@@ -2,32 +2,42 @@ $font-family: 'Inter', sans-serif;
 
 %font-heading-1 {
   font-family: $font-family;
-  font-size: 72px;
   font-weight: 600;
   line-height: 105%;
+  font-size: clamp(42px, 10vw, 72px);
+
+  @media (max-width: $mobile) {
+    line-height: 115%;
+  }
 }
 
 %font-heading-1-accent {
   font-family: $font-family;
-  font-size: 72px;
+  font-size: clamp(42px, 10vw, 72px);
   font-weight: 600;
   font-style: italic;
   line-height: 105%;
+  padding-right: clamp(10px, 20vw - 135px, 18px);
+
+  @media (max-width: $mobile) {
+    line-height: 115%;
+  }
 }
 
 %font-heading-2 {
   font-family: $font-family;
-  font-size: 60px;
+  font-size: clamp(32px, 8vw, 60px);
   font-weight: 600;
   line-height: 125%;
 }
 
 %font-heading-2-accent {
   font-family: $font-family;
-  font-size: 60px;
+  font-size: clamp(32px, 8vw, 60px);
   font-weight: 600;
   font-style: italic;
   line-height: 125%;
+  color: $text-accent;
 }
 
 %font-heading-3 {
@@ -63,9 +73,4 @@ $font-family: 'Inter', sans-serif;
   font-size: 32px;
   font-weight: 600;
   line-height: 125%;
-}
-
-%accent-correction {
-  display: inline-block;
-  transform: skewX(5deg) translateX(-6px);
 }
