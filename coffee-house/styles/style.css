@@ -4,7 +4,7 @@
   line-height: 105%;
   font-size: clamp(42px, 10vw, 72px);
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .main-title {
     line-height: 115%;
   }
@@ -18,7 +18,7 @@
   line-height: 105%;
   padding-right: clamp(10px, 20vw - 135px, 18px);
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .main-title span {
     line-height: 115%;
   }
@@ -168,7 +168,7 @@
     background-image: url("../assets/hero/img-hero-768.webp");
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .hero {
     background-image: url("../assets/hero/img-hero-425.webp");
   }
@@ -310,7 +310,7 @@
 .slider-btn-right {
   stroke: hsl(40, 2%, 25%);
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .slider-btn-left,
   .slider-btn-right {
     display: none;
@@ -350,7 +350,7 @@
   height: 100%;
   margin: 0 auto;
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .slide-content {
     min-width: 348px;
   }
@@ -417,7 +417,6 @@
 .about-content {
   display: flex;
   gap: 39px;
-  min-height: 800px;
 }
 @media (max-width: 768px) {
   .about-content {
@@ -457,7 +456,7 @@
     transform: scale(1.055);
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .about-content-card picture {
     height: 100%;
   }
@@ -471,7 +470,7 @@
     aspect-ratio: 1/0.858;
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .about-card__590 {
     aspect-ratio: 1/1.693;
   }
@@ -506,7 +505,7 @@
     gap: 101px;
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .mobileapp {
     padding-top: 5px;
     gap: 40px;
@@ -537,7 +536,7 @@
   display: flex;
   gap: 20px;
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .mobileapp-btn-container {
     flex-direction: column;
   }
@@ -605,7 +604,7 @@
     gap: 68px;
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .footer {
     padding: 60px 16px;
     gap: 8px;
@@ -840,7 +839,7 @@
   gap: 14px;
   margin-bottom: 38px;
 }
-@media (max-width: 425px) {
+@media (max-width: 450px) {
   .tab-container {
     gap: 6px;
   }
