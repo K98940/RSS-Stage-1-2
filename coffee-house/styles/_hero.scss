@@ -1,22 +1,17 @@
 .hero {
+  position: relative;
   height: 644px;
   padding-top: 101px;
   padding-left: 100px;
 
+  overflow: hidden;
   border-radius: 40px;
-  background-image: url('../assets/hero/img-hero-1440.webp');
-  @extend %bg-to-center;
 
   @media (max-width: $tablet) {
     height: clamp(552px, 100vw - 124px, 644px);
     padding-top: clamp(60px, 20vw - 52px, 101px);
     padding-right: clamp(16px, 20vw - 93px, 60px);
     padding-left: clamp(16px, 20vw - 93px, 60px);
-    background-image: url('../assets/hero/img-hero-768.webp');
-  }
-
-  @media (max-width: $mobile) {
-    background-image: url('../assets/hero/img-hero-425.webp');
   }
 }
 
@@ -75,4 +70,18 @@
   height: 20px;
   background-image: url('../assets/header/coffee-cup.svg');
   transition-duration: $transition-duration-normal;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $z-index-backdrop;
+
+  & video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
