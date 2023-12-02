@@ -6,8 +6,17 @@
   display: flex;
   align-items: center;
   gap: 100px;
-
   color: $text-dark;
+
+  @media (max-width: $small-desktop) {
+    flex-direction: column;
+    gap: 101px;
+  }
+
+  @media (max-width: $mobile) {
+    padding-top: 5px;
+    gap: 40px;
+  }
 }
 
 .mobileapp-offer {
@@ -22,9 +31,7 @@
     @extend %font-heading-2;
 
     & span {
-      color: $text-accent;
       @extend %font-heading-2-accent;
-      @extend %accent-correction;
     }
   }
 
@@ -35,18 +42,25 @@
 
 .mobile-screens {
   @extend %flex-center-center;
-  flex: 0 0 630px;
-  height: 630px;
+  flex: 0 0 46.33%;
 
   & img {
     width: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: $tablet) {
+    margin-bottom: -4px;
+  }
 }
 
 .mobileapp-btn-container {
   display: flex;
-  gap: 20px
+  gap: 20px;
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
 }
 
 .mobileapp-btn {
@@ -65,13 +79,15 @@
 
   border: 1px solid $border-dark;
 
-  &:hover {
-    background-color: $background-container;
-    color: $text-light;
-  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: $background-container;
+      color: $text-light;
+    }
 
-  &:hover .mobileapp-btn-icon svg {
-    fill: $text-light;
+    &:hover .mobileapp-btn-icon svg {
+      fill: $text-light;
+    }
   }
 }
 

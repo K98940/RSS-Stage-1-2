@@ -11,9 +11,23 @@
   @extend %flex-center-center;
   gap: 100px;
   padding: 100px;
+  margin-top: 0;
   border-radius: 40px;
   background: $background-container;
   color: $text-light;
+
+  @media (max-width: $small-desktop) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 60px;
+    padding-right: 60px;
+    gap: 68px;
+  }
+
+  @media (max-width: $mobile) {
+    padding: 60px 16px;
+    gap: 8px;
+  }
 }
 
 .footer-column {
@@ -29,8 +43,6 @@
 
     & span {
       @extend %font-heading-2-accent;
-      @extend %accent-correction;
-      color: $text-accent;
     }
   }
 
@@ -65,10 +77,12 @@
       @extend %link-after;
     }
 
-    &:hover::after {
-      background-color: $border-light;
-      opacity: 1;
-      width: 100%;
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: $border-light;
+        opacity: 1;
+        width: 100%;
+      }
     }
 
     &>a {
@@ -99,11 +113,14 @@
       @extend %link-after;
     }
 
-    &:hover::after {
-      background-color: $border-light;
-      opacity: 1;
-      width: 100%;
+    @media (hover: hover) {
+      &:hover::after {
+        background-color: $border-light;
+        opacity: 1;
+        width: 100%;
+      }
     }
+
   }
 
   & time {
@@ -134,8 +151,10 @@
   stroke: $border-light;
   transition-duration: $transition-duration-normal;
 
-  &:hover {
-    stroke: $text-dark;
-    background-color: $background-body;
+  @media (hover: hover) {
+    &:hover {
+      stroke: $text-dark;
+      background-color: $background-body;
+    }
   }
 }

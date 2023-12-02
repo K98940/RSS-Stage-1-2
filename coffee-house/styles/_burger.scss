@@ -1,0 +1,37 @@
+%burger-pseudo-elements {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 17px;
+  height: 2px;
+  left: 50%;
+  top: 50%;
+  background-color: $text-dark;
+}
+
+.burger-menu {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid $border-dark;
+
+  &::before {
+    @extend %burger-pseudo-elements;
+    transform: translate(-50%, calc(-50% - 4px));
+  }
+
+  &::after {
+    @extend %burger-pseudo-elements;
+    transform: translate(-50%, calc(-50% + 4px));
+  }
+}
+
+@media (max-width: $tablet) {
+  .burger-menu {
+    display: inline-block;
+  }
+}

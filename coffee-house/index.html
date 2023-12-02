@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -108,8 +106,8 @@
           </svg>
         </a>
       </div>
+      <button class="burger-menu"></button>
     </header>
-
     <main>
       <section class="hero section">
         <div class="hero-container">
@@ -137,6 +135,7 @@
               <div class="slide">
                 <div class="slide-content">
                   <div class="slide-content-img">
+                    <img src="./assets/slider/coffee-slider-1.webp" alt="">
                   </div>
                   <div class="slide-description">
                     <h3 class="slide-description-title">S’mores Frappuccino</h3>
@@ -164,29 +163,37 @@
         </div>
       </section>
       <section class="about section" id="about">
-        <h2 class="about-title">Resource is <span>the perfect and cozy place</span> where you can enjoy a variety of hot
-          beverages, relax,
-          catch up with friends, or get some work done.</h2>
+        <h2 class="about-title">Resource is <span>the perfect and cozy place</span> where you can enjoy a
+          variety
+          of hot beverages, relax, catch up with friends, or get some work done.</h2>
         <div class="about-content">
           <div class="about-content-col">
             <div class="about-content-card about-card__590">
-              <img src="./assets/about/about-1.jpg" alt="">
+              <picture>
+                <img src="./assets/about/about-1.webp" loading="lazy" alt="">
+              </picture>
             </div>
             <div class="about-content-card about-card__430">
-              <img src="./assets/about/about-2.jpg" alt="">
+              <picture>
+                <img src="./assets/about/about-2.webp" loading="lazy" alt="">
+              </picture>
             </div>
           </div>
           <div class="about-content-col">
             <div class="about-content-card about-card__430">
-              <img src="./assets/about/about-3.jpg" alt="">
+              <picture>
+                <img src="./assets/about/about-3.webp" loading="lazy" alt="">
+              </picture>
             </div>
             <div class="about-content-card  about-card__590">
-              <img src="./assets/about/about-4.jpg" alt="">
+              <picture>
+                <img src="./assets/about/about-4.webp" loading="lazy" alt="">
+              </picture>
             </div>
           </div>
         </div>
       </section>
-      <section class="mobileapp section" id="mobileapp">
+      <section class="section mobileapp" id="mobileapp">
         <div class="mobileapp-offer">
           <h2><span>Download</span> our apps to start ordering</h2>
           <p>
@@ -226,14 +233,15 @@
           </div>
         </div>
         <div class="mobile-screens">
-          <img src="./assets/mobile/mobile-screens.png" alt="">
+          <picture>
+            <img src="./assets/mobile/mobile-screens.webp" loading="lazy" alt="our app">
+          </picture>
         </div>
       </section>
     </main>
-
     <footer class="footer" id="contactus">
       <div class="footer-column">
-        <h2>Sip, Savor, Smile.<br><span>It’s coffee time!</span></h2>
+        <h2>Sip, Savor, Smile. <span>It’s coffee time!</span></h2>
         <div class="contacts-btns-container">
           <a class="contacts-btn" href="#contactus">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -271,7 +279,6 @@
       </div>
     </footer>
   </div>
-
   <script type="module" src="./js/index.js"></script>
 </body>
 
