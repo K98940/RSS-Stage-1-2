@@ -783,7 +783,31 @@
 .tab-input {
   display: none;
 }
+@media (max-width: 768px) {
+  .tab-input:checked ~ .menu-container .card {
+    display: flex;
+    animation-name: showCard;
+    animation-duration: 1000ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  .tab-input[portion]:checked ~ .menu-container .card {
+    display: none;
+    opacity: 0;
+  }
+  .tab-input[portion]:checked ~ .menu-container .card:nth-child(-1n+4) {
+    display: flex;
+  }
+}
 
+@keyframes showCard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .menu-tab label {
   padding: 8px 16px 8px 8px;
   gap: 8px;
@@ -834,7 +858,7 @@
 
 .menu-container {
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 .menu-container article {
   display: grid;
@@ -844,20 +868,8 @@
   gap: 40px;
   width: 100%;
   height: fit-content;
-  transition-duration: 500ms, 1000ms;
-  transition-property: opacity, height;
+  margin-bottom: 40px;
   overflow: hidden;
-}
-@media (max-width: 768px) {
-  .menu-container {
-    margin-bottom: 40px;
-  }
-  .menu-container [T-only-4] .card {
-    display: none;
-  }
-  .menu-container [T-only-4] .card:nth-child(-1n+4) {
-    display: flex;
-  }
 }
 
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] {
@@ -887,21 +899,6 @@
   background-color: hsl(28, 29%, 84%);
 }
 
-.tab-input[value=coffee]:checked ~ .menu-container .menu__coffee {
-  opacity: 1;
-  height: fit-content;
-}
-
-.tab-input[value=tea]:checked ~ .menu-container .menu__tea {
-  opacity: 1;
-  height: fit-content;
-}
-
-.tab-input[value=dessert]:checked ~ .menu-container .menu__dessert {
-  opacity: 1;
-  height: fit-content;
-}
-
 .tab-container {
   gap: 14px;
   margin-bottom: 38px;
@@ -914,7 +911,8 @@
 
 .btn-refresh-container {
   display: none;
-  margin-bottom: 100px;
+  justify-content: center;
+  align-items: center;
 }
 .btn-refresh-container button {
   width: 60px;
@@ -930,18 +928,12 @@
     background-color: hsl(35, 9%, 37%);
   }
 }
+
 @media (max-width: 768px) {
-  .btn-refresh-container {
+  .tab-input[portion]:checked ~ .menu-container .btn-refresh-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
-
-.show-all-elements {
-  display: flex;
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -952,7 +944,7 @@
   transition-duration: 500ms;
 }
 .card picture {
-  flex: 0 0 auto;
+  flex: 0 0 308px;
   width: 100%;
   align-self: center;
   border-radius: 40px;

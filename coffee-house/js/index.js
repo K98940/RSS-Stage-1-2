@@ -1,4 +1,3 @@
-import { initBtnRefresh } from './btn-refresh.js';
 import { initBurgerMenu } from './burger.js';
 import { initMenu } from './menu.js';
 import { initSlider } from './slider.js';
@@ -7,4 +6,3 @@ import { initSlider } from './slider.js';
 initBurgerMenu();
 initSlider();
 initMenu();
-initBtnRefresh();

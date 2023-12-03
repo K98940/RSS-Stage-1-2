@@ -18,7 +18,38 @@
 }
 
 .tab-input {
-  display: none
+  display: none;
+
+  @media (max-width: $tablet) {
+    &:checked~.menu-container .card {
+      display: flex;
+      animation-name: showCard;
+      animation-duration: $transition-duration-slow;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
+
+    &[portion]:checked~.menu-container .card {
+      display: none;
+      opacity: 0;
+
+      &:nth-child(-1n+4) {
+        display: flex;
+      }
+    }
+  }
+}
+
+
+
+@keyframes showCard {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .menu-tab {
@@ -84,7 +115,7 @@
 
 .menu-container {
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 
   & article {
     display: grid;
@@ -95,22 +126,8 @@
 
     width: 100%;
     height: fit-content;
-    transition-duration: $transition-duration-normal, $transition-duration-slow;
-    transition-property: opacity, height;
-
-    overflow: hidden;
-  }
-
-  @media (max-width: $tablet) {
-    & [T-only-4] .card {
-      display: none;
-
-      &:nth-child(-1n+4) {
-        display: flex;
-      }
-    }
-
     margin-bottom: 40px;
+    overflow: hidden;
   }
 }
 
@@ -144,21 +161,6 @@
   }
 }
 
-.tab-input[value="coffee"]:checked~.menu-container .menu__coffee {
-  opacity: 1;
-  height: fit-content;
-}
-
-.tab-input[value="tea"]:checked~.menu-container .menu__tea {
-  opacity: 1;
-  height: fit-content;
-}
-
-.tab-input[value="dessert"]:checked~.menu-container .menu__dessert {
-  opacity: 1;
-  height: fit-content;
-}
-
 .tab-container {
   @extend %flex-center-center;
   gap: 14px;
@@ -171,7 +173,8 @@
 
 .btn-refresh-container {
   display: none;
-  margin-bottom: 100px;
+  justify-content: center;
+  align-items: center;
 
   & button {
     width: 60px;
@@ -188,14 +191,10 @@
       }
     }
   }
-
-  @media (max-width: $tablet) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
-.show-all-elements {
-  display: flex;
+@media (max-width: $tablet) {
+  .tab-input[portion]:checked~.menu-container .btn-refresh-container {
+    display: flex;
+  }
 }
