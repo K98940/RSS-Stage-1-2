@@ -40,8 +40,6 @@
   }
 }
 
-
-
 @keyframes showCard {
   0% {
     opacity: 0;
@@ -76,15 +74,15 @@
 
   }
 
-  & input:checked+label {
-    background-color: $background-container;
-    color: $text-light;
-    cursor: default;
+  // & input:checked+label {
+  //   background-color: $background-container;
+  //   color: $text-light;
+  //   cursor: default;
 
-    & .tab-icon {
-      background-color: $background-body;
-    }
-  }
+  //   & .tab-icon {
+  //     background-color: $background-body;
+  //   }
+  // }
 }
 
 .tab-icon {

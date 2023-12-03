@@ -16,7 +16,7 @@ export const initMenu = async () => {
 
   const initTabs = (cards) => {
     const tabHandler = () => {
-      renderCards(menuContainer, cards);
+      fillCardsContainer(menuContainer, cards);
     }
 
     const tabs = document.querySelectorAll('.tab-input');
@@ -43,7 +43,7 @@ export const initMenu = async () => {
 </div>
     `;
     const sections = cards.map(card => `
-<section class="card">
+<section class="card" id="${card.id}">
   <picture>
     <img src="${card.img || ''}" alt="" loading="lazy">
   </picture>
@@ -63,7 +63,7 @@ export const initMenu = async () => {
     return article;
   }
 
-  const renderCards = (menuContainer, cards) => {
+  const fillCardsContainer = (menuContainer, cards) => {
     const tabInput = document.querySelector('.tab-input:checked').value;
     const filteredCards = cards.filter(card => card.category === tabInput);
     const menuHTML = createMenuHtml(filteredCards);
@@ -71,12 +71,110 @@ export const initMenu = async () => {
     initBtnRefresh();
   }
 
+  const menuContainerClick = (e, cards) => {
+    e.stopImmediatePropagation();
+
+    const getIdCard = (element) => {
+      if (!element) return null;
+      if (element.tagName === 'SECTION') return element.getAttribute('id');
+      return getIdCard(element.parentElement);
+    }
+
+    const fillDialogContainer = (id) => {
+      const card = cards.filter(card => card.id === +id)[0];
+      const html = `
+      <form action="">
+        <section class="dialog-container">
+          <picture>
+            <img src="${card.img}" alt="" loading="lazy">
+          </picture>
+          <div class="dialog-form">
+            <h3>${card.name}</h3>
+            <p class="dialog-description">${card.description}</p>
+
+            <fieldset class="dialog-tab-container">
+              <legend>Size</legend>
+              <div class="dialog-tab">
+                <input class="tab-input" type="radio" name="tab-size" id="tabs" value="S" checked>
+                <label for="tabs">
+                  <span class="tab-icon">S</span>
+                  <span class="tab-title">200 ml</span>
+                </label>
+              </div>
+              <div class="dialog-tab">
+                <input class="tab-input" type="radio" name="tab-size" id="tab-M" value="M">
+                <label for="tab-M">
+                  <span class="tab-icon">M</span>
+                  <span class="tab-title">300 ml</span>
+                </label>
+              </div>
+              <div class="dialog-tab">
+                <input class="tab-input" type="radio" name="tab-size" id="tab-L" value="L">
+                <label for="tab-L">
+                  <span class="tab-icon">L</span>
+                  <span class="tab-title">400 ml</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="dialog-tab-container">
+              <legend>Additives</legend>
+              <div class="dialog-tab">
+                <input type="checkbox" name="additives" id="sugar" value="sugar">
+                <label for="sugar">
+                  <span class="tab-icon">1</span>
+                  <span class="tab-title">Sugar</span>
+                </label>
+              </div>
+              <div class="dialog-tab">
+                <input type="checkbox" name="additives" id="cinnamon" value="cinnamon">
+                <label for="cinnamon">
+                  <span class="tab-icon">2</span>
+                  <span class="tab-title">Cinnamon</span>
+                </label>
+              </div>
+              <div class="dialog-tab">
+                <input type="checkbox" name="additives" id="syrup" value="syrup">
+                <label for="syrup">
+                  <span class="tab-icon">3</span>
+                  <span class="tab-title">Syrup</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <p class="dialog-price">
+              <span>Total:</span><span>$${card.price}</span>
+            </p>
+
+            <div class="dialog-alert">
+              <button>i</button>
+              <p>The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and
+              enjoy your favorite coffee with up to 20% discount.</p>
+            </div>
+
+
+          </div>
+        </section>
+      </form>
+      `;
+      dialog.innerHTML = html;
+    }
+
+    const dialog = document.getElementById('menu-dialog');
+    const id = getIdCard(e.target);
+    if (!id) return;
+    fillDialogContainer(id);
+    // dialog.show();
+    dialog.showModal();
+  }
+
   const menuContainer = document.querySelector('.menu-container');
   if (!menuContainer) return;
 
   try {
     const cards = await getCardsData();
-    renderCards(menuContainer, cards);
+    menuContainer.addEventListener('click', (e) => menuContainerClick(e, cards))
+    fillCardsContainer(menuContainer, cards);
     initTabs(cards);
   } catch (error) {
     console.error(error);

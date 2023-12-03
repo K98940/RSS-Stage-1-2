@@ -34,14 +34,6 @@
       background-color: mix($background-body, $background-container, 95%);
     }
   }
-
-  // @media (max-width: $tablet) {
-  //   display: none;
-
-  //   &:nth-child(-1n+5) {
-  //     display: flex;
-  //   }
-  // }
 }
 
 .card-description {

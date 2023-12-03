@@ -1,5 +1,6 @@
 [
   {
+    "id": 2023,
     "img": "./assets/menu/coffee/coffee-1.webp",
     "name": "Irish coffee",
     "description": "Fragrant black coffee with Jameson Irish whiskey and whipped milk",
@@ -35,6 +36,7 @@
     ]
   },
   {
+    "id": 2024,
     "img": "./assets/menu/coffee/coffee-2.webp",
     "name": "Kahlua coffee",
     "description": "Classic coffee with milk and Kahlua liqueur under a cap of frothed milk",
@@ -70,6 +72,7 @@
     ]
   },
   {
+    "id": 2025,
     "img": "./assets/menu/coffee/coffee-3.webp",
     "name": "Honey raf",
     "description": "Espresso with frothed milk, cream and aromatic honey",
@@ -105,6 +108,7 @@
     ]
   },
   {
+    "id": 2026,
     "img": "./assets/menu/coffee/coffee-4.webp",
     "name": "Ice cappuccino",
     "description": "Cappuccino with soft thick foam in summer version with ice",
@@ -140,6 +144,7 @@
     ]
   },
   {
+    "id": 2027,
     "img": "./assets/menu/coffee/coffee-5.webp",
     "name": "Espresso",
     "description": "Classic black coffee",
@@ -175,6 +180,7 @@
     ]
   },
   {
+    "id": 2028,
     "img": "./assets/menu/coffee/coffee-6.webp",
     "name": "Latte",
     "description": "Espresso coffee with the addition of steamed milk and dense milk foam",
@@ -210,6 +216,7 @@
     ]
   },
   {
+    "id": 2029,
     "img": "./assets/menu/coffee/coffee-7.webp",
     "name": "Latte macchiato",
     "description": "Espresso with frothed milk and chocolate",
@@ -245,6 +252,7 @@
     ]
   },
   {
+    "id": 2030,
     "img": "./assets/menu/coffee/coffee-8.webp",
     "name": "Coffee with cognac",
     "description": "Fragrant black coffee with cognac and whipped cream",
@@ -280,6 +288,7 @@
     ]
   },
   {
+    "id": 2031,
     "img": "./assets/menu/tea/tea-1.webp",
     "name": "Moroccan",
     "description": "Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint",
@@ -315,6 +324,7 @@
     ]
   },
   {
+    "id": 2032,
     "img": "./assets/menu/tea/tea-2.webp",
     "name": "Ginger",
     "description": "Original black tea with fresh ginger, lemon and honey",
@@ -350,6 +360,7 @@
     ]
   },
   {
+    "id": 2033,
     "img": "./assets/menu/tea/tea-3.webp",
     "name": "Cranberry",
     "description": "Invigorating black tea with cranberry and honey",
@@ -385,6 +396,7 @@
     ]
   },
   {
+    "id": 2034,
     "img": "./assets/menu/tea/tea-4.webp",
     "name": "Sea buckthorn",
     "description": "Toning sweet black tea with sea buckthorn, fresh thyme and cinnamon",
@@ -420,6 +432,7 @@
     ]
   },
   {
+    "id": 2035,
     "img": "./assets/menu/dessert/dessert-1.webp",
     "name": "Marble cheesecake",
     "description": "Philadelphia cheese with lemon zest on a light sponge cake and red currant jam",
@@ -455,6 +468,7 @@
     ]
   },
   {
+    "id": 2036,
     "img": "./assets/menu/dessert/dessert-2.webp",
     "name": "Red velvet",
     "description": "Layer cake with cream cheese frosting",
@@ -490,6 +504,7 @@
     ]
   },
   {
+    "id": 2037,
     "img": "./assets/menu/dessert/dessert-3.webp",
     "name": "Cheesecakes",
     "description": "Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar",
@@ -525,6 +540,7 @@
     ]
   },
   {
+    "id": 2038,
     "img": "./assets/menu/dessert/dessert-4.webp",
     "name": "Creme brulee",
     "description": "Delicate creamy dessert in a caramel basket with wild berries",
@@ -560,6 +576,7 @@
     ]
   },
   {
+    "id": 2039,
     "img": "./assets/menu/dessert/dessert-5.webp",
     "name": "Pancakes",
     "description": "Tender pancakes with strawberry jam and fresh strawberries",
@@ -595,6 +612,7 @@
     ]
   },
   {
+    "id": 2040,
     "img": "./assets/menu/dessert/dessert-6.webp",
     "name": "Honey cake",
     "description": "Classic honey cake with delicate custard",
@@ -630,6 +648,7 @@
     ]
   },
   {
+    "id": 2041,
     "img": "./assets/menu/dessert/dessert-7.webp",
     "name": "Chocolate cake",
     "description": "Cake with hot chocolate filling and nuts with dried apricots",
@@ -665,6 +684,7 @@
     ]
   },
   {
+    "id": 2042,
     "img": "./assets/menu/dessert/dessert-8.webp",
     "name": "Black forest",
     "description": "A combination of thin sponge cake with cherry jam and light chocolate mousse",
