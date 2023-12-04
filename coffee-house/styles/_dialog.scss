@@ -12,7 +12,7 @@
   animation: dialog-out $transition-duration-fast ease-out forwards;
 
   // temp
-  height: 504px;
+  // height: 504px;
 
   &[open] {
     animation: dialog-in $transition-duration-fast ease-out;
@@ -43,13 +43,11 @@
 @keyframes dialog-out {
   0% {
     opacity: 1;
-    width: clamp(0px, 100%, 800px);
     display: block;
   }
 
   100% {
     opacity: 0;
-    width: 0;
     display: none;
   }
 }
@@ -135,7 +133,7 @@
     color: $text-dark;
     border-radius: 100px;
     border: 1px solid $border-light;
-    transition-duration: $transition-duration-normal;
+    transition-duration: $transition-duration-fast;
     cursor: pointer;
 
     @media (hover: hover) {
@@ -190,11 +188,14 @@
   justify-content: flex-start;
   gap: 8px;
   padding: 12px 0;
+  margin-bottom: 17px;
 
-  &>button {
+  &>div {
+    @extend %flex-center-center;
     flex: 0 0 16px;
     height: 16px;
 
+    font-size: 13px;
     border-radius: 100%;
     border: 1px solid $border-dark;
     background-color: transparent;
@@ -204,4 +205,26 @@
     @extend %font-body-caption;
     color: $text-dark;
   }
+}
+
+.dialog-btn-close {
+  @extend %flex-center-center;
+  @extend %font-action-link-button;
+  width: 100%;
+
+  padding: 10px 0;
+  color: $text-dark;
+  background-color: transparent;
+  border: 1px solid $border-dark;
+  border-radius: 100px;
+  transition-duration: $transition-duration-fast;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $text-light;
+      cursor: pointer;
+      background-color: $background-container;
+    }
+  }
+
 }

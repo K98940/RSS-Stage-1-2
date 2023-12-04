@@ -61,7 +61,7 @@
   line-height: 140%;
 }
 
-.dialog-tab-container label, .menu-tab label, .contacts-container > a, .contacts-container address > a, .contacts-container, .mobileapp-btn-vendor, .mobileapp-btn, .hero-btn, .header-nav ul li a, .header-menu-link {
+.dialog-btn-close, .dialog-tab-container label, .menu-tab label, .contacts-container > a, .contacts-container address > a, .contacts-container, .mobileapp-btn-vendor, .mobileapp-btn, .hero-btn, .header-nav ul li a, .header-menu-link {
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -265,7 +265,7 @@
   object-fit: cover;
 }
 
-.dialog-tab-container label, .dialog-tab-container, .card picture, .tab-container, .menu-tab label, .menu-tab, .menus-container, .contacts-btn, .footer, .mobile-screens, .slider-btn-left,
+.dialog-btn-close, .dialog-alert > div, .dialog-tab-container label, .dialog-tab-container, .card picture, .tab-container, .menu-tab label, .menu-tab, .menus-container, .contacts-btn, .footer, .mobile-screens, .slider-btn-left,
 .slider-btn-right, .hero-btn {
   display: flex;
   justify-content: center;
@@ -1074,7 +1074,6 @@
   border-radius: 40px;
   background-color: hsl(28, 29%, 84%);
   animation: dialog-out 250ms ease-out forwards;
-  height: 504px;
 }
 .menu-dialog[open] {
   animation: dialog-in 250ms ease-out;
@@ -1100,12 +1099,10 @@
 @keyframes dialog-out {
   0% {
     opacity: 1;
-    width: clamp(0px, 100%, 800px);
     display: block;
   }
   100% {
     opacity: 0;
-    width: 0;
     display: none;
   }
 }
@@ -1174,7 +1171,7 @@
   color: hsl(40, 2%, 25%);
   border-radius: 100px;
   border: 1px solid hsl(27, 14%, 72%);
-  transition-duration: 500ms;
+  transition-duration: 250ms;
   cursor: pointer;
 }
 @media (hover: hover) {
@@ -1218,16 +1215,35 @@
   justify-content: flex-start;
   gap: 8px;
   padding: 12px 0;
+  margin-bottom: 17px;
 }
-.dialog-alert > button {
+.dialog-alert > div {
   flex: 0 0 16px;
   height: 16px;
+  font-size: 13px;
   border-radius: 100%;
   border: 1px solid hsl(35, 9%, 37%);
   background-color: transparent;
 }
 .dialog-alert > p {
   color: hsl(40, 2%, 25%);
+}
+
+.dialog-btn-close {
+  width: 100%;
+  padding: 10px 0;
+  color: hsl(40, 2%, 25%);
+  background-color: transparent;
+  border: 1px solid hsl(35, 9%, 37%);
+  border-radius: 100px;
+  transition-duration: 250ms;
+}
+@media (hover: hover) {
+  .dialog-btn-close:hover {
+    color: hsl(28, 29%, 84%);
+    cursor: pointer;
+    background-color: hsl(35, 9%, 37%);
+  }
 }
 
 * {

@@ -74,16 +74,23 @@ export const initMenu = async () => {
   const menuContainerClick = (e, cards) => {
     e.stopImmediatePropagation();
 
+    const calcPrice = (base) => {
+      const selectedItems = [...document.querySelectorAll('#menu-dialog input:checked')];
+      let sum = selectedItems.reduce((sum, item) => sum + Number(item.value), base);
+      sum = `$${sum.toFixed(2).toString(10)}`;
+      document.getElementById('dialog-sum').textContent = sum;
+    }
+
     const getIdCard = (element) => {
       if (!element) return null;
       if (element.tagName === 'SECTION') return element.getAttribute('id');
       return getIdCard(element.parentElement);
     }
 
-    const fillDialogContainer = (id) => {
+    const initDialogContainer = (id) => {
       const card = cards.filter(card => card.id === +id)[0];
       const html = `
-      <form action="">
+      <form>
         <section class="dialog-container">
           <picture>
             <img src="${card.img}" alt="" loading="lazy">
@@ -95,21 +102,21 @@ export const initMenu = async () => {
             <fieldset class="dialog-tab-container">
               <legend>Size</legend>
               <div class="dialog-tab">
-                <input class="tab-input" type="radio" name="tab-size" id="tabs" value="S" checked>
+                <input class="tab-input" type="radio" name="tab-size" id="tabs" value="${card.sizes.s['add-price']}" checked>
                 <label for="tabs">
                   <span class="tab-icon">S</span>
                   <span class="tab-title">200 ml</span>
                 </label>
               </div>
               <div class="dialog-tab">
-                <input class="tab-input" type="radio" name="tab-size" id="tab-M" value="M">
+                <input class="tab-input" type="radio" name="tab-size" id="tab-M" value="${card.sizes.m['add-price']}">
                 <label for="tab-M">
                   <span class="tab-icon">M</span>
                   <span class="tab-title">300 ml</span>
                 </label>
               </div>
               <div class="dialog-tab">
-                <input class="tab-input" type="radio" name="tab-size" id="tab-L" value="L">
+                <input class="tab-input" type="radio" name="tab-size" id="tab-L" value="${card.sizes.l['add-price']}">
                 <label for="tab-L">
                   <span class="tab-icon">L</span>
                   <span class="tab-title">400 ml</span>
@@ -120,21 +127,21 @@ export const initMenu = async () => {
             <fieldset class="dialog-tab-container">
               <legend>Additives</legend>
               <div class="dialog-tab">
-                <input type="checkbox" name="additives" id="sugar" value="sugar">
+                <input type="checkbox" name="additives" id="sugar" value="${card.additives[0]['add-price']}">
                 <label for="sugar">
                   <span class="tab-icon">1</span>
                   <span class="tab-title">Sugar</span>
                 </label>
               </div>
               <div class="dialog-tab">
-                <input type="checkbox" name="additives" id="cinnamon" value="cinnamon">
+                <input type="checkbox" name="additives" id="cinnamon" value="${card.additives[1]['add-price']}">
                 <label for="cinnamon">
                   <span class="tab-icon">2</span>
                   <span class="tab-title">Cinnamon</span>
                 </label>
               </div>
               <div class="dialog-tab">
-                <input type="checkbox" name="additives" id="syrup" value="syrup">
+                <input type="checkbox" name="additives" id="syrup" value="${card.additives[2]['add-price']}">
                 <label for="syrup">
                   <span class="tab-icon">3</span>
                   <span class="tab-title">Syrup</span>
@@ -143,33 +150,45 @@ export const initMenu = async () => {
             </fieldset>
 
             <p class="dialog-price">
-              <span>Total:</span><span>$${card.price}</span>
+              <span>Total:</span><span id="dialog-sum">$${card.price}</span>
             </p>
 
             <div class="dialog-alert">
-              <button>i</button>
+              <div>i</div>
               <p>The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and
               enjoy your favorite coffee with up to 20% discount.</p>
             </div>
 
-
+            <button class="dialog-btn-close">Close</button>
           </div>
         </section>
       </form>
       `;
       dialog.innerHTML = html;
+      return card;
     }
 
-    const dialog = document.getElementById('menu-dialog');
     const id = getIdCard(e.target);
     if (!id) return;
-    fillDialogContainer(id);
+    let { price } = initDialogContainer(id);
+    price = Number(price);
+
+    const btnClose = dialog.querySelector('.dialog-btn-close');
+    btnClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      dialog.close();
+    })
+
+    const inputs = dialog.querySelectorAll('input');
+    inputs.forEach(input => input.addEventListener('change', (_) => calcPrice(price)));
+
     // dialog.show();
     dialog.showModal();
   }
 
   const menuContainer = document.querySelector('.menu-container');
   if (!menuContainer) return;
+  const dialog = document.getElementById('menu-dialog');
 
   try {
     const cards = await getCardsData();
