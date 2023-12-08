@@ -96,7 +96,7 @@ export const initMenu = async () => {
     const initDialogContainer = (id) => {
       const card = cards.filter(card => card.id === +id)[0];
       const html = `
-      <form>
+      <form method="dialog">
         <section class="dialog-container">
           <picture>
             <img src="${card.img}" alt="" loading="lazy">
@@ -191,9 +191,14 @@ export const initMenu = async () => {
     dialog.showModal();
   }
 
+  const handleDialogClose = (e) => {
+    if (e.target === e.currentTarget) dialog.close();
+  }
+
   const menuContainer = document.querySelector('.menu-container');
   if (!menuContainer) return;
   const dialog = document.getElementById('menu-dialog');
+  dialog.addEventListener('click', handleDialogClose);
 
   try {
     const cards = await getCardsData();

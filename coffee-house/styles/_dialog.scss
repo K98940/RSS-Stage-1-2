@@ -72,11 +72,11 @@
       transition-duration: $transition-duration-normal;
     }
 
-    @media (hover: hover) {
-      &:hover img {
-        transform: scale(1);
-      }
-    }
+    // @media (hover: hover) {
+    //   &:hover img {
+    //     transform: scale(1);
+    //   }
+    // }
 
   }
 }
