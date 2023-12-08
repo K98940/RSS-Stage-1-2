@@ -114,10 +114,13 @@
   & input {
     display: none;
 
+    &[type="radio"]:checked+label {
+      @extend %mod-no-select;
+    }
+
     &:checked+label {
       background-color: $background-container;
       color: $text-dark;
-      cursor: default;
 
       & .tab-title {
         color: $text-light;
@@ -138,7 +141,7 @@
     color: $text-dark;
     border-radius: 100px;
     border: 1px solid $border-light;
-    transition-duration: $transition-duration-fast;
+    transition-duration: $transition-duration-normal;
     cursor: pointer;
 
     @media (hover: hover) {

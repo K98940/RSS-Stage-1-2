@@ -310,7 +310,7 @@
   transition: 300ms;
 }
 
-.main-title, .dialog-container picture img, .card picture img, .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert], .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea], .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee], .mobile-screens img, .about-content-card img, .slide-content-img img, .header-logo a[href="#"], .header-menu a[href="#"], .hero-content, .hero-video video {
+.main-title, .dialog-tab-container input[type=radio]:checked + label, .dialog-container picture img, .card picture img, .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert], .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea], .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee], .mobile-screens img, .about-content-card img, .slide-content-img img, .header-logo a[href="#"], .header-menu a[href="#"], .hero-content, .hero-video video {
   pointer-events: none;
   user-select: none;
   cursor: default;
@@ -1168,7 +1168,6 @@
 .dialog-tab-container input:checked + label {
   background-color: hsl(35, 9%, 37%);
   color: hsl(40, 2%, 25%);
-  cursor: default;
 }
 .dialog-tab-container input:checked + label .tab-title {
   color: hsl(28, 29%, 84%);
@@ -1182,7 +1181,7 @@
   color: hsl(40, 2%, 25%);
   border-radius: 100px;
   border: 1px solid hsl(27, 14%, 72%);
-  transition-duration: 250ms;
+  transition-duration: 500ms;
   cursor: pointer;
 }
 @media (hover: hover) {
