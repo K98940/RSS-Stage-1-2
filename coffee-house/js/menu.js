@@ -1,5 +1,5 @@
 export const initMenu = async () => {
-  const initBtnRefresh = () => {
+  const initBtnRefresh = (cardsCount) => {
     const clickHandler = () => {
       try {
         const tab = document.querySelector('.tab-input:checked');
@@ -10,6 +10,12 @@ export const initMenu = async () => {
     }
 
     const btn = document.getElementById('btn-refresh');
+    if (cardsCount < 5) {
+      btn.style.display = 'none';
+      return;
+    } else {
+      btn.style.display = 'block';
+    }
     if (!btn) return;
     btn.addEventListener('click', clickHandler, { passive: true })
   }
@@ -60,15 +66,15 @@ export const initMenu = async () => {
     </article>
     ${btnRefreshHtml}
     `;
-    return article;
+    return [article, sections.length];
   }
 
   const fillCardsContainer = (menuContainer, cards) => {
     const tabInput = document.querySelector('.tab-input:checked').value;
     const filteredCards = cards.filter(card => card.category === tabInput);
-    const menuHTML = createMenuHtml(filteredCards);
+    const [menuHTML, cardsCount] = createMenuHtml(filteredCards);
     menuContainer.innerHTML = menuHTML;
-    initBtnRefresh();
+    initBtnRefresh(cardsCount);
   }
 
   const menuContainerClick = (e, cards) => {
