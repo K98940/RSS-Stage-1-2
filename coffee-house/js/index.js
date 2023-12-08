@@ -1,5 +1,8 @@
+import { initBurgerMenu } from './burger.js';
+import { initMenu } from './menu.js';
+import { initSlider } from './slider.js';
 
-// window.scrollTo(0, document.body.scrollHeight);
-// const scroll = document.body.querySelector('.mobileapp-btn-container')
-// console.log('scroll to :>> ', scroll);
-// scroll.scrollIntoView();
+
+initBurgerMenu();
+initSlider();
+initMenu();

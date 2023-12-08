@@ -45,6 +45,7 @@
   flex: 0 0 46.33%;
 
   & img {
+    @extend %mod-no-select;
     width: 100%;
     object-fit: cover;
   }

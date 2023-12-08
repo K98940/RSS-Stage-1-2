@@ -58,3 +58,9 @@
   opacity: 0;
   transition: 300ms;
 }
+
+%mod-no-select {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}

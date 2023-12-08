@@ -79,12 +79,31 @@
           </svg>
         </a>
       </div>
-      <nav class="header-nav">
+      <nav class="header-nav" id="burgerMenu">
         <ul>
           <li class="menu-item"><a href="#favorite-coffee">Favorite coffee</a></li>
           <li class="menu-item"><a href="#about">About</a></li>
           <li class="menu-item"><a href="#mobileapp">Mobile app</a></li>
           <li class="menu-item"><a href="#contactus">Contact us</a></li>
+          <li class="menu-item menu-item__burger">
+            <a href="./menu.html">
+              <span>Menu</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M14.167 9.76667V11.6667C14.167 14.8883 11.5553 17.5 8.33366 17.5C5.112 17.5 2.50033 14.8883 2.50033 11.6667V9.76667C2.50033 9.4353 2.76896 9.16667 3.10033 9.16667H13.567C13.8984 9.16667 14.167 9.4353 14.167 9.76667Z"
+                  stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M10.0003 7.50008C10.0003 6.66675 10.5956 5.83341 11.786 5.83341V5.83341C13.101 5.83341 14.167 4.76743 14.167 3.45246V2.91675"
+                  stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M6.66634 7.5V7.08333C6.66634 5.70262 7.78563 4.58333 9.16634 4.58333V4.58333C10.0868 4.58333 10.833 3.83714 10.833 2.91667V2.5"
+                  stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M13.333 9.16675H15.4163C16.5669 9.16675 17.4997 10.0995 17.4997 11.2501C17.4997 12.4007 16.5669 13.3334 15.4163 13.3334H14.1663"
+                  stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="header-menu">
@@ -106,7 +125,7 @@
           </svg>
         </a>
       </div>
-      <button class="burger-menu"></button>
+      <button class="burger-menu" id="burgerBtn"></button>
     </header>
     <main>
       <section class="hero section">
@@ -120,6 +139,12 @@
             <span class="hero-btn-title">Menu</span>
             <span class="hero-btn-icon"></span>
           </a>
+        </div>
+        <div class="hero-video">
+          <video autoplay loop muted playsinline poster="./assets/hero/img-hero-425.webp">
+            <source src="./assets/video/video(720p).webm" type="video/webm">
+            <source src="./assets/video/video(720p).mp4" type="video/mp4">
+          </video>
         </div>
       </section>
       <section class="favorite-coffee section" id="favorite-coffee">
@@ -139,14 +164,39 @@
                   </div>
                   <div class="slide-description">
                     <h3 class="slide-description-title">S’mores Frappuccino</h3>
-                    <p class="slide-description-content">This new drink takes an espresso and mixes it with brown sugar
+                    <p class="slide-description-content">This new drink takes an espresso and mixes it with brown
+                      sugar
                       and cinnamon before being topped with oat milk.</p>
                     <span class="slide-description-price">$5.50</span>
                   </div>
                 </div>
               </div>
-              <div class="slide"></div>
-              <div class="slide"></div>
+              <div class="slide">
+                <div class="slide-content">
+                  <div class="slide-content-img">
+                    <img src="./assets/slider/coffee-slider-2.webp" alt="">
+                  </div>
+                  <div class="slide-description">
+                    <h3 class="slide-description-title">Caramel Macchiato</h3>
+                    <p class="slide-description-content">Fragrant and unique classic espresso with rich caramel-peanut
+                      syrup, with cream under whipped thick foam.</p>
+                    <span class="slide-description-price">$5.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="slide-content">
+                  <div class="slide-content-img">
+                    <img src="./assets/slider/coffee-slider-3.webp" alt="">
+                  </div>
+                  <div class="slide-description">
+                    <h3 class="slide-description-title">Ice coffee</h3>
+                    <p class="slide-description-content">A popular summer drink that tones and invigorates. Prepared
+                      from coffee, milk and ice.</p>
+                    <span class="slide-description-price">$4.50</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="slider-btn-right">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,9 +206,15 @@
             </div>
           </div>
           <div class="slider-dots">
-            <div class="slider-dots-item slider-dots__active"></div>
-            <div class="slider-dots-item"></div>
-            <div class="slider-dots-item"></div>
+            <div class="slider-dots-item" slide="1" pointer>
+              <div class="dot-bar"></div>
+            </div>
+            <div class="slider-dots-item" slide="2">
+              <div class="dot-bar"></div>
+            </div>
+            <div class="slider-dots-item" slide="3">
+              <div class="dot-bar"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -272,7 +328,8 @@
       <div class="footer-column footer-column__flex-start">
         <h3>Contact us</h3>
         <div class="contacts-container">
-          <address><a href="https://maps.app.goo.gl/TsfNmN8NFMPwfCxR7" target="_blank">8558 Green Rd., LA</a></address>
+          <address><a href="https://maps.app.goo.gl/TsfNmN8NFMPwfCxR7" target="_blank" rel="noreferrer">8558 Green Rd.,
+              LA</a></address>
           <a href="tel:+16035550123">+1 (603) 555-0123</a>
           <time datetime="09:00">Mon-Sat: 9:00 AM – 23:00 PM</time>
         </div>

@@ -1,0 +1,235 @@
+.menu-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: clamp(0px, 100%, 800px);
+  transform: translate(-50%, -50%);
+
+  border: none;
+  border-radius: 40px;
+  background-color: $background-body;
+
+  animation: dialog-out $transition-duration-fast ease-out forwards;
+
+  &[open] {
+    animation: dialog-in $transition-duration-fast ease-out;
+  }
+
+  &::backdrop {
+    background-color: $background-backdrop;
+    backdrop-filter: blur(3px);
+  }
+
+  & form {
+    height: 100%;
+  }
+
+  @media (max-width: $tablet) {
+    width: clamp(0px, 100%, 688px);
+  }
+
+  @media (max-width: $small-tablet) {
+    width: clamp(0px, 90%, 620px);
+  }
+}
+
+@keyframes dialog-in {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes dialog-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.dialog-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px;
+  height: 100%;
+
+  & picture {
+    flex: 0 0 310px;
+    height: 310px;
+    border-radius: 40px;
+    overflow: hidden;
+
+    & img {
+      @extend %mod-no-select;
+      width: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      transition-duration: $transition-duration-normal;
+    }
+
+    @media (max-width: $small-tablet) {
+      display: none;
+    }
+  }
+}
+
+.dialog-form {
+  flex: 1 1 auto;
+  @extend %font-body-medium;
+
+  &>h3 {
+    @extend %font-heading-3;
+    margin-bottom: 13px;
+  }
+
+  & .dialog-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 20px;
+    letter-spacing: -0.1px;
+  }
+}
+
+.dialog-tab-container {
+  @extend %flex-center-center;
+  border: none;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-bottom: 19px;
+
+  & input {
+    display: none;
+
+    &:checked+label {
+      background-color: $background-container;
+      color: $text-dark;
+      cursor: default;
+
+      & .tab-title {
+        color: $text-light;
+      }
+
+      & .tab-icon {
+        background-color: $background-body;
+      }
+    }
+  }
+
+  & label {
+    @extend %flex-center-center;
+    @extend %font-action-link-button;
+
+    padding: 8px 16px 8px 8px;
+    gap: 8px;
+    color: $text-dark;
+    border-radius: 100px;
+    border: 1px solid $border-light;
+    transition-duration: $transition-duration-fast;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: $background-container;
+      }
+
+      &:hover .tab-title {
+        color: $text-light;
+      }
+
+      &:hover .tab-icon {
+        background-color: $background-body;
+      }
+    }
+
+  }
+
+  & .dialog-tab {
+    & .tab-icon {
+      background-color: $border-light;
+      text-align: center;
+    }
+  }
+
+  & legend {
+    margin-bottom: 7px;
+  }
+}
+
+.dialog-price {
+  @extend %font-heading-3;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $border-light;
+  }
+}
+
+.dialog-alert {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 12px 0;
+  margin-bottom: 17px;
+
+  &>div {
+    @extend %flex-center-center;
+    flex: 0 0 16px;
+    height: 16px;
+
+    font-size: 13px;
+    border-radius: 100%;
+    border: 1px solid $border-dark;
+    background-color: transparent;
+  }
+
+  &>p {
+    @extend %font-body-caption;
+    color: $text-dark;
+  }
+}
+
+.dialog-btn-close {
+  @extend %flex-center-center;
+  @extend %font-action-link-button;
+  width: 100%;
+
+  padding: 10px 0;
+  color: $text-dark;
+  background-color: transparent;
+  border: 1px solid $border-dark;
+  border-radius: 100px;
+  transition-duration: $transition-duration-fast;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $text-light;
+      cursor: pointer;
+      background-color: $background-container;
+    }
+  }
+
+}

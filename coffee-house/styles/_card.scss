@@ -10,13 +10,14 @@
 
   & picture {
     @extend %flex-center-center;
-    flex: 0 0 auto;
+    flex: 0 0 308px;
     width: 100%;
     align-self: center;
     border-radius: 40px;
     overflow: hidden;
 
     & img {
+      @extend %mod-no-select;
       width: 100%;
       object-fit: cover;
       transform: scale(1.1);
@@ -32,14 +33,6 @@
     &:hover {
       cursor: pointer;
       background-color: mix($background-body, $background-container, 95%);
-    }
-  }
-
-  @media (max-width: $tablet) {
-    display: none;
-
-    &:nth-child(-1n+5) {
-      display: flex;
     }
   }
 }

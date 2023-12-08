@@ -1,4 +1,7 @@
 .slider {
+  --pointer: 1;
+  --currentSlide: 0vw;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -6,6 +9,16 @@
   gap: 41px;
 
   padding: 0 4px;
+
+  @media (hover: hover) {
+    &:hover .dot-bar {
+      animation-play-state: paused;
+    }
+  }
+
+  &:active .dot-bar {
+    animation-play-state: paused;
+  }
 }
 
 .slider-main {
@@ -14,8 +27,6 @@
   align-items: center;
 
   width: 100%;
-  // height: 640px;
-  // gap: 40px;
 }
 
 .slider-dots {
@@ -62,6 +73,9 @@
   display: flex;
   flex: 0 0 100%;
   height: 100%;
+
+  transition-duration: $transition-duration-normal;
+  transform: translateX(var(--currentSlide));
 }
 
 .slide-content {
@@ -86,6 +100,7 @@
   flex: 0 0 480px;
 
   & img {
+    @extend %mod-no-select;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -131,15 +146,34 @@
   height: 4px;
 
   border-radius: 100px;
+  overflow: hidden;
   background-color: $border-light;
-}
 
-.slider-dots__active {
-  background-color: $border-dark;
+  & .dot-bar {
+    width: 0;
+    background-color: $border-dark;
+    height: 100%;
+  }
+
+  &[pointer] .dot-bar {
+    animation-name: dots-filling;
+    animation-timing-function: linear;
+    animation-duration: $animation-autoslider;
+  }
 }
 
 @media (max-width: $tablet) {
   .slider {
     padding: 0;
+  }
+}
+
+@keyframes dots-filling {
+  0% {
+    width: 10%;
+  }
+
+  100% {
+    width: 100%;
   }
 }
