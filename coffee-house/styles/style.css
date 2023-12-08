@@ -1084,6 +1084,16 @@
 .menu-dialog form {
   height: 100%;
 }
+@media (max-width: 768px) {
+  .menu-dialog {
+    width: clamp(0px, 100%, 688px);
+  }
+}
+@media (max-width: 690px) {
+  .menu-dialog {
+    width: clamp(0px, 90%, 620px);
+  }
+}
 
 @keyframes dialog-in {
   0% {
@@ -1124,6 +1134,11 @@
   transform: scale(1.1);
   transition-duration: 500ms;
 }
+@media (max-width: 690px) {
+  .dialog-container picture {
+    display: none;
+  }
+}
 
 .dialog-form {
   flex: 1 1 auto;
@@ -1137,10 +1152,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 20px;
+  letter-spacing: -0.1px;
 }
 
 .dialog-tab-container {
   border: none;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 6px;
   margin-bottom: 19px;

@@ -11,9 +11,6 @@
 
   animation: dialog-out $transition-duration-fast ease-out forwards;
 
-  // temp
-  // height: 504px;
-
   &[open] {
     animation: dialog-in $transition-duration-fast ease-out;
   }
@@ -25,6 +22,14 @@
 
   & form {
     height: 100%;
+  }
+
+  @media (max-width: $tablet) {
+    width: clamp(0px, 100%, 688px);
+  }
+
+  @media (max-width: $small-tablet) {
+    width: clamp(0px, 90%, 620px);
   }
 }
 
@@ -72,6 +77,10 @@
       transform: scale(1.1);
       transition-duration: $transition-duration-normal;
     }
+
+    @media (max-width: $small-tablet) {
+      display: none;
+    }
   }
 }
 
@@ -90,12 +99,14 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 20px;
+    letter-spacing: -0.1px;
   }
 }
 
 .dialog-tab-container {
   @extend %flex-center-center;
   border: none;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 6px;
   margin-bottom: 19px;
