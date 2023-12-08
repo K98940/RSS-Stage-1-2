@@ -11,7 +11,7 @@ export const initMenu = async () => {
 
     const btn = document.getElementById('btn-refresh');
     if (!btn) return;
-    btn.addEventListener('click', clickHandler)
+    btn.addEventListener('click', clickHandler, { passive: true })
   }
 
   const initTabs = (cards) => {
@@ -20,7 +20,7 @@ export const initMenu = async () => {
     }
 
     const tabs = document.querySelectorAll('.tab-input');
-    tabs.forEach(tab => tab.addEventListener('change', tabHandler))
+    tabs.forEach(tab => tab.addEventListener('change', tabHandler), { passive: true })
   }
 
   const getCardsData = async () => {
@@ -105,21 +105,21 @@ export const initMenu = async () => {
                 <input class="tab-input" type="radio" name="tab-size" id="tabs" value="${card.sizes.s['add-price']}" checked>
                 <label for="tabs">
                   <span class="tab-icon">S</span>
-                  <span class="tab-title">200 ml</span>
+                  <span class="tab-title">${card.sizes.s.size}</span>
                 </label>
               </div>
               <div class="dialog-tab">
                 <input class="tab-input" type="radio" name="tab-size" id="tab-M" value="${card.sizes.m['add-price']}">
                 <label for="tab-M">
                   <span class="tab-icon">M</span>
-                  <span class="tab-title">300 ml</span>
+                  <span class="tab-title">${card.sizes.m.size}</span>
                 </label>
               </div>
               <div class="dialog-tab">
                 <input class="tab-input" type="radio" name="tab-size" id="tab-L" value="${card.sizes.l['add-price']}">
                 <label for="tab-L">
                   <span class="tab-icon">L</span>
-                  <span class="tab-title">400 ml</span>
+                  <span class="tab-title">${card.sizes.l.size}</span>
                 </label>
               </div>
             </fieldset>
@@ -130,21 +130,21 @@ export const initMenu = async () => {
                 <input type="checkbox" name="additives" id="sugar" value="${card.additives[0]['add-price']}">
                 <label for="sugar">
                   <span class="tab-icon">1</span>
-                  <span class="tab-title">Sugar</span>
+                  <span class="tab-title">${card.additives[0].name}</span>
                 </label>
               </div>
               <div class="dialog-tab">
                 <input type="checkbox" name="additives" id="cinnamon" value="${card.additives[1]['add-price']}">
                 <label for="cinnamon">
                   <span class="tab-icon">2</span>
-                  <span class="tab-title">Cinnamon</span>
+                  <span class="tab-title">${card.additives[1].name}</span>
                 </label>
               </div>
               <div class="dialog-tab">
                 <input type="checkbox" name="additives" id="syrup" value="${card.additives[2]['add-price']}">
                 <label for="syrup">
                   <span class="tab-icon">3</span>
-                  <span class="tab-title">Syrup</span>
+                  <span class="tab-title">${card.additives[2].name}</span>
                 </label>
               </div>
             </fieldset>
@@ -180,9 +180,8 @@ export const initMenu = async () => {
     })
 
     const inputs = dialog.querySelectorAll('input');
-    inputs.forEach(input => input.addEventListener('change', (_) => calcPrice(price)));
+    inputs.forEach(input => input.addEventListener('change', (_) => calcPrice(price), { passive: true }));
 
-    // dialog.show();
     dialog.showModal();
   }
 
@@ -192,7 +191,7 @@ export const initMenu = async () => {
 
   try {
     const cards = await getCardsData();
-    menuContainer.addEventListener('click', (e) => menuContainerClick(e, cards))
+    menuContainer.addEventListener('click', (e) => menuContainerClick(e, cards), { passive: true })
     fillCardsContainer(menuContainer, cards);
     initTabs(cards);
   } catch (error) {

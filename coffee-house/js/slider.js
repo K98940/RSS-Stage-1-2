@@ -10,6 +10,16 @@ export const initSlider = () => {
     endY: null,
     sensetive: 20,
   };
+
+  // ToDo сделать инициализацию как - то так:
+  // initSlider(
+  //   container,
+  //  {
+  //    paths: [path - 1, path - 2, ...path - n],
+  //    autoslide: true,
+  //  }
+  //  )
+
   const dots = document.querySelectorAll('.slider-dots-item');
   if (dots.length < 1) return;
   const slider = document.querySelector('.slider');
@@ -57,11 +67,11 @@ export const initSlider = () => {
   }
 
   try {
-    dots.forEach(dot => { dot.addEventListener('animationend', (e) => doSlide(e)) });
-    btnLeft.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.rigth));
-    btnRight.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.left));
-    slider.addEventListener('touchstart', touchStart);
-    slider.addEventListener('touchend', touchEnd);
+    dots.forEach(dot => { dot.addEventListener('animationend', (e) => doSlide(e), { passive: true }) });
+    btnLeft.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.rigth), { passive: true });
+    btnRight.addEventListener('click', (e) => doSlide(e, DIRECTION_SLIDE.left), { passive: true });
+    slider.addEventListener('touchstart', touchStart, { passive: true });
+    slider.addEventListener('touchend', touchEnd, { passive: true });
   } catch (error) {
     console.error(error);
   }

@@ -12,6 +12,6 @@ export const initBurgerMenu = () => {
     if (isLinkTouched) clickBurgerHandle();
   }
 
-  burgerBtn && burgerBtn.addEventListener('click', clickBurgerHandle);
-  menu && menu.addEventListener('click', clickMenuHandle);
+  burgerBtn && burgerBtn.addEventListener('click', clickBurgerHandle, { passive: true });
+  menu && menu.addEventListener('click', clickMenuHandle, { passive: true });
 }
