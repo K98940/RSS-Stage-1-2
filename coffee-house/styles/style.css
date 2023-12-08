@@ -84,10 +84,6 @@
   cursor: default;
   transition-duration: 500ms;
 }
-.header-logo img {
-  width: 100%;
-  object-fit: cover;
-}
 @media (hover: hover) {
   .header-logo a[href*=html]:hover {
     cursor: pointer;
@@ -312,6 +308,12 @@
   background-color: hsl(35, 9%, 37%);
   opacity: 0;
   transition: 300ms;
+}
+
+.main-title, .dialog-container picture img, .card picture img, .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert], .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea], .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee], .mobile-screens img, .about-content-card img, .slide-content-img img, .header-logo a[href="#"], .header-menu a[href="#"], .hero-content, .hero-video video {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
 }
 
 .favorite-coffee {
@@ -867,7 +869,6 @@
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] {
   background-color: hsl(35, 9%, 37%);
   color: hsl(28, 29%, 84%);
-  cursor: default;
 }
 .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee] .tab-icon {
   background-color: hsl(28, 29%, 84%);
@@ -876,7 +877,6 @@
 .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea] {
   background-color: hsl(35, 9%, 37%);
   color: hsl(28, 29%, 84%);
-  cursor: default;
 }
 .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea] .tab-icon {
   background-color: hsl(28, 29%, 84%);
@@ -885,7 +885,6 @@
 .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert] {
   background-color: hsl(35, 9%, 37%);
   color: hsl(28, 29%, 84%);
-  cursor: default;
 }
 .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert] .tab-icon {
   background-color: hsl(28, 29%, 84%);

@@ -43,6 +43,7 @@
   border-radius: 20px;
 
   & img {
+    @extend %mod-no-select;
     width: 100%;
     object-fit: cover;
     transition-duration: $transition-duration-slow;

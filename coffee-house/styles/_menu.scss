@@ -120,9 +120,9 @@
 }
 
 .tab-input[value="coffee"]:checked~.tab-container label[for=tab-coffee] {
+  @extend %mod-no-select;
   background-color: $background-container;
   color: $text-light;
-  cursor: default;
 
   & .tab-icon {
     background-color: $background-body;
@@ -130,9 +130,9 @@
 }
 
 .tab-input[value="tea"]:checked~.tab-container label[for=tab-tea] {
+  @extend %mod-no-select;
   background-color: $background-container;
   color: $text-light;
-  cursor: default;
 
   & .tab-icon {
     background-color: $background-body;
@@ -140,9 +140,9 @@
 }
 
 .tab-input[value="dessert"]:checked~.tab-container label[for=tab-dessert] {
+  @extend %mod-no-select;
   background-color: $background-container;
   color: $text-light;
-  cursor: default;
 
   & .tab-icon {
     background-color: $background-body;

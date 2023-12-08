@@ -22,6 +22,7 @@
 }
 
 .hero-content {
+  @extend %mod-no-select;
   @extend %font-body-medium;
   margin-bottom: 40px;
 }
@@ -80,6 +81,7 @@
   z-index: $z-index-backdrop;
 
   & video {
+    @extend %mod-no-select;
     width: 100%;
     height: 100%;
     object-fit: cover;
