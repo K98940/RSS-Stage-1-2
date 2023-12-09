@@ -327,6 +327,7 @@
 .slider {
   --pointer: 1;
   --currentSlide: 0vw;
+  --animation-duration: 7s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -448,6 +449,7 @@
   border-radius: 100px;
   overflow: hidden;
   background-color: hsl(27, 14%, 72%);
+  animation-duration: var(--animation-duration);
 }
 .slider-dots-item .dot-bar {
   width: 0;
@@ -457,7 +459,7 @@
 .slider-dots-item[pointer] .dot-bar {
   animation-name: dots-filling;
   animation-timing-function: linear;
-  animation-duration: 7s;
+  animation-duration: var(--animation-duration);
 }
 
 @media (max-width: 768px) {
