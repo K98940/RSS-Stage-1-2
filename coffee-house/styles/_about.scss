@@ -19,8 +19,6 @@
   display: flex;
   gap: 39px;
 
-  min-height: 800px;
-
   @media (max-width: $tablet) {
     flex-direction: column;
   }
