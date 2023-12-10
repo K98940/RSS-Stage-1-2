@@ -134,12 +134,19 @@ export class Slider {
   }
 
   touchStart = (e) => {
-    this.touch.startX = e.changedTouches[0].pageX
+    this.touch.startX = e.changedTouches[0].pageX;
+    document.querySelector('.slider-dots-item[pointer] .dot-bar').classList.add('mod-animation-paused');
+
+    const pointer = document.querySelector('.slider-dots-item[pointer]');
+    const index = parseInt(pointer.attributes.slide.value) - 1;
+    this.currentSlide = this.slider.querySelectorAll('.slide')[index];
   }
 
   touchEnd = (e) => {
-    this.touch.endX = e.changedTouches[0].pageX
-    const directionX = this.touch.startX - this.touch.endX
+    this.currentSlide.style = '';
+    document.querySelector('.slider-dots-item[pointer] .dot-bar').classList.remove('mod-animation-paused');
+    this.touch.endX = e.changedTouches[0].pageX;
+    const directionX = this.touch.startX - this.touch.endX;
     if (Math.abs(directionX) < this.sensitive) return
     if (directionX > 0) {
       this.doSlide(null, this.DIRECTION_SLIDE.left);
