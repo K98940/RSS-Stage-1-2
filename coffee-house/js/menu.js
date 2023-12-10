@@ -22,6 +22,10 @@ export const initMenu = async () => {
 
   const initTabs = (cards) => {
     const tabHandler = () => {
+      const tabs = document.querySelectorAll('.tab-input');
+      tabs.forEach(tab => {
+        tab.setAttribute('portion', '');
+      });
       fillCardsContainer(menuContainer, cards);
     }
 
@@ -188,7 +192,6 @@ export const initMenu = async () => {
     const inputs = dialog.querySelectorAll('input');
     inputs.forEach(input => input.addEventListener('change', (_) => calcPrice(price), { passive: true }));
 
-    // dialog.show();
     dialog.showModal();
   }
 

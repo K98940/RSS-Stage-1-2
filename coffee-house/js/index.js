@@ -1,8 +1,15 @@
 import { initBurgerMenu } from './burger.js';
 import { initMenu } from './menu.js';
-import { initSlider } from './slider.js';
+import { Slider } from '../components/slider/slider.js';
 
+const sliderContainer = document.querySelector('.slider');
 
 initBurgerMenu();
-initSlider();
+new Slider({
+  container: sliderContainer,
+  sensitive: 20,
+  direction: 'left',
+  autoslide: true,
+  animationDuration: '5s',
+});
 initMenu();
