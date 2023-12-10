@@ -4,7 +4,7 @@
   line-height: 105%;
   font-size: clamp(42px, 10vw, 72px);
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .main-title {
     line-height: 115%;
   }
@@ -18,7 +18,7 @@
   line-height: 105%;
   padding-right: clamp(10px, 20vw - 135px, 18px);
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .main-title span {
     line-height: 115%;
   }
@@ -133,7 +133,6 @@
     z-index: 10;
     flex-direction: column;
     align-items: center;
-    opacity: 0;
     transition-duration: 250ms;
     transition-timing-function: ease-out;
     background-color: hsl(28, 29%, 84%);
@@ -200,12 +199,6 @@
     padding-top: clamp(60px, 20vw - 52px, 101px);
     padding-right: clamp(16px, 20vw - 93px, 60px);
     padding-left: clamp(16px, 20vw - 93px, 60px);
-    background-image: url("../assets/hero/img-hero-768.webp");
-  }
-}
-@media (max-width: 425px) {
-  .hero {
-    background-image: url("../assets/hero/img-hero-425.webp");
   }
 }
 
@@ -316,7 +309,7 @@
   transition: 300ms;
 }
 
-.main-title, .dialog-container picture img, .card picture img, .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert], .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea], .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee], .mobile-screens img, .about-content-card img, .slide-content-img img, .header-logo a[href="#"], .header-menu a[href="#"], .hero-content, .hero-video video {
+.main-title, .dialog-tab-container input[type=radio]:checked + label, .dialog-container picture img, .card picture img, .tab-input[value=dessert]:checked ~ .tab-container label[for=tab-dessert], .tab-input[value=tea]:checked ~ .tab-container label[for=tab-tea], .tab-input[value=coffee]:checked ~ .tab-container label[for=tab-coffee], .mobile-screens img, .about-content-card img, .slide-content-img img, .header-logo a[href="#"], .header-menu a[href="#"], .hero-content, .hero-video video {
   pointer-events: none;
   user-select: none;
   cursor: default;
@@ -333,6 +326,7 @@
 .slider {
   --pointer: 1;
   --currentSlide: 0vw;
+  --animation-duration: 7s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -368,7 +362,7 @@
 .slider-btn-right {
   stroke: hsl(40, 2%, 25%);
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .slider-btn-left,
   .slider-btn-right {
     display: none;
@@ -410,7 +404,7 @@
   height: 100%;
   margin: 0 auto;
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .slide-content {
     min-width: 348px;
   }
@@ -454,6 +448,7 @@
   border-radius: 100px;
   overflow: hidden;
   background-color: hsl(27, 14%, 72%);
+  animation-duration: var(--animation-duration);
 }
 .slider-dots-item .dot-bar {
   width: 0;
@@ -463,7 +458,11 @@
 .slider-dots-item[pointer] .dot-bar {
   animation-name: dots-filling;
   animation-timing-function: linear;
-  animation-duration: 7s;
+  animation-duration: var(--animation-duration);
+}
+
+.mod-animation-paused {
+  animation-play-state: paused;
 }
 
 @media (max-width: 768px) {
@@ -487,7 +486,7 @@
 
 .about-title {
   color: hsl(40, 2%, 25%);
-  letter-spacing: -0.2px;
+  letter-spacing: -0.15px;
 }
 .about-content {
   display: flex;
@@ -531,7 +530,7 @@
     transform: scale(1.055);
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .about-content-card picture {
     height: 100%;
   }
@@ -545,7 +544,7 @@
     aspect-ratio: 1/0.858;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .about-card__590 {
     aspect-ratio: 1/1.693;
   }
@@ -580,7 +579,7 @@
     gap: 101px;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .mobileapp {
     padding-top: 5px;
     gap: 40px;
@@ -611,7 +610,7 @@
   display: flex;
   gap: 20px;
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .mobileapp-btn-container {
     flex-direction: column;
   }
@@ -679,7 +678,7 @@
     gap: 68px;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .footer {
     padding: 60px 16px;
     gap: 8px;
@@ -899,7 +898,7 @@
   gap: 14px;
   margin-bottom: 38px;
 }
-@media (max-width: 450px) {
+@media (max-width: 425px) {
   .tab-container {
     gap: 6px;
   }
@@ -1173,7 +1172,6 @@
 .dialog-tab-container input:checked + label {
   background-color: hsl(35, 9%, 37%);
   color: hsl(40, 2%, 25%);
-  cursor: default;
 }
 .dialog-tab-container input:checked + label .tab-title {
   color: hsl(28, 29%, 84%);
@@ -1187,7 +1185,7 @@
   color: hsl(40, 2%, 25%);
   border-radius: 100px;
   border: 1px solid hsl(27, 14%, 72%);
-  transition-duration: 250ms;
+  transition-duration: 500ms;
   cursor: pointer;
 }
 @media (hover: hover) {

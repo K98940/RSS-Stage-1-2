@@ -1,6 +1,7 @@
 .slider {
   --pointer: 1;
   --currentSlide: 0vw;
+  --animation-duration: 7s;
 
   display: flex;
   flex-direction: column;
@@ -130,7 +131,6 @@
 }
 
 .slide-description-content {
-  // flex: 1 1 auto;
   text-align: center;
 
   @extend %font-body-medium;
@@ -148,6 +148,7 @@
   border-radius: 100px;
   overflow: hidden;
   background-color: $border-light;
+  animation-duration: var(--animation-duration);
 
   & .dot-bar {
     width: 0;
@@ -158,8 +159,12 @@
   &[pointer] .dot-bar {
     animation-name: dots-filling;
     animation-timing-function: linear;
-    animation-duration: $animation-autoslider;
+    animation-duration: var(--animation-duration);
   }
+}
+
+.mod-animation-paused {
+  animation-play-state: paused;
 }
 
 @media (max-width: $tablet) {
