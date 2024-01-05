@@ -2,16 +2,32 @@
   "errorLimit": 6,
   "questions": [
     {
-      "question": "question",
-      "hint": "hint - 1"
+      "question": "evidence",
+      "hint": "facts, information, documents, etc. that give reason to believe that something is true"
     },
     {
-      "question": "quest",
-      "hint": "hint - 2"
+      "question": "diary",
+      "hint": "a book in which you record your thoughts or feelings or what has happened each day"
     },
     {
-      "question": "qu",
-      "hint": "hint - 3"
+      "question": "goof",
+      "hint": "a silly mistake"
+    },
+    {
+      "question": "plot",
+      "hint": "the story of a book, film, play, etc."
+    },
+    {
+      "question": "guest",
+      "hint": "a person who is staying with you, or a person you have invited to a social occasion, such as a party or a meal"
+    },
+    {
+      "question": "resort",
+      "hint": "a place where many people go for rest, sport, or another stated purpose"
+    },
+    {
+      "question": "picnic",
+      "hint": "an occasion when you have an informal meal of sandwiches, etc. outside, or the food itself"
     }
   ]
 }
