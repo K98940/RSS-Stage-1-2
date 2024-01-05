@@ -1,0 +1,25 @@
+@import "components/main/main";
+@import "components/gallows/gallows";
+@import "components/game/game";
+@import "components/hint/hint";
+@import "components/currentState/currentState";
+@import "components/virtualKeyboard/virtualKeyboard";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+  // scrollbar-gutter: stable;
+}
+
+html {
+  height: 100dvh;
+}

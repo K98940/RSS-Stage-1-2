@@ -1,0 +1,13 @@
+main {
+  --max-width: 640px;
+  --min-width: 300px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  width: clamp(var(--min-width), 100%, var(--max-width));
+  margin: 0 auto;
+  height: 100%;
+}

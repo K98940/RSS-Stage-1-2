@@ -1,0 +1,7 @@
+main {
+  --main-max-width: 1440px;
+  width: clamp(200px, 100%, var(--main-max-width));
+  margin: 0 auto;
+  height: 100%;
+  border: 4px solid goldenrod;
+}/*# sourceMappingURL=main.css.map */
