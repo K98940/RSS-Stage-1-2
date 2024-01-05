@@ -68,9 +68,13 @@ main {
   background-color: black;
 }
 
-.question__character[pressed] {
+.question__character[data-pressed] {
   color: black;
   background-color: aqua;
+}
+
+.question__character[data-pressed]::after {
+  content: none;
 }
 
 * {
