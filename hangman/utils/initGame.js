@@ -1,5 +1,6 @@
-import { state } from '/hangman/utils/loadConfig.js';
+import { state } from './loadConfig.js';
+import { getNewQuestion } from './getNewQuestion.js';
 
 export const initGame = () => {
-  console.log(state);
+  state.newQuestion = getNewQuestion();
 };

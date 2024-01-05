@@ -1,4 +1,4 @@
-import { createTag } from '/hangman/utils/createTag.js';
+import { createTag } from '../../utils/createTag.js';
 
 export const currentState = () => {
   const currentState = createTag('div');

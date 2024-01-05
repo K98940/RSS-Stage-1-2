@@ -2,12 +2,16 @@
   "errorLimit": 6,
   "questions": [
     {
-      "question": "question - 1",
+      "question": "question",
       "hint": "hint - 1"
     },
     {
-      "question": "question - 2",
+      "question": "quest",
       "hint": "hint - 2"
+    },
+    {
+      "question": "qu",
+      "hint": "hint - 3"
     }
   ]
 }
