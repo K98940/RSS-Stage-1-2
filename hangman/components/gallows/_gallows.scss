@@ -1,0 +1,18 @@
+.gallows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 1 40%;
+  height: 100%;
+}
+
+.gallows__img {
+  width: 100%;
+}
+
+.gallows__title {
+  text-transform: uppercase;
+  text-align: center;
+}

@@ -1,0 +1,13 @@
+{
+  "errorLimit": 6,
+  "questions": [
+    {
+      "question": "question - 1",
+      "hint": "hint - 1"
+    },
+    {
+      "question": "question - 2",
+      "hint": "hint - 2"
+    }
+  ]
+}

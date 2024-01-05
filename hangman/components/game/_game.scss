@@ -1,0 +1,10 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 1 60%;
+  height: 100%;
+  gap: 1rem;
+}
