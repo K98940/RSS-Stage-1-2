@@ -2,18 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--key-interval);
 }
 
 .question__character {
-  --char-size: 2rem;
-
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--char-size);
-  height: var(--char-size);
+  width: var(--key-size);
+  height: var(--key-size);
 
   color: transparent;
   border: 1px solid black;

@@ -1,0 +1,42 @@
+.virtual-keyboard {
+  display: flex;
+  width: calc(var(--key-size) * 10 + (var(--key-interval) * 10));
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--key-interval);
+}
+
+.virtual-keyboard__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--key-interval);
+}
+
+.virtual-keyboard__row:nth-child(3) {
+  margin-left: calc(var(--key-size) * -1);
+}
+
+.virtual-keyboard__key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--key-size);
+  height: var(--key-size);
+
+  border: 1px solid black;
+  border-radius: 0.3rem;
+}
+
+.virtual-keyboard__key:hover {
+  cursor: pointer;
+}
+
+.virtual-keyboard__key[data-succes] {
+  background-color: aqua;
+}
+
+.virtual-keyboard__key[data-loose] {
+  background-color: brown;
+}

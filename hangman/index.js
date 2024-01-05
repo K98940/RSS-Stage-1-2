@@ -11,3 +11,5 @@ initGame();
 body.prepend(Main());
 
 window.addEventListener('keypress', keyPress);
+const virtualKeyboard = document.querySelector('.virtual-keyboard');
+virtualKeyboard && virtualKeyboard.addEventListener('click', keyPress);

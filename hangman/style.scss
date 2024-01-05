@@ -6,6 +6,11 @@
 @import "components/virtualKeyboard/virtualKeyboard";
 @import "components/word/word";
 
+:root {
+  --key-size: 2rem;
+  --key-interval: 0.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;

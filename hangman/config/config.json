@@ -1,5 +1,42 @@
 {
   "errorLimit": 6,
+  "incorrectGuesses": 0,
+  "keyPressed": [],
+  "newQuestion": {},
+  "keyboard": [
+    [
+      {"title": "q", "code": "KeyQ"},
+      {"title": "w", "code": "KeyW"},
+      {"title": "e", "code": "KeyE"},
+      {"title": "r", "code": "KeyR"},
+      {"title": "t", "code": "KeyT"},
+      {"title": "y", "code": "KeyY"},
+      {"title": "u", "code": "KeyU"},
+      {"title": "i", "code": "KeyI"},
+      {"title": "o", "code": "KeyO"},
+      {"title": "p", "code": "KeyP"}
+    ],
+    [
+      {"title": "a", "code": "KeyA"},
+      {"title": "s", "code": "KeyS"},
+      {"title": "d", "code": "KeyD"},
+      {"title": "f", "code": "KeyF"},
+      {"title": "g", "code": "KeyG"},
+      {"title": "h", "code": "KeyH"},
+      {"title": "j", "code": "KeyJ"},
+      {"title": "k", "code": "KeyK"},
+      {"title": "l", "code": "KeyL"}
+    ],
+    [
+      {"title": "z", "code": "KeyZ"},
+      {"title": "x", "code": "KeyX"},
+      {"title": "c", "code": "KeyC"},
+      {"title": "v", "code": "KeyV"},
+      {"title": "b", "code": "KeyB"},
+      {"title": "n", "code": "KeyN"},
+      {"title": "m", "code": "KeyM"}
+    ]
+  ],
   "questions": [
     {
       "question": "evidence",

@@ -15,7 +15,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 0 1 40%;
+  flex: 0 1 30%;
   height: 100%;
 }
 
@@ -33,7 +33,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 0 1 60%;
+  flex: 0 1 70%;
   height: 100%;
   gap: 1rem;
 }
@@ -43,21 +43,62 @@ main {
   gap: 1rem;
 }
 
+.virtual-keyboard {
+  display: flex;
+  width: calc(var(--key-size) * 10 + var(--key-interval) * 10);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--key-interval);
+}
+
+.virtual-keyboard__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--key-interval);
+}
+
+.virtual-keyboard__row:nth-child(3) {
+  margin-left: calc(var(--key-size) * -1);
+}
+
+.virtual-keyboard__key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--key-size);
+  height: var(--key-size);
+  border: 1px solid black;
+  border-radius: 0.3rem;
+}
+
+.virtual-keyboard__key:hover {
+  cursor: pointer;
+}
+
+.virtual-keyboard__key[data-succes] {
+  background-color: aqua;
+}
+
+.virtual-keyboard__key[data-loose] {
+  background-color: brown;
+}
+
 .question {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--key-interval);
 }
 
 .question__character {
-  --char-size: 2rem;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--char-size);
-  height: var(--char-size);
+  width: var(--key-size);
+  height: var(--key-size);
   color: transparent;
   border: 1px solid black;
   border-radius: 0.3rem;
@@ -80,6 +121,11 @@ main {
 
 .question__character[data-pressed]::after {
   content: none;
+}
+
+:root {
+  --key-size: 2rem;
+  --key-interval: 0.5rem;
 }
 
 * {
