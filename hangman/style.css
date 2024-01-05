@@ -38,6 +38,11 @@ main {
   gap: 1rem;
 }
 
+.current-state {
+  display: flex;
+  gap: 1rem;
+}
+
 .question {
   display: flex;
   justify-content: center;
