@@ -25,8 +25,10 @@
   width: var(--key-size);
   height: var(--key-size);
 
+  font-size: var(--key-font-size);
   border: 1px solid black;
   border-radius: 0.3rem;
+  user-select: none;
 }
 
 .virtual-keyboard__key:hover {
@@ -41,6 +43,13 @@
   background-color: brown;
 }
 
-// .virtual-keyboard__key[data-loose][data-succes] {
-//   background-color: chartreuse !important;
-// }
+.virtual-keyboard__key[data-succes]:hover,
+.virtual-keyboard__key[data-loose]:hover {
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .virtual-keyboard {
+    gap: 1rem;
+  }
+}

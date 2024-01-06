@@ -6,7 +6,9 @@
   align-items: center;
 
   flex: 0 1 30%;
-  height: 20rem;
+  aspect-ratio: 1/1;
+  user-select: none;
+  pointer-events: none;
 }
 
 .gallows__img {
@@ -17,9 +19,10 @@
 
 .gallows__title {
   position: absolute;
+  font-size: var(--title-font-size);
   text-transform: uppercase;
   text-align: center;
-  bottom: 0;
+  bottom: calc(var(--title-font-size) * -1);
 }
 
 .gallows__head,
@@ -44,7 +47,7 @@
 }
 
 .gallows__body {
-  transform: translateY(10rem);
+  transform: translateY(5rem);
 }
 
 .gallows__l-arm {
@@ -73,3 +76,18 @@
   z-index: 1;
   transform: translate(0, 0);
   }
+
+@media (max-width: 768px) {
+  .gallows {
+    flex: 0 1 40%;
+  }
+
+  .gallows__head,
+  .gallows__r-leg,
+  .gallows__l-leg,
+  .gallows__r-arm,
+  .gallows__l-arm,
+  .gallows__body {
+    transform: translateY(0);
+  }
+}

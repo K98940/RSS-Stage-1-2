@@ -9,7 +9,7 @@ export const hint = () => {
     hintElement = createTag('div');
     hintElement.classList = 'hint';
   }
-  hintElement.innerText = hint;
+  hintElement.innerText = `${hint}.`;
 
   return hintElement;
 };

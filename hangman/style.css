@@ -1,5 +1,5 @@
 main {
-  --max-width: 640px;
+  --max-width: 2400px;
   --min-width: 300px;
   display: flex;
   justify-content: space-between;
@@ -7,9 +7,15 @@ main {
   gap: 1rem;
   width: clamp(var(--min-width), 100%, var(--max-width));
   margin: 0 auto;
+  padding: 1rem;
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+}
 .gallows {
   display: flex;
   position: relative;
@@ -17,7 +23,11 @@ main {
   justify-content: center;
   align-items: center;
   flex: 0 1 30%;
-  height: 20rem;
+  aspect-ratio: 1/1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 
 .gallows__img {
@@ -28,9 +38,10 @@ main {
 
 .gallows__title {
   position: absolute;
+  font-size: var(--title-font-size);
   text-transform: uppercase;
   text-align: center;
-  bottom: 0;
+  bottom: calc(var(--title-font-size) * -1);
 }
 
 .gallows__head,
@@ -54,7 +65,7 @@ main {
 }
 
 .gallows__body {
-  transform: translateY(10rem);
+  transform: translateY(5rem);
 }
 
 .gallows__l-arm {
@@ -84,6 +95,19 @@ main {
   transform: translate(0, 0);
 }
 
+@media (max-width: 768px) {
+  .gallows {
+    flex: 0 1 40%;
+  }
+  .gallows__head,
+  .gallows__r-leg,
+  .gallows__l-leg,
+  .gallows__r-arm,
+  .gallows__l-arm,
+  .gallows__body {
+    transform: translateY(0);
+  }
+}
 .game {
   display: flex;
   flex-direction: column;
@@ -94,11 +118,47 @@ main {
   gap: 1rem;
 }
 
+@media (max-width: 768px) {
+  .game {
+    flex: 0 1 60%;
+  }
+}
+.hint {
+  display: inline-block;
+  text-align: center;
+  font-size: calc(var(--key-font-size) / 2);
+}
+
+.hint::first-letter {
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .hint {
+    font-size: calc(var(--key-font-size) * 0.75);
+  }
+}
+@media (max-width: 768px) {
+  .hint {
+    font-size: 1.2rem;
+  }
+}
 .current-state {
   display: flex;
   gap: 1rem;
+  font-size: calc(var(--key-font-size) / 2);
 }
 
+@media (max-width: 1024px) {
+  .current-state {
+    font-size: calc(var(--key-font-size) * 0.75);
+  }
+}
+@media (max-width: 768px) {
+  .current-state {
+    font-size: 1.2rem;
+  }
+}
 .virtual-keyboard {
   display: flex;
   width: calc(var(--key-size) * 10 + var(--key-interval) * 10);
@@ -125,8 +185,12 @@ main {
   align-items: center;
   width: var(--key-size);
   height: var(--key-size);
+  font-size: var(--key-font-size);
   border: 1px solid black;
   border-radius: 0.3rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .virtual-keyboard__key:hover {
@@ -141,6 +205,16 @@ main {
   background-color: brown;
 }
 
+.virtual-keyboard__key[data-succes]:hover,
+.virtual-keyboard__key[data-loose]:hover {
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .virtual-keyboard {
+    gap: 1rem;
+  }
+}
 .question {
   display: flex;
   justify-content: center;
@@ -155,19 +229,24 @@ main {
   align-items: center;
   width: var(--key-size);
   height: var(--key-size);
+  font-size: var(--key-font-size);
   color: transparent;
   border: 1px solid black;
   border-radius: 0.3rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .question__character::after {
   content: "";
   position: absolute;
   display: inline-block;
-  width: 1rem;
-  height: 2px;
-  bottom: 0.1rem;
+  width: var(--key-font-size);
+  height: calc(var(--key-interval) / 2);
+  bottom: calc(var(--key-interval) / 2);
   background-color: black;
+  border-radius: var(--key-interval);
 }
 
 .question__character[data-pressed] {
@@ -221,8 +300,10 @@ main {
 }
 
 :root {
-  --key-size: 2rem;
-  --key-interval: 0.5rem;
+  --key-size: clamp(2rem, calc(2rem + ((1vw - 0.1875rem) * 3.5398)), 7rem);
+  --key-interval: clamp(0.5rem, calc(0.5rem + ((1vw - 0.1875rem) * 0.354)), 1rem);
+  --key-font-size: clamp(1.5rem, calc(1.5rem + ((1vw - 0.1875rem) * 2.4779)), 5rem);
+  --title-font-size: clamp(1.5rem, calc(1.5rem + ((1vw - 0.1875rem) * 0.3)), 3rem);
 }
 
 * {
@@ -241,4 +322,18 @@ body {
 
 html {
   height: 100dvh;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --key-size: clamp(1.4rem, calc(1.4rem + ((1vw - 0.1875rem) * 3.5359)), 3rem);
+    --key-font-size: clamp(1rem, calc(1rem + ((1vw - 0.1875rem) * 2.2099)), 2rem);
+    --title-font-size: clamp(18px, calc(1.125rem + ((1vw - 5.25px) * 1.6032)), 26px);
+  }
+}
+@media (max-width: 425px) {
+  :root {
+    --key-size: clamp(1.375rem, calc(1.375rem + ((1vw - 0.1875rem) * 9.6)), 2.125rem);
+    --key-interval: 0.2rem;
+  }
 }/*# sourceMappingURL=style.css.map */
