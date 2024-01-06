@@ -8,6 +8,5 @@ export const getNewQuestion = () => {
     return;
   }
   const RandomIndex = Math.floor(Math.random() * count);
-  console.log('новый вопрос №', RandomIndex + 1, 'из', count);
   return state.questions[RandomIndex];
 };

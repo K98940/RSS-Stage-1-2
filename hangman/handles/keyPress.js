@@ -1,3 +1,4 @@
+import { createModal } from '../components/modal/modal.js';
 import { state } from '../utils/loadConfig.js';
 
 export const keyPress = (e) => {
@@ -24,10 +25,10 @@ export const keyPress = (e) => {
     updateIncorrectGuesses();
     updateKeyboard(code, false);
     updateGallows(state.incorrectGuesses);
-    if (state.incorrectGuesses >= state.errorLimit) console.log('LOOSE!');
+    if (state.incorrectGuesses >= state.errorLimit) createModal(false);
   } else updateKeyboard(code, true);
 
-  if (pressedCount === characters.length) console.log('WIN!');
+  if (pressedCount === characters.length) createModal(true);
 };
 
 const updateIncorrectGuesses = () => {

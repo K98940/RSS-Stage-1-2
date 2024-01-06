@@ -1,0 +1,40 @@
+.dialog__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: clamp(0px, 100%, 20rem);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1/1;
+
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.dialog__wrapper::backdrop {
+  backdrop-filter: blur(3px);
+  background-color: hsla(0, 0%, 0%, 0.4);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid brown;
+}
+
+.form__btn-play {
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: black;
+  text-transform: uppercase;
+}

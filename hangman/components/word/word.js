@@ -2,8 +2,12 @@ import { createTag } from '../../utils/createTag.js';
 import { state } from '../../utils/loadConfig.js';
 
 export const word = () => {
-  const word = createTag('div');
-  word.classList = 'question';
+  let word = document.querySelector('.question');
+  if (word) word.innerHTML = '';
+  else {
+    word = createTag('div');
+    word.classList = 'question';
+  }
 
   const { question } = state.newQuestion;
   const chars = [...question].map((c, i) => {
@@ -14,6 +18,7 @@ export const word = () => {
     return char;
   });
 
+  console.log('question', question);
   word.append(...chars);
   return word;
 };

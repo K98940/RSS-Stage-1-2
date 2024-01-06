@@ -7,7 +7,7 @@ const ConfigPath = './config/config.json';
 const body = document.querySelector('body');
 
 await loadConfig(ConfigPath);
-initGame();
+await initGame();
 body.prepend(Main());
 
 window.addEventListener('keypress', keyPress);

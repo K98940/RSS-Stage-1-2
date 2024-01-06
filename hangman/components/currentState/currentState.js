@@ -2,8 +2,15 @@ import { createTag } from '../../utils/createTag.js';
 import { state } from '../../utils/loadConfig.js';
 
 export const currentState = () => {
-  const incorrectGuesses = createTag('span');
-  incorrectGuesses.classList = 'current-state__incorrect-guesses';
+  let incorrectGuesses = document.querySelector(
+    '.current-state__incorrect-guesses'
+  );
+  if (incorrectGuesses) incorrectGuesses.innerHTML = '';
+  else {
+    incorrectGuesses = createTag('span');
+    incorrectGuesses.classList = 'current-state__incorrect-guesses';
+  }
+
   incorrectGuesses.innerText = `${state.incorrectGuesses} / ${state.errorLimit}`;
 
   const labelGuesses = createTag('label');
