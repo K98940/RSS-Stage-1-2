@@ -3,6 +3,7 @@ import { state } from '../utils/loadConfig.js';
 
 export const keyPress = (e) => {
   const code = e.target.dataset.code || e.code;
+  if (!isCharCode(code)) return;
   const isPressedAgain = state.keyPressed.includes(code);
   if (isPressedAgain) return;
   state.keyPressed.push(code);
@@ -51,4 +52,9 @@ const updateKeyboard = (code, succes) => {
 const updateGallows = (incorrectGuesses) => {
   const gallow = document.querySelector('.gallows');
   gallow.setAttribute(state.errorOrder[incorrectGuesses] || 'error', '');
+};
+
+const isCharCode = (code) => {
+  const keyboard = state.keyboard.flat(1).map((key) => key.code);
+  return keyboard.includes(code);
 };
