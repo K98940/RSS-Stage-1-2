@@ -1,5 +1,6 @@
 {
   "errorLimit": 6,
+  "errorOrder": ["img", "head", "body", "l-arm", "r-arm", "l-leg", "r-leg"],
   "incorrectGuesses": 0,
   "keyPressed": [],
   "newQuestion": {},

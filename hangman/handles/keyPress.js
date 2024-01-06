@@ -23,6 +23,7 @@ export const keyPress = (e) => {
     state.incorrectGuesses += 1;
     updateIncorrectGuesses();
     updateKeyboard(code, false);
+    updateGallows(state.incorrectGuesses);
     if (state.incorrectGuesses >= state.errorLimit) console.log('LOOSE!');
   } else updateKeyboard(code, true);
 
@@ -44,4 +45,9 @@ const updateKeyboard = (code, succes) => {
     if (succes) k.setAttribute('data-succes', '');
     else k.setAttribute('data-loose', '');
   });
+};
+
+const updateGallows = (incorrectGuesses) => {
+  const gallow = document.querySelector('.gallows');
+  gallow.setAttribute(state.errorOrder[incorrectGuesses] || 'error', '');
 };

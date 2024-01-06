@@ -5,7 +5,6 @@ export const virtualKeyboard = () => {
   const virtualKeyboard = createTag('div');
   virtualKeyboard.classList = 'virtual-keyboard';
 
-  console.log(state);
   const rowsKeys = state.keyboard.map((row) => {
     const kyes = row.map((key) => {
       const div = createTag('div');
