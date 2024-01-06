@@ -66,6 +66,46 @@
     {
       "question": "picnic",
       "hint": "an occasion when you have an informal meal of sandwiches, etc. outside, or the food itself"
+    },
+    {
+      "question": "shortcut",
+      "hint": "a route that leads from one place to another and is quicker and more direct than the usual route"
+    },
+    {
+      "question": "rookie",
+      "hint": "(informal) a person who is new to an organization or an activity"
+    },
+    {
+      "question": "prediction",
+      "hint": "a statement about what you think will happen in the future"
+    },
+    {
+      "question": "destination",
+      "hint": "the place where someone is going or where something is being sent or taken"
+    },
+    {
+      "question": "expenses",
+      "hint": "money that you spend when you are doing your job, that your employer will pay back to you"
+    },
+    {
+      "question": "journey",
+      "hint": "the act of travelling from one place to another, especially in a vehicle"
+    },
+    {
+      "question": "hideout",
+      "hint": "a secret place where someone can go when they do not want to be found by other people"
+    },
+    {
+      "question": "lifeguard",
+      "hint": "a person on a beach or at a swimming pool whose job is to make certain that the swimmers are safe and save them if they are in danger"
+    },
+    {
+      "question": "encryption",
+      "hint": "the process of changing electronic information or signals into a secret code that people cannot understand or use without special equipment"
+    },
+    {
+      "question": "content",
+      "hint": "information, images, video, etc. that are included as part of something such as a website"
     }
   ]
 }

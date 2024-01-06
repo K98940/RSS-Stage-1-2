@@ -7,5 +7,6 @@ export const loadConfig = async (path) => {
     Object.assign(state, cfg);
   } catch (error) {
     console.error('loadConfig:', error);
+    console.error('error load config from', path);
   }
 };

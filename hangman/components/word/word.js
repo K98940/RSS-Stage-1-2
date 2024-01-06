@@ -18,7 +18,11 @@ export const word = () => {
     return char;
   });
 
-  console.log('question', question);
+  console.log(
+    `%cthe new word is %c${question} 🚩`,
+    'font-size: 16px;',
+    'color: orange; font-size: 24px; font-weight: 800'
+  );
   word.append(...chars);
   return word;
 };
