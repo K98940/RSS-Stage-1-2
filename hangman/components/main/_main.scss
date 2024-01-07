@@ -8,13 +8,19 @@ main {
   gap: 1rem;
 
   width: clamp(var(--min-width), 100%, var(--max-width));
-  margin: 0 auto;
-  padding: 1rem;
   height: 100%;
+  margin: 0 auto;
+  padding: 1rem 1rem 1rem 0;
+
+  background-image: url("../../../hangman/components/main/img/main.webp");
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media (max-width: 768px) {
   main {
     flex-direction: column;
+    background-image: url("../../../hangman/components/main/img/main-small.webp");
   }
 }

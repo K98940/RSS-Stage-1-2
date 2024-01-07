@@ -5,6 +5,7 @@
   align-items: center;
   flex-direction: column;
   gap: var(--key-interval);
+  padding-left: 1rem;
 }
 
 .virtual-keyboard__row {
@@ -25,26 +26,44 @@
   width: var(--key-size);
   height: var(--key-size);
 
+  color: var(--color-key-text);
   font-size: var(--key-font-size);
-  border: 1px solid black;
+  text-transform: uppercase;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border: 1px solid var(--color-key-border);
+  backdrop-filter: blur(3px);
+  box-shadow: var(--color-key-shadow);
+  background-color: var(--color-key-bg);
   border-radius: 0.3rem;
   user-select: none;
 }
 
 .virtual-keyboard__key:hover {
+  box-shadow: var(--color-key-shadow-hover);
+  color: var(--color-key-text-hover);
   cursor: pointer;
 }
 
 .virtual-keyboard__key[data-succes] {
-  background-color: aqua;
+  background-color: var(--color-key-bg-success);
 }
 
 .virtual-keyboard__key[data-loose] {
-  background-color: brown;
+  background-color: var(--color-key-bg-loose);
+}
+
+.virtual-keyboard__key[data-succes],
+.virtual-keyboard__key[data-loose] {
+  box-shadow: var(--color-key-shadow-inactive);
+  color: var(--color-key-inactive);
+  border-top: var(--color-key-border);
+  border-left: var(--color-key-border);
 }
 
 .virtual-keyboard__key[data-succes]:hover,
 .virtual-keyboard__key[data-loose]:hover {
+  box-shadow: var(--color-key-shadow-inactive);
+  color: var(--color-key-inactive);
   cursor: default;
 }
 

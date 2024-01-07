@@ -14,8 +14,12 @@
   height: var(--key-size);
 
   font-size: var(--key-font-size);
+  text-transform: uppercase;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: transparent;
-  border: 1px solid black;
+  border: 1px solid var(--color-key-border);
+  backdrop-filter: blur(3px);
+  box-shadow: var(--color-key-shadow);
   border-radius: 0.3rem;
   user-select: none;
 }
@@ -33,8 +37,9 @@
 }
 
 .question__character[data-pressed] {
-  color: black;
-  background-color: aqua;
+  color: var(--color-word);
+  font-weight: 700;
+  background-color: var(--color-key-bg-success);
 }
 
 .question__character[data-pressed]::after {
