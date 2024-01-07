@@ -3,12 +3,18 @@ import { initGame } from '../../utils/initGame.js';
 import { state } from '../../utils/loadConfig.js';
 
 export const createModal = (win) => {
-  const msg = win ? 'You WIN' : 'You LOOSE';
+  let msg = '';
   const body = document.querySelector('body');
   let dialog = document.querySelector('dialog');
   if (dialog) dialog.remove();
   dialog = createTag('dialog');
-  dialog.classList = 'dialog__wrapper';
+  if (win) {
+    msg = 'You win';
+    dialog.classList = 'dialog__wrapper dialod_win';
+  } else {
+    msg = 'You lost';
+    dialog.classList = 'dialog__wrapper dialod_lost';
+  }
   dialog.addEventListener('close', dialogClose);
 
   const form = createTag('form');
@@ -21,7 +27,7 @@ export const createModal = (win) => {
 
   const formSecretWord = createTag('p');
   formSecretWord.classList = 'form__secret-word';
-  formSecretWord.innerText = state.newQuestion.question;
+  formSecretWord.innerText = `Secret word: ${state.newQuestion.question}`;
 
   const formBtnClose = createTag('button');
   formBtnClose.classList = 'form__btn-play';
