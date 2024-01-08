@@ -1,39 +1,46 @@
 import { createTag } from '../../utils/createTag.js';
 import { initGame } from '../../utils/initGame.js';
-import { state } from '../../utils/loadConfig.js';
 
-export const createModal = (win) => {
-  let msg = '';
+export const createModal = (
+  win,
+  {
+    caption = '',
+    title = '',
+    msg = '',
+    btnMsg = 'play again',
+    style: {
+      dialogClass = '',
+      formClass = 'form',
+      h1Class = 'form__h1',
+      pClass = 'form__p',
+      btnClass = 'form__btn',
+    },
+  }
+) => {
   const body = document.querySelector('body');
   let dialog = document.querySelector('dialog');
   if (dialog) dialog.remove();
   dialog = createTag('dialog');
-  if (win) {
-    msg = 'You win';
-    dialog.classList = 'dialog__wrapper dialod_win';
-  } else {
-    msg = 'You lost';
-    dialog.classList = 'dialog__wrapper dialod_lost';
-  }
+  dialog.classList = dialogClass;
   dialog.addEventListener('close', dialogClose);
 
   const form = createTag('form');
-  form.classList = 'form';
+  form.classList = formClass;
   form.setAttribute('method', 'dialog');
 
-  const formMessage = createTag('p');
-  formMessage.classList = 'form__message';
-  formMessage.innerText = msg;
+  const h1 = createTag('h1');
+  h1.classList = h1Class;
+  h1.innerText = title;
 
-  const formSecretWord = createTag('p');
-  formSecretWord.classList = 'form__secret-word';
-  formSecretWord.innerText = `Secret word: ${state.newQuestion.question}`;
+  const p = createTag('p');
+  p.classList = pClass;
+  p.innerText = msg;
 
-  const formBtnClose = createTag('button');
-  formBtnClose.classList = 'form__btn-play';
-  formBtnClose.innerText = 'play again';
+  const formBtn = createTag('button');
+  formBtn.classList = btnClass;
+  formBtn.innerText = btnMsg;
 
-  form.append(formMessage, formSecretWord, formBtnClose);
+  form.append(h1, p, formBtn);
   dialog.append(form);
   body.append(dialog);
   dialog.showModal();

@@ -38,7 +38,7 @@
   border-radius: 0.5rem;
 }
 
-.form__btn-play {
+.form__btn {
   padding: 0.5rem 2rem;
   border: none;
   border-radius: 0.5rem;
@@ -48,13 +48,13 @@
   user-select: none;
 }
 
-.form__btn-play:hover {
+.form__btn:hover {
   color: rgb(243, 164, 46);
   cursor: pointer;
   filter: drop-shadow(2px 2px 5px rgb(243, 164, 46));
 }
 
-.form__message {
+.form__h1 {
   text-shadow: 2px 2px 4px black;
   font-size: 2rem;
   word-spacing: 1rem;
@@ -70,7 +70,7 @@
   background-image: url("./components/modal/img/win.webp");
 }
 
-.dialog__wrapper.dialod_win .form__message {
+.dialog__wrapper.dialod_win .form__h1 {
   color: white;
   font-weight: 800;
   font-size: 2.5rem;
@@ -78,7 +78,7 @@
   -webkit-text-stroke-color: black;
 }
 
-.dialog__wrapper.dialod_win .form__secret-word {
+.dialog__wrapper.dialod_win .form__p {
   display: inline-block;
   border-radius: 0.5rem;
   color: black;
@@ -86,7 +86,7 @@
   padding: 0.5rem;
 }
 
-.dialog__wrapper.dialod_win .form__btn-play:hover {
+.dialog__wrapper.dialod_win .form__btn:hover {
   color: rgb(243, 164, 46);
   cursor: pointer;
   filter: drop-shadow(2px 2px 5px rgb(255, 255, 255));
