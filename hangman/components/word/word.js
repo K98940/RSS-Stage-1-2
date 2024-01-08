@@ -4,18 +4,17 @@ import { state } from '../../utils/loadConfig.js';
 export const word = () => {
   let word = document.querySelector('.question');
   if (word) word.innerHTML = '';
-  else {
-    word = createTag('div');
-    word.classList = 'question';
-  }
+  else word = createTag({ tag: 'div', classList: 'question' });
 
   const { question } = state.newQuestion;
   const chars = [...question].map((c, i) => {
-    const char = createTag('div');
-    char.innerText = c;
-    char.setAttribute('data-character', `Key${c.toUpperCase()}`);
-    char.classList = 'question__character';
-    return char;
+    return createTag({
+      tag: 'div',
+      classList: 'question__character',
+      innerText: c,
+      attr: 'data-character',
+      attrValue: `Key${c.toUpperCase()}`,
+    });
   });
 
   console.log(

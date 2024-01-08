@@ -6,18 +6,19 @@ export const currentState = () => {
     '.current-state__incorrect-guesses'
   );
   if (incorrectGuesses) incorrectGuesses.innerHTML = '';
-  else {
-    incorrectGuesses = createTag('span');
-    incorrectGuesses.classList = 'current-state__incorrect-guesses';
-  }
-
+  else
+    incorrectGuesses = createTag({
+      tag: 'span',
+      classList: 'current-state__incorrect-guesses',
+    });
   incorrectGuesses.innerText = `${state.incorrectGuesses} / ${state.errorLimit}`;
 
-  const labelGuesses = createTag('label');
-  labelGuesses.innerText = 'Incorrect guesses:';
+  const labelGuesses = createTag({
+    tag: 'label',
+    innerText: 'Incorrect guesses:',
+  });
 
-  const currentState = createTag('div');
-  currentState.classList = 'current-state';
+  const currentState = createTag({ tag: 'div', classList: 'current-state' });
   currentState.append(labelGuesses, incorrectGuesses);
 
   return currentState;

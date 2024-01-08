@@ -20,25 +20,22 @@ export const createModal = (
   const body = document.querySelector('body');
   let dialog = document.querySelector('dialog');
   if (dialog) dialog.remove();
-  dialog = createTag('dialog');
-  dialog.classList = dialogClass;
+
+  dialog = createTag({ tag: 'dialog', classList: dialogClass });
   dialog.addEventListener('close', dialogClose);
-
-  const form = createTag('form');
-  form.classList = formClass;
-  form.setAttribute('method', 'dialog');
-
-  const h1 = createTag('h1');
-  h1.classList = h1Class;
-  h1.innerText = title;
-
-  const p = createTag('p');
-  p.classList = pClass;
-  p.innerText = msg;
-
-  const formBtn = createTag('button');
-  formBtn.classList = btnClass;
-  formBtn.innerText = btnMsg;
+  const form = createTag({
+    tag: 'form',
+    classList: formClass,
+    attr: 'method',
+    attrValue: 'dialog',
+  });
+  const h1 = createTag({ tag: 'h1', classList: h1Class, innerText: title });
+  const p = createTag({ tag: 'p', classList: pClass, innerText: msg });
+  const formBtn = createTag({
+    tag: 'button',
+    classList: btnClass,
+    innerText: btnMsg,
+  });
 
   form.append(h1, p, formBtn);
   dialog.append(form);

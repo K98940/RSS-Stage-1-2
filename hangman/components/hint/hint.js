@@ -5,10 +5,11 @@ export const hint = () => {
   const { hint } = state.newQuestion;
   let hintElement = document.querySelector('.hint');
   if (hintElement) hintElement.innerHTML = '';
-  else {
-    hintElement = createTag('div');
-    hintElement.classList = 'hint';
-  }
+  else
+    hintElement = createTag({
+      tag: 'div',
+      classList: 'hint',
+    });
   hintElement.innerText = `${hint}.`;
 
   return hintElement;

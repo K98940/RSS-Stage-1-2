@@ -5,8 +5,7 @@ import { currentState } from '../currentState/currentState.js';
 import { virtualKeyboard } from '../virtualKeyboard/virtualKeyboard.js';
 
 export const game = () => {
-  const game = createTag('article');
-  game.classList = 'game';
+  const game = createTag({ tag: 'article', classList: 'game' });
 
   game.append(word());
   game.append(hint());
