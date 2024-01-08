@@ -4,14 +4,14 @@ import { word } from '../components/word/word.js';
 import { hint } from '../components/hint/hint.js';
 
 export const initGame = async () => {
-  resetGame().then(() => {
+  newRound().then(() => {
     state.newQuestion = getNewQuestion();
     state.incorrectGuesses = 0;
     state.keyPressed = [];
   });
 };
 
-const resetGame = () => {
+const newRound = () => {
   return new Promise((resolve, _) => {
     const keys = document.querySelectorAll(
       '.virtual-keyboard__key[data-loose], .virtual-keyboard__key[data-succes]'
@@ -30,9 +30,7 @@ const resetGame = () => {
         setTimeout(() => gallows.removeAttribute(error), 200 * (i + 1))
       );
 
-    const characters = document.querySelectorAll(
-      '.question__character[data-pressed]'
-    );
+    const characters = document.querySelectorAll('.question__character');
     characters &&
       characters.forEach((char, i, chars) => {
         setTimeout(() => char.removeAttribute('data-pressed'), 200 * (i + 1));

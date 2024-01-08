@@ -11,9 +11,5 @@ export const getNewQuestion = () => {
   const RandomIndex = Math.floor(Math.random() * count);
   const secretWord = state.questions.splice(RandomIndex, 1)[0];
   state.questionsPast.push(secretWord);
-
-  console.warn('RandomIndex', RandomIndex);
-  console.warn('secretWord', secretWord);
-
   return secretWord;
 };

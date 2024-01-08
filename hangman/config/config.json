@@ -125,10 +125,6 @@
       "hint": "a person related to you who lived a long time ago"
     },
     {
-      "question": "neighborhood",
-      "hint": "the area of a town that surrounds someone's home, or the people who live in this area"
-    },
-    {
       "question": "algorithm",
       "hint": "a set of mathematical instructions or rules that, especially if given to a computer, will help to calculate an answer to a problem"
     },

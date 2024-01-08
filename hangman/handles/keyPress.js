@@ -76,5 +76,7 @@ const isCorrectKeyCode = (code) => {
   if (!VirtualKeyboard.includes(code)) return false;
   const isPressedAgain = state.keyPressed.includes(code);
   if (isPressedAgain) return false;
+  const isOpenModal = document.querySelector('body>dialog');
+  if (isOpenModal) return false;
   return true;
 };
