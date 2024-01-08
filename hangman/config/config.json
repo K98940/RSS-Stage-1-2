@@ -5,6 +5,7 @@
   "keyPressed": [],
   "questionsPast": [],
   "newQuestion": {},
+  "delay": 100,
   "keyboard": [
     [
       {"title": "q", "code": "KeyQ"},
