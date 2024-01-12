@@ -1,5 +1,5 @@
-import { createTag } from '../../utils/createTag.js';
-import { state } from '../../utils/loadConfig.js';
+import { createTag } from './../../utils/createTag.js';
+import { state } from './../../utils/loadConfig.js';
 
 export const word = () => {
   let word = document.querySelector('.question');

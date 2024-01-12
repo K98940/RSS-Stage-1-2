@@ -1,7 +1,7 @@
 import { state } from './loadConfig.js';
 import { getNewQuestion } from './getNewQuestion.js';
-import { word } from '../components/word/word.js';
-import { hint } from '../components/hint/hint.js';
+import { word } from './../components/word/word.js';
+import { hint } from './../components/hint/hint.js';
 
 export const initGame = async () => {
   newRound().then(() => {
