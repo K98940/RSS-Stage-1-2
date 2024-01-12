@@ -156,6 +156,62 @@
     {
       "question": "debug",
       "hint": "to remove bugs (mistakes) from a computer program"
+    },
+    {
+      "question": "fever",
+      "hint": "a medical condition in which the body temperature is higher than usual:"
+    },
+    {
+      "question": "lawn",
+      "hint": "an area of grass, especially near to a house or in a park, that is cut regularly to keep it short"
+    },
+    {
+      "question": "spade",
+      "hint": "a tool used for digging especially soil or sand, with a long handle and a flat blade"
+    },
+    {
+      "question": "lantern",
+      "hint": "a light inside a container that has a handle for holding it or hanging it up, or the container itself"
+    },
+    {
+      "question": "lounge",
+      "hint": "a room in a hotel, airport, theatre, etc. where people can relax or wait"
+    },
+    {
+      "question": "aisle",
+      "hint": "a long, narrow space between rows of seats in an aircraft, cinema, or church"
+    },
+    {
+      "question": "duckling",
+      "hint": "a young duck"
+    },
+    {
+      "question": "treasure",
+      "hint": "very valuable things, usually in the form of a store of precious metals, precious stones, or money"
+    },
+    {
+      "question": "vault",
+      "hint": "a room, especially in a bank, with thick walls and a strong door, used to store money or valuable things in safe conditions"
+    },
+    {
+      "question": "goon",
+      "hint": "a violent criminal who is paid to hurt or threaten people"
+    },
+    {
+      "question": "temper",
+      "hint": "the tendency to become angry very quickly"
+    },
+    {
+      "question": "hookah",
+      "hint": "a type of pipe that brings smoke through a container of water before it is breathed in"
+    },
+    {
+      "question": "purpose",
+      "hint": "why you do something or why something exists"
+    },
+    {
+      "question": "menace",
+      "hint": "a dangerous quality that makes you think someone is going to do something bad"
     }
   ]
 }
