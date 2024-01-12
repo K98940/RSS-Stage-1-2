@@ -1,8 +1,8 @@
-import { createTag } from '../../utils/createTag.js';
-import { word } from '../word/word.js';
-import { hint } from '../hint/hint.js';
-import { currentState } from '../currentState/currentState.js';
-import { virtualKeyboard } from '../virtualKeyboard/virtualKeyboard.js';
+import { createTag } from './../../utils/createTag.js';
+import { word } from './../word/word.js';
+import { hint } from './../hint/hint.js';
+import { currentState } from './../currentState/currentState.js';
+import { virtualKeyboard } from './../virtualKeyboard/virtualKeyboard.js';
 
 export const game = () => {
   const game = createTag({ tag: 'article', classList: 'game' });

@@ -12,7 +12,7 @@ main {
   margin: 0 auto;
   padding: 1rem 1rem 1rem 0;
 
-  background-image: url("../../../hangman/components/main/img/main.webp");
+  background-image: url("./components/main/img/main.webp");
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,6 +21,6 @@ main {
 @media (max-width: 768px) {
   main {
     flex-direction: column;
-    background-image: url("../../../hangman/components/main/img/main-small.webp");
+    background-image: url("./components/main/img/main-small.webp");
   }
 }

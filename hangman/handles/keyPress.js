@@ -1,5 +1,5 @@
-import { createModal } from '../components/modal/modal.js';
-import { state } from '../utils/loadConfig.js';
+import { createModal } from './../components/modal/modal.js';
+import { state } from './../utils/loadConfig.js';
 
 export const keyPress = (e) => {
   const code = e.target.dataset.code || e.code;

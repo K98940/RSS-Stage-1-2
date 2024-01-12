@@ -1,5 +1,5 @@
-import { createTag } from '../../utils/createTag.js';
-import { initGame } from '../../utils/initGame.js';
+import { createTag } from './../../utils/createTag.js';
+import { initGame } from './../../utils/initGame.js';
 
 export const createModal = (
   win,
