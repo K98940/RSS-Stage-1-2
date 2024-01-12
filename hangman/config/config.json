@@ -1,13 +1,217 @@
 {
   "errorLimit": 6,
+  "errorOrder": ["img", "head", "body", "l-arm", "r-arm", "l-leg", "r-leg"],
+  "incorrectGuesses": 0,
+  "keyPressed": [],
+  "questionsPast": [],
+  "newQuestion": {},
+  "delay": 100,
+  "keyboard": [
+    [
+      {"title": "q", "code": "KeyQ"},
+      {"title": "w", "code": "KeyW"},
+      {"title": "e", "code": "KeyE"},
+      {"title": "r", "code": "KeyR"},
+      {"title": "t", "code": "KeyT"},
+      {"title": "y", "code": "KeyY"},
+      {"title": "u", "code": "KeyU"},
+      {"title": "i", "code": "KeyI"},
+      {"title": "o", "code": "KeyO"},
+      {"title": "p", "code": "KeyP"}
+    ],
+    [
+      {"title": "a", "code": "KeyA"},
+      {"title": "s", "code": "KeyS"},
+      {"title": "d", "code": "KeyD"},
+      {"title": "f", "code": "KeyF"},
+      {"title": "g", "code": "KeyG"},
+      {"title": "h", "code": "KeyH"},
+      {"title": "j", "code": "KeyJ"},
+      {"title": "k", "code": "KeyK"},
+      {"title": "l", "code": "KeyL"}
+    ],
+    [
+      {"title": "z", "code": "KeyZ"},
+      {"title": "x", "code": "KeyX"},
+      {"title": "c", "code": "KeyC"},
+      {"title": "v", "code": "KeyV"},
+      {"title": "b", "code": "KeyB"},
+      {"title": "n", "code": "KeyN"},
+      {"title": "m", "code": "KeyM"}
+    ]
+  ],
   "questions": [
     {
-      "question": "question - 1",
-      "hint": "hint - 1"
+      "question": "evidence",
+      "hint": "facts, information, documents, etc. that give reason to believe that something is true"
     },
     {
-      "question": "question - 2",
-      "hint": "hint - 2"
+      "question": "diary",
+      "hint": "a book in which you record your thoughts or feelings or what has happened each day"
+    },
+    {
+      "question": "goof",
+      "hint": "a silly mistake"
+    },
+    {
+      "question": "plot",
+      "hint": "the story of a book, film, play, etc."
+    },
+    {
+      "question": "guest",
+      "hint": "a person who is staying with you, or a person you have invited to a social occasion, such as a party or a meal"
+    },
+    {
+      "question": "resort",
+      "hint": "a place where many people go for rest, sport, or another stated purpose"
+    },
+    {
+      "question": "picnic",
+      "hint": "an occasion when you have an informal meal of sandwiches, etc. outside, or the food itself"
+    },
+    {
+      "question": "shortcut",
+      "hint": "a route that leads from one place to another and is quicker and more direct than the usual route"
+    },
+    {
+      "question": "rookie",
+      "hint": "(informal) a person who is new to an organization or an activity"
+    },
+    {
+      "question": "prediction",
+      "hint": "a statement about what you think will happen in the future"
+    },
+    {
+      "question": "destination",
+      "hint": "the place where someone is going or where something is being sent or taken"
+    },
+    {
+      "question": "expenses",
+      "hint": "money that you spend when you are doing your job, that your employer will pay back to you"
+    },
+    {
+      "question": "journey",
+      "hint": "the act of travelling from one place to another, especially in a vehicle"
+    },
+    {
+      "question": "hideout",
+      "hint": "a secret place where someone can go when they do not want to be found by other people"
+    },
+    {
+      "question": "lifeguard",
+      "hint": "a person on a beach or at a swimming pool whose job is to make certain that the swimmers are safe and save them if they are in danger"
+    },
+    {
+      "question": "encryption",
+      "hint": "the process of changing electronic information or signals into a secret code that people cannot understand or use without special equipment"
+    },
+    {
+      "question": "content",
+      "hint": "information, images, video, etc. that are included as part of something such as a website"
+    },
+    {
+      "question": "square",
+      "hint": "a flat shape with four sides of equal length and four angles of 90°"
+    },
+    {
+      "question": "wealth",
+      "hint": "a large amount of money or valuable possessions that someone has"
+    },
+    {
+      "question": "herder",
+      "hint": "a person who takes care of a large group of animals of the same type"
+    },
+    {
+      "question": "ancestor",
+      "hint": "a person related to you who lived a long time ago"
+    },
+    {
+      "question": "algorithm",
+      "hint": "a set of mathematical instructions or rules that, especially if given to a computer, will help to calculate an answer to a problem"
+    },
+    {
+      "question": "gift",
+      "hint": "a present or something that is given"
+    },
+    {
+      "question": "author",
+      "hint": "the writer of a book, article, play, etc."
+    },
+    {
+      "question": "hometown",
+      "hint": "the town or city that a person is from, especially the one in which they were born and lived while they were young"
+    },
+    {
+      "question": "weekend",
+      "hint": "Saturday and Sunday, or Friday evening until Sunday night; the part of the week in which many people living in the West do not go to work"
+    },
+    {
+      "question": "software",
+      "hint": "the instructions that control what a computer does; computer programs"
+    },
+    {
+      "question": "server",
+      "hint": "a central computer from which other computers get information"
+    },
+    {
+      "question": "debug",
+      "hint": "to remove bugs (mistakes) from a computer program"
+    },
+    {
+      "question": "fever",
+      "hint": "a medical condition in which the body temperature is higher than usual:"
+    },
+    {
+      "question": "lawn",
+      "hint": "an area of grass, especially near to a house or in a park, that is cut regularly to keep it short"
+    },
+    {
+      "question": "spade",
+      "hint": "a tool used for digging especially soil or sand, with a long handle and a flat blade"
+    },
+    {
+      "question": "lantern",
+      "hint": "a light inside a container that has a handle for holding it or hanging it up, or the container itself"
+    },
+    {
+      "question": "lounge",
+      "hint": "a room in a hotel, airport, theatre, etc. where people can relax or wait"
+    },
+    {
+      "question": "aisle",
+      "hint": "a long, narrow space between rows of seats in an aircraft, cinema, or church"
+    },
+    {
+      "question": "duckling",
+      "hint": "a young duck"
+    },
+    {
+      "question": "treasure",
+      "hint": "very valuable things, usually in the form of a store of precious metals, precious stones, or money"
+    },
+    {
+      "question": "vault",
+      "hint": "a room, especially in a bank, with thick walls and a strong door, used to store money or valuable things in safe conditions"
+    },
+    {
+      "question": "goon",
+      "hint": "a violent criminal who is paid to hurt or threaten people"
+    },
+    {
+      "question": "temper",
+      "hint": "the tendency to become angry very quickly"
+    },
+    {
+      "question": "hookah",
+      "hint": "a type of pipe that brings smoke through a container of water before it is breathed in"
+    },
+    {
+      "question": "purpose",
+      "hint": "why you do something or why something exists"
+    },
+    {
+      "question": "menace",
+      "hint": "a dangerous quality that makes you think someone is going to do something bad"
     }
   ]
 }

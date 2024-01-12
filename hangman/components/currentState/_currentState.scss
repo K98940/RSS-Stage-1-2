@@ -1,0 +1,21 @@
+.current-state {
+  display: flex;
+  gap: 1rem;
+  color: var(--color-text);
+  font-size: calc(var(--key-font-size) / 2);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-shadow: 2px 2px 4px orangered;
+  user-select: none;
+}
+
+@media (max-width: 1024px) {
+  .current-state {
+    font-size: calc(var(--key-font-size) * 0.75);
+  }
+}
+
+@media (max-width: 768px) {
+  .current-state {
+    font-size: 1.2rem;
+  }
+}

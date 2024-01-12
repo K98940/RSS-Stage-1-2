@@ -1,18 +1,102 @@
 .gallows {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   flex: 0 1 40%;
-  height: 100%;
+  aspect-ratio: 1/1;
+  max-width: 500px;
+  user-select: none;
+  pointer-events: none;
 }
 
 .gallows__img {
+  position: absolute;
   width: 100%;
+  // aspect-ratio: 1/1;
 }
 
 .gallows__title {
+  color: var(--color-key-text);
+  position: fixed;
+  font-size: var(--title-font-size);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-transform: uppercase;
   text-align: center;
+  bottom: 1rem;
+}
+
+.gallows__head,
+.gallows__body,
+.gallows__l-arm,
+.gallows__r-arm,
+.gallows__l-leg,
+.gallows__r-leg {
+  position: absolute;
+  width: 100%;
+  // aspect-ratio: 1/1;
+  opacity: 0;
+  z-index: -1;
+
+  transition-property: transform opacity z-index;
+  transition-duration: 800ms;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55)
+}
+
+.gallows__head {
+  transform: translateY(-5rem);
+}
+
+.gallows__body {
+  transform: translateY(5rem);
+}
+
+.gallows__l-arm,
+.gallows__l-leg {
+  transform: translateX(5rem);
+}
+
+.gallows__r-arm,
+.gallows__r-leg {
+  transform: translateX(-5rem);
+}
+
+.gallows[head] .gallows__head,
+.gallows[body] .gallows__body,
+.gallows[l-arm] .gallows__l-arm,
+.gallows[r-arm] .gallows__r-arm,
+.gallows[l-leg] .gallows__l-leg,
+.gallows[r-leg] .gallows__r-leg {
+  opacity: 1;
+  z-index: 1;
+  transform: translate(0, 0);
+  }
+
+@media (max-width: 768px) {
+  .gallows {
+    flex: 0 1 40%;
+    align-self: normal;
+  }
+
+  .gallows__head,
+  .gallows__r-leg,
+  .gallows__l-leg,
+  .gallows__r-arm,
+  .gallows__l-arm,
+  .gallows__body {
+    transform: translateY(0);
+  }
+
+  .gallows__title {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 425px) {
+  .gallows {
+      flex: 0 1 30%;
+    }
 }

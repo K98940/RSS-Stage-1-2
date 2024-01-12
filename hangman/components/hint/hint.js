@@ -1,9 +1,16 @@
-import { createTag } from '/hangman/utils/createTag.js';
+import { createTag } from '../../utils/createTag.js';
+import { state } from '../../utils/loadConfig.js';
 
 export const hint = () => {
-  const hint = createTag('div');
-  hint.classList = 'hint';
-  hint.innerText = 'hint';
+  const { hint } = state.newQuestion;
+  let hintElement = document.querySelector('.hint');
+  if (hintElement) hintElement.innerHTML = '';
+  else
+    hintElement = createTag({
+      tag: 'div',
+      classList: 'hint',
+    });
+  hintElement.innerText = `${hint}.`;
 
-  return hint;
+  return hintElement;
 };
