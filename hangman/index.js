@@ -1,4 +1,4 @@
-import { Main } from './components/main/Main.js';
+import { Main } from './components/main/main.js';
 import { loadConfig } from './utils/loadConfig.js';
 import { initGame } from './utils/initGame.js';
 import { keyPress } from './handles/keyPress.js';
