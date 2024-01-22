@@ -1,0 +1,11 @@
+  .container {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(5, 20%);
+
+    width: clamp(0px, 50%, 20rem);
+    aspect-ratio: 1/1;
+
+    border: 1px solid black;
+    background-color: rgb(255, 131, 131);
+  }
