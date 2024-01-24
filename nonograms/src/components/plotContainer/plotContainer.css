@@ -1,11 +1,14 @@
-  .container {
-    display: grid;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-rows: repeat(5, 20%);
+  .game-container {
+    --columns-count: 20;
 
-    width: clamp(0px, 50%, 20rem);
+    display: grid;
+    grid-template-columns: repeat(var(--columns-count), 1fr);
+    grid-template-rows: repeat(5, auto);
+
+    width: clamp(0px, 96%, 20rem);
+    margin: 0 auto;
     aspect-ratio: 1/1;
 
     border: 1px solid black;
-    background-color: rgb(255, 131, 131);
+    background-color: rgb(200, 200, 200);
   }

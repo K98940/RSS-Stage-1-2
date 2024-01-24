@@ -1,8 +1,26 @@
 .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
   background-color: rgb(231, 255, 255);
   border: 1px solid black;
 }
 
-.cell_fill {
-  background-color: blue;
+.cell[role="game"] {
+  background-color: white;
+}
+
+.cell[role="game"]:hover {
+  cursor: pointer;
+}
+
+.cell_fill[role="game"] {
+  background-color: rgb(173, 173, 255);
+}
+
+.cell[role="empty"] {
+  background-color: rgb(255, 255, 255);
+  border: none;
 }
