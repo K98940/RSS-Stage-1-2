@@ -17,4 +17,4 @@ function game() {
 document.body.classList.add('body');
 document.body.append(header());
 document.body.append(game());
-renderDesk();
+renderDesk(0);

@@ -1,5 +1,6 @@
 import state from '../../state/state';
 import createElement from '../../utils/createElement';
+import renderDesk from '../plotContainer/renderDesk';
 import './header.css';
 
 export default () => {
@@ -19,9 +20,9 @@ export default () => {
       );
       gameSelect.innerHTML = '';
       gameSelect.append(...options);
-
-      console.log(gameSelect);
+      renderDesk(listGames[0].id);
     } else {
+      renderDesk(value);
     }
   };
 

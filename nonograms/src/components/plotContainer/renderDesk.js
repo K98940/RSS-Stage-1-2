@@ -2,8 +2,20 @@ import state from '../../state/state';
 import rotateMatrix from '../../utils/rotateMatrix';
 import newCell from './cell/newCell';
 
-export default () => {
-  const { plot } = state.game;
+const getPlot = (id) => {
+  const ID = Number(id);
+  for (let field in state.fields) {
+    const game = state.fields[field].filter((game) => game.id === ID)[0];
+    if (game) return game.plot;
+  }
+  return null;
+};
+
+export default (id = 0) => {
+  const plot = [...getPlot(id)];
+  if (!plot) {
+    return;
+  }
 
   const rotatedPlot = rotateMatrix(plot);
   const clueTopRotated = createClueArray(rotatedPlot);

@@ -7,7 +7,8 @@ export default () => {
   const fields = getFields();
   Object.assign(state, {
     ...state,
-    game: field5x5[0],
+    game: {},
+    // game: field5x5[0],
     fields: fields,
   });
 };
