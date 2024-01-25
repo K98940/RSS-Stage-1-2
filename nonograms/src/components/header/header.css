@@ -1,4 +1,5 @@
 .header {
-  height: 10rem;
-  background-color: darkgoldenrod;
+  height: 6rem;
+  background-color: rgb(231, 255, 255);
+  border-bottom: 1px solid grey;
 }
