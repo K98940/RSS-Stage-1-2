@@ -1,5 +1,6 @@
 import state from '../../state/state';
 import createElement from '../../utils/createElement';
+import createOptions from '../../utils/createOptions';
 import renderDesk from '../plotContainer/renderDesk';
 import './header.css';
 
@@ -11,15 +12,16 @@ export default () => {
     const isFilter = filters.includes(value);
     if (isFilter) {
       const listGames = fields[value];
-      const options = listGames.map((game) =>
-        createElement({
-          tag: 'option',
-          attr: [['value', game.id]],
-          txt: game.name,
-        })
-      );
-      gameSelect.innerHTML = '';
-      gameSelect.append(...options);
+      createOptions(gameSelect, listGames);
+      // const options = listGames.map((game) =>
+      //   createElement({
+      //     tag: 'option',
+      //     attr: [['value', game.id]],
+      //     txt: game.name,
+      //   })
+      // );
+      // gameSelect.innerHTML = '';
+      // gameSelect.append(...options);
       renderDesk(listGames[0].id);
     } else {
       renderDesk(value);
@@ -39,6 +41,7 @@ export default () => {
     tag: 'select',
     attr: [['id', 'game-select']],
   });
+  state.html.gameSelect = gameSelect;
 
   const gameFilterLabel5 = createElement({
     tag: 'label',

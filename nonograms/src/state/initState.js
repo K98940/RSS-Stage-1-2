@@ -5,10 +5,10 @@ import field15x15 from '../fields/15x15.json';
 
 export default () => {
   const fields = getFields();
+  setUnicID(fields);
   Object.assign(state, {
     ...state,
     game: {},
-    // game: field5x5[0],
     fields: fields,
   });
 };
@@ -19,4 +19,14 @@ const getFields = () => {
     '10x10': field10x10,
     '15x15': field15x15,
   };
+};
+
+const setUnicID = (fields) => {
+  let id = 0;
+  for (let field in fields) {
+    fields[field].forEach((game) => {
+      game.id = id;
+      id += 1;
+    });
+  }
 };
