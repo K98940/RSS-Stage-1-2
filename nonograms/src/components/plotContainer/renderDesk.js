@@ -46,10 +46,11 @@ export default (id = 0) => {
 
   // объеденить подсказки сверху с игровым полем
   const gameDesk = [...clueTop, ...clueLeftAndPlot];
+  const columnsCount = gameDesk[0].length;
 
   //сформируем элементы игрового поля
   state.html.plotContainer.innerHTML = '';
-  gameDesk.forEach((row, i) =>
+  gameDesk.forEach((row, i) => {
     row.forEach((el, j) => {
       const cell = newCell();
       if (el === '⚫' || el === '⚪') {
@@ -80,11 +81,11 @@ export default (id = 0) => {
       }
 
       state.html.plotContainer.appendChild(cell);
-    })
-  );
+    });
+  });
 
+  setBorders(gameDesk);
   state.game.plot = gameDesk;
-  const columnsCount = gameDesk[0].length;
   state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
 };
 
@@ -113,4 +114,28 @@ const createClueArray = (matrix) => {
   });
 
   return clues;
+};
+
+const setBorders = (matrix) => {
+  let indexRow = 0;
+
+  for (let row = 0; row < matrix.length; row += 1) {
+    let indexCol = 0;
+    const lastIndexRow = matrix[row].length - 1;
+    const lastElemRow = matrix[row][lastIndexRow].value;
+    if (lastElemRow === '⚫' || lastElemRow === '⚪') indexRow += 1;
+
+    for (let col = 0; col < matrix[row].length; col += 1) {
+      const lastRowIndex = matrix.length - 1;
+      const lastElemCol = matrix[lastRowIndex][col].value;
+      if (lastElemCol === '⚫' || lastElemCol === '⚪') {
+        indexCol += 1;
+      }
+
+      if (indexRow && indexRow % 5 === 0)
+        matrix[row][col].element.setAttribute('row', '');
+      if (indexCol && indexCol % 5 === 0)
+        matrix[row][col].element.setAttribute('col', '');
+    }
+  }
 };
