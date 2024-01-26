@@ -132,8 +132,12 @@ const setBorders = (matrix) => {
         indexCol += 1;
       }
 
+      if (indexRow && indexRow === 1)
+        matrix[row][col].element.setAttribute('first-row', '');
       if (indexRow && indexRow % 5 === 0)
         matrix[row][col].element.setAttribute('row', '');
+      if (indexCol && indexCol === 1)
+        matrix[row][col].element.setAttribute('first-col', '');
       if (indexCol && indexCol % 5 === 0)
         matrix[row][col].element.setAttribute('col', '');
     }

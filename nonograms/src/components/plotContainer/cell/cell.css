@@ -29,6 +29,14 @@
   border-bottom: 2px solid black;
 }
 
+.cell[first-row] {
+  border-top: 2px solid black;
+}
+
 .cell[col] {
   border-right: 2px solid black;
+}
+
+.cell[first-col] {
+  border-left: 2px solid black;
 }
