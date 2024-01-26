@@ -1,5 +1,8 @@
 export default {
-  game: [],
+  game: {
+    plot: [],
+    showCellsValue: false,
+  },
   fields: [],
   html: {},
 };

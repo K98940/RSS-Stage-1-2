@@ -6,13 +6,14 @@ import state from './state/state';
 import './styles/style.css';
 import createElement from './utils/createElement';
 import createOptions from './utils/createOptions';
+import windowHandle from './utils/windowHandle';
 
 function game() {
   initState();
   console.log(state);
-  const main = createElement({ tag: 'main', cls: 'main' });
-  main.append(plotContainer());
-  return main;
+  state.html.main = createElement({ tag: 'main', cls: 'main' });
+  state.html.main.append(plotContainer());
+  return state.html.main;
 }
 
 document.body.classList.add('body');
@@ -20,3 +21,4 @@ document.body.append(header());
 document.body.append(game());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
+window.addEventListener('keypress', windowHandle);

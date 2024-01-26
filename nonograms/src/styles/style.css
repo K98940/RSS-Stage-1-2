@@ -11,10 +11,5 @@
 }
 
 .main {
-  --columns: 2;
-  --row: 2;
-
-  /* display: grid; */
-  /* grid-template-columns: repeat(var(--columns), auto); */
-  /* grid-template-rows: repeat(var(--row), auto); */
+  --opacity-cell-text: 0;
 }

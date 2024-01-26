@@ -9,13 +9,13 @@
 
 .cell[role="game"] {
   background-color: white;
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, var(--opacity-cell-text, 0));
   border: 1px dashed lightgray;
 }
 
 .cell_fill[role="game"] {
   background-color: black;
-  border: 1px dashed black; /* убрать после отладки! */
+  border: 1px dashed black;
 }
 
 .cell[role="empty"] {

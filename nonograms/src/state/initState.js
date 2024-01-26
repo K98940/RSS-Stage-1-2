@@ -8,7 +8,6 @@ export default () => {
   setUnicID(fields);
   Object.assign(state, {
     ...state,
-    game: {},
     fields: fields,
   });
 };
