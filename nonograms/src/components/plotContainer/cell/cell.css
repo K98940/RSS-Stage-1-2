@@ -5,24 +5,21 @@
 
   user-select: none;
   background-color: rgb(231, 255, 255);
-  /* border: 1px solid black; */
 }
 
 .cell[role="game"] {
   background-color: white;
-}
-
-.cell[role="game"]:hover {
-  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px dashed lightgray;
 }
 
 .cell_fill[role="game"] {
-  background-color: rgb(173, 173, 255);
+  background-color: black;
+  border: 1px dashed black; /* убрать после отладки! */
 }
 
 .cell[role="empty"] {
   background-color: rgb(255, 255, 255);
-  /* border: none; */
 }
 
 .cell[row] {
@@ -39,4 +36,11 @@
 
 .cell[first-col] {
   border-left: 2px solid black;
+}
+
+@media (hover: hover)  {
+.cell[role="game"]:hover {
+    cursor: pointer;
+    filter: invert(0.2);
+  }
 }
