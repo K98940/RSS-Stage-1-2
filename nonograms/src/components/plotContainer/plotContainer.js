@@ -98,5 +98,9 @@ const clickHandler = (e) => {
 
 const isAllCorrectChecked = () => {
   const { plot } = state.game;
-  return !plot.flat(1).some((cell) => cell.state !== cell.value);
+  const plotWithoutX = plot.flat(1).map((cell) => {
+    if (cell.state === 'x') return { ...cell, state: '⚪' };
+    return cell;
+  });
+  return !plotWithoutX.some((cell) => cell.state !== cell.value);
 };
