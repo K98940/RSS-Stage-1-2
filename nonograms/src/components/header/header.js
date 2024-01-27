@@ -12,10 +12,12 @@ export default () => {
     const isFilter = filters.includes(value);
     if (isFilter) {
       const listGames = fields[value];
+      state.game.currentGame = listGames[0].id;
       createOptions(gameSelect, listGames);
-      renderDesk(listGames[0].id);
+      renderDesk(state.game.currentGame);
     } else {
-      renderDesk(value);
+      state.game.currentGame = value;
+      renderDesk(state.game.currentGame);
     }
   };
 
