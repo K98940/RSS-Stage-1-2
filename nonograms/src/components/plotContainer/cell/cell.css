@@ -38,6 +38,28 @@
   border-left: 2px solid black;
 }
 
+.cell_checked[role="game"] {
+  position: relative;
+}
+
+.cell_checked[role="game"]::after,
+.cell_checked[role="game"]::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 120%;
+  height: 1px;
+  inset: 0;
+  top: 45%;
+  left: -10%;
+  transform: rotateZ(45deg);
+  background-color: black;
+}
+
+.cell_checked[role="game"]::before {
+  transform: rotateZ(-45deg);
+}
+
 @media (hover: hover)  {
 .cell[role="game"]:hover {
     cursor: pointer;
