@@ -22,7 +22,6 @@ const contextMenuHandler = (e) => {
     const { state } = clickedCell;
     switch (state) {
       case '⚪':
-        // clickedCell.state = '⚫';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
         break;

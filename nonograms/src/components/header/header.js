@@ -13,15 +13,6 @@ export default () => {
     if (isFilter) {
       const listGames = fields[value];
       createOptions(gameSelect, listGames);
-      // const options = listGames.map((game) =>
-      //   createElement({
-      //     tag: 'option',
-      //     attr: [['value', game.id]],
-      //     txt: game.name,
-      //   })
-      // );
-      // gameSelect.innerHTML = '';
-      // gameSelect.append(...options);
       renderDesk(listGames[0].id);
     } else {
       renderDesk(value);
@@ -29,8 +20,18 @@ export default () => {
   };
 
   const header = createElement({ tag: 'header', cls: 'header' });
-  const form = createElement({ tag: 'form' });
+  const form = createElement({ tag: 'form', cls: 'form' });
   const gameSelectContainer = createElement({ cls: 'game-select' });
+
+  const fieldSet = createElement({
+    tag: 'fieldset',
+    cls: 'game-select_fieldset',
+  });
+  const legend = createElement({
+    tag: 'legend',
+    cls: 'fieldset_legend',
+    txt: 'сложность',
+  });
 
   const gameSelectLabel = createElement({
     tag: 'label',
@@ -46,6 +47,7 @@ export default () => {
   const gameFilterLabel5 = createElement({
     tag: 'label',
     txt: '5x5',
+    cls: 'fieldset_label',
     attr: [['for', 'game-filter-5x5']],
   });
   const gameFilter5 = createElement({
@@ -56,11 +58,13 @@ export default () => {
       ['value', '5x5'],
       ['id', 'game-filter-5x5'],
       ['checked', ''],
+      ['autofocus', ''],
     ],
   });
   const gameFilterLabel10 = createElement({
     tag: 'label',
     txt: '10x10',
+    cls: 'fieldset_label',
     attr: [['for', 'game-filter-10x10']],
   });
   const gameFilter10 = createElement({
@@ -75,6 +79,7 @@ export default () => {
   const gameFilterLabel15 = createElement({
     tag: 'label',
     txt: '15x15',
+    cls: 'fieldset_label',
     attr: [['for', 'game-filter-15x15']],
   });
   const gameFilter15 = createElement({
@@ -87,18 +92,18 @@ export default () => {
     ],
   });
 
-  gameSelectContainer.addEventListener('change', changeFilter);
-  gameSelectContainer.append(
-    gameSelectLabel,
-    gameSelect,
-    gameFilterLabel5,
+  fieldSet.append(
+    legend,
     gameFilter5,
-    gameFilterLabel10,
+    gameFilterLabel5,
     gameFilter10,
-    gameFilterLabel15,
-    gameFilter15
+    gameFilterLabel10,
+    gameFilter15,
+    gameFilterLabel15
   );
-  form.append(gameSelectContainer);
+  form.append(fieldSet, gameSelectContainer);
   header.append(form);
+  form.addEventListener('change', changeFilter);
+  gameSelectContainer.append(gameSelectLabel, gameSelect);
   return header;
 };
