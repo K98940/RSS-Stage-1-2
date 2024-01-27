@@ -3,7 +3,7 @@ export default {
     plot: [],
     currentGame: 0,
     showCellsValue: false,
-    timer: 1000,
+    timer: 0,
     isGameStarted: false,
   },
   fields: [],

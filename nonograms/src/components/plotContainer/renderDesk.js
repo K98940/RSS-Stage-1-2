@@ -89,6 +89,49 @@ export default (id = 0) => {
   state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
 };
 
+export const updateDesk = () => {
+  //сформируем элементы игрового поля
+  const { plot } = state.game;
+  state.html.plotContainer.innerHTML = '';
+  plot.forEach((row, i) => {
+    row.forEach((el, j) => {
+      const cell = newCell();
+      if (el.state === '⚫') {
+        cell.setAttribute('role', 'game');
+        cell.classList.add('cell_fill');
+      }
+      if (el.state === '⚪') {
+        cell.setAttribute('role', 'game');
+      }
+      if (el.state === 'x') {
+        cell.setAttribute('role', 'game');
+        cell.classList.add('cell_checked');
+      }
+      cell.textContent = el.value;
+      if (Number.isFinite(el.state)) {
+        cell.setAttribute('role', 'clue');
+        cell.textContent = el.state > 0 ? el.state : '';
+      }
+      if (el.state === '') {
+        cell.setAttribute('role', 'empty');
+      }
+
+      plot[i][j] = {
+        state: el.state,
+        value: el.value,
+        element: cell,
+      };
+
+      state.html.plotContainer.appendChild(cell);
+    });
+  });
+
+  setBorders(plot);
+  console.warn('updated plot', plot);
+  const columnsCount = plot[0].length;
+  state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
+};
+
 const createClueArray = (matrix) => {
   const clues = [];
   matrix.forEach((row, i) => {

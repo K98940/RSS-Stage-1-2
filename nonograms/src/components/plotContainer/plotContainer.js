@@ -1,6 +1,6 @@
 import state from '../../state/state';
 import createElement from '../../utils/createElement';
-import { parseTimer, triggerTimer } from '../timer/timer';
+import { parseTimer, startTimer } from '../timer/timer';
 import './plotContainer.css';
 
 export default () => {
@@ -14,7 +14,7 @@ export default () => {
 const checkGameStart = () => {
   if (!state.game.isGameStarted) {
     state.game.isGameStarted = true;
-    triggerTimer();
+    startTimer();
   }
 };
 
@@ -30,14 +30,22 @@ const contextMenuHandler = (e) => {
     const cellState = clickedCell.state;
     switch (cellState) {
       case '⚪':
+        clickedCell.state = 'x';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
         checkGameStart();
         break;
       case '⚫':
+        clickedCell.state = 'x';
+        clickedCell.element.classList.toggle('cell_checked');
+        clickedCell.element.classList.remove('cell_fill');
+        checkGameStart();
+        break;
+      case 'x':
         clickedCell.state = '⚪';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
+        checkGameStart();
         break;
 
       default:
@@ -61,6 +69,13 @@ const clickHandler = (e) => {
         clickedCell.state = '⚪';
         clickedCell.element.classList.remove('cell_fill');
         clickedCell.element.classList.remove('cell_checked');
+        checkGameStart();
+        break;
+      case 'x':
+        clickedCell.state = '⚫';
+        clickedCell.element.classList.add('cell_fill');
+        clickedCell.element.classList.remove('cell_checked');
+        checkGameStart();
         break;
 
       default:
@@ -74,7 +89,9 @@ const clickHandler = (e) => {
             state.game.timer
           )} seconds!`
         );
-        triggerTimer(false);
+
+        state.game.timer = 0;
+        startTimer(false);
       }, 0);
   }
 };

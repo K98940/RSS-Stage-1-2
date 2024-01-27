@@ -1,4 +1,4 @@
-import btnReset from './components/buttons/reset/btnReset';
+import footer from './components/footer/footer';
 import header from './components/header/header';
 import plotContainer from './components/plotContainer/plotContainer';
 import renderDesk from './components/plotContainer/renderDesk';
@@ -22,7 +22,7 @@ document.body.classList.add('body');
 document.body.append(header());
 document.body.append(timer());
 document.body.append(game());
-document.body.append(btnReset());
+document.body.append(footer());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);

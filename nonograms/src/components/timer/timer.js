@@ -17,7 +17,7 @@ export const renderTimer = () => {
   state.html.timer.innerText = parseTimer(seconds);
 };
 
-export const triggerTimer = (start = true) => {
+export const startTimer = (start = true) => {
   const timerHandler = () => {
     state.game.timer += 1;
     renderTimer();
@@ -27,7 +27,6 @@ export const triggerTimer = (start = true) => {
   if (start) state.html.timerID = setInterval(timerHandler(), 1000);
   if (!start) {
     clearInterval(state.html.timerID);
-    state.game.timer = 0;
     state.game.isGameStarted = false;
     renderTimer();
   }

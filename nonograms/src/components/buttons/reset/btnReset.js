@@ -1,7 +1,7 @@
 import state from '../../../state/state';
 import createElement from '../../../utils/createElement';
 import renderDesk from '../../plotContainer/renderDesk';
-import { triggerTimer } from '../../timer/timer';
+import { startTimer } from '../../timer/timer';
 import './btnReset.css';
 
 export default () => {
@@ -13,5 +13,6 @@ export default () => {
 
 const resetGame = () => {
   renderDesk(state.game.currentGame);
-  triggerTimer(false);
+  state.game.timer = 0;
+  startTimer(false);
 };
