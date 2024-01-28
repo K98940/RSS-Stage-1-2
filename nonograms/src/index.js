@@ -1,15 +1,15 @@
+import './styles/style.css';
+import { timer } from './components/timer/timer';
+import state from './state/state';
 import footer from './components/footer/footer';
+import initState from './state/initState';
+import renderDesk from './components/plotContainer/renderDesk';
+import windowHandle from './utils/windowHandle';
 import gameSelector from './components/gameSelector/gameSelector';
 import plotContainer from './components/plotContainer/plotContainer';
-import renderDesk from './components/plotContainer/renderDesk';
-import schemeSelector from './components/schemeSelector/schemeSelector';
-import { timer } from './components/timer/timer';
-import initState from './state/initState';
-import state from './state/state';
-import './styles/style.css';
 import createElement from './utils/createElement';
 import createOptions from './utils/createOptions';
-import windowHandle from './utils/windowHandle';
+import schemeSelector from './components/schemeSelector/schemeSelector';
 
 function game() {
   initState();

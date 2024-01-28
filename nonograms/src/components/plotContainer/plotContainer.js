@@ -1,7 +1,13 @@
+import './plotContainer.css';
 import state from '../../state/state';
 import createElement from '../../utils/createElement';
 import { parseTimer, startTimer } from '../timer/timer';
-import './plotContainer.css';
+import soundFillCell from './sound/soundFillCell.mp3';
+import soundFillCross from './sound/soundFillCross.mp3';
+import soundClear from './sound/soundClear.mp3';
+const sndFillCell = new Audio(soundFillCell);
+const sndFillCross = new Audio(soundFillCross);
+const sndClear = new Audio(soundClear);
 
 export default () => {
   const container = createElement({ tag: 'div', cls: 'game-container' });
@@ -30,18 +36,21 @@ const contextMenuHandler = (e) => {
     const cellState = clickedCell.state;
     switch (cellState) {
       case '⚪':
+        sndFillCross.play();
         clickedCell.state = 'x';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
         checkGameStart();
         break;
       case '⚫':
+        sndFillCross.play();
         clickedCell.state = 'x';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
         checkGameStart();
         break;
       case 'x':
+        sndClear.play();
         clickedCell.state = '⚪';
         clickedCell.element.classList.toggle('cell_checked');
         clickedCell.element.classList.remove('cell_fill');
@@ -60,18 +69,21 @@ const clickHandler = (e) => {
     const cellState = clickedCell.state;
     switch (cellState) {
       case '⚪':
+        sndFillCell.play();
         clickedCell.state = '⚫';
         clickedCell.element.classList.add('cell_fill');
         clickedCell.element.classList.remove('cell_checked');
         checkGameStart();
         break;
       case '⚫':
+        sndClear.play();
         clickedCell.state = '⚪';
         clickedCell.element.classList.remove('cell_fill');
         clickedCell.element.classList.remove('cell_checked');
         checkGameStart();
         break;
       case 'x':
+        sndFillCell.play();
         clickedCell.state = '⚫';
         clickedCell.element.classList.add('cell_fill');
         clickedCell.element.classList.remove('cell_checked');
