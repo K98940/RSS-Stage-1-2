@@ -2,7 +2,7 @@ import state from '../../state/state';
 import createElement from '../../utils/createElement';
 import createOptions from '../../utils/createOptions';
 import renderDesk from '../plotContainer/renderDesk';
-import './header.css';
+import './gameSelector.css';
 
 export default () => {
   const changeFilter = (e) => {

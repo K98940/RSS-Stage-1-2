@@ -127,7 +127,6 @@ export const updateDesk = () => {
   });
 
   setBorders(plot);
-  console.warn('updated plot', plot);
   const columnsCount = plot[0].length;
   state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
 };

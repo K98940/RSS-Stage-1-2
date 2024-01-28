@@ -1,5 +1,5 @@
 import footer from './components/footer/footer';
-import header from './components/header/header';
+import gameSelector from './components/gameSelector/gameSelector';
 import plotContainer from './components/plotContainer/plotContainer';
 import renderDesk from './components/plotContainer/renderDesk';
 import { timer } from './components/timer/timer';
@@ -19,7 +19,7 @@ function game() {
 }
 
 document.body.classList.add('body');
-document.body.append(header());
+document.body.append(gameSelector());
 document.body.append(timer());
 document.body.append(game());
 document.body.append(footer());

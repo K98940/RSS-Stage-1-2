@@ -14,7 +14,7 @@ export default (e) => {
       name: '',
       plot: filter,
     };
-    console.warn('json', json);
+    console.warn('json for save...', json);
   }
 
   if (code === 'KeyH') {
