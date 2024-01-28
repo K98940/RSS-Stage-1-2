@@ -42,6 +42,7 @@ export default () => {
   });
   const gameSelect = createElement({
     tag: 'select',
+    cls: 'game-select_selector',
     attr: [['id', 'game-select']],
   });
   state.html.gameSelect = gameSelect;

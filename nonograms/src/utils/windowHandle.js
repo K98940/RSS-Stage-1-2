@@ -20,6 +20,7 @@ export default (e) => {
   if (code === 'KeyH') {
     state.game.showCellsValue = !state.game.showCellsValue;
     const opacity = state.game.showCellsValue ? '0.4' : '0';
-    state.html.main.style.setProperty('--opacity-cell-text', opacity);
+    const root = document.querySelector(':root');
+    root.style.setProperty('--opacity-cell-text', opacity);
   }
 };

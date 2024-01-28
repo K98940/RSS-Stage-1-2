@@ -4,38 +4,38 @@
   align-items: center;
 
   user-select: none;
-  background-color: rgb(231, 255, 255);
+  background-color: var(--blocks-background);
 }
 
 .cell[role="game"] {
-  background-color: white;
-  color: rgba(0, 0, 0, var(--opacity-cell-text, 0));
-  border: 1px dashed lightgray;
+  background-color: var(--cell-background);
+  color: rgba(0, 0, 0, var(--opacity-cell-text));
+  border: 1px dashed var(--cell-border-color);
 }
 
 .cell_fill[role="game"] {
-  background-color: black;
-  border: 1px dashed black;
+  background-color: var(--cell-background-fill);
+  border: none;
 }
 
 .cell[role="empty"] {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--blocks-background);
 }
 
 .cell[row] {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .cell[first-row] {
-  border-top: 2px solid black;
+  border-top: 2px solid var(--border-color);
 }
 
 .cell[col] {
-  border-right: 2px solid black;
+  border-right: 2px solid var(--border-color);
 }
 
 .cell[first-col] {
-  border-left: 2px solid black;
+  border-left: 2px solid var(--border-color);
 }
 
 .cell_checked[role="game"] {
@@ -63,6 +63,6 @@
 @media (hover: hover)  {
 .cell[role="game"]:hover {
     cursor: pointer;
-    filter: invert(0.2);
+    filter: invert(var(--hover-invert));
   }
 }

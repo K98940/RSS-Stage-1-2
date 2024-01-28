@@ -5,7 +5,11 @@ import { startTimer } from '../../timer/timer';
 import './btnReset.css';
 
 export default () => {
-  const btnReset = createElement({ tag: 'button', txt: 'Reset game' });
+  const btnReset = createElement({
+    tag: 'button',
+    txt: 'Reset game',
+    cls: 'button',
+  });
   btnReset.addEventListener('click', resetGame);
 
   return btnReset;

@@ -1,0 +1,12 @@
+.scheme-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+
+  border: 1px solid var(--border-color);
+}
+
+.scheme-select {
+  color: var(--common-text-color);
+  background-color: var(--blocks-background);
+}

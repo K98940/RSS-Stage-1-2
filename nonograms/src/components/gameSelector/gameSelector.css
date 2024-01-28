@@ -1,6 +1,5 @@
 .header {
-  background-color: rgb(231, 255, 255);
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .form {
@@ -32,4 +31,9 @@
     margin: 0 auto;
     padding: 0 1rem;
   }
+}
+
+.game-select_selector {
+  color: var(--common-text-color);
+  background-color: var(--blocks-background);
 }
