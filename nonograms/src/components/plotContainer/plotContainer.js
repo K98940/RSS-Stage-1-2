@@ -5,6 +5,8 @@ import { parseTimer, startTimer } from '../timer/timer';
 import soundFillCell from './sound/soundFillCell.mp3';
 import soundFillCross from './sound/soundFillCross.mp3';
 import soundClear from './sound/soundClear.mp3';
+import { saveRecords } from '../../utils/gameRecord';
+import { updateScore } from '../score/score';
 const sndFillCell = new Audio(soundFillCell);
 const sndFillCross = new Audio(soundFillCross);
 const sndClear = new Audio(soundClear);
@@ -94,17 +96,7 @@ const clickHandler = (e) => {
         break;
     }
 
-    if (isAllCorrectChecked())
-      setTimeout(() => {
-        alert(
-          `Great! You have solved the nonogram in ${parseTimer(
-            state.game.timer
-          )} seconds!`
-        );
-
-        state.game.timer = 0;
-        startTimer(false);
-      }, 0);
+    if (isAllCorrectChecked()) setTimeout(() => gameOver(), 0);
   }
 };
 
@@ -115,4 +107,18 @@ const isAllCorrectChecked = () => {
     return cell;
   });
   return !plotWithoutX.some((cell) => cell.state !== cell.value);
+};
+
+const gameOver = () => {
+  saveRecords();
+  updateScore();
+  alert(
+    `Great! You have solved the nonogram in ${parseTimer(
+      state.game.timer
+    )} seconds!`
+  );
+
+  state.game.timer = 0;
+  state.html.main.classList.add('gameover');
+  startTimer(false);
 };

@@ -13,12 +13,13 @@ export default () => {
     if (isFilter) {
       const listGames = fields[value];
       state.game.currentGame = listGames[0].id;
+      state.game.difficulty = value;
       createOptions(gameSelect, listGames);
-      renderDesk(state.game.currentGame);
     } else {
       state.game.currentGame = value;
-      renderDesk(state.game.currentGame);
     }
+    state.html.main.classList.remove('gameover');
+    renderDesk(state.game.currentGame);
   };
 
   const header = createElement({ tag: 'header', cls: 'header' });

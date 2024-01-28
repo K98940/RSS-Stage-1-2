@@ -18,5 +18,6 @@ export default () => {
 const resetGame = () => {
   renderDesk(state.game.currentGame);
   state.game.timer = 0;
+  state.html.main.classList.remove('gameover');
   startTimer(false);
 };

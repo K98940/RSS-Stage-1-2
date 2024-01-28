@@ -1,16 +1,15 @@
 import { updateDesk } from '../components/plotContainer/renderDesk';
 import { startTimer } from '../components/timer/timer';
 import state from '../state/state';
-const LS_KEY = 'nonogram20240127161701';
 
 export const saveState = () => {
   const { game } = state;
-  localStorage.setItem(LS_KEY, JSON.stringify(game));
+  localStorage.setItem(state.lsKeyState, JSON.stringify(game));
 };
 
 export const loadState = () => {
   try {
-    const ls = localStorage.getItem(LS_KEY);
+    const ls = localStorage.getItem(state.lsKeyState);
     const game = JSON.parse(ls);
     if (game) {
       state.game = game;

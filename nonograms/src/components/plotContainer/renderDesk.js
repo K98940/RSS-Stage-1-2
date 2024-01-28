@@ -1,15 +1,7 @@
 import state from '../../state/state';
+import getPlot from '../../utils/getPlot';
 import rotateMatrix from '../../utils/rotateMatrix';
 import newCell from './cell/newCell';
-
-const getPlot = (id) => {
-  const ID = Number(id);
-  for (let field in state.fields) {
-    const game = state.fields[field].filter((game) => game.id === ID)[0];
-    if (game) return game.plot;
-  }
-  return null;
-};
 
 export default (id = 0) => {
   const plot = [...getPlot(id)];

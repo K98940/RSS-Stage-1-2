@@ -10,6 +10,7 @@ import plotContainer from './components/plotContainer/plotContainer';
 import createElement from './utils/createElement';
 import createOptions from './utils/createOptions';
 import schemeSelector from './components/schemeSelector/schemeSelector';
+import { score } from './components/score/score';
 
 function game() {
   initState();
@@ -25,6 +26,7 @@ document.body.append(gameSelector());
 document.body.append(timer());
 document.body.append(game());
 document.body.append(footer());
+document.body.append(score());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);

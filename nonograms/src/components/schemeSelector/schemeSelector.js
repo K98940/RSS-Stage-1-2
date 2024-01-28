@@ -48,5 +48,4 @@ const applyScheme = (scheme) => {
   keys.forEach((color) => {
     root.style.setProperty(`--${color}`, colors[color]);
   });
-  console.warn(keys);
 };
