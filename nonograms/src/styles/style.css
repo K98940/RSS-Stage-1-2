@@ -13,11 +13,18 @@
   --score-lastgame: rgb(165, 245, 140);
   --common-text-color: rgb(0, 0, 0);
   --score-shadow: rgb(125, 125, 125);
+
+  --border-radius: 0.2rem;
 }
 
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100dvh;
 }
 
 .body {
@@ -27,9 +34,15 @@
   gap: 0.5rem;
   padding: 1rem;
 
+  height: 100%;
+
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: var(--common-text-color);;
   background-color: var(--body-bacground);
+}
+
+.main {
+  flex: 1 0 auto;
 }
 
 .button {
