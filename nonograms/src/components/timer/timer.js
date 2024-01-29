@@ -24,9 +24,9 @@ export const startTimer = (start = true) => {
     return timerHandler;
   };
 
+  clearInterval(state.html.timerID);
   if (start) state.html.timerID = setInterval(timerHandler(), 1000);
   if (!start) {
-    clearInterval(state.html.timerID);
     state.game.isGameStarted = false;
     renderTimer();
   }

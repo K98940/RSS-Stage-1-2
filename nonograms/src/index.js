@@ -5,12 +5,12 @@ import footer from './components/footer/footer';
 import initState from './state/initState';
 import renderDesk from './components/plotContainer/renderDesk';
 import windowHandle from './utils/windowHandle';
-import gameSelector from './components/gameSelector/gameSelector';
 import plotContainer from './components/plotContainer/plotContainer';
 import createElement from './utils/createElement';
 import createOptions from './utils/createOptions';
 import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';
+import { gameSelector } from './components/gameSelector/gameSelector';
 
 function game() {
   initState();
@@ -30,3 +30,6 @@ document.body.append(score());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);
+
+// ToDO: при смене селектора игры - не останавливается таймер
+// - уменьшить яркость темной темы, особенно тени score

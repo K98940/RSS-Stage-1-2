@@ -1,27 +1,11 @@
 import state from '../../state/state';
 import createElement from '../../utils/createElement';
 import createOptions from '../../utils/createOptions';
-import renderDesk from '../plotContainer/renderDesk';
+import renderDesk, { updateDesk } from '../plotContainer/renderDesk';
+import { startTimer } from '../timer/timer';
 import './gameSelector.css';
 
-export default () => {
-  const changeFilter = (e) => {
-    const { value } = e.target;
-    const { fields } = state;
-    const filters = Object.keys(state.fields);
-    const isFilter = filters.includes(value);
-    if (isFilter) {
-      const listGames = fields[value];
-      state.game.currentGame = listGames[0].id;
-      state.game.difficulty = value;
-      createOptions(gameSelect, listGames);
-    } else {
-      state.game.currentGame = value;
-    }
-    state.html.main.classList.remove('gameover');
-    renderDesk(state.game.currentGame);
-  };
-
+export const gameSelector = () => {
   const header = createElement({ tag: 'header', cls: 'header' });
   const form = createElement({ tag: 'form', cls: 'form' });
   const gameSelectContainer = createElement({ cls: 'game-select' });
@@ -30,6 +14,7 @@ export default () => {
     tag: 'fieldset',
     cls: 'game-select_fieldset',
   });
+  state.html.fieldSet = fieldSet;
   const legend = createElement({
     tag: 'legend',
     cls: 'fieldset_legend',
@@ -110,4 +95,45 @@ export default () => {
   form.addEventListener('change', changeFilter);
   gameSelectContainer.append(gameSelectLabel, gameSelect);
   return header;
+};
+
+export const switchGame = (id) => {
+  const { fields } = state;
+  let game = null;
+
+  for (const difficulty in fields) {
+    game = fields[difficulty].filter((g) => g.id === +id);
+    if (game.length) {
+      const radio = state.html.fieldSet.querySelector(
+        `input[value="${difficulty}"]`
+      );
+      radio && (radio.checked = true);
+      changeFilter(difficulty, id);
+      return;
+    }
+  }
+};
+
+const changeFilter = (e, id) => {
+  const value = e.target?.value || e;
+
+  const { fields } = state;
+  const filters = Object.keys(state.fields);
+  const isFilter = filters.includes(value);
+  if (isFilter) {
+    const listGames = fields[value];
+    state.game.currentGame = id || listGames[0].id;
+    state.game.difficulty = value;
+    createOptions(state.html.gameSelect, listGames);
+  } else {
+    state.game.currentGame = value;
+  }
+  state.html.main.classList.remove('gameover');
+  if (e.target?.value) {
+    state.game.timer = 0;
+    startTimer(false);
+    renderDesk(state.game.currentGame);
+  } else {
+    updateDesk(state.game.currentGame);
+  }
 };

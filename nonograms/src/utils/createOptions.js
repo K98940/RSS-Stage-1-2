@@ -1,3 +1,4 @@
+import state from '../state/state';
 import createElement from './createElement';
 
 export default (select, games) => {
@@ -6,9 +7,14 @@ export default (select, games) => {
     const MAX_LENGTH = 30;
     const nameNormalized =
       length > MAX_LENGTH ? game.name.slice(0, MAX_LENGTH) + '...' : game.name;
+    const checked =
+      state.game.currentGame === game.id ? 'selected' : 'unselected';
     return createElement({
       tag: 'option',
-      attr: [['value', game.id]],
+      attr: [
+        ['value', game.id],
+        [checked, ''],
+      ],
       txt: nameNormalized,
     });
   });

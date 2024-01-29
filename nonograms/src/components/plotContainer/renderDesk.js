@@ -84,6 +84,7 @@ export default (id = 0) => {
 export const updateDesk = () => {
   //сформируем элементы игрового поля
   const { plot } = state.game;
+
   state.html.plotContainer.innerHTML = '';
   plot.forEach((row, i) => {
     row.forEach((el, j) => {

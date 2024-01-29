@@ -14,6 +14,8 @@ export const score = () => {
 
 export const updateScore = () => {
   state.html.score.innerHTML = '';
+  const h1 = createElement({ tag: 'h1', cls: 'score_h1', txt: 'SCORE:' });
+  state.html.score.append(h1);
   const records = getContainerRecords();
   records && state.html.score.append(...records);
 };
@@ -27,11 +29,9 @@ const getContainerRecords = () => {
   // if (!records) return null;
 
   const difficultyList = Object.keys(state.fields);
-  console.log('difficultyList', difficultyList);
-  const tables = difficultyList.map((dif, i) => {
+  const tables = difficultyList.map((dif) => {
     const rec = records.filter((r) => r.difficulty === dif);
-    if (rec.length === 0 && i > 0) return '';
-    console.log('rec', rec);
+    if (rec.length === 0) return '';
     const container = createElement({ cls: 'container__records' });
     container.append(createElement({ txt: 'игра' }));
     container.append(createElement({ txt: 'сложн.' }));

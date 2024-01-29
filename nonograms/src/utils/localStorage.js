@@ -1,3 +1,4 @@
+import { switchGame } from '../components/gameSelector/gameSelector';
 import { updateDesk } from '../components/plotContainer/renderDesk';
 import { startTimer } from '../components/timer/timer';
 import state from '../state/state';
@@ -13,8 +14,9 @@ export const loadState = () => {
     const game = JSON.parse(ls);
     if (game) {
       state.game = game;
-      startTimer(false);
       updateDesk();
+      switchGame(state.game.currentGame);
+      startTimer(true);
       const opacity = state.game.showCellsValue ? '0.4' : '0';
       state.html.main.style.setProperty('--opacity-cell-text', opacity);
     }
