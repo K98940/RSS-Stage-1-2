@@ -12,6 +12,7 @@
   --border-color: rgb(0, 0, 0);
   --score-lastgame: rgb(165, 245, 140);
   --common-text-color: rgb(0, 0, 0);
+  --score-shadow: rgb(125, 125, 125);
 }
 
 * {

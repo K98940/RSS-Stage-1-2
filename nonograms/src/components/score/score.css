@@ -12,7 +12,7 @@
   border-radius: 0.5rem;
   background-color: var(--blocks-background);
   border: 2px solid var(--border-color);
-  filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--border-color));
+  filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--score-shadow));
   transition-duration: 200ms;
 }
 

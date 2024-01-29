@@ -30,6 +30,3 @@ document.body.append(score());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);
-
-// ToDO: при смене селектора игры - не останавливается таймер
-// - уменьшить яркость темной темы, особенно тени score

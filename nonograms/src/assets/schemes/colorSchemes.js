@@ -12,6 +12,7 @@ export default [
       'score-lastgame': 'rgb(165, 245, 140)',
       'common-text-color': 'rgb(0, 0, 0)',
       'hover-invert': '0.2',
+      'score-shadow': 'rgb(125, 125, 125)',
     },
   },
   {
@@ -23,10 +24,11 @@ export default [
       'cell-background': 'rgb(130, 130, 130)',
       'cell-background-fill': 'rgb(60, 60, 60)',
       'cell-border-color': 'rgb(160, 160, 160)',
-      'border-color': 'rgb(200, 200, 200)',
+      'border-color': 'rgb(151, 151, 151)',
       'score-lastgame': 'rgb(30, 20, 40)',
       'common-text-color': 'rgb(230, 230, 230)',
       'hover-invert': '0.7',
+      'score-shadow': 'rgb(0, 0, 0)',
     },
   },
   {
@@ -42,6 +44,7 @@ export default [
       'score-lastgame': 'rgb(255, 220, 220)',
       'common-text-color': 'rgb(100, 100, 100)',
       'hover-invert': '0.2',
+      'score-shadow': 'rgb(150, 150, 150)',
     },
   },
 ];
