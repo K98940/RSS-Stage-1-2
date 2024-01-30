@@ -6,7 +6,7 @@ export const timer = () => {
   let seconds = parseInt(state.game.timer);
   seconds ||= 0;
   const timerStr = parseTimer(seconds);
-  const timer = createElement({ tag: 'div', txt: timerStr });
+  const timer = createElement({ tag: 'div', cls: 'timer', txt: timerStr });
   state.html.timer = timer;
   return timer;
 };

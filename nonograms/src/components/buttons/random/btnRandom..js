@@ -31,5 +31,6 @@ const randomGame = () => {
   state.game.currentGame = randomID;
   renderDesk(randomID);
   switchGame(randomID);
+  state.game.timer = 0;
   startTimer(false);
 };

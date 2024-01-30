@@ -20,6 +20,8 @@
 
 .cell[role="empty"] {
   background-color: var(--blocks-background);
+  grid-row: 1 / span var(--row-count);
+  grid-column: 1 / span var(--column-count);
 }
 
 .cell[row] {

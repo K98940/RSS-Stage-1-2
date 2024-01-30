@@ -128,6 +128,8 @@ const changeFilter = (e, id) => {
   } else {
     state.game.currentGame = value;
   }
+  const opacity = '0';
+  state.html.root.style.setProperty('--opacity-cell-text', opacity);
   state.html.main.classList.remove('gameover');
   if (e.target?.value) {
     state.game.timer = 0;

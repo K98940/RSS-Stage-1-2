@@ -14,6 +14,9 @@
   --common-text-color: rgb(0, 0, 0);
   --score-shadow: rgb(125, 125, 125);
 
+  --color-warning: 255, 80, 80;
+  --color-warning-shadow: 0, 0, 0;
+
   --border-radius: 0.2rem;
 }
 
@@ -52,6 +55,7 @@ html {
   background-color: var(--blocks-background);
   font-weight: bold;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  user-select: none;
 }
 
 @media (hover: hover) {
@@ -63,5 +67,5 @@ html {
 
 .gameover {
   pointer-events: none;
-  filter: blur(1px) opacity(0.7);
+  filter: blur(1px) opacity(0.8);
 }

@@ -13,6 +13,7 @@ export default [
       'common-text-color': 'rgb(0, 0, 0)',
       'hover-invert': '0.2',
       'score-shadow': 'rgb(125, 125, 125)',
+      'color-warning': '255, 80, 80',
     },
   },
   {
@@ -29,6 +30,7 @@ export default [
       'common-text-color': 'rgb(230, 230, 230)',
       'hover-invert': '0.7',
       'score-shadow': 'rgb(0, 0, 0)',
+      'color-warning': '255, 80, 80',
     },
   },
   {
@@ -45,6 +47,7 @@ export default [
       'common-text-color': 'rgb(100, 100, 100)',
       'hover-invert': '0.2',
       'score-shadow': 'rgb(150, 150, 150)',
+      'color-warning': '255, 80, 80',
     },
   },
 ];

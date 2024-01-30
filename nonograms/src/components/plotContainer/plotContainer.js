@@ -110,13 +110,12 @@ const isAllCorrectChecked = () => {
 };
 
 const gameOver = () => {
+  const msg = `Great! You have solved the nonogram in ${parseTimer(
+    state.game.timer
+  )} seconds!`;
   saveRecords();
-  updateScore();
-  alert(
-    `Great! You have solved the nonogram in ${parseTimer(
-      state.game.timer
-    )} seconds!`
-  );
+  updateScore(msg);
+  state.html.score.classList.add('score_show');
 
   state.game.timer = 0;
   state.html.main.classList.add('gameover');

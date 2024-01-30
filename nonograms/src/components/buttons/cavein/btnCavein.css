@@ -1,0 +1,69 @@
+.btn_container {
+  container-type: inline-size;
+  width: 100%;
+  height: 100%;
+}
+
+.btn_cavein {
+  width: 100%;
+  height: 100%;
+  padding: 0.2rem;
+
+  border-top: 3px solid rgb(200, 200, 200);
+  border-right: 3px solid rgb(100, 100, 100);
+  border-bottom: 3px solid rgb(70, 70, 70);
+  border-left: 3px solid rgb(170, 170, 170);
+  background-color: transparent;
+
+  & svg {
+    width: clamp(0px, 100%, 2rem);
+    aspect-ratio: 1/1;
+    transition-duration: 200ms;
+    fill: var(--border-color);
+
+    animation-name: roll;
+    animation-duration: 60s;
+    animation-delay: 60s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+  }
+}
+
+@keyframes roll {
+  0% {
+    fill: rgb(var(--color-warning));
+    transform: rotateY(360deg);
+  }
+  5% {
+    fill: rgb(var(--color-warning));
+    transform: rotateY(0deg);
+  }
+  10% {
+    fill: var(--border-color);
+  }
+  100% {
+  }
+}
+
+@media (hover: hover) {
+  .btn_cavein:hover {
+    cursor: pointer;
+
+    & svg {
+      fill: rgb(var(--color-warning));
+      filter: drop-shadow(0.1rem 0.1rem 0.1rem rgb(var(--color-warning-shadow)));
+    }
+  }
+}
+
+@container (max-width: 2rem) {
+  .btn_cavein {
+    & svg {
+        display: none;
+      }
+  }
+
+  .btn_cavein:hover {
+    background-color: rgb(var(--color-warning));
+  }
+}

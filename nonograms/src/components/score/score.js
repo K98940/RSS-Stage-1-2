@@ -5,28 +5,38 @@ import { parseTimer } from '../timer/timer';
 import './score.css';
 
 export const score = () => {
-  const container = createElement({ cls: 'container' });
+  const dialog = createElement({
+    tag: 'dialog',
+    cls: 'dialog',
+    attr: [['open', '']],
+  });
+  const container = createElement({
+    cls: 'container',
+  });
   state.html.score = container;
   updateScore();
-  container.addEventListener('click', clickHandle);
-  return container;
+  dialog.addEventListener('click', clickHandle);
+  dialog.append(container);
+  return dialog;
 };
 
-export const updateScore = () => {
+export const updateScore = (msg) => {
   state.html.score.innerHTML = '';
-  const h1 = createElement({ tag: 'h1', cls: 'score_h1', txt: 'SCORE:' });
+  const title = msg ? msg : 'SCORE:';
+  const h1 = createElement({ tag: 'h1', cls: 'score_h1', txt: title });
   state.html.score.append(h1);
+  state.html.scoreH1 = h1;
   const records = getContainerRecords();
   records && state.html.score.append(...records);
 };
 
 const clickHandle = () => {
+  state.html.scoreH1.textContent = 'SCORE:';
   state.html.score.classList.toggle('score_show');
 };
 
 const getContainerRecords = () => {
   const records = getRecords();
-  // if (!records) return null;
 
   const difficultyList = Object.keys(state.fields);
   const tables = difficultyList.map((dif) => {
@@ -38,9 +48,11 @@ const getContainerRecords = () => {
     container.append(createElement({ txt: 'время' }));
     const sorted = rec.sort((a, b) => a.timer - b.timer);
     sorted.splice(5);
-    sorted.forEach((r) => {
+    sorted.forEach((r, i) => {
       const style = r.lastGame ? 'record_last-game' : '';
-      container.append(createElement({ txt: r.name, cls: style }));
+      container.append(
+        createElement({ txt: `${i + 1}. ${r.name}`, cls: style })
+      );
       container.append(createElement({ txt: r.difficulty, cls: style }));
       container.append(createElement({ txt: parseTimer(r.timer), cls: style }));
     });

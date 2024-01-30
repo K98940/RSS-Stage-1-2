@@ -17,6 +17,7 @@ function game() {
   console.log(state);
   state.html.main = createElement({ tag: 'main', cls: 'main' });
   state.html.main.append(plotContainer());
+  state.html.root = document.querySelector(':root');
   return state.html.main;
 }
 
