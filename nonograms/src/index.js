@@ -34,7 +34,6 @@ renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);
 
-// добавить чекбокс для ПКМ
 // добавить заполнение Х по клику на подсказки
 // добавить иконки на  кнопки
 // добавить чекбокс отключения звуков
