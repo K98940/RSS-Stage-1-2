@@ -40,14 +40,14 @@ const getContainerRecords = () => {
 
   const difficultyList = Object.keys(state.fields);
   const tables = difficultyList.map((dif) => {
-    const rec = records.filter((r) => r.difficulty === dif);
+    const rec = records.filter((r) => r.difficulty === dif).reverse();
     if (rec.length === 0) return '';
     const container = createElement({ cls: 'container__records' });
     container.append(createElement({ txt: 'игра' }));
     container.append(createElement({ txt: 'сложн.' }));
     container.append(createElement({ txt: 'время' }));
+    rec.splice(5);
     const sorted = rec.sort((a, b) => a.timer - b.timer);
-    sorted.splice(5);
     sorted.forEach((r, i) => {
       const style = r.lastGame ? 'record_last-game' : '';
       container.append(
