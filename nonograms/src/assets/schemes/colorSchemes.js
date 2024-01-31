@@ -14,6 +14,7 @@ export default [
       'hover-invert': '0.2',
       'score-shadow': 'rgb(125, 125, 125)',
       'color-warning': '255, 80, 80',
+      'btn-icon-hover': 'rgba(90, 0, 255, 1)',
     },
   },
   {
@@ -31,6 +32,7 @@ export default [
       'hover-invert': '0.7',
       'score-shadow': 'rgb(0, 0, 0)',
       'color-warning': '255, 80, 80',
+      'btn-icon-hover': 'rgba(160, 160, 40, 1)',
     },
   },
   {
@@ -48,6 +50,7 @@ export default [
       'hover-invert': '0.2',
       'score-shadow': 'rgb(150, 150, 150)',
       'color-warning': '255, 80, 80',
+      'btn-icon-hover': 'rgba(40, 70, 120, 1)',
     },
   },
 ];

@@ -2,16 +2,17 @@ import state from '../../../state/state';
 import createElement from '../../../utils/createElement';
 import renderDesk from '../../plotContainer/renderDesk';
 import { startTimer } from '../../timer/timer';
+import svg from '../../../assets/icons/reset.svg';
 import './btnReset.css';
 
 export default () => {
   const btnReset = createElement({
     tag: 'button',
     txt: 'Reset game',
-    cls: 'button',
+    cls: 'button btn-reset',
+    icon: svg,
   });
   btnReset.addEventListener('click', resetGame);
-
   return btnReset;
 };
 

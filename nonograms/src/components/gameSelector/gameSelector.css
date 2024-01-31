@@ -42,3 +42,15 @@
   color: var(--common-text-color);
   background-color: var(--blocks-background);
 }
+
+@media (hover: hover) {
+  .game-select_fieldset {
+    &> input:hover,
+    &> label:hover {
+      cursor: pointer;
+    }
+  }
+  .game-select_selector:hover {
+    cursor: pointer;
+  }
+}

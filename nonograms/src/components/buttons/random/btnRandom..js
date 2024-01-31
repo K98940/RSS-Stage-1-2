@@ -3,13 +3,15 @@ import createElement from '../../../utils/createElement';
 import { switchGame } from '../../gameSelector/gameSelector';
 import renderDesk from '../../plotContainer/renderDesk';
 import { startTimer } from '../../timer/timer';
+import svg from '../../../assets/icons/random.svg';
 import './btnRandom.css';
 
 export default () => {
   const button = createElement({
     tag: 'button',
     txt: 'Random game',
-    cls: 'button',
+    cls: 'button btn-random-game',
+    icon: svg,
   });
   button.addEventListener('click', randomGame);
 

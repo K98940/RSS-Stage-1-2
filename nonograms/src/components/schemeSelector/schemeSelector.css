@@ -12,3 +12,10 @@
   color: var(--common-text-color);
   background-color: var(--blocks-background);
 }
+
+
+@media (hover: hover) {
+  .scheme-select:hover {
+    cursor: pointer;
+  }
+}
