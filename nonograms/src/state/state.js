@@ -7,6 +7,7 @@ export default {
     showCellsValue: false,
     timer: 0,
     isGameStarted: false,
+    brush: 'fill', // fill | cross
   },
   fields: [],
   html: {},

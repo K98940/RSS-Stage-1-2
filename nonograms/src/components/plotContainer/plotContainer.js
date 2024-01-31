@@ -36,66 +36,74 @@ const contextMenuHandler = (e) => {
   const clickedCell = getClickedCell(e.target);
   if (clickedCell) {
     const cellState = clickedCell.state;
+    checkGameStart();
+
     switch (cellState) {
       case '⚪':
         sndFillCross.play();
         clickedCell.state = 'x';
-        clickedCell.element.classList.toggle('cell_checked');
-        clickedCell.element.classList.remove('cell_fill');
-        checkGameStart();
         break;
       case '⚫':
         sndFillCross.play();
         clickedCell.state = 'x';
-        clickedCell.element.classList.toggle('cell_checked');
-        clickedCell.element.classList.remove('cell_fill');
-        checkGameStart();
         break;
       case 'x':
         sndClear.play();
         clickedCell.state = '⚪';
-        clickedCell.element.classList.toggle('cell_checked');
-        clickedCell.element.classList.remove('cell_fill');
-        checkGameStart();
-        break;
-
-      default:
         break;
     }
+
+    clickedCell.element.classList.toggle('cell_checked');
+    clickedCell.element.classList.remove('cell_fill');
+    checkGameStart();
   }
 };
 
 const clickHandler = (e) => {
+  const { brush } = state.game;
   const clickedCell = getClickedCell(e.target);
+
+  const drawFill = () => {
+    sndFillCell.play();
+    clickedCell.state = '⚫';
+    clickedCell.element.classList.add('cell_fill');
+    clickedCell.element.classList.remove('cell_checked');
+  };
+  const drawCross = () => {
+    sndFillCross.play();
+    clickedCell.state = 'x';
+    clickedCell.element.classList.toggle('cell_checked');
+    clickedCell.element.classList.remove('cell_fill');
+    checkGameStart();
+  };
+  const drawEmpty = () => {
+    sndClear.play();
+    clickedCell.state = '⚪';
+    clickedCell.element.classList.remove('cell_fill');
+    clickedCell.element.classList.remove('cell_checked');
+  };
+
   if (clickedCell) {
     const cellState = clickedCell.state;
     switch (cellState) {
       case '⚪':
-        sndFillCell.play();
-        clickedCell.state = '⚫';
-        clickedCell.element.classList.add('cell_fill');
-        clickedCell.element.classList.remove('cell_checked');
-        checkGameStart();
+        if (brush === 'fill') {
+          drawFill();
+        } else drawCross();
         break;
       case '⚫':
-        sndClear.play();
-        clickedCell.state = '⚪';
-        clickedCell.element.classList.remove('cell_fill');
-        clickedCell.element.classList.remove('cell_checked');
-        checkGameStart();
+        if (brush === 'fill') {
+          drawEmpty();
+        } else drawCross();
         break;
       case 'x':
-        sndFillCell.play();
-        clickedCell.state = '⚫';
-        clickedCell.element.classList.add('cell_fill');
-        clickedCell.element.classList.remove('cell_checked');
-        checkGameStart();
-        break;
-
-      default:
+        if (brush === 'fill') {
+          drawFill();
+        } else drawEmpty();
         break;
     }
 
+    checkGameStart();
     if (isAllCorrectChecked()) setTimeout(() => gameOver(), 0);
   }
 };

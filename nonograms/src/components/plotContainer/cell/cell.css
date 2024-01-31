@@ -15,7 +15,7 @@
 
 .cell_fill[role="game"] {
   background-color: var(--cell-background-fill);
-  border: none;
+  border: 1px solid var(--cell-background-fill);
 }
 
 .cell[role="empty"] {

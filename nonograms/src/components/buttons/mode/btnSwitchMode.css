@@ -1,0 +1,31 @@
+.btn-switch-container {
+  container-name: btn-switch;
+  container-type: inline-size;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  width: 96%;
+  min-height: 1rem;
+
+  margin: 0 auto;
+
+  & span {
+      flex: 1 1 60%;
+      display: none;
+  }
+
+  & svg {
+    flex: 1 1 20%;
+  }
+}
+
+@container btn-switch (min-width: 10rem) {
+  .btn-switch-container {
+    & span {
+      display: inline;
+    }
+  }
+}

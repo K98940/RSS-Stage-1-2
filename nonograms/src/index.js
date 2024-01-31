@@ -11,12 +11,14 @@ import createOptions from './utils/createOptions';
 import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';
 import { gameSelector } from './components/gameSelector/gameSelector';
+import btnSwitchMode from './components/buttons/mode/btnSwitchMode';
 
 function game() {
   initState();
   console.log(state);
   state.html.main = createElement({ tag: 'main', cls: 'main' });
   state.html.main.append(plotContainer());
+  state.html.main.append(btnSwitchMode());
   state.html.root = document.querySelector(':root');
   return state.html.main;
 }
@@ -32,7 +34,8 @@ renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 window.addEventListener('keypress', windowHandle);
 
-// implement "Solution" button
-
 // добавить чекбокс для ПКМ
 // добавить заполнение Х по клику на подсказки
+// добавить иконки на  кнопки
+// добавить чекбокс отключения звуков
+// добавить заполнение "нажал и потащил"

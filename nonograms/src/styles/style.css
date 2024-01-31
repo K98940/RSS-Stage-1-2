@@ -45,17 +45,26 @@ html {
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
   flex: 1 0 auto;
 }
 
 .button {
   color: var(--common-text-color);
-  padding: 0.5rem;
+  padding: 0.2rem 0.3rem;
   border-radius: 0.3rem;
   background-color: var(--blocks-background);
   font-weight: bold;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   user-select: none;
+
+  & svg {
+    width: 2rem;
+    height: auto;
+  }
 }
 
 @media (hover: hover) {
