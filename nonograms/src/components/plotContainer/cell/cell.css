@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
 
   user-select: none;
   background-color: var(--blocks-background);
@@ -63,8 +65,11 @@
 }
 
 @media (hover: hover)  {
-.cell[role="game"]:hover {
+.cell[role="game"]:hover,
+.cell[role="clue"]:hover {
     cursor: pointer;
+  }
+.cell[role="game"]:hover {
     filter: invert(var(--hover-invert));
   }
 }

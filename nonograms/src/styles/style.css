@@ -19,6 +19,8 @@
 
   --border-radius: 0.2rem;
   --btn-icon-hover: rgba(90, 0, 255, 1);
+
+  --cell-size: 2rem;
 }
 
 * {

@@ -7,6 +7,7 @@ import soundFillCross from './sound/soundFillCross.mp3';
 import soundClear from './sound/soundClear.mp3';
 import { saveRecords } from '../../utils/gameRecord';
 import { updateScore } from '../score/score';
+import { updateDesk } from './renderDesk';
 const sndFillCell = new Audio(soundFillCell);
 const sndFillCross = new Audio(soundFillCross);
 const sndClear = new Audio(soundClear);
@@ -28,15 +29,27 @@ const checkGameStart = () => {
 
 const getClickedCell = (target) => {
   const { plot } = state.game;
-  return plot.flat(1).filter((cell) => cell.element === target)[0];
+  let index = null;
+  const cell = plot.flat(1).filter((cell, i) => {
+    if (cell.element === target) {
+      index = i;
+      return true;
+    }
+  })[0];
+
+  return { cell, index };
 };
 
 const contextMenuHandler = (e) => {
   e.preventDefault();
-  const clickedCell = getClickedCell(e.target);
+  const { cell: clickedCell, index } = getClickedCell(e.target);
   if (clickedCell) {
-    const cellState = clickedCell.state;
     checkGameStart();
+    const cellState = clickedCell.state;
+    if (Number.isFinite(cellState)) {
+      markX(clickedCell, index, false);
+      return;
+    }
 
     switch (cellState) {
       case '⚪':
@@ -55,13 +68,12 @@ const contextMenuHandler = (e) => {
 
     clickedCell.element.classList.toggle('cell_checked');
     clickedCell.element.classList.remove('cell_fill');
-    checkGameStart();
   }
 };
 
 const clickHandler = (e) => {
   const { brush } = state.game;
-  const clickedCell = getClickedCell(e.target);
+  const { cell: clickedCell, index } = getClickedCell(e.target);
 
   const drawFill = () => {
     sndFillCell.play();
@@ -74,7 +86,6 @@ const clickHandler = (e) => {
     clickedCell.state = 'x';
     clickedCell.element.classList.toggle('cell_checked');
     clickedCell.element.classList.remove('cell_fill');
-    checkGameStart();
   };
   const drawEmpty = () => {
     sndClear.play();
@@ -84,7 +95,12 @@ const clickHandler = (e) => {
   };
 
   if (clickedCell) {
+    checkGameStart();
     const cellState = clickedCell.state;
+    if (Number.isFinite(cellState)) {
+      markX(clickedCell, index);
+      return;
+    }
     switch (cellState) {
       case '⚪':
         if (brush === 'fill') {
@@ -103,9 +119,41 @@ const clickHandler = (e) => {
         break;
     }
 
-    checkGameStart();
     if (isAllCorrectChecked()) setTimeout(() => gameOver(), 0);
   }
+};
+
+const markX = (cell, indexCell, setMark = true) => {
+  const length = state.game.plot[0].length;
+  let rowClicked = -1;
+  let x = 0;
+  while (x <= indexCell) {
+    rowClicked += 1;
+    x += length;
+  }
+  const columnCliked = indexCell - length * rowClicked;
+
+  state.game.plot.forEach((row, rowIndex) => {
+    row.forEach((cell, columnIndex) => {
+      switch (setMark) {
+        case true:
+          if (
+            (columnCliked === columnIndex || rowClicked === rowIndex) &&
+            cell.state === '⚪'
+          )
+            cell.state = 'x';
+          break;
+        case false:
+          if (
+            (columnCliked === columnIndex || rowClicked === rowIndex) &&
+            cell.state === 'x'
+          )
+            cell.state = '⚪';
+          break;
+      }
+    });
+  });
+  updateDesk();
 };
 
 const isAllCorrectChecked = () => {
