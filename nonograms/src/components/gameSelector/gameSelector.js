@@ -1,5 +1,5 @@
 import state from '../../state/state';
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 import createOptions from '../../utils/createOptions';
 import renderDesk, { updateDesk } from '../plotContainer/renderDesk';
 import { startTimer } from '../timer/timer';

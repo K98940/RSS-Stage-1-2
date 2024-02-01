@@ -1,5 +1,5 @@
 import state from '../../../state/state';
-import createElement from '../../../utils/createElement';
+import { createButton } from '../../../utils/createNode';
 import { switchGame } from '../../gameSelector/gameSelector';
 import renderDesk from '../../plotContainer/renderDesk';
 import { startTimer } from '../../timer/timer';
@@ -7,12 +7,7 @@ import svg from '../../../assets/icons/random.svg';
 import './btnRandom.css';
 
 export default () => {
-  const button = createElement({
-    tag: 'button',
-    txt: 'Random game',
-    cls: 'button btn-random-game',
-    icon: svg,
-  });
+  const button = createButton({ icon: svg, txt: 'Random game' });
   button.addEventListener('click', randomGame);
 
   return button;

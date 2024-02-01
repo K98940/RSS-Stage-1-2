@@ -1,6 +1,6 @@
 import './schemeSelector.css';
 import colorSchemes from '../../assets/schemes/colorSchemes';
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 
 export default () => {
   let options = [];

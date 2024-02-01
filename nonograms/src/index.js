@@ -6,7 +6,7 @@ import initState from './state/initState';
 import renderDesk from './components/plotContainer/renderDesk';
 import windowHandle from './utils/windowHandle';
 import plotContainer from './components/plotContainer/plotContainer';
-import createElement from './utils/createElement';
+import { createElement } from './utils/createNode';
 import createOptions from './utils/createOptions';
 import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';

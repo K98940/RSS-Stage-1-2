@@ -1,4 +1,4 @@
-import createElement from '../../../utils/createElement';
+import { createElement } from '../../../utils/createNode';
 import './cell.css';
 
 export default () => {

@@ -1,6 +1,6 @@
 import './plotContainer.css';
 import state from '../../state/state';
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 import { parseTimer, startTimer } from '../timer/timer';
 import soundFillCell from './sound/soundFillCell.mp3';
 import soundFillCross from './sound/soundFillCross.mp3';

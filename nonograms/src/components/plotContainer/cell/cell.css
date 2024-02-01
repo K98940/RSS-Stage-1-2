@@ -2,8 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--cell-size);
-  height: var(--cell-size);
 
   user-select: none;
   background-color: var(--blocks-background);

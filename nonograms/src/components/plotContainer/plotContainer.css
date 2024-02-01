@@ -3,11 +3,8 @@
 
     display: grid;
     grid-template-columns: repeat(var(--columns-count), 1fr);
-    /* grid-template-rows: 1fr; */
 
-    /* width: clamp(0px, 96%, calc(var(--cell-size) * var(--columns-count))); */
-    /* margin: 0 auto; */
-    /* aspect-ratio: 1/1; */
+    font-size: clamp(14px, 300px / var(--columns-count), 20px);
 
     border: 2px solid var(--border-color);
     border-bottom: none;

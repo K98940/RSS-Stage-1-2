@@ -1,5 +1,5 @@
 import state from '../../state/state';
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 import './timer.css';
 
 export const timer = () => {

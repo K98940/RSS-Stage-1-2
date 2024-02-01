@@ -1,5 +1,5 @@
 import state from '../state/state';
-import createElement from './createElement';
+import { createElement } from './createNode';
 
 export default (select, games) => {
   const options = games.map((game) => {

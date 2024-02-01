@@ -1,7 +1,6 @@
 import state from '../../state/state';
 import getPlot from '../../utils/getPlot';
 import rotateMatrix from '../../utils/rotateMatrix';
-// import btnCavein from '../buttons/cavein/btnCavein';
 import newCell from './cell/newCell';
 
 export default (id = 0) => {
@@ -39,9 +38,6 @@ export default (id = 0) => {
 
   // объеденить подсказки сверху с игровым полем
   const gameDesk = [...clueTop, ...clueLeftAndPlot];
-
-  // const col = clueLeft[0].length;
-  // const row = clueTop.length;
 
   //сформируем элементы игрового поля
   state.html.plotContainer.innerHTML = '';
@@ -82,27 +78,12 @@ export default (id = 0) => {
   setBorders(gameDesk);
   const columnsCount = gameDesk[0].length;
   state.game.plot = gameDesk;
-  // state.html.emptyCell = state.html.plotContainer.children[0];
-  // state.html.emptyCell.style.zIndex = 2;
-
-  // state.html.emptyCell.append(btnCavein());
   state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
-  // state.html.plotContainer.style.setProperty('--row-count', row);
-  // state.html.plotContainer.style.setProperty('--column-count', col);
 };
 
 export const updateDesk = () => {
   //сформируем элементы игрового поля
   const { plot } = state.game;
-
-  // const row = plot.reduce((count, r) => {
-  //   if (r[0].value === '') return count + 1;
-  //   return count;
-  // }, 0);
-  // const col = plot[0].reduce((count, cell) => {
-  //   if (cell.value === '') return count + 1;
-  //   return count;
-  // }, 0);
 
   state.html.plotContainer.innerHTML = '';
   plot.forEach((row, i) => {
@@ -140,13 +121,7 @@ export const updateDesk = () => {
 
   setBorders(plot);
   const columnsCount = plot[0].length;
-  // state.html.emptyCell = state.html.plotContainer.children[0];
-  // state.html.emptyCell.style.zIndex = 2;
-
-  // state.html.emptyCell.append(btnCavein());
   state.html.plotContainer.style.setProperty('--columns-count', columnsCount);
-  // state.html.plotContainer.style.setProperty('--row-count', row);
-  // state.html.plotContainer.style.setProperty('--column-count', col);
 };
 
 const createClueArray = (matrix) => {

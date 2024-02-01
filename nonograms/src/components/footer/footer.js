@@ -1,4 +1,4 @@
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 import btnCavein from '../buttons/cavein/btnCavein';
 import btnLoad from '../buttons/load/btnLoad';
 import btnRandom from '../buttons/random/btnRandom.';

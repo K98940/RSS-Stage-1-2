@@ -1,5 +1,5 @@
 import state from '../../state/state';
-import createElement from '../../utils/createElement';
+import { createElement } from '../../utils/createNode';
 import { getRecords, resetLastGameFlag } from '../../utils/gameRecord';
 import { parseTimer } from '../timer/timer';
 import './score.css';

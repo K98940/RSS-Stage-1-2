@@ -1,5 +1,5 @@
 import state from '../../../state/state';
-import createElement from '../../../utils/createElement';
+import { createElement } from '../../../utils/createNode';
 import svg_cross from '../../../assets/icons/cross.svg';
 import svg_fill from '../../../assets/icons/fill.svg';
 import svgBrush from '../../../assets/icons/brush.svg';
