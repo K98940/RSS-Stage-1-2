@@ -12,6 +12,7 @@ import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';
 import { gameSelector } from './components/gameSelector/gameSelector';
 import btnSwitchMode from './components/buttons/mode/btnSwitchMode';
+import { startRandomSVGanimation } from './utils/animation';
 
 function game() {
   initState();
@@ -32,7 +33,9 @@ document.body.append(footer());
 document.body.append(score());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
+startRandomSVGanimation();
 window.addEventListener('keypress', windowHandle);
 
 // добавить чекбокс отключения звуков
 // добавить заполнение "нажал и потащил"
+// добавить favicon

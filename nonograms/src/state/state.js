@@ -8,6 +8,7 @@ export default {
     timer: 0,
     isGameStarted: false,
     brush: 'fill', // fill | cross
+    animeInterval: 60,
   },
   fields: [],
   html: {},

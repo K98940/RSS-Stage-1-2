@@ -70,6 +70,7 @@ html {
   justify-content: center;
   gap: clamp(5px, 5%, 10px);
 
+  transition-duration: 200ms;
   user-select: none;
   color: var(--common-text-color);
   padding: clamp(4px, 1%, 8px) clamp(5px, 1%, 10px);
@@ -109,5 +110,30 @@ html {
     & svg {
       width: 2rem;
     }
+  }
+}
+
+.animation {
+    animation-name: roll;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: none;
+}
+
+@keyframes roll {
+  0% {
+    fill: var(--border-color);
+  }
+  20% {
+    transform: rotateY(0deg);
+    fill: rgb(var(--color-warning));
+  }
+  80% {
+    transform: rotateY(360deg);
+    fill: rgb(var(--color-warning));
+  }
+  100% {
+    transform: rotateY(360deg);
+    fill: var(--border-color);
   }
 }

@@ -14,7 +14,8 @@ export const timer = () => {
 export const renderTimer = () => {
   let seconds = parseInt(state.game.timer);
   seconds ||= 0;
-  state.html.timer.innerText = parseTimer(seconds);
+  const time = parseTimer(seconds);
+  if (state.html.timer.innerText !== time) state.html.timer.innerText = time;
 };
 
 export const startTimer = (start = true) => {

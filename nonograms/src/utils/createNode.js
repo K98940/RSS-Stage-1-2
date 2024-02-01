@@ -24,8 +24,13 @@ export const createElement = ({
   return element;
 };
 
-export const createButton = ({ icon = null, txt = '', attr = [] }) => {
-  const container = createElement({ cls: 'button-container' });
+export const createButton = ({
+  cls = '',
+  icon = null,
+  txt = '',
+  attr = [],
+}) => {
+  const container = createElement({ cls: `button-container ${cls}` });
   const button = createElement({ tag: 'button', cls: 'button', attr: attr });
 
   if (icon) {
