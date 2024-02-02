@@ -76,7 +76,9 @@ html {
   transition-duration: 200ms;
   user-select: none;
   color: var(--common-text-color);
+  color: inherit;
   padding: clamp(4px, 1%, 8px) clamp(5px, 1%, 10px);
+  border: 2px solid var(--border-color);
   border-radius: 0.3rem;
   background-color: var(--blocks-background);
   font-weight: bold;
@@ -88,16 +90,20 @@ html {
   }
 }
 
+
+
 .gameover {
   pointer-events: none;
   filter: blur(1px) opacity(0.8);
 }
 
 .gameover~footer button[data-role="cavein"],
-.gameover~footer button[data-role="save"] {
+.gameover~footer button[data-role="save"],
+.button_disabled button {
   color: var(--btn-disabled-border);
-  border: 2px solid var(--btn-disabled-border);
   pointer-events: none;
+  border: 2px solid var(--btn-disabled-border);
+  border-radius: 0.3rem;
 
   & svg {
     fill: var(--btn-disabled-border);

@@ -35,4 +35,5 @@ startRandomSVGanimation();
 window.addEventListener('keypress', windowHandle);
 showWelcome();
 
+console.log('STATE', state);
 // Добавить сообщения
