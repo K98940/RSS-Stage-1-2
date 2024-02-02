@@ -1,4 +1,4 @@
-import { switchGame } from '../components/gameSelector/gameSelector';
+import { switchGame } from '../components/header/gameSelector/gameSelector';
 import { updateDesk } from '../components/plotContainer/renderDesk';
 import { startTimer } from '../components/timer/timer';
 import svg_cross from '../assets/icons/cross.svg';

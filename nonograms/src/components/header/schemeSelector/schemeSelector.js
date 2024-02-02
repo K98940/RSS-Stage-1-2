@@ -1,8 +1,9 @@
 import './schemeSelector.css';
-import colorSchemes from '../../assets/schemes/colorSchemes';
-import { createElement } from '../../utils/createNode';
+import colorSchemes from '../../../assets/schemes/colorSchemes';
+import { createElement } from '../../../utils/createNode';
 
 export default () => {
+  createElement;
   let options = [];
   const container = createElement({ cls: 'scheme-container' });
   const label = createElement({

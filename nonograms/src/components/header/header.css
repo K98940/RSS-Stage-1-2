@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.container-game-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}

@@ -1,6 +1,6 @@
 import state from '../../../state/state';
 import { createButton } from '../../../utils/createNode';
-import { switchGame } from '../../gameSelector/gameSelector';
+import { switchGame } from '../../header/gameSelector/gameSelector';
 import renderDesk from '../../plotContainer/renderDesk';
 import { startTimer } from '../../timer/timer';
 import svg from '../../../assets/icons/random.svg';

@@ -8,11 +8,12 @@ import windowHandle from './utils/windowHandle';
 import plotContainer from './components/plotContainer/plotContainer';
 import { createElement } from './utils/createNode';
 import createOptions from './utils/createOptions';
-import schemeSelector from './components/schemeSelector/schemeSelector';
+// import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';
-import { gameSelector } from './components/gameSelector/gameSelector';
+// import { gameSelector } from './components/gameSelector/gameSelector';
 import btnSwitchMode from './components/buttons/mode/btnSwitchMode';
 import { startRandomSVGanimation } from './utils/animation';
+import header from './components/header/header';
 
 function game() {
   initState();
@@ -25,8 +26,9 @@ function game() {
 }
 
 document.body.classList.add('body');
-document.body.append(schemeSelector());
-document.body.append(gameSelector());
+// document.body.append(schemeSelector());
+// document.body.append(gameSelector());
+document.body.append(header());
 document.body.append(timer());
 document.body.append(game());
 document.body.append(footer());
@@ -39,3 +41,5 @@ window.addEventListener('keypress', windowHandle);
 // добавить чекбокс отключения звуков
 // добавить заполнение "нажал и потащил"
 // добавить favicon
+// добавить в консоль руководство пользователя и чит код для проверки
+// Добавить сообщения
