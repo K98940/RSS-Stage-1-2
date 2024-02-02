@@ -37,3 +37,4 @@ showWelcome();
 
 // добавить favicon
 // Добавить сообщения
+// Save game не должна быть активна при gameover

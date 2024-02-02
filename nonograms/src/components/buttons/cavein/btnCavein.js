@@ -18,6 +18,7 @@ const clickCavein = () => {
   state.game.isGameStarted = false;
   startTimer(false);
   const opacity = '1';
+  state.game.showCellsValue = true;
   state.html.root.style.setProperty('--opacity-cell-text', opacity);
   state.html.main.classList.add('gameover');
 };
