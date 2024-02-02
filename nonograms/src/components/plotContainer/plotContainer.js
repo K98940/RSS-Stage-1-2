@@ -11,6 +11,8 @@ import { updateDesk } from './renderDesk';
 const sndFillCell = new Audio(soundFillCell);
 const sndFillCross = new Audio(soundFillCross);
 const sndClear = new Audio(soundClear);
+state.html.sounds = [];
+state.html.sounds.push(sndFillCell, sndFillCross, sndClear);
 
 export default () => {
   const container = createElement({ tag: 'div', cls: 'game-container' });

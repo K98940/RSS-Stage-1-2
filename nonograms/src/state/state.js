@@ -9,6 +9,7 @@ export default {
     isGameStarted: false,
     brush: 'fill', // fill | cross
     animeInterval: 60,
+    soundVolume: 0.5,
   },
   fields: [],
   html: {},

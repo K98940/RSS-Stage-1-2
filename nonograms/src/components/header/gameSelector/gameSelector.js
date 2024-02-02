@@ -6,7 +6,7 @@ import { startTimer } from '../../timer/timer';
 import './gameSelector.css';
 
 export const gameSelector = () => {
-  const header = createElement({ tag: 'header', cls: 'header' });
+  const header = createElement({ cls: 'container-game-select' });
   const form = createElement({ tag: 'form', cls: 'form' });
   const gameSelectContainer = createElement({ cls: 'game-select' });
 

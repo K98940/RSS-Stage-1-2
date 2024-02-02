@@ -1,7 +1,6 @@
-.header {
+.container-game-select {
   flex: 0 0 auto;
-  width: 100%;
-  border-bottom: 1px solid var(--border-color);
+  width: var(--container-width);
 }
 
 .form {
@@ -9,7 +8,6 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 0 1rem 0.5rem;
 }
 
 .game-select {
@@ -23,9 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: clamp(1rem, 100%, 25rem);
+  width: 100%;
   gap: 0.25rem;
   padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
 
   & .fieldset_label {

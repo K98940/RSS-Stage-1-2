@@ -4,11 +4,21 @@
   justify-content: flex-start;
   align-items: center;
   flex: 0 0 auto;
+  width: 100%;
+  padding-bottom: 0.5rem;
+
+  border-bottom: 1px solid var(--border-color);
 }
 
 .container-game-options {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+
+  width: var(--container-width);
+  padding: 0.3rem 0.5rem;
+
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
 }
