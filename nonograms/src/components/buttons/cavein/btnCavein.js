@@ -8,6 +8,7 @@ export default () => {
   const btn = createButton({
     txt: 'Solution',
     icon: svg,
+    attr: [['data-role', 'cavein']],
   });
   btn.addEventListener('click', clickCavein);
   return btn;

@@ -36,4 +36,3 @@ window.addEventListener('keypress', windowHandle);
 showWelcome();
 
 // Добавить сообщения
-// Save game не должна быть активна при gameover

@@ -19,7 +19,9 @@
 
   --border-radius: 0.2rem;
   --btn-icon-hover: rgba(90, 0, 255, 1);
-  --container-width: clamp(1rem, 100%, 25rem)
+  --container-width: clamp(1rem, 100%, 25rem);
+
+  --btn-disabled-border: rgb(170, 170, 170);
 }
 
 * {
@@ -89,6 +91,17 @@ html {
 .gameover {
   pointer-events: none;
   filter: blur(1px) opacity(0.8);
+}
+
+.gameover~footer button[data-role="cavein"],
+.gameover~footer button[data-role="save"] {
+  color: var(--btn-disabled-border);
+  border: 2px solid var(--btn-disabled-border);
+  pointer-events: none;
+
+  & svg {
+    fill: var(--btn-disabled-border);
+  }
 }
 
 @media (hover: hover) {

@@ -7,6 +7,7 @@ export default () => {
   const btnSave = createButton({
     txt: 'Save game',
     icon: svg,
+    attr: [['data-role', 'save']],
   });
   btnSave.addEventListener('click', saveState);
   return btnSave;
