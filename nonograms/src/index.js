@@ -8,16 +8,14 @@ import windowHandle from './utils/windowHandle';
 import plotContainer from './components/plotContainer/plotContainer';
 import { createElement } from './utils/createNode';
 import createOptions from './utils/createOptions';
-// import schemeSelector from './components/schemeSelector/schemeSelector';
 import { score } from './components/score/score';
-// import { gameSelector } from './components/gameSelector/gameSelector';
 import btnSwitchMode from './components/buttons/mode/btnSwitchMode';
 import { startRandomSVGanimation } from './utils/animation';
 import header from './components/header/header';
+import showWelcome from './utils/showWelcome';
 
 function game() {
   initState();
-  console.log(state);
   state.html.main = createElement({ tag: 'main', cls: 'main' });
   state.html.main.append(plotContainer());
   state.html.main.append(btnSwitchMode());
@@ -26,8 +24,6 @@ function game() {
 }
 
 document.body.classList.add('body');
-// document.body.append(schemeSelector());
-// document.body.append(gameSelector());
 document.body.append(header());
 document.body.append(timer());
 document.body.append(game());
@@ -37,9 +33,7 @@ renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 startRandomSVGanimation();
 window.addEventListener('keypress', windowHandle);
+showWelcome();
 
-// добавить чекбокс отключения звуков
-// добавить заполнение "нажал и потащил"
 // добавить favicon
-// добавить в консоль руководство пользователя и чит код для проверки
 // Добавить сообщения

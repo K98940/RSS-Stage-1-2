@@ -42,6 +42,7 @@
 }
 
 .game-select_selector {
+  font-size: 1rem;
   color: var(--common-text-color);
   background-color: var(--blocks-background);
 }

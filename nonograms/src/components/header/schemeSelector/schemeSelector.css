@@ -1,4 +1,5 @@
 .scheme-select {
+  font-size: 1rem;
   margin-left: 0.5rem;
   color: var(--common-text-color);
   background-color: var(--blocks-background);

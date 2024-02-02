@@ -23,7 +23,6 @@ const muteSoundClick = () => {
   if (volume > 0) {
     state.game.soundVolume = 0;
     state.html.soundIcon.innerHTML = svgSoundOFF;
-    console.log('state.html.sounds', state.html.sounds);
     state.html.sounds.forEach((sound) => (sound.volume = 0));
   }
   if (volume === 0) {
