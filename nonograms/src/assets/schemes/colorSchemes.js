@@ -6,7 +6,7 @@ export default [
       'body-bacground': 'rgb(230, 255, 230)',
       'blocks-background': 'rgb(231, 255, 255)',
       'cell-background': 'rgb(240, 240, 240)',
-      'cell-background-fill': 'rgb(0, 0, 0)',
+      'cell-background-fill': 'rgb(90, 0, 255)',
       'cell-border-color': 'rgb(200, 200, 200)',
       'border-color': 'rgb(0, 0, 0)',
       'score-lastgame': 'rgb(165, 245, 140)',
@@ -15,6 +15,7 @@ export default [
       'score-shadow': 'rgb(125, 125, 125)',
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(90, 0, 255, 1)',
+      'btn-disabled-border': 'rgb(170, 170, 170)',
     },
   },
   {
@@ -33,6 +34,7 @@ export default [
       'score-shadow': 'rgb(0, 0, 0)',
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(160, 160, 40, 1)',
+      'btn-disabled-border': 'rgb(20, 20, 20)',
     },
   },
   {
@@ -42,7 +44,7 @@ export default [
       'body-bacground': 'rgb(230, 230, 230)',
       'blocks-background': 'rgb(255, 255, 255)',
       'cell-background': 'rgb(240, 240, 240)',
-      'cell-background-fill': 'rgb(90, 90, 90)',
+      'cell-background-fill': 'rgb(40, 70, 120)',
       'cell-border-color': 'rgb(200, 200, 200)',
       'border-color': 'rgb(140, 140, 140)',
       'score-lastgame': 'rgb(255, 220, 220)',
@@ -51,6 +53,7 @@ export default [
       'score-shadow': 'rgb(150, 150, 150)',
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(40, 70, 120, 1)',
+      'btn-disabled-border': 'rgb(200, 180, 180)',
     },
   },
 ];
