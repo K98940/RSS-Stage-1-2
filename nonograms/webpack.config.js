@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'nonograms',
+      favicon: './src/favicon.webp',
     }),
   ],
   output: {
