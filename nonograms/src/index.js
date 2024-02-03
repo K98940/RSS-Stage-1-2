@@ -13,6 +13,7 @@ import btnSwitchMode from './components/buttons/mode/btnSwitchMode';
 import { startRandomSVGanimation } from './utils/animation';
 import header from './components/header/header';
 import showWelcome from './utils/showWelcome';
+import { initNotice } from './components/notice/showNotice';
 
 function game() {
   initState();
@@ -24,16 +25,10 @@ function game() {
 }
 
 document.body.classList.add('body');
-document.body.append(header());
-document.body.append(timer());
-document.body.append(game());
-document.body.append(footer());
-document.body.append(score());
+document.body.append(header(), timer(), game(), footer(), score());
 renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 startRandomSVGanimation();
 window.addEventListener('keypress', windowHandle);
-// showWelcome();
-
-console.log('STATE', state);
-// Добавить сообщения
+showWelcome();
+initNotice();

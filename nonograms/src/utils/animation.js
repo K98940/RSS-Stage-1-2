@@ -8,9 +8,6 @@ export const startRandomSVGanimation = () => {
     const { icons } = state.html;
     const count = state.html.icons.length;
     const random = Math.round(Math.random() * (count - 1));
-    const error = 'random должен быть меньше count';
-    console.assert(random < count, { random, count, error });
-
     icons[random].classList.toggle('animation');
   }, state.game.animeInterval * 1000);
 };

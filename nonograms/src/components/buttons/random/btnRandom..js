@@ -22,9 +22,6 @@ const randomGame = () => {
   }
 
   const randomID = Math.round(Math.random() * (countGames - 1));
-  const error = 'randomID должен быть меньше countGames';
-  console.assert(randomID < countGames, { randomID, countGames, error });
-
   state.game.currentGame = randomID;
   renderDesk(randomID);
   switchGame(randomID);

@@ -1,27 +1,26 @@
 :root {
   --opacity-cell-text: 0;
   --hover-invert: 0.2;
-
   --body-bacground: rgb(230, 255, 230);
   --blocks-background: rgb(231, 255, 255);
-
   --cell-background: rgb(240, 240, 240);
   --cell-background-fill: rgb(90, 0, 255);
   --cell-border-color: rgb(200, 200, 200);
-
   --border-color: rgb(0, 0, 0);
   --score-lastgame: rgb(165, 245, 140);
   --common-text-color: rgb(0, 0, 0);
   --score-shadow: rgb(125, 125, 125);
-
   --color-warning: 255, 80, 80;
   --color-warning-shadow: 0, 0, 0;
-
   --border-radius: 0.2rem;
   --btn-icon-hover: rgba(90, 0, 255, 1);
   --container-width: clamp(1rem, 100%, 25rem);
-
   --btn-disabled-border: rgb(170, 170, 170);
+
+  --notice-background: rgba(90, 0, 255);
+  --notice-text-color: rgb(255, 255, 255);
+  --notice-background-error: rgba(255, 174, 0);
+  --notice-text-color-error: rgb(0, 0, 0);
 }
 
 * {

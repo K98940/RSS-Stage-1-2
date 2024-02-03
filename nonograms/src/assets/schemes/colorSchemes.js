@@ -16,6 +16,10 @@ export default [
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(90, 0, 255, 1)',
       'btn-disabled-border': 'rgb(170, 170, 170)',
+      'notice-background': 'rgba(90, 0, 255)',
+      'notice-text-color': 'rgb(255, 255, 255)',
+      'notice-background-error': 'rgba(255, 174, 0)',
+      'notice-text-color-error': 'rgb(0, 0, 0)',
     },
   },
   {
@@ -35,6 +39,10 @@ export default [
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(160, 160, 40, 1)',
       'btn-disabled-border': 'rgb(20, 20, 20)',
+      'notice-background': 'rgba(40, 0, 110)',
+      'notice-text-color': 'rgb(200, 200, 200)',
+      'notice-background-error': 'rgba(180, 80, 80)',
+      'notice-text-color-error': 'rgb(240, 240, 240)',
     },
   },
   {
@@ -54,6 +62,9 @@ export default [
       'color-warning': '255, 80, 80',
       'btn-icon-hover': 'rgba(40, 70, 120, 1)',
       'btn-disabled-border': 'rgb(200, 180, 180)',
+      'notice-background': 'rgba(40, 70, 120)',
+      'notice-background-error': 'rgba(255, 170, 170)',
+      'notice-text-color-error': 'rgb(0, 0, 0)',
     },
   },
 ];

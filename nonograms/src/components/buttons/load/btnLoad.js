@@ -1,5 +1,5 @@
 import { createButton } from '../../../utils/createNode';
-import { checkSavedGame, loadState } from '../../../utils/localStorage';
+import { isSavedGame, loadState } from '../../../utils/localStorage';
 import svg from '../../../assets/icons/load.svg';
 import './btnLoad.css';
 import state from '../../../state/state';
@@ -12,6 +12,10 @@ export default () => {
   });
   state.html.btnLoad = btnLoad;
   btnLoad.firstElementChild.addEventListener('click', loadState);
-  checkSavedGame();
+  if (isSavedGame()) {
+    state.html.btnLoad.classList.remove('button_disabled');
+  } else {
+    state.html.btnLoad.classList.add('button_disabled');
+  }
   return btnLoad;
 };

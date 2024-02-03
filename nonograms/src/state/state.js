@@ -10,6 +10,7 @@ export default {
     brush: 'fill', // fill | cross
     animeInterval: 60,
     soundVolume: 0.5,
+    noticeDelay: 2000,
   },
   fields: [],
   html: {},
