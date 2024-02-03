@@ -1,7 +1,8 @@
 import './plotContainer.css';
 import state from '../../state/state';
 import { createElement } from '../../utils/createNode';
-import { parseTimer, startTimer } from '../timer/timer';
+import { startTimer } from '../timer/timer';
+// import { parseTimer, startTimer } from '../timer/timer';
 import soundFillCell from './sound/soundFillCell.mp3';
 import soundFillCross from './sound/soundFillCross.mp3';
 import soundClear from './sound/soundClear.mp3';
@@ -168,9 +169,10 @@ const isAllCorrectChecked = () => {
 };
 
 const gameOver = () => {
-  const msg = `Great! You have solved the nonogram in ${parseTimer(
-    state.game.timer
-  )} seconds!`;
+  const msg = `Great! You have solved the nonogram in ${state.game.timer} seconds!`;
+  // const msg = `Great! You have solved the nonogram in ${parseTimer(
+  //   state.game.timer
+  // )} seconds!`;
   saveRecords();
   updateScore(msg);
   state.html.score.classList.add('score_show');
