@@ -10,7 +10,7 @@ export default () => {
     txt: 'Reset game',
     icon: svg,
   });
-  btnReset.addEventListener('click', resetGame);
+  btnReset.firstElementChild.addEventListener('click', resetGame);
   return btnReset;
 };
 

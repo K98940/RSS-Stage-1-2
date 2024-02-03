@@ -6,7 +6,8 @@ import svg_fill from '../assets/icons/fill.svg';
 
 import state from '../state/state';
 
-export const saveState = () => {
+export const saveState = (e) => {
+  console.log('e.target', e.target);
   const { game } = state;
   localStorage.setItem(state.lsKeyState, JSON.stringify(game));
   checkSavedGame();

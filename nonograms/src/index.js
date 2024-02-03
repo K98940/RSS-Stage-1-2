@@ -33,7 +33,7 @@ renderDesk(0);
 createOptions(state.html.gameSelect, state.fields['5x5']);
 startRandomSVGanimation();
 window.addEventListener('keypress', windowHandle);
-showWelcome();
+// showWelcome();
 
 console.log('STATE', state);
 // Добавить сообщения

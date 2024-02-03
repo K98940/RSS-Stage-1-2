@@ -9,6 +9,6 @@ export default () => {
     icon: svg,
     attr: [['data-role', 'save']],
   });
-  btnSave.addEventListener('click', saveState);
+  btnSave.firstElementChild.addEventListener('click', saveState);
   return btnSave;
 };

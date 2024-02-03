@@ -11,8 +11,7 @@ export default () => {
     icon: svg,
   });
   state.html.btnLoad = btnLoad;
-
-  btnLoad.addEventListener('click', loadState);
+  btnLoad.firstElementChild.addEventListener('click', loadState);
   checkSavedGame();
   return btnLoad;
 };

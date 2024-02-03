@@ -8,7 +8,7 @@ import './btnRandom.css';
 
 export default () => {
   const button = createButton({ icon: svg, txt: 'Random game' });
-  button.addEventListener('click', randomGame);
+  button.firstElementChild.addEventListener('click', randomGame);
 
   return button;
 };

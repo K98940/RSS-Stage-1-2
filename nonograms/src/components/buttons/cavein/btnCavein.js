@@ -10,7 +10,7 @@ export default () => {
     icon: svg,
     attr: [['data-role', 'cavein']],
   });
-  btn.addEventListener('click', clickCavein);
+  btn.firstElementChild.addEventListener('click', clickCavein);
   return btn;
 };
 
