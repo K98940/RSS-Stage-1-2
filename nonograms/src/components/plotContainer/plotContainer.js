@@ -47,13 +47,13 @@ const contextMenuHandler = (e) => {
   e.preventDefault();
   const { cell: clickedCell, index } = getClickedCell(e.target);
   if (clickedCell) {
-    checkGameStart();
     const cellState = clickedCell.state;
     if (Number.isFinite(cellState)) {
       markX(clickedCell, index, false);
       return;
     }
 
+    checkGameStart();
     switch (cellState) {
       case '⚪':
         sndFillCross.play();
@@ -98,12 +98,13 @@ const clickHandler = (e) => {
   };
 
   if (clickedCell) {
-    checkGameStart();
     const cellState = clickedCell.state;
     if (Number.isFinite(cellState)) {
       markX(clickedCell, index);
       return;
     }
+
+    checkGameStart();
     switch (cellState) {
       case '⚪':
         if (brush === 'fill') {

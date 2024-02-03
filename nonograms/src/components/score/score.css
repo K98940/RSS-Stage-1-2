@@ -14,7 +14,7 @@
 }
 
 .container {
-  --w : clamp(10rem, 90%, 25rem);
+  --w : clamp(10rem, 90%, 35rem);
   position: fixed;
   z-index: 2;
   top: 2rem;
