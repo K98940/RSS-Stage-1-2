@@ -6,12 +6,14 @@ import { startTimer } from '../timer/timer';
 import soundFillCell from './sound/soundFillCell.mp3';
 import soundFillCross from './sound/soundFillCross.mp3';
 import soundClear from './sound/soundClear.mp3';
+import soundWin from './sound/win.mp3';
 import { saveRecords } from '../../utils/gameRecord';
 import { updateScore } from '../score/score';
 import { updateDesk } from './renderDesk';
 const sndFillCell = new Audio(soundFillCell);
 const sndFillCross = new Audio(soundFillCross);
 const sndClear = new Audio(soundClear);
+const sndWin = new Audio(soundWin);
 state.html.sounds = [];
 state.html.sounds.push(sndFillCell, sndFillCross, sndClear);
 
@@ -170,6 +172,7 @@ const isAllCorrectChecked = () => {
 };
 
 const gameOver = () => {
+  sndWin.play();
   const msg = `Great! You have solved the nonogram in ${state.game.timer} seconds!`;
   // const msg = `Great! You have solved the nonogram in ${parseTimer(
   //   state.game.timer
@@ -178,7 +181,7 @@ const gameOver = () => {
   updateScore(msg);
   state.html.score.classList.add('score_show');
 
-  state.game.timer = 0;
+  // state.game.timer = 0;
   state.html.main.classList.add('gameover');
   startTimer(false);
 };
