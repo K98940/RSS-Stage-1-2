@@ -15,7 +15,7 @@ const sndFillCross = new Audio(soundFillCross);
 const sndClear = new Audio(soundClear);
 const sndWin = new Audio(soundWin);
 state.html.sounds = [];
-state.html.sounds.push(sndFillCell, sndFillCross, sndClear);
+state.html.sounds.push(sndFillCell, sndFillCross, sndClear, sndWin);
 
 export default () => {
   const container = createElement({ tag: 'div', cls: 'game-container' });
