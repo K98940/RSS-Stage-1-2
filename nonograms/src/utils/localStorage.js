@@ -11,10 +11,10 @@ export const saveState = () => {
   localStorage.setItem(state.lsKeyState, JSON.stringify(game));
   if (isSavedGame()) {
     state.html.btnLoad.classList.remove('button_disabled');
-    showNotice('Игра сохранена');
+    showNotice('Game saved');
   } else {
     state.html.btnLoad.classList.add('button_disabled');
-    showNotice('Игра не сохранена', true);
+    showNotice('The game is not saved', true);
   }
 };
 
@@ -33,10 +33,10 @@ export const loadState = () => {
       if (state.game.brush === 'fill') {
         state.html.iconBrushMode.innerHTML = svg_fill;
       } else state.html.iconBrushMode.innerHTML = svg_cross;
-      showNotice('Игра загружена');
+      showNotice(`Game's loaded`);
     } else {
       state.html.btnLoad.classList.add('button_disabled');
-      showNotice('Нет сохранённых игр', true);
+      showNotice('No saved games', true);
     }
   } catch (error) {
     console.error('ошибка при загрузке игры из localStorage:', error);

@@ -8,7 +8,7 @@ export default () => {
   const container = createElement({ cls: 'scheme-container' });
   const label = createElement({
     tag: 'label',
-    txt: 'Цветовая схема',
+    txt: 'color theme',
     attr: [['for', 'scheme_select']],
   });
   const select = createElement({

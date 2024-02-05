@@ -27,7 +27,18 @@ export const updateScore = (msg) => {
   state.html.score.append(h1);
   state.html.scoreH1 = h1;
   const records = getContainerRecords();
-  records && state.html.score.append(...records);
+  if (records) {
+    const footer = createElement({ tag: 'footer', cls: 'score-footer' });
+    const icon = createElement({ tag: 'span', cls: 'score-footer__icon' });
+    const text = createElement({
+      tag: 'span',
+      cls: 'score-footer__text',
+      txt: 'last saved game',
+    });
+    footer.append(icon, text);
+    state.html.score.append(records);
+    state.html.score.append(footer);
+  }
 };
 
 const clickHandle = () => {
@@ -37,29 +48,28 @@ const clickHandle = () => {
 
 const getContainerRecords = () => {
   const records = getRecords();
+  if (records.length === 0) return '';
 
-  const difficultyList = Object.keys(state.fields);
-  const tables = difficultyList.map((dif) => {
-    const rec = records.filter((r) => r.difficulty === dif).reverse();
-    if (rec.length === 0) return '';
-    const container = createElement({ cls: 'container__records' });
-    container.append(createElement({ txt: 'игра' }));
-    container.append(createElement({ txt: 'сложн.' }));
-    container.append(createElement({ txt: 'время' }));
-    rec.splice(5);
-    const sorted = rec.sort((a, b) => a.timer - b.timer);
-    sorted.forEach((r, i) => {
-      const style = r.lastGame ? 'record_last-game' : '';
-      container.append(
-        createElement({ txt: `${i + 1}. ${r.name}`, cls: style })
-      );
-      container.append(createElement({ txt: r.difficulty, cls: style }));
-      container.append(createElement({ txt: parseTimer(r.timer), cls: style }));
-    });
+  const lastGames = [...records];
+  lastGames.sort((a, b) => b.id - a.id).splice(5);
+  lastGames.sort((a, b) => a.timer - b.timer);
 
-    return container;
+  const container = createElement({ cls: 'container__records' });
+  container.append(createElement({ txt: 'Title' }));
+  container.append(createElement({ txt: 'Size' }));
+  container.append(createElement({ txt: 'Time 🛆' }));
+
+  lastGames.forEach((record, i) => {
+    const style = record.lastGame ? 'record_last-game' : '';
+    container.append(
+      createElement({ txt: `${i + 1}. ${record.name}`, cls: style })
+    );
+    container.append(createElement({ txt: record.difficulty, cls: style }));
+    container.append(
+      createElement({ txt: parseTimer(record.timer), cls: style })
+    );
   });
 
   resetLastGameFlag(records);
-  return tables;
+  return container;
 };

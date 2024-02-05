@@ -18,12 +18,12 @@ export const gameSelector = () => {
   const legend = createElement({
     tag: 'legend',
     cls: 'fieldset_legend',
-    txt: 'сложность',
+    txt: 'size',
   });
 
   const gameSelectLabel = createElement({
     tag: 'label',
-    txt: 'Выбор игры',
+    txt: 'title',
     attr: [['for', 'game-select']],
   });
   const gameSelect = createElement({

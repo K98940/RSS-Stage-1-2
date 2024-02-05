@@ -11,14 +11,16 @@ export const getRecords = () => {
 };
 
 export const saveRecords = () => {
+  const oldRecords = getRecords();
+  const lastRecord = oldRecords.length;
   const record = {
+    id: lastRecord,
     name: state.game.currentGameName,
     difficulty: state.game.difficulty,
     timer: state.game.timer,
     lastGame: true,
   };
 
-  const oldRecords = getRecords();
   const newRecords = [...oldRecords, record];
   const data = JSON.stringify(newRecords);
   localStorage.setItem(state.lsKeyRecords, data);

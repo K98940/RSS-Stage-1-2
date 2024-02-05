@@ -1,6 +1,6 @@
 export default [
   {
-    title: 'цветная',
+    title: 'light green',
     name: 'color',
     colors: {
       'body-bacground': 'rgb(230, 255, 230)',
@@ -23,7 +23,7 @@ export default [
     },
   },
   {
-    title: 'тёмная',
+    title: 'dark',
     name: 'dark',
     colors: {
       'body-bacground': 'rgb(50, 50, 50)',
@@ -46,7 +46,7 @@ export default [
     },
   },
   {
-    title: 'светлая',
+    title: 'light',
     name: 'light',
     colors: {
       'body-bacground': 'rgb(230, 230, 230)',

@@ -1,7 +1,7 @@
 export default () => {
-  console.clear();
   console.log(
-    'Привет!%cДля облегчения проверки конечно же есть кое-что. Клавиша\n %c H \n%cнажатая на клавиатуре покажет / скроет подсказку',
+    '%cПривет!%cДля облегчения проверки конечно же есть кое-что. Клавиша\n %c H \n%cнажатая на клавиатуре покажет / скроет подсказку',
+    'font-size: 14px; font-weight: 700; background-color: black; color: white; padding: 8px 20px; border: 1px solid yellow; border-radius: 10px',
     'background-color: transparent; padding: 8px 4px',
     'background-color: #555555; color: #ffff00; line-height: 26px; font-size: 20px',
     'background-color: transparent; padding: 8px 4px; font-size: 12px'
