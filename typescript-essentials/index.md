@@ -6,6 +6,7 @@
 4. **Develop typed functions by using TypeScript**: [badge](https://learn.microsoft.com/api/achievements/share/en-us/K98940/VKYJ4UPM?sharingId=220BBAB425956B74)
 5. **Declare and instantiate classes in TypeScript**: [badge](https://learn.microsoft.com/api/achievements/share/en-us/K98940/9NSAXGNU?sharingId=220BBAB425956B74)
 6. **Define generics in TypeScript**: [badge](https://learn.microsoft.com/api/achievements/share/en-us/K98940/9NS2QQ4U?sharingId=220BBAB425956B74)
+7. **Access external libraries from TypeScript**: [badge](https://learn.microsoft.com/api/achievements/share/en-us/K98940/X23DE42Y?sharingId=220BBAB425956B74)
 
 ## Reflections
 
@@ -15,3 +16,4 @@
 4. Now I can use Type and Interface for my functions.
 5. It was really exciting. I hope that, over time, I will understand it better.
 6. The level of misunderstanding is close to critical.
+7. Lastly, an easy subject comes after generic.
