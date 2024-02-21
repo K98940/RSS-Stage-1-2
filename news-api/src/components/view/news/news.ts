@@ -1,20 +1,5 @@
 import './news.css';
-
-type SourceType = {
-    id: string;
-    name: string;
-};
-
-interface INews {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    source: SourceType;
-    title: string;
-    url: string;
-    urlToImage: string;
-}
+import { INews } from '../../../types/types';
 
 class News {
     draw(data: INews[]) {
