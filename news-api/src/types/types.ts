@@ -3,7 +3,7 @@ type SourceType = {
     name: string;
 };
 
-export interface INews {
+export interface Articles {
     author: string;
     content: string;
     description: string;
@@ -14,7 +14,7 @@ export interface INews {
     urlToImage: string;
 }
 
-export interface ISource {
+export interface ISources {
     category: string;
     country: string;
     description: string;
@@ -22,4 +22,10 @@ export interface ISource {
     language: string;
     name: string;
     url: string;
+}
+
+export interface INews {
+    articles: Articles[];
+    status: string;
+    totalResults: number;
 }

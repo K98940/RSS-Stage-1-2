@@ -1,8 +1,8 @@
 import './sources.css';
-import { ISource } from '../../../types/types';
+import { ISources } from '../../../types/types';
 
 class Sources {
-    draw(data: ISource[]) {
+    draw(data: ISources[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
         if (!sourceItemTemp) throw new Error('error Sources');
