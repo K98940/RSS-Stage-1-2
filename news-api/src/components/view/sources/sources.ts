@@ -1,5 +1,5 @@
 import './sources.css';
-import { ISources, isDocumentFragment } from '../../../types/types';
+import { ISources, getHTMLElement, isDocumentFragment } from '../../../types/types';
 
 class Sources {
   draw(data: ISources[]) {
@@ -12,15 +12,9 @@ class Sources {
 
     data.forEach((item) => {
       const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
-      if (!isDocumentFragment(sourceClone)) {
-        console.error('error sourceClone', sourceClone);
-        return;
-      }
-
-      const itemName: HTMLSpanElement | null = sourceClone.querySelector('.source__item-name');
-      itemName && (itemName.textContent = item.name);
-      sourceClone.querySelector('.source__item')?.setAttribute('data-source-id', item.id);
-
+      if (!isDocumentFragment(sourceClone)) throw Error();
+      getHTMLElement(sourceClone, '.source__item-name').textContent = item.name;
+      getHTMLElement(sourceClone, '.source__item').setAttribute('data-source-id', item.id);
       fragment.append(sourceClone);
     });
 
