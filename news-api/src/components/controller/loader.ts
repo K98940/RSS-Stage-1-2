@@ -1,10 +1,11 @@
 type Param = {
   endpoint: string;
-  options: Option;
+  options?: Option;
 };
 
 type Option = {
   apiKey?: string;
+  sources?: string;
 };
 
 class Loader {
