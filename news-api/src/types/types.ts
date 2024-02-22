@@ -1,31 +1,35 @@
 type SourceType = {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 };
 
 export interface Articles {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    source: SourceType;
-    title: string;
-    url: string;
-    urlToImage: string;
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: SourceType;
+  title: string;
+  url: string;
+  urlToImage: string;
 }
 
 export interface ISources {
-    category: string;
-    country: string;
-    description: string;
-    id: string;
-    language: string;
-    name: string;
-    url: string;
+  category: string;
+  country: string;
+  description: string;
+  id: string;
+  language: string;
+  name: string;
+  url: string;
 }
 
 export interface INews {
-    articles: Articles[];
-    status: string;
-    totalResults: number;
+  articles: Articles[];
+  status: string;
+  totalResults: number;
+}
+
+export function isDocumentFragment(node: unknown): node is DocumentFragment {
+  return node instanceof DocumentFragment;
 }
