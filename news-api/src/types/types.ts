@@ -1,3 +1,8 @@
+export interface DataSources {
+  sources: ISources[];
+  status: string;
+}
+
 type SourceType = {
   id: string;
   name: string;

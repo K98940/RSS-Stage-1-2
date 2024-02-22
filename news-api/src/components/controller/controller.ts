@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { DataSources, INews } from '../../types/types';
 import AppLoader from './appLoader';
 
-type x = {
-  endpoint: string;
-  cb: () => void;
-};
-
 class AppController extends AppLoader {
-  getSources(callback: () => void) {
+  getSources(callback: (data?: DataSources) => void) {
     super.getResp(
       {
         endpoint: 'sources',
@@ -17,7 +11,7 @@ class AppController extends AppLoader {
     );
   }
 
-  getNews(e: PointerEvent, callback: () => void) {
+  getNews(e: Event, callback: (data?: INews) => void) {
     let target = e.target as Element;
     const newsContainer = e.currentTarget as Element;
 
