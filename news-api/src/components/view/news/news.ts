@@ -1,5 +1,7 @@
 import './news.css';
-import { Articles, getHTMLElement, isDocumentFragment } from '../../../types/types';
+import { Articles } from '../../../types/types';
+import { isDocumentFragment } from '../../../utils/assertions';
+import { getHTMLElement } from '../../../utils/dom';
 
 class News {
   draw(data: Articles[]) {

@@ -1,6 +1,9 @@
 body {
-    color: #fff;
-    background: #17181c;
+  --color-background: #17181c;
+  --color: #fff;
+
+    color: var(--color);
+    background: var(--color-background);
     font-family: sans-serif;
 }
 

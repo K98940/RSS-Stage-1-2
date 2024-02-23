@@ -34,21 +34,3 @@ export interface INews {
   status: string;
   totalResults: number;
 }
-
-export function isDocumentFragment(node: Node): node is DocumentFragment {
-  if (!(node instanceof DocumentFragment)) {
-    console.warn('node instance of ', node.constructor.name);
-    throw Error(node + 'is not instanceof DocumentFragment');
-  }
-  return node instanceof DocumentFragment;
-}
-
-export function getHTMLElement(node: Node, query: string): HTMLElement {
-  if (!(node instanceof DocumentFragment)) {
-    console.warn('node instance of ', node.constructor.name);
-    throw Error(node + 'is not instanceof DocumentFragment');
-  }
-  const elem: HTMLElement | null = node.querySelector(query);
-  if (!elem) throw Error(`${query} not found`);
-  return elem;
-}

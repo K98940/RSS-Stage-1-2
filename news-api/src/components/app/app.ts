@@ -11,14 +11,26 @@ class App {
   }
 
   start() {
-    const sources = document.querySelector('.sources');
-    sources &&
-      sources.addEventListener('click', (e) =>
-        this.controller.getNews(e, (data) => {
-          data && this.view.drawNews(data);
-        })
-      );
-    this.controller.getSources((data) => data && this.view.drawSources(data));
+    // const sources = document.querySelector('.sources');
+    // sources &&
+    //   sources.addEventListener('click', (e) =>
+    //     this.controller.getNews(e, (data) => {
+    //       data && this.view.drawNews(data);
+    //     })
+    //   );
+
+    this.controller.getSources((data) => {
+      if (data) {
+        this.view.drawSources(data);
+        const select = document.querySelector('.sources__select');
+        select &&
+          select.addEventListener('change', (e) =>
+            this.controller.getNews(e, (data) => {
+              data && this.view.drawNews(data);
+            })
+          );
+      }
+    });
   }
 }
 

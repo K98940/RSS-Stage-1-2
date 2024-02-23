@@ -32,3 +32,38 @@
     font-weight: 400;
     white-space: nowrap;
 }
+
+.sources-container {
+  --color-background-container: color-mix(in srgb, var(--color-background) 90%, var(--color));
+  --color-container: color-mix(in srgb, var(--color) 80%, var(--color-background));
+
+  box-sizing: border-box;
+  width: clamp(15rem, 100%, 30rem);
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  background-color: var(--color-background);
+}
+
+.sources__select {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-container);
+  border-radius: 0.3rem;
+  color: color-mix(in srgb, var(--color) 80%, black);
+  background-color: var(--color-background-container);
+
+  &:focus-visible {
+    border: 1px solid var(--color-container);
+    outline: none;
+  }
+}
+
+.sources__select option {
+  color: color-mix(in srgb, var(--color) 90%, black);
+  background-color: var(--color-background-container);
+
+  &:nth-child(1) {
+    color: transparent;
+  }
+}
