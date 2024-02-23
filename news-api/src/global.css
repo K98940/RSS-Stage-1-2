@@ -113,9 +113,19 @@ header h1 {
   }
 
   .footer__logo {
-    &:hover {
-      & svg {
-        fill: color-mix(in srgb, var(--color) 80%, var(--color-background) 20%);
+    height: 100%;
+    align-items: center;
+
+    & a {
+      display: inline-block;
+      width: 4rem;
+      aspect-ratio: 64/23;
+      background-image: url("./assets/img/logo.webp");
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      &:hover {
+        filter: brightness(0.8);
       }
     }
   }

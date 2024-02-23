@@ -1,11 +1,11 @@
 import './sources.css';
-import { ISources } from '../../../types/types';
+import { Source } from '../../../types/types';
 // import { isDocumentFragment } from '../../../utils/assertions';
 // import { getHTMLElement, cteateHTMLElement } from '../../../utils/dom';
 import { cteateHTMLElement } from '../../../utils/dom';
 
 class Sources {
-  draw(data: ISources[]) {
+  draw(data: Source[]) {
     // const fragment = document.createDocumentFragment();
     // const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
     // if (!sourceItemTemp) {

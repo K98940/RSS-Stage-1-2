@@ -1,25 +1,27 @@
-export interface DataSources {
-  sources: ISources[];
+export type NewHTMLElement = {
+  tag?: string;
+  class?: string;
+  text?: string;
+  attributes?: Attributes[];
+};
+
+export interface ResponseSources {
+  sources: Source[];
   status: string;
 }
 
-type SourceType = {
-  id: string;
-  name: string;
-};
-
-export interface Articles {
+export interface Article {
   author: string;
   content: string;
   description: string;
   publishedAt: string;
-  source: SourceType;
+  source: SourcePreview;
   title: string;
   url: string;
   urlToImage: string;
 }
 
-export interface ISources {
+export interface Source {
   category: string;
   country: string;
   description: string;
@@ -29,8 +31,13 @@ export interface ISources {
   url: string;
 }
 
-export interface INews {
-  articles: Articles[];
+export interface ResponseNews {
+  articles: Article[];
   status: string;
   totalResults: number;
 }
+
+type Attributes = [name: string, value: string];
+type SourcePreview = Pick<Source, 'id' | 'name'>;
+export type Templates = HTMLTemplateElement | null;
+export type Div = HTMLDivElement | null;

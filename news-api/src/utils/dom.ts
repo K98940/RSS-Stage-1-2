@@ -1,3 +1,4 @@
+import { NewHTMLElement } from './../types/types';
 export function getHTMLElement(node: Node, query: string): HTMLElement {
   if (!(node instanceof DocumentFragment)) {
     console.warn('node instance of ', node.constructor.name);
@@ -7,15 +8,6 @@ export function getHTMLElement(node: Node, query: string): HTMLElement {
   if (!elem) throw Error(`${query} not found`);
   return elem;
 }
-
-type Attributes = [name: string, value: string];
-
-type NewHTMLElement = {
-  tag?: string;
-  class?: string;
-  text?: string;
-  attributes?: Attributes[];
-};
 
 export function cteateHTMLElement(options: NewHTMLElement): HTMLElement {
   options.tag ??= 'div';

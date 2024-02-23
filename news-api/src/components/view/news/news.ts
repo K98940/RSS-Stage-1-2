@@ -1,15 +1,16 @@
 import './news.css';
-import { Articles } from '../../../types/types';
+import { Article, Div, Templates } from '../../../types/types';
 import { isDocumentFragment } from '../../../utils/assertions';
 import { getHTMLElement } from '../../../utils/dom';
+import placeholder from '../../../assets/img/placeholder.webp';
 
 class News {
-  draw(data: Articles[]) {
+  draw(data: Article[]) {
     if (data.length === 0) return;
     const news = data.length > 10 ? data.filter((_item, idx) => idx < 10) : data;
 
     const fragment = document.createDocumentFragment();
-    const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
+    const newsItemTemp: Templates = document.querySelector('#newsItemTemp');
     if (!newsItemTemp) {
       console.error('#newsItemTemp not found');
       return;
@@ -21,7 +22,7 @@ class News {
 
       if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');
 
-      getHTMLElement(newsClone, '.news__meta-photo').style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+      getHTMLElement(newsClone, '.news__meta-photo').style.backgroundImage = `url(${item.urlToImage || placeholder})`;
       getHTMLElement(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
       getHTMLElement(newsClone, '.news__meta-date').textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
       getHTMLElement(newsClone, '.news__description-title').textContent = item.title;
@@ -32,7 +33,7 @@ class News {
       fragment.append(newsClone);
     });
 
-    const mainNews: HTMLDivElement | null = document.querySelector('.news');
+    const mainNews: Div = document.querySelector('.news');
     if (!mainNews) {
       console.error('.news not found');
       return;
