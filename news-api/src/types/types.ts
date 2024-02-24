@@ -85,6 +85,5 @@ export type SourceOptions = {
 
 type Attributes = [name: string, value: string];
 type SourcePreview = Pick<Source, 'id' | 'name'>;
-// export type FilterOptions = Pick<Source, 'country' | 'language'>;
 export type Templates = HTMLTemplateElement | null;
 export type Div = HTMLDivElement | null;

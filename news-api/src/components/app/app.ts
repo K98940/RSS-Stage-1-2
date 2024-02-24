@@ -1,4 +1,4 @@
-import { Source, TypeApp } from '../../types/types';
+import { ResponseSources, Source, TypeApp } from '../../types/types';
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 
@@ -12,7 +12,7 @@ class App implements TypeApp {
   }
 
   start(): void {
-    this.controller.getSources((data) => {
+    this.controller.getSources((data?: ResponseSources): void => {
       if (data) {
         this.view.drawFilter(data);
         const filter = document.querySelector('.lang__select');

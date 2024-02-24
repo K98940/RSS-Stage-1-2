@@ -40,9 +40,9 @@ class Loader implements TypeLoader {
   load(method: string, endpoint: Endpoint, callback: (data: Response) => void, options: SourceOptions): void {
     fetch(this.makeUrl({ options, endpoint }), { method })
       .then(this.errorHandler)
-      .then((res) => res.json())
-      .then((data) => callback(data))
-      .catch((err) => console.error(err));
+      .then((res: Response) => res.json())
+      .then((data: Response) => callback(data))
+      .catch((err: ErrorEvent) => console.error(err));
   }
 }
 

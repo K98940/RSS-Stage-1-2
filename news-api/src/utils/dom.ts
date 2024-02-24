@@ -1,6 +1,5 @@
 import { NewHTMLElement } from './../types/types';
 export function getHTMLElement(node: Node, query: string): HTMLElement {
-  // if (!(node instanceof Document)) {
   if (!(node instanceof DocumentFragment || node instanceof Document)) {
     console.warn('node instance of ', node.constructor.name);
     throw Error(node + 'is not instanceof DocumentFragment');
