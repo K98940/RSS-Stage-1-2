@@ -1,9 +1,10 @@
+import { TypeApp } from '../../types/types';
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 
-class App {
-  controller: AppController;
-  view: AppView;
+class App implements TypeApp {
+  private controller: AppController;
+  private view: AppView;
 
   constructor() {
     this.controller = new AppController();

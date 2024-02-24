@@ -1,10 +1,10 @@
 import './news.css';
-import { Article, Div, Templates } from '../../../types/types';
+import { Article, Div, Templates, TypeNews } from '../../../types/types';
 import { isDocumentFragment } from '../../../utils/assertions';
 import { getHTMLElement } from '../../../utils/dom';
 import placeholder from '../../../assets/img/placeholder.webp';
 
-class News {
+class News implements TypeNews {
   draw(data: Article[]) {
     if (data.length === 0) return;
     const news = data.length > 10 ? data.filter((_item, idx) => idx < 10) : data;

@@ -1,5 +1,5 @@
-import { Endpoint, Option, Param } from './../../types/types';
-class Loader {
+import { Endpoint, SourceOptions, Param, TypeLoader } from './../../types/types';
+class Loader implements TypeLoader {
   baseLink: string;
   options: object;
 
@@ -26,18 +26,18 @@ class Loader {
     return res;
   }
 
-  makeUrl({ endpoint, options = {} }: Param) {
+  makeUrl({ endpoint, options = {} }: Param): string {
     const urlOptions = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 
     Object.keys(urlOptions).forEach((key) => {
-      url += `${key}=${urlOptions[key as keyof Option]}&`;
+      url += `${key}=${urlOptions[key as keyof SourceOptions]}&`;
     });
 
     return url.slice(0, -1);
   }
 
-  load(method: string, endpoint: Endpoint, callback: (data: Response) => void, options: Option) {
+  load(method: string, endpoint: Endpoint, callback: (data: Response) => void, options: SourceOptions) {
     fetch(this.makeUrl({ options, endpoint }), { method })
       .then(this.errorHandler)
       .then((res) => res.json())

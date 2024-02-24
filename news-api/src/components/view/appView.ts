@@ -1,8 +1,8 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { ResponseNews, ResponseSources } from '../../types/types';
+import { ResponseNews, ResponseSources, TypeAppView } from '../../types/types';
 
-export class AppView {
+export class AppView implements TypeAppView {
   private news: News;
   private sources: Sources;
 

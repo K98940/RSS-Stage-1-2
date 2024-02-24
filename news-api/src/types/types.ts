@@ -1,3 +1,27 @@
+export type TypeAppView = {
+  drawNews(data: ResponseNews): void;
+  drawSources(data: ResponseSources): void;
+};
+
+export type TypeSources = {
+  draw(data: Source[]): void;
+};
+
+export type TypeLoader = {
+  getResp({ endpoint, options }: Param, callback: () => void): void;
+  errorHandler(res: Response): Response;
+  makeUrl({ endpoint, options }: Param): string;
+  load(method: string, endpoint: Endpoint, callback: (data: Response) => void, options: SourceOptions): void;
+};
+
+export type TypeApp = {
+  start(): void;
+};
+
+export type TypeNews = {
+  draw(data: Article[]): void;
+};
+
 export type NewHTMLElement = {
   tag?: string;
   class?: string;
@@ -42,12 +66,16 @@ export enum Endpoint {
   everything = 'everything',
 }
 
+// export type getRespOption = {
+//   endpoint: Endpoint;
+// };
+
 export type Param = {
   endpoint: Endpoint;
-  options?: Option;
+  options?: SourceOptions;
 };
 
-export type Option = {
+export type SourceOptions = {
   apiKey?: string;
   sources?: string;
 };

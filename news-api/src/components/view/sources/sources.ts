@@ -1,10 +1,11 @@
+import { TypeSources } from './../../../types/types';
 import './sources.css';
 import { Source } from '../../../types/types';
 // import { isDocumentFragment } from '../../../utils/assertions';
 // import { getHTMLElement, cteateHTMLElement } from '../../../utils/dom';
 import { cteateHTMLElement } from '../../../utils/dom';
 
-class Sources {
+class Sources implements TypeSources {
   draw(data: Source[]) {
     // const fragment = document.createDocumentFragment();
     // const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
