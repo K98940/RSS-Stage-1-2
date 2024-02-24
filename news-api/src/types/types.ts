@@ -1,6 +1,11 @@
+export type TypeFilter = {
+  draw(data: string[]): void;
+};
+
 export type TypeAppView = {
   drawNews(data: ResponseNews): void;
   drawSources(data: ResponseSources): void;
+  drawFilter(data: ResponseSources): void;
 };
 
 export type TypeSources = {
@@ -16,6 +21,8 @@ export type TypeLoader = {
 
 export type TypeApp = {
   start(): void;
+  updateSource(): void;
+  handleFilter(e: Event, data: Source[]): void;
 };
 
 export type TypeNews = {
@@ -31,7 +38,7 @@ export type NewHTMLElement = {
 
 export interface ResponseSources {
   sources: Source[];
-  status: string;
+  status?: string;
 }
 
 export interface Article {
@@ -66,10 +73,6 @@ export enum Endpoint {
   everything = 'everything',
 }
 
-// export type getRespOption = {
-//   endpoint: Endpoint;
-// };
-
 export type Param = {
   endpoint: Endpoint;
   options?: SourceOptions;
@@ -82,5 +85,6 @@ export type SourceOptions = {
 
 type Attributes = [name: string, value: string];
 type SourcePreview = Pick<Source, 'id' | 'name'>;
+// export type FilterOptions = Pick<Source, 'country' | 'language'>;
 export type Templates = HTMLTemplateElement | null;
 export type Div = HTMLDivElement | null;

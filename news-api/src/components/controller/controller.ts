@@ -12,9 +12,6 @@ class AppController extends AppLoader {
   }
 
   getNews(e: Event, callback: (data?: ResponseNews) => void): void {
-    // let target = e.target as Element;
-    // const newsContainer = e.currentTarget as Element;
-
     const id = e.currentTarget as HTMLInputElement;
     super.getResp(
       {
@@ -25,27 +22,6 @@ class AppController extends AppLoader {
       },
       callback
     );
-
-    // while (target !== newsContainer) {
-    //   if (target?.classList.contains('source__item')) {
-    //     const sourceId = target.getAttribute('data-source-id');
-    //     if (newsContainer.getAttribute('data-source') !== sourceId) {
-    //       if (!sourceId) break;
-    //       newsContainer.setAttribute('data-source', sourceId);
-    //       super.getResp(
-    //         {
-    //           endpoint: 'everything',
-    //           options: {
-    //             sources: sourceId,
-    //           },
-    //         },
-    //         callback
-    //       );
-    //     }
-    //     return;
-    //   }
-    //   target = target.parentNode as Element;
-    // }
   }
 }
 

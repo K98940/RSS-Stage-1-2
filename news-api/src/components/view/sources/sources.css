@@ -3,6 +3,7 @@
     flex-wrap: nowrap;
     width: 100%;
     padding: 1rem;
+    gap: 1rem;
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
 }
@@ -36,32 +37,16 @@
   --color-background-container: color-mix(in srgb, var(--color-background) 90%, var(--color));
   --color-container: color-mix(in srgb, var(--color) 80%, var(--color-background));
 
-  width: clamp(15rem, 100%, 30rem);
-  padding: 0.5rem 1rem;
-  margin: 0 auto;
-  /* background-color: var(--color-background); */
+  flex: 1 1 70%;
 }
 
-.sources__select {
-  width: 100%;
-  font-size: 1.5rem;
-  padding: 0 1rem;
-  border: 1px solid var(--color-container);
-  border-radius: 0.3rem;
-  color: color-mix(in srgb, var(--color) 80%, black);
-  background-color: var(--color-background-container);
-
-  &:focus-visible {
-    border: 1px solid var(--color-container);
-    outline: none;
+@media (max-width: 640px) {
+.sources {
+  flex-direction: column;
+  gap: 2rem;
   }
-}
 
-.sources__select option {
-  color: color-mix(in srgb, var(--color) 90%, black);
-  background-color: var(--color-background-container);
-
-  &:nth-child(1) {
-    color: transparent;
+  .sources-container {
+    width: clamp(1rem, 100%, 23rem);
   }
 }
