@@ -1,11 +1,11 @@
-import { ResponseSources, ResponseNews } from '../../types/types';
+import { ResponseSources, ResponseNews, Endpoint } from '../../types/types';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
   getSources(callback: (data?: ResponseSources) => void) {
     super.getResp(
       {
-        endpoint: 'sources',
+        endpoint: Endpoint.sources,
       },
       callback
     );
@@ -18,7 +18,7 @@ class AppController extends AppLoader {
     const id = e.currentTarget as HTMLInputElement;
     super.getResp(
       {
-        endpoint: 'everything',
+        endpoint: Endpoint.everything,
         options: {
           sources: id.value,
         },

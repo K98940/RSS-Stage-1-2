@@ -1,13 +1,4 @@
-type Param = {
-  endpoint: string;
-  options?: Option;
-};
-
-type Option = {
-  apiKey?: string;
-  sources?: string;
-};
-
+import { Endpoint, Option, Param } from './../../types/types';
 class Loader {
   baseLink: string;
   options: object;
@@ -35,7 +26,7 @@ class Loader {
     return res;
   }
 
-  makeUrl(options: Option, endpoint: string) {
+  makeUrl({ endpoint, options = {} }: Param) {
     const urlOptions = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 
@@ -46,8 +37,8 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  load(method: string, endpoint: string, callback: (data: Response) => void, options: Option) {
-    fetch(this.makeUrl(options, endpoint), { method })
+  load(method: string, endpoint: Endpoint, callback: (data: Response) => void, options: Option) {
+    fetch(this.makeUrl({ options, endpoint }), { method })
       .then(this.errorHandler)
       .then((res) => res.json())
       .then((data) => callback(data))

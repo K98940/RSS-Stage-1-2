@@ -37,6 +37,21 @@ export interface ResponseNews {
   totalResults: number;
 }
 
+export enum Endpoint {
+  sources = 'sources',
+  everything = 'everything',
+}
+
+export type Param = {
+  endpoint: Endpoint;
+  options?: Option;
+};
+
+export type Option = {
+  apiKey?: string;
+  sources?: string;
+};
+
 type Attributes = [name: string, value: string];
 type SourcePreview = Pick<Source, 'id' | 'name'>;
 export type Templates = HTMLTemplateElement | null;
