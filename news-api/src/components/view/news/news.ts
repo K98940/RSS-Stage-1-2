@@ -5,7 +5,7 @@ import { getHTMLElement } from '../../../utils/dom';
 import placeholder from '../../../assets/img/placeholder.webp';
 
 class News implements TypeNews {
-  draw(data: Article[]) {
+  draw(data: Article[]): void {
     if (data.length === 0) return;
     const news = data.length > 10 ? data.filter((_item, idx) => idx < 10) : data;
 

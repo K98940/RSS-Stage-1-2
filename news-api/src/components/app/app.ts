@@ -11,7 +11,7 @@ class App implements TypeApp {
     this.view = new AppView();
   }
 
-  start() {
+  start(): void {
     // const sources = document.querySelector('.sources');
     // sources &&
     //   sources.addEventListener('click', (e) =>

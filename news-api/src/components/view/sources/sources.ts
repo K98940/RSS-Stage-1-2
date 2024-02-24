@@ -6,7 +6,7 @@ import { Source } from '../../../types/types';
 import { cteateHTMLElement } from '../../../utils/dom';
 
 class Sources implements TypeSources {
-  draw(data: Source[]) {
+  draw(data: Source[]): void {
     // const fragment = document.createDocumentFragment();
     // const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
     // if (!sourceItemTemp) {
