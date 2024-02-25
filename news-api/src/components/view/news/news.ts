@@ -1,7 +1,7 @@
 import './news.css';
 import { Article, Div, Templates, TypeNews } from '../../../types/types';
 import { isDocumentFragment } from '../../../utils/assertions';
-import { getHTMLElement } from '../../../utils/dom';
+import { getElement } from '../../../utils/dom';
 import placeholder from '../../../assets/img/placeholder.webp';
 
 class News implements TypeNews {
@@ -22,13 +22,13 @@ class News implements TypeNews {
 
       if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');
 
-      getHTMLElement(newsClone, '.news__meta-photo').style.backgroundImage = `url(${item.urlToImage || placeholder})`;
-      getHTMLElement(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
-      getHTMLElement(newsClone, '.news__meta-date').textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
-      getHTMLElement(newsClone, '.news__description-title').textContent = item.title;
-      getHTMLElement(newsClone, '.news__description-source').textContent = item.source.name;
-      getHTMLElement(newsClone, '.news__description-content').textContent = item.description;
-      getHTMLElement(newsClone, '.news__read-more a').setAttribute('href', item.url);
+      getElement<HTMLElement>(newsClone, '.news__meta-photo').style.backgroundImage = `url(${item.urlToImage || placeholder})`;
+      getElement<HTMLElement>(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
+      getElement<HTMLElement>(newsClone, '.news__meta-date').textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
+      getElement<HTMLElement>(newsClone, '.news__description-title').textContent = item.title;
+      getElement<HTMLElement>(newsClone, '.news__description-source').textContent = item.source.name;
+      getElement<HTMLElement>(newsClone, '.news__description-content').textContent = item.description;
+      getElement<HTMLElement>(newsClone, '.news__read-more a').setAttribute('href', item.url);
 
       fragment.append(newsClone);
     });

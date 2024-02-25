@@ -1,10 +1,11 @@
 import { NewHTMLElement } from './../types/types';
-export function getHTMLElement(node: Node, query: string): HTMLElement {
+
+export function getElement<T extends Element>(node: Node, query: string): T {
   if (!(node instanceof DocumentFragment || node instanceof Document)) {
     console.warn('node instance of ', node.constructor.name);
     throw Error(node + 'is not instanceof DocumentFragment');
   }
-  const elem: HTMLElement | null = node.querySelector(query);
+  const elem: T | null = node.querySelector(query);
   if (!elem) throw Error(`${query} not found`);
   return elem;
 }
