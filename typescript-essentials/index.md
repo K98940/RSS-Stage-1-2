@@ -12,10 +12,10 @@
 ## Reflections
 
 1. I am starting to realize that I need to learn TypeScript.
-2. `:number` and `:string` became my best friends. When I created an `enum`, I felt, "Wow, I know TypeScript now."
-3. My experience has increased. Level 3 is coming soon! I will become an App crafter.
-4. Now I can use `Type` and `Interface` for my Apps.
-5. It was really exciting. I hope that, over time, I will understand it better.
-6. The level of misunderstanding is close to critical.
-7. Lastly, an easy subject comes after generic.
+2. `:number` and `:string` became my best friends. When I created an `enum`, I felt, "Wow, I know TypeScript now.". I didn't know that I would face news-api yet.
+3. My experience has increased. Level 3 is coming soon! I will become an App crafter. Now I can use `Type` and `Interface` for my Apps.
+4. Functions can also have types. I can create a type to describe my function and then apply it to several functions.
+5. TS makes JS classes more strict: access modifiers, interfaces. It was really exciting. I hope that, over time, I will understand it better.
+6. Generics is a new level of work with types. The level of misunderstanding is close to critical.
+7. Lastly, an easy subject comes after generic. ES6 has native module support, so this concept was learned earlier. Types can also import.
 8. I met with the ancient practice of namespaces, and have got a [sign](https://learn.microsoft.com/api/achievements/share/en-us/K98940/UF5MJYC3?sharingId=220BBAB425956B74)
