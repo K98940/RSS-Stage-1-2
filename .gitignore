@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+code-review/.gitignore
+code-review/.vscode/extensions.json
+code-review/.vscode/settings.json
