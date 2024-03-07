@@ -1,0 +1,122 @@
+import { InputProps, Html } from './../../types/types';
+import './login.css';
+import {
+  MyElement,
+  MyElementProps,
+} from '../../components/app/Element/my-element';
+import Input from './input/input';
+import Button from '../../components/app/tags/button/button';
+import Label from '../../components/app/tags/label/label';
+
+const ID = {
+  firstName: 'first-name-input',
+  surname: 'surname-input',
+};
+
+const inputs: InputProps[] = [
+  {
+    id: ID.firstName,
+    labelText: 'First Name',
+    attributes: [
+      ['id', ID.firstName],
+      ['placeholder', 'First Name'],
+      ['required', ''],
+      ['autofocus', ''],
+    ],
+  },
+  {
+    id: ID.surname,
+    labelText: 'Surname',
+    attributes: [
+      ['id', ID.surname],
+      ['placeholder', 'Surname'],
+      ['required', ''],
+    ],
+  },
+];
+
+const propsConstructor: MyElementProps = {
+  tag: 'section',
+  classNames: ['login'],
+  textContent: undefined,
+  callback: null,
+};
+
+export default class LoginForm extends MyElement {
+  inputs: Html[];
+
+  button: Button | null;
+
+  constructor() {
+    super(propsConstructor);
+    this.inputs = [];
+    this.button = null;
+    this.config();
+  }
+
+  private config() {
+    const form = new MyElement({ tag: 'form', classNames: ['login_form'] });
+    const container = new MyElement({ classNames: ['form_container'] });
+
+    inputs.forEach((input) => {
+      const label = new Label({
+        id: input.id,
+        text: input.labelText || '',
+        classNames: ['login_label'],
+      });
+      const field = new Input({
+        ...input,
+        callback: this.handleInput.bind(this),
+      });
+      container.appendNodes(label);
+      container.appendNodes(field);
+      this.inputs.push(field.getNode());
+    });
+
+    const button = new Button({
+      text: 'Login',
+      classNames: ['login__button'],
+      callback: this.handleButtonClick.bind(this),
+    });
+    this.button = button;
+    container.appendNodes(button);
+    form.appendNodes(container);
+    this.appendNodes(form);
+  }
+
+  private handleButtonClick(e: Event): void {
+    if (!this.isCorrectForm()) return;
+
+    e.preventDefault();
+    this.inputs.forEach((input) => {
+      if (input instanceof HTMLInputElement) {
+        input.value = '';
+      }
+    });
+    this.button?.removeClass('login__button_active');
+  }
+
+  private handleInput(e: Event): void {
+    const target = e?.target;
+    if (target instanceof HTMLInputElement) {
+      if (this.isCorrectForm()) {
+        this.button?.setClasses(['login__button_active']);
+      } else {
+        this.button?.removeClass('login__button_active');
+      }
+    }
+  }
+
+  private isCorrectForm() {
+    let isCorrect = true;
+    this.inputs.forEach((input) => {
+      if (input instanceof HTMLInputElement) {
+        const value = input.value.trim();
+        input.value = value;
+        if (value.length === 0) isCorrect = false;
+      }
+    });
+
+    return isCorrect;
+  }
+}

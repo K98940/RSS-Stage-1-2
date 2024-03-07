@@ -1,0 +1,14 @@
+.header {
+  flex: 0 0 5rem;
+
+  text-align: center;
+  background-color: burlywood;
+}
+
+.header__nav {
+  width: 50%;
+  height: 5rem;
+
+  background-color: darkcyan;
+  border: 1px solid black;
+}

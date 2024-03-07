@@ -11,8 +11,7 @@
   "author": "K989",
   "license": "ISC",
   "lint-staged": {
-    "src/**/*.{ts,css,html}": "prettier --write",
-    "src/**/*.{ts,css}": "eslint"
+    "src/**/*.{ts}": "eslint"
   },
   "validate-branch-name": {
     "pattern": "(feat|fix|chore|refactor|init)/(RSS-PZ-[0-9]+)_[a-z-]+",

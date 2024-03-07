@@ -1,0 +1,21 @@
+:root {
+  --form-background-color: rgb(230, 230, 230);
+  --form-color-inactive: rgb(170, 170, 170);
+  --form-color-active: rgb(0, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100dvh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
