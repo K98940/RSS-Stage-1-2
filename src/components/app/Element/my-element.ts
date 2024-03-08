@@ -72,4 +72,6 @@ export class MyElement {
       this.getNode().addEventListener(event, calback);
     }
   }
+
+  update() {}
 }

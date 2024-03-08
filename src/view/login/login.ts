@@ -1,4 +1,4 @@
-import { InputProps, Html } from './../../types/types';
+import { InputProps, Html, StateObect } from './../../types/types';
 import './login.css';
 import {
   MyElement,
@@ -7,6 +7,8 @@ import {
 import Input from './input/input';
 import Button from '../../components/app/tags/button/button';
 import Label from '../../components/app/tags/label/label';
+import { State } from '../../components/app/State/state';
+import { LocalStorage } from '../../LocalStorage/local-storage';
 
 const ID = {
   firstName: 'first-name-input',
@@ -47,8 +49,14 @@ export default class LoginForm extends MyElement {
 
   button: Button | null;
 
+  state: State;
+
+  localstorage: LocalStorage;
+
   constructor() {
     super(propsConstructor);
+    this.state = new State();
+    this.localstorage = new LocalStorage();
     this.inputs = [];
     this.button = null;
     this.config();
@@ -88,12 +96,18 @@ export default class LoginForm extends MyElement {
     if (!this.isCorrectForm()) return;
 
     e.preventDefault();
-    this.inputs.forEach((input) => {
+    this.updateState();
+    this.localstorage.save(this.state.getState());
+
+    this.inputs.forEach((input, i) => {
       if (input instanceof HTMLInputElement) {
         input.value = '';
       }
     });
+
     this.button?.removeClass('login__button_active');
+    this.setClasses(['_nodisplay']);
+    // console.log('->state', this.state.getState());
   }
 
   private handleInput(e: Event): void {
@@ -136,7 +150,6 @@ export default class LoginForm extends MyElement {
         wrongText = wrongText.map((char) =>
           char === ' ' ? '"пробел"' : `"${char}"`,
         );
-        console.log(value, '->filterText', wrongText);
         if (wrongText.length !== 0) {
           errorMsg += ` \n◾ The string contains illegal characters:\n${wrongText}`;
           isCorrect = false;
@@ -149,5 +162,18 @@ export default class LoginForm extends MyElement {
     });
 
     return isCorrect;
+  }
+
+  private updateState() {
+    if (
+      this.inputs[0] instanceof HTMLInputElement &&
+      this.inputs[1] instanceof HTMLInputElement
+    ) {
+      this.state.setState({
+        ...this.state.getState(),
+        userFirstName: this.inputs[0].value,
+        surname: this.inputs[1].value,
+      });
+    }
   }
 }

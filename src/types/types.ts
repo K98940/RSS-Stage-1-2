@@ -11,3 +11,8 @@ export type InputProps = {
   attributes?: HTMLAttributes[];
   callback?: Callback;
 };
+
+export type StateObect = {
+  userFirstName: string | null;
+  surname: string | null;
+};
