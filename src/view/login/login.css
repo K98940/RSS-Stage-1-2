@@ -55,8 +55,20 @@
   margin-bottom: -0.5rem;
 }
 
-.label__is-required::after {
-  content: '*';
-  color: red;
-  padding-left: 0.3rem;
+.label__is-required:has(+ input:invalid) {
+  &::after {
+    content: '*';
+    color: var(--form-label-invalid);
+    padding-left: 0.3rem;
+    text-shadow: 0 0 5px var(--form-label-invalid);
+  }
+}
+
+.label__is-required:has(+ input:valid) {
+  &::after {
+    content: '*';
+    color: var(--form-label-valid);
+    padding-left: 0.3rem;
+    text-shadow: 0 0 5px var(--form-label-valid);
+  }
 }

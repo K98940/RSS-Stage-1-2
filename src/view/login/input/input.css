@@ -6,3 +6,11 @@
   border: 1px solid grey;
   padding: 0.2rem 0.5rem;
 }
+
+.form_input:invalid {
+  background-color: var(--form-background-invalid);
+}
+
+.form_input:valid {
+  background-color: var(--form-background-valid);
+}

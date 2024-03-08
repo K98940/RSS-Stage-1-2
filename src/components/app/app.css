@@ -1,7 +1,11 @@
 :root {
   --form-background-color: rgb(230, 230, 230);
+  --form-background-valid: rgb(235, 255, 235);
+  --form-background-invalid: rgb(255, 235, 235);
   --form-color-inactive: rgb(170, 170, 170);
   --form-color-active: rgb(0, 0, 0);
+  --form-label-valid: rgb(0, 255, 0);
+  --form-label-invalid: rgb(255, 0, 0);
 }
 
 * {

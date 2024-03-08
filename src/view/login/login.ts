@@ -97,8 +97,9 @@ export default class LoginForm extends MyElement {
   }
 
   private handleInput(e: Event): void {
-    const target = e?.target;
-    if (target instanceof HTMLInputElement) {
+    const input = e?.target;
+    if (input instanceof HTMLInputElement) {
+      input.setCustomValidity('');
       if (this.isCorrectForm()) {
         this.button?.setClasses(['login__button_active']);
       } else {
@@ -109,11 +110,41 @@ export default class LoginForm extends MyElement {
 
   private isCorrectForm() {
     let isCorrect = true;
-    this.inputs.forEach((input) => {
+    let errorMsg = '';
+    const regex = /[a-zA-Z-]/g;
+
+    this.inputs.forEach((input, i) => {
       if (input instanceof HTMLInputElement) {
         const value = input.value.trim();
-        input.value = value;
-        if (value.length === 0) isCorrect = false;
+        if (input.value === '') {
+          errorMsg += ' \n◾ The empty string.';
+          isCorrect = false;
+        }
+        if (value !== input.value) {
+          errorMsg += '\n◾ There is space either before or after a string.';
+          isCorrect = false;
+        }
+        if (value[0] && value[0] !== value[0].toLocaleUpperCase()) {
+          errorMsg += ' \n◾ The first letter must be capitalized.';
+          isCorrect = false;
+        }
+        if (value !== '' && value.length < i + 3) {
+          errorMsg += ` \n◾ The length of the string is less than ${i + 3} characters.`;
+          isCorrect = false;
+        }
+        let wrongText = value.replace(regex, '').split('');
+        wrongText = wrongText.map((char) =>
+          char === ' ' ? '"пробел"' : `"${char}"`,
+        );
+        console.log(value, '->filterText', wrongText);
+        if (wrongText.length !== 0) {
+          errorMsg += ` \n◾ The string contains illegal characters:\n${wrongText}`;
+          isCorrect = false;
+        }
+
+        if (!isCorrect) {
+          input.setCustomValidity(errorMsg);
+        }
       }
     });
 
