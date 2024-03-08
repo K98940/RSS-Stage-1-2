@@ -1,14 +1,15 @@
 .header {
+  display: flex;
   flex: 0 0 5rem;
+  justify-content: space-between;
+  padding: 1rem 2rem;
 
   text-align: center;
   background-color: burlywood;
 }
 
-.header__nav {
-  width: 50%;
-  height: 5rem;
-
-  background-color: darkcyan;
+.header__btn-logout {
+  padding: 1rem;
   border: 1px solid black;
+  border-radius: 0.3rem;
 }

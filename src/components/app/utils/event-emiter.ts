@@ -14,9 +14,5 @@ export class MyEventEmmiter {
     this.listeners = this.listeners.filter((o) => o !== observer);
   }
 
-  protected notify(data: MyEventEmmiter) {
-    console.log('->EventEmmiter ->notify', data);
-  }
-
   protected update() {}
 }

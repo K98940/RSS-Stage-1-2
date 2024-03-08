@@ -29,4 +29,8 @@ export class LocalStorage {
       return null;
     }
   }
+
+  public clear(): void {
+    localStorage.removeItem(LS_KEY);
+  }
 }

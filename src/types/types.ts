@@ -13,6 +13,6 @@ export type InputProps = {
 };
 
 export type StateObect = {
-  userFirstName: string | null;
+  firstName: string | null;
   surname: string | null;
 };

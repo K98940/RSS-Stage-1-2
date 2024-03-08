@@ -60,6 +60,7 @@ export default class LoginForm extends MyElement {
     this.inputs = [];
     this.button = null;
     this.config();
+    this.state.subscribe(this);
   }
 
   private config() {
@@ -90,6 +91,10 @@ export default class LoginForm extends MyElement {
     container.appendNodes(button);
     form.appendNodes(container);
     this.appendNodes(form);
+
+    this.loadLocalStorage();
+    const { firstName, surname } = this.state.getState();
+    if (firstName && surname) this.hideForm();
   }
 
   private handleButtonClick(e: Event): void {
@@ -98,16 +103,7 @@ export default class LoginForm extends MyElement {
     e.preventDefault();
     this.updateState();
     this.localstorage.save(this.state.getState());
-
-    this.inputs.forEach((input, i) => {
-      if (input instanceof HTMLInputElement) {
-        input.value = '';
-      }
-    });
-
-    this.button?.removeClass('login__button_active');
-    this.setClasses(['_nodisplay']);
-    // console.log('->state', this.state.getState());
+    this.hideForm();
   }
 
   private handleInput(e: Event): void {
@@ -171,9 +167,40 @@ export default class LoginForm extends MyElement {
     ) {
       this.state.setState({
         ...this.state.getState(),
-        userFirstName: this.inputs[0].value,
+        firstName: this.inputs[0].value,
         surname: this.inputs[1].value,
       });
+    }
+  }
+
+  private loadLocalStorage() {
+    const data = this.localstorage.load();
+    if (!data) return;
+    this.state.setState({
+      ...this.state.getState(),
+      ...data,
+    });
+  }
+
+  private hideForm() {
+    this.inputs.forEach((input) => {
+      if (input instanceof HTMLInputElement) {
+        input.value = '';
+      }
+    });
+
+    this.setClasses(['_nodisplay']);
+  }
+
+  update(): void {
+    const state = this.state.getState();
+    if (state) {
+      if (!state.firstName && !state.surname) {
+        this.removeClass('_nodisplay');
+        setTimeout(() => {
+          this.inputs[0].focus();
+        }, 0);
+      }
     }
   }
 }

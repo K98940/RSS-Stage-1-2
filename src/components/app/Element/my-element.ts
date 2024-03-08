@@ -3,6 +3,7 @@ import { Callback, HTMLAttributes, Html } from './../../../types/types';
 export type MyElementProps = {
   tag?: keyof HTMLElementTagNameMap;
   classNames?: string[];
+  attributes?: HTMLAttributes[];
   textContent?: string;
   callback?: Callback | null;
 };
@@ -16,6 +17,7 @@ export class MyElement {
     // this.children = [];
     this.node = document.createElement(prop.tag || 'div');
     if (prop.classNames) this.setClasses(prop.classNames);
+    if (prop.attributes) this.setAttributes(prop.attributes);
     if (prop.textContent) this.setTextContent(prop.textContent);
     if (prop.callback) this.setCallback(prop.callback);
   }

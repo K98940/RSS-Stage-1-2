@@ -2,7 +2,7 @@ import { StateObect } from './../../../types/types';
 import { MyElement } from '../Element/my-element';
 
 const initialState: StateObect = {
-  userFirstName: null,
+  firstName: null,
   surname: null,
 };
 
