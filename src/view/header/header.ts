@@ -7,6 +7,7 @@ import {
 } from '../../components/app/Element/my-element';
 import Button from '../../components/app/tags/button/button';
 import { Dialog } from '../dialog/dialog';
+import { Welcome } from './welcome/welcome';
 
 export default class Header extends MyElement {
   private state;
@@ -25,20 +26,23 @@ export default class Header extends MyElement {
   }
 
   public update(): void {
-    const state = this.state.getState();
-    if (state) {
-      if (state.firstName && state.surname) {
+    const { process } = this.state.getState();
+    switch (process) {
+      case 'start':
         this.getNode().innerHTML = '';
         const btnLogout = new Button({
           text: 'Logout',
           classNames: ['header__btn-logout'],
           callback: this.logOut.bind(this),
         });
-
-        this.appendNodes(btnLogout);
-      } else {
+        const welcome = new Welcome();
+        this.appendNodes(welcome, btnLogout);
+        break;
+      case 'login':
         this.getNode().innerHTML = '';
-      }
+        break;
+      default:
+        break;
     }
   }
 
