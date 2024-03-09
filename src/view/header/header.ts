@@ -1,4 +1,4 @@
-import { State } from './../../components/app/State/state';
+import { State, initialState } from './../../components/app/State/state';
 import { LocalStorage } from './../../LocalStorage/local-storage';
 import './header.css';
 import {
@@ -7,12 +7,6 @@ import {
 } from '../../components/app/Element/my-element';
 import Button from '../../components/app/tags/button/button';
 import { Dialog } from '../dialog/dialog';
-import { StateObect } from '../../types/types';
-
-const initialState: StateObect = {
-  firstName: null,
-  surname: null,
-};
 
 export default class Header extends MyElement {
   private state;
@@ -41,13 +35,7 @@ export default class Header extends MyElement {
           callback: this.logOut.bind(this),
         });
 
-        const welcomeContainer = new MyElement({ classNames: ['welcome'] });
-        welcomeContainer.appendNodes(
-          new MyElement({ tag: 'p', textContent: 'welcome' }),
-          new MyElement({ tag: 'p', textContent: state.firstName }),
-          new MyElement({ tag: 'p', textContent: state.surname }),
-        );
-        this.appendNodes(welcomeContainer, btnLogout);
+        this.appendNodes(btnLogout);
       } else {
         this.getNode().innerHTML = '';
       }
@@ -64,7 +52,9 @@ export default class Header extends MyElement {
         this.state.setState({
           ...this.state.getState(),
           ...initialState,
+          process: 'login',
         });
+        this.localstorage.save(this.state.getState());
         dialogElement.remove();
       },
     });

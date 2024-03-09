@@ -15,6 +15,8 @@ export class LocalStorage {
 
   public save(data: StateObect): void {
     if (typeof data === 'object') {
+      delete data.process;
+      delete data.DOM;
       const str = JSON.stringify(data);
       localStorage.setItem(LS_KEY, str);
     }
@@ -23,10 +25,12 @@ export class LocalStorage {
   public load(): object | null {
     try {
       const response = localStorage.getItem(LS_KEY);
-      const data = JSON.parse(response || '');
-      return data || null;
+      if (!response) return null;
+
+      const data = JSON.parse(response);
+      return data;
     } catch (error) {
-      return null;
+      return { error };
     }
   }
 

@@ -1,4 +1,4 @@
-import { InputProps, Html, StateObect } from './../../types/types';
+import { InputProps, Html } from './../../types/types';
 import './login.css';
 import {
   MyElement,
@@ -59,11 +59,12 @@ export default class LoginForm extends MyElement {
     this.localstorage = new LocalStorage();
     this.inputs = [];
     this.button = null;
-    this.config();
     this.state.subscribe(this);
+    this.config();
   }
 
   private config() {
+    this.state.setState({ process: 'login' });
     const form = new MyElement({ tag: 'form', classNames: ['login_form'] });
     const container = new MyElement({ classNames: ['form_container'] });
 
@@ -92,9 +93,12 @@ export default class LoginForm extends MyElement {
     form.appendNodes(container);
     this.appendNodes(form);
 
-    this.loadLocalStorage();
     const { firstName, surname } = this.state.getState();
-    if (firstName && surname) this.hideForm();
+    if (firstName && surname) {
+      this.state.setState({ process: 'start' });
+      this.localstorage.save(this.state.getState());
+      this.hide();
+    }
   }
 
   private handleButtonClick(e: Event): void {
@@ -103,7 +107,7 @@ export default class LoginForm extends MyElement {
     e.preventDefault();
     this.updateState();
     this.localstorage.save(this.state.getState());
-    this.hideForm();
+    this.hide();
   }
 
   private handleInput(e: Event): void {
@@ -169,38 +173,38 @@ export default class LoginForm extends MyElement {
         ...this.state.getState(),
         firstName: this.inputs[0].value,
         surname: this.inputs[1].value,
+        process: 'start',
       });
+      this.localstorage.save(this.state.getState());
     }
   }
 
-  private loadLocalStorage() {
-    const data = this.localstorage.load();
-    if (!data) return;
-    this.state.setState({
-      ...this.state.getState(),
-      ...data,
-    });
+  private show() {
+    document.body.append(this.getNode());
   }
 
-  private hideForm() {
+  private hide() {
     this.inputs.forEach((input) => {
       if (input instanceof HTMLInputElement) {
         input.value = '';
       }
     });
 
-    this.setClasses(['_nodisplay']);
+    this.getNode().remove();
   }
 
   update(): void {
-    const state = this.state.getState();
-    if (state) {
-      if (!state.firstName && !state.surname) {
-        this.removeClass('_nodisplay');
-        setTimeout(() => {
-          this.inputs[0].focus();
-        }, 0);
+    const { firstName, surname, DOM } = this.state.getState();
+    if (firstName && surname) {
+      this.hide();
+    } else {
+      if (DOM?.main) {
+        DOM.main.innerHTML = '';
       }
+      this.show();
+      setTimeout(() => {
+        this.inputs[0].focus();
+      }, 0);
     }
   }
 }

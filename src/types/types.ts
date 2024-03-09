@@ -15,4 +15,8 @@ export type InputProps = {
 export type StateObect = {
   firstName: string | null;
   surname: string | null;
+  process?: 'login' | 'start';
+  DOM?: {
+    [index: string]: HTMLElement;
+  };
 };
