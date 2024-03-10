@@ -1,0 +1,51 @@
+.button-start {
+  --btn-width: 14rem;
+  --btn-height: 8rem;
+  --btn-color: rgb(20, 70, 100);
+  --text-color: rgb(240, 240, 40);
+  --text-hover: rgb(254, 228, 54);
+
+  font-size: 2rem;
+  font-weight: 700;
+  border: none;
+  color: var(--text-color);
+  background-color: var(--btn-color);
+
+  align-self: center;
+  width: var(--btn-width);
+  height: var(--btn-height);
+
+  mask-image: url("./mask.webp");
+  mask-size: var(--btn-width) var(--btn-height);
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  cursor: pointer;
+  animation-duration: 10s;
+  animation-name: button-start;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+
+  @media (hover: hover) {
+    &:hover {
+      text-shadow: 0 0 1rem var(--text-hover);
+      color: var(--text-hover);
+    }
+  }
+}
+
+@keyframes button-start {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  80% {
+    transform: rotateZ(0deg);
+  }
+  90% {
+    transform: rotateZ(10deg);
+  }
+    100% {
+      transform: rotateZ(0deg);
+    }
+  }

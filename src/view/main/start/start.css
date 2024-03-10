@@ -1,0 +1,32 @@
+.start {
+  --background-color: rgb(187, 240, 216);
+  --title-color: rgb(170, 100, 60);
+  --content-color: rgb(0, 0, 0);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--title-color);
+
+  background-image: url('./background.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.start__title {
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.start__content {
+  width: 100%;
+  color: var(--content-color);
+  padding: 1rem 1rem 3rem;
+  font-size: 1.3rem;
+}
