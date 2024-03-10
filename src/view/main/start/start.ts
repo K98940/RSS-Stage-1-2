@@ -7,6 +7,7 @@ import { State } from '../../../components/app/State/state';
 import { LocalStorage } from '../../../LocalStorage/local-storage';
 import { ButtonStart } from './button-start/button-start';
 import { Html } from '../../../types/types';
+import { Game } from '../game/game';
 
 export default class Start extends MyElement {
   private state;
@@ -46,21 +47,14 @@ export default class Start extends MyElement {
 
   update(): void {
     const { process } = this.state.getState();
-    console.log(process);
     switch (process) {
       case 'start':
         this.parent.innerHTML = '';
         this.parent.append(this.getNode());
         break;
       case 'game':
-        console.log(this.parent);
         this.parent.innerHTML = '';
-        const temp = new MyElement({
-          tag: 'h1',
-          classNames: ['game__temp'],
-          textContent: 'Main Game Page',
-        });
-        this.parent.append(temp.getNode());
+        this.parent.append(new Game().getNode());
         break;
       default:
         break;

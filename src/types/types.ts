@@ -20,3 +20,34 @@ export type StateObect = {
     [index: string]: HTMLElement;
   };
 };
+
+export type Words = {
+  audioExample: string;
+  id: number;
+  textExample: string;
+  textExampleTranslate: string;
+  word: string;
+  wordTranslate: string;
+};
+
+export type PageCollection = {
+  levelData: {
+    author: string;
+    cutSrc: string;
+    id: string;
+    imageSrc: string;
+    name: string;
+    year: string;
+  };
+  words: Words[];
+};
+
+export type Cell = {
+  text: string;
+  node: Html;
+};
+
+export type Matrix = {
+  source: Cell[][];
+  destination: Cell[][];
+};
