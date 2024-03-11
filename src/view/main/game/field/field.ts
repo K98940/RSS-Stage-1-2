@@ -3,7 +3,8 @@ import { getRandom } from '../../../../components/app/utils/random';
 import { Cell, Html, PageCollection } from '../../../../types/types';
 import './field.css';
 
-let CURRENT_LINE = 0;
+let currentLine = 0;
+const ANIMATION_DELAY = 300;
 
 export class Field extends MyElement {
   parent;
@@ -43,7 +44,7 @@ export class Field extends MyElement {
     this.appendNodes(this.containerDestination);
 
     this.source.forEach((sentence, line) => {
-      if (line === CURRENT_LINE) {
+      if (line === currentLine) {
         const row = this.createCellsRow(sentence);
         this.containerSource.appendNodes(row);
       }
@@ -56,6 +57,30 @@ export class Field extends MyElement {
     const row = new MyElement({ classNames: ['field__row'] });
     cells.forEach((cell, i) => {
       if (wrapContainer && i === 0) return;
+
+      if (cell.x && cell.y) {
+        setTimeout(() => {
+          const coord = cell.node.getBoundingClientRect();
+          cell.xOffset = (cell.x || 0) - Math.round(coord.x);
+          cell.yOffset = (cell.y || 0) - Math.round(coord.y);
+          cell.y = 0;
+          cell.x = 0;
+
+          cell.node.style.setProperty(
+            '--x-coord',
+            cell.xOffset.toString() + 'px',
+          );
+          cell.node.style.setProperty(
+            '--y-coord',
+            cell.yOffset.toString() + 'px',
+          );
+          cell.node.setAttribute('go-away', '');
+          setTimeout(() => {
+            cell.node.removeAttribute('go-away');
+          }, ANIMATION_DELAY);
+        }, 0);
+      }
+
       row.appendNodes(cell.node);
     });
     if (wrapContainer) {
@@ -68,7 +93,7 @@ export class Field extends MyElement {
   }
 
   public createMatrix(data: PageCollection) {
-    CURRENT_LINE = 0;
+    currentLine = 0;
     this.source = data.words.map((sentence) => {
       const words = sentence.textExample.split(' ');
       const randomWords = this.randomizeArray(words);
@@ -105,21 +130,25 @@ export class Field extends MyElement {
 
       if (this.source && place === 'source') {
         // if clicked to Source block
-        const index = this.source[CURRENT_LINE]?.findIndex((word) => {
+        const index = this.source[currentLine]?.findIndex((word) => {
           return target === word.node;
         });
-        const cell = this.source[CURRENT_LINE].splice(index, 1)[0];
+        const cell = this.source[currentLine].splice(index, 1)[0];
         cell.node.setAttribute('place', 'destination');
-        cell.node.setAttribute('line', `${CURRENT_LINE}`);
+        cell.node.setAttribute('line', `${currentLine}`);
+
+        // ============== go-away word
+        const coord = cell.node.getBoundingClientRect();
+        cell.x = Math.round(coord.x);
+        cell.y = Math.round(coord.y);
 
         if (!this.destination) this.destination = [];
-        while (this.destination.length <= CURRENT_LINE)
+        while (this.destination.length <= currentLine)
           this.destination.push([]);
 
-        this.destination[CURRENT_LINE].push(cell);
+        this.destination[currentLine].push(cell);
 
-        if (this.source[CURRENT_LINE].length === 0)
-          this.lineComplete(cell.node);
+        if (this.source[currentLine].length === 0) this.lineComplete(cell.node);
 
         this.render();
       }
@@ -127,19 +156,24 @@ export class Field extends MyElement {
       if (
         this.destination &&
         place === 'destination' &&
-        line === CURRENT_LINE.toString()
+        line === currentLine.toString()
       ) {
         // if clicked to Destination block
-        const index = this.destination[CURRENT_LINE]?.findIndex((word) => {
+        const index = this.destination[currentLine]?.findIndex((word) => {
           return target === word.node;
         });
-        const cell = this.destination[CURRENT_LINE].splice(index, 1)[0];
+        const cell = this.destination[currentLine].splice(index, 1)[0];
         cell.node.setAttribute('place', 'source');
 
-        if (!this.source) this.source = [];
-        while (this.source.length <= CURRENT_LINE) this.source.push([]);
+        // ============== go-away word
+        const coord = cell.node.getBoundingClientRect();
+        cell.x = Math.round(coord.x);
+        cell.y = Math.round(coord.y);
 
-        this.source[CURRENT_LINE].push(cell);
+        if (!this.source) this.source = [];
+        while (this.source.length <= currentLine) this.source.push([]);
+
+        this.source[currentLine].push(cell);
         this.render();
       }
     }
@@ -157,7 +191,7 @@ export class Field extends MyElement {
 
   private lineComplete(node: Html) {
     if (this.source) {
-      CURRENT_LINE += 1;
+      currentLine += 1;
       node.setAttribute('complete', '');
     }
   }

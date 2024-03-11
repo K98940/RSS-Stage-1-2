@@ -34,9 +34,14 @@
 }
 
 .field__word {
-  --color-shadow: rgb(222, 254, 154);
+  --animation-delay: 500ms;
+  --x-coord: 0;
+  --y-coord: 0;
+  --color-shadow: rgb(187, 107, 2);
+  --color-move: rgb(187, 107, 2);
 
   display: flex;
+  position: relative;
   z-index: 1;
   flex: 0 1 2rem;
   justify-content: center;
@@ -52,6 +57,13 @@
   user-select: none;
   box-shadow: 0.2rem 0.2rem 0.5rem var(--color-shadow);
   background-color: var(--background-color);
+
+  &[go-away] {
+    z-index: 1;
+    animation-name: word-go-away;
+    animation-duration: var(--animation-delay);
+    animation-iteration-count: 1;
+  }
 
   @media (hover: hover) {
     &:hover {
@@ -122,5 +134,20 @@
     position: fixed;
     z-index: -1;
     padding-left: 1rem;
+  }
+}
+
+@keyframes word-go-away {
+  0%{
+    transform: translate(var(--x-coord), var(--y-coord));
+  }
+  1% {
+    transform: translate(var(--x-coord), calc(var(--y-coord) - 3rem));
+    background-color: var(--color-move);
+  }
+  30% {
+    transform: translate(calc(200% + var(--x-coord)), calc(var(--y-coord) - 7rem));
+  }
+  100%{
   }
 }

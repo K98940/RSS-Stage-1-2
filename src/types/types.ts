@@ -45,6 +45,10 @@ export type PageCollection = {
 export type Cell = {
   text: string;
   node: Html;
+  x?: number;
+  y?: number;
+  xOffset?: number;
+  yOffset?: number;
 };
 
 export type Matrix = {
