@@ -17,7 +17,7 @@ export class Field extends MyElement {
   containerSource: MyElement;
 
   constructor(parent: MyElement) {
-    super({ tag: 'article', classNames: ['field'] });
+    super({});
     this.parent = parent;
     this.source = null;
     this.destination = null;
@@ -37,7 +37,7 @@ export class Field extends MyElement {
 
     if (this.destination)
       this.destination.forEach((sentence) => {
-        const row = this.createCellsRow(sentence);
+        const row = this.createCellsRow(sentence, true);
         this.containerDestination.appendNodes(row);
       });
     this.appendNodes(this.containerDestination);
@@ -52,15 +52,23 @@ export class Field extends MyElement {
     this.parent.appendNodes(this.containerDestination, this.containerSource);
   }
 
-  private createCellsRow(cells: Cell[]): MyElement {
+  private createCellsRow(cells: Cell[], wrapContainer?: boolean): MyElement {
     const row = new MyElement({ classNames: ['field__row'] });
-    cells.forEach((cell) => {
+    cells.forEach((cell, i) => {
+      if (wrapContainer && i === 0) return;
       row.appendNodes(cell.node);
     });
+    if (wrapContainer) {
+      const rowContainer = new MyElement({ classNames: ['row-container'] });
+      rowContainer.appendNodes(cells[0].node);
+      rowContainer.appendNodes(row);
+      return rowContainer;
+    }
     return row;
   }
 
   public createMatrix(data: PageCollection) {
+    CURRENT_LINE = 0;
     this.source = data.words.map((sentence) => {
       const words = sentence.textExample.split(' ');
       const randomWords = this.randomizeArray(words);
@@ -80,10 +88,10 @@ export class Field extends MyElement {
 
     this.destination = this.source.map((_, line) => {
       const lineNumber = new MyElement({
-        textContent: `${line + 1}.`,
+        textContent: `${line + 1}`,
         classNames: ['line-number'],
       });
-      return [{ text: `${line + 1}.`, node: lineNumber.getNode() }];
+      return [{ text: `${line + 1}`, node: lineNumber.getNode() }];
     });
     this.render();
   }
