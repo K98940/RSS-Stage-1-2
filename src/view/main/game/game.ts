@@ -4,23 +4,32 @@ import { Data } from '../../../components/app/utils/data';
 import { Field } from './field/field';
 import './game.css';
 
-const START_PAGE = 1;
+let page = 0;
 
 export class Game extends MyElement {
   state;
+
+  data: Data;
+
+  field: Field;
 
   constructor() {
     super({ classNames: ['game'] });
     this.state = new State();
     this.state.subscribe(this);
+    this.data = new Data();
+    this.field = new Field(this);
     this.config();
+
+    document.addEventListener('new-level', () => {
+      page += 1;
+      this.config();
+    });
   }
 
   private config() {
-    const data = new Data();
-    const field = new Field(this);
-    const page = data.getPage(START_PAGE);
-    field.createMatrix(page);
+    const pageData = this.data.getPage(page);
+    this.field.createMatrix(pageData);
   }
 
   public update(): void {}

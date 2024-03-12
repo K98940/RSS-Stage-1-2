@@ -17,16 +17,34 @@ export class Field extends MyElement {
 
   containerSource: MyElement;
 
+  correctAnswers: string[];
+
   constructor(parent: MyElement) {
     super({});
     this.parent = parent;
     this.source = null;
     this.destination = null;
+    this.correctAnswers = [];
     this.containerDestination = new MyElement({
       classNames: ['container-destination'],
     });
     this.containerSource = new MyElement({
       classNames: ['container-source'],
+    });
+    document.addEventListener('continue', () => {
+      if (this.destination) {
+        const lastWord = this.destination[currentLine].length - 1;
+        this.destination[currentLine][lastWord].node.setAttribute(
+          'complete',
+          '',
+        );
+        currentLine += 1;
+        this.render();
+        const restWords = this.source?.flat().length;
+        if (restWords === 0) {
+          document.dispatchEvent(new CustomEvent('new-level'));
+        }
+      }
     });
   }
 
@@ -94,7 +112,9 @@ export class Field extends MyElement {
 
   public createMatrix(data: PageCollection) {
     currentLine = 0;
+    this.correctAnswers.length = 0;
     this.source = data.words.map((sentence) => {
+      this.correctAnswers.push(sentence.textExample);
       const words = sentence.textExample.split(' ');
       const randomWords = this.randomizeArray(words);
       const cellsRow: Cell[] = randomWords.map((word) => {
@@ -148,8 +168,7 @@ export class Field extends MyElement {
 
         this.destination[currentLine].push(cell);
 
-        if (this.source[currentLine].length === 0) this.lineComplete(cell.node);
-
+        if (this.source[currentLine].length === 0) this.lineComplete();
         this.render();
       }
 
@@ -174,6 +193,9 @@ export class Field extends MyElement {
         while (this.source.length <= currentLine) this.source.push([]);
 
         this.source[currentLine].push(cell);
+
+        if (this.source[currentLine].length !== 0)
+          document.dispatchEvent(new CustomEvent('line-not-complete'));
         this.render();
       }
     }
@@ -189,10 +211,28 @@ export class Field extends MyElement {
     return result;
   };
 
-  private lineComplete(node: Html) {
-    if (this.source) {
-      currentLine += 1;
-      node.setAttribute('complete', '');
+  private lineComplete() {
+    if (this.destination) {
+      const restWords = this.source?.flat().length;
+      const textButton = restWords ? 'Continue' : 'Next Page';
+
+      const completedSentence = this.destination[currentLine];
+      if (this.isCorrectSequence(completedSentence)) {
+        document.dispatchEvent(
+          new CustomEvent('line', {
+            detail: { textButton },
+          }),
+        );
+      }
     }
+  }
+
+  private isCorrectSequence(sentence: Cell[]): boolean {
+    const result = sentence
+      .map((word, i) => (i === 0 ? '' : word.text))
+      .join(' ')
+      .trim();
+    const answer = this.correctAnswers[currentLine];
+    return result === answer;
   }
 }

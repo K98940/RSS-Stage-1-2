@@ -1,8 +1,47 @@
 .footer {
-  flex: 0 0 5rem;
-  width: 100%;
+  --background-color: rgb(222, 184, 135);
+  --btn-background-color: rgb(222, 190, 140);
+  --btn-active-bg-color: rgb(172,223,3);
+  --text-color: rgb(150, 120, 70);
+  --text-active-color: rgb(0, 0, 0);
+  --btn-shadow: rgb(255, 255, 230);
 
-  text-align: center;
-  vertical-align: baseline;
-  background-color: burlywood;
+  display: flex;
+  flex: 0 0 5rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  background-color: var(--background-color);
+}
+
+.footer__btn-continue {
+  padding: 1rem;
+  border: 1px solid grey;
+  border-radius: 0.3rem;
+
+  font-weight: 700;
+  color: var(--text-color);
+  background-color: var(--btn-background-color);
+  pointer-events: none;
+  user-select: none;
+}
+
+.btn-continue_active {
+  pointer-events: all;
+  border: 1px solid black;
+  color: var(--text-active-color);
+  background-color: var(--btn-active-bg-color);
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 1rem var(--btn-shadow);
+    }
+  }
+}
+
+.btn-continue_hidden {
+  visibility: hidden;
 }

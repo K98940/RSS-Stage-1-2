@@ -38,7 +38,8 @@
   --x-coord: 0;
   --y-coord: 0;
   --color-shadow: rgb(187, 107, 2);
-  --color-move: rgb(187, 107, 2);
+  --background-color-hover: rgb(187, 107, 2);
+  --color-hover: rgb(255, 255, 200);
 
   display: flex;
   position: relative;
@@ -67,7 +68,8 @@
 
   @media (hover: hover) {
     &:hover {
-      transform: translate(-2px, -2px);
+      background-color: var(--background-color-hover);
+      color: var(--color-hover);
     }
   }
 
@@ -143,7 +145,7 @@
   }
   1% {
     transform: translate(var(--x-coord), calc(var(--y-coord) - 3rem));
-    background-color: var(--color-move);
+    background-color: var(--background-color-hover);
   }
   30% {
     transform: translate(calc(200% + var(--x-coord)), calc(var(--y-coord) - 7rem));
