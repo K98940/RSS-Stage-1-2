@@ -1,8 +1,11 @@
+import { Actions, MyCustomEvent } from './../../../types/types';
 import { MyElement } from '../../../components/app/Element/my-element';
 import { State } from '../../../components/app/State/state';
 
 export class BtnCheck extends MyElement {
   state: State;
+
+  action: Actions;
 
   constructor() {
     super({
@@ -10,31 +13,49 @@ export class BtnCheck extends MyElement {
       textContent: 'Check',
       classNames: ['footer__btn', 'visibility_hidden'],
       callback: () => {
-        document.dispatchEvent(new CustomEvent('check'));
+        document.dispatchEvent(new CustomEvent(this.action));
         this.removeClass('btn_active');
         this.removeClass('btn_check');
+        this.setTextContent('Check');
       },
     });
+    this.action = Actions.check;
     this.state = new State();
     this.state.subscribe(this);
 
-    document.addEventListener('continue', () => {
+    document.addEventListener(Actions.continue, () => {
+      this.action = Actions.continue;
       this.removeClass('btn_active');
       this.removeClass('btn_check');
     });
 
-    document.addEventListener('correct-sequence', () => {
+    document.addEventListener(Actions.correctSequence, () => {
+      this.action = Actions.continue;
       this.setClasses(['btn_active', 'btn_check']);
     });
 
-    document.addEventListener('wrong-sequence', () => {
+    document.addEventListener(Actions.wrongSequence, () => {
+      this.action = Actions.check;
       this.setClasses(['btn_active', 'btn_check']);
     });
 
-    document.addEventListener('line-not-complete', () => {
+    document.addEventListener(Actions.lineNotComplete, () => {
       this.removeClass('btn_active');
       this.removeClass('btn_check');
     });
+
+    document.addEventListener(
+      Actions.correctSequence,
+      (e: CustomEventInit<MyCustomEvent>) => {
+        this.action = Actions.continue;
+        if (e.detail?.textButton) {
+          this.setTextContent(e.detail?.textButton);
+        }
+
+        this.removeClass('btn_check');
+        this.setClasses(['btn_active']);
+      },
+    );
   }
 
   public update(): void {

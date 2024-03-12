@@ -59,3 +59,12 @@ export type Matrix = {
 export type MyCustomEvent = {
   textButton?: string;
 };
+
+export enum Actions {
+  check = 'check',
+  continue = 'continue',
+  newLevel = 'new-level',
+  lineNotComplete = 'line-not-complete',
+  correctSequence = 'correct-sequence',
+  wrongSequence = 'wrong-sequence',
+}

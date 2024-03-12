@@ -1,6 +1,7 @@
 import { MyElement } from '../../../components/app/Element/my-element';
 import { State } from '../../../components/app/State/state';
 import { Data } from '../../../components/app/utils/data';
+import { Actions } from '../../../types/types';
 import { Field } from './field/field';
 import './game.css';
 
@@ -21,7 +22,7 @@ export class Game extends MyElement {
     this.field = new Field(this);
     this.config();
 
-    document.addEventListener('new-level', () => {
+    document.addEventListener(Actions.newLevel, () => {
       page += 1;
       this.config();
     });

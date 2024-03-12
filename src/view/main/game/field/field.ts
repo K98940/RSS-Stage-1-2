@@ -1,7 +1,7 @@
 import { MyElement } from '../../../../components/app/Element/my-element';
 import { check } from '../../../../components/app/utils/check';
 import { getRandom } from '../../../../components/app/utils/random';
-import { Cell, PageCollection } from '../../../../types/types';
+import { Actions, Cell, PageCollection } from '../../../../types/types';
 import './field.css';
 
 let currentLine = 0;
@@ -32,8 +32,8 @@ export class Field extends MyElement {
     this.containerSource = new MyElement({
       classNames: ['container-source'],
     });
-    document.addEventListener('continue', () => this.clickBtnContinue());
-    document.addEventListener('check', () => this.clickBtnCheck());
+    document.addEventListener(Actions.continue, () => this.clickBtnContinue());
+    document.addEventListener(Actions.check, () => this.clickBtnCheck());
   }
 
   public render() {
@@ -184,7 +184,7 @@ export class Field extends MyElement {
         this.source[currentLine].push(cell);
 
         if (this.source[currentLine].length !== 0) {
-          document.dispatchEvent(new CustomEvent('line-not-complete'));
+          document.dispatchEvent(new CustomEvent(Actions.lineNotComplete));
         }
         this.render();
       }
@@ -209,11 +209,11 @@ export class Field extends MyElement {
 
       if (this.isCorrectSequence(completedSentence)) {
         document.dispatchEvent(
-          new CustomEvent('correct-sequence', {
+          new CustomEvent(Actions.correctSequence, {
             detail: { textButton },
           }),
         );
-      } else document.dispatchEvent(new CustomEvent('wrong-sequence'));
+      } else document.dispatchEvent(new CustomEvent(Actions.wrongSequence));
     }
   }
 
@@ -234,7 +234,7 @@ export class Field extends MyElement {
       this.render();
       const restWords = this.source?.flat().length;
       if (restWords === 0) {
-        document.dispatchEvent(new CustomEvent('new-level'));
+        document.dispatchEvent(new CustomEvent(Actions.newLevel));
       }
     }
   }
