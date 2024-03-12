@@ -43,6 +43,7 @@ export type PageCollection = {
 };
 
 export type Cell = {
+  id: number;
   text: string;
   node: Html;
   x?: number;
@@ -67,4 +68,5 @@ export enum Actions {
   lineNotComplete = 'line-not-complete',
   correctSequence = 'correct-sequence',
   wrongSequence = 'wrong-sequence',
+  autoComplete = 'auto-complete',
 }

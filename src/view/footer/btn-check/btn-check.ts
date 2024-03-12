@@ -37,11 +37,13 @@ export class BtnCheck extends MyElement {
     document.addEventListener(Actions.wrongSequence, () => {
       this.action = Actions.check;
       this.setClasses(['btn_active', 'btn_check']);
+      this.setTextContent('Check');
     });
 
     document.addEventListener(Actions.lineNotComplete, () => {
       this.removeClass('btn_active');
       this.removeClass('btn_check');
+      this.setTextContent('Check');
     });
 
     document.addEventListener(

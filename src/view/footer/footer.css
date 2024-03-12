@@ -49,6 +49,40 @@
   background-color: var(--btn-check-active-bg-color);
 }
 
+.btn_auto-complete {
+  --icon-size: 3rem;
+
+  position: absolute;
+  right: var(--main-padding-lr);
+  pointer-events: all;
+  border: 1px solid var(--border-active-color);
+  color: var(--text-active-color);
+
+  @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 1rem var(--btn-shadow);
+        background-color: aliceblue;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: var(--icon-size);
+          height: var(--icon-size);
+          inset: 0;
+          top: -100%;
+          left: 50%;
+          transform: translateX(-50%);
+
+          background-image: url("./btn-auto-complete/help.gif");
+          background-repeat: no-repeat;
+          background-size: contain;
+          mix-blend-mode: multiply;
+        }
+      }
+    }
+  }
+
 .visibility_hidden {
   visibility: hidden;
 }

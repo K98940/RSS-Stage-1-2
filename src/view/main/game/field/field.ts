@@ -1,6 +1,7 @@
 import { MyElement } from '../../../../components/app/Element/my-element';
+import { autoComplete } from '../../../../components/app/utils/auto-complete';
 import { check } from '../../../../components/app/utils/check';
-import { getRandom } from '../../../../components/app/utils/random';
+import { randomizeArray } from '../../../../components/app/utils/randomize-array';
 import { Actions, Cell, PageCollection } from '../../../../types/types';
 import './field.css';
 
@@ -34,6 +35,9 @@ export class Field extends MyElement {
     });
     document.addEventListener(Actions.continue, () => this.clickBtnContinue());
     document.addEventListener(Actions.check, () => this.clickBtnCheck());
+    document.addEventListener(Actions.autoComplete, () => {
+      if (this.source) autoComplete(this.source[currentLine], ANIMATION_DELAY);
+    });
   }
 
   public render() {
@@ -104,8 +108,7 @@ export class Field extends MyElement {
     this.source = data.words.map((sentence) => {
       this.correctAnswers.push(sentence.textExample);
       const words = sentence.textExample.split(' ');
-      const randomWords = this.randomizeArray(words);
-      const cellsRow: Cell[] = randomWords.map((word) => {
+      const cellsRow: Cell[] = words.map((word, id) => {
         const node = new MyElement({
           textContent: word,
           classNames: ['field__word'],
@@ -113,10 +116,11 @@ export class Field extends MyElement {
           callback: this.handleWordClick,
         });
 
-        return { text: word, node: node.getNode() };
+        return { id, text: word, node: node.getNode() };
       });
 
-      return cellsRow;
+      const randomWords = randomizeArray(cellsRow);
+      return randomWords;
     });
 
     this.destination = this.source.map((_, line) => {
@@ -124,7 +128,9 @@ export class Field extends MyElement {
         textContent: `${line + 1}`,
         classNames: ['line-number'],
       });
-      return [{ text: `${line + 1}`, node: lineNumber.getNode() }];
+      return [
+        { id: line + 1, text: `${line + 1}`, node: lineNumber.getNode() },
+      ];
     });
     this.render();
   }
@@ -189,16 +195,6 @@ export class Field extends MyElement {
         this.render();
       }
     }
-  };
-
-  private randomizeArray = (array: string[]): string[] => {
-    const source = [...array];
-    const result = [];
-    while (source.length > 0) {
-      const element = source.splice(getRandom(0, source.length - 1), 1)[0];
-      result.push(element);
-    }
-    return result;
   };
 
   private lineComplete(): void {

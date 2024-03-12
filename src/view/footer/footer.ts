@@ -4,6 +4,7 @@ import {
   MyElementProps,
 } from '../../components/app/Element/my-element';
 import { BtnCheck } from './btn-check/btn-check';
+import { BtnAutoComplete } from './btn-auto-complete/btn-auto-complete';
 
 export default class Footer extends MyElement {
   constructor() {
@@ -13,6 +14,6 @@ export default class Footer extends MyElement {
     };
     super(prop);
 
-    this.appendNodes(new BtnCheck());
+    this.appendNodes(new BtnCheck(), new BtnAutoComplete());
   }
 }

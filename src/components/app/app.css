@@ -6,6 +6,8 @@
   --form-color-active: rgb(0, 0, 0);
   --form-label-valid: rgb(0, 255, 0);
   --form-label-invalid: rgb(255, 0, 0);
+
+  --main-padding-lr: 2rem;
 }
 
 * {
@@ -23,8 +25,4 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-._nodisplay {
-  display: none !important;
 }
