@@ -5,10 +5,8 @@ import {
 } from '../../components/app/Element/my-element';
 import Button from '../../components/app/tags/button/button';
 import { State } from '../../components/app/State/state';
-
-type MyEvent = {
-  textButton?: string;
-};
+import { BtnCheck } from './btn-check/btn-check';
+import { MyCustomEvent } from '../../types/types';
 
 export default class Footer extends MyElement {
   private state;
@@ -27,34 +25,37 @@ export default class Footer extends MyElement {
 
     this.btnContinue = new Button({
       text: 'Continue',
-      classNames: ['footer__btn-continue', 'btn-continue_hidden'],
+      classNames: ['footer__btn', 'visibility_hidden'],
       callback: () => {
         document.dispatchEvent(new CustomEvent('continue'));
-        this.btnContinue.removeClass('btn-continue_active');
+        this.btnContinue.removeClass('btn_active');
         this.btnContinue.setTextContent('Continue');
       },
     });
 
-    document.addEventListener('line', (e: CustomEventInit<MyEvent>) => {
-      if (e.detail?.textButton) {
-        this.btnContinue.setTextContent(e.detail?.textButton);
-      }
+    document.addEventListener(
+      'correct-sequence',
+      (e: CustomEventInit<MyCustomEvent>) => {
+        if (e.detail?.textButton) {
+          this.btnContinue.setTextContent(e.detail?.textButton);
+        }
 
-      this.btnContinue.setClasses(['btn-continue_active']);
-    });
+        this.btnContinue.setClasses(['btn_active']);
+      },
+    );
 
     document.addEventListener('line-not-complete', () => {
-      this.btnContinue.removeClass('btn-continue_active');
+      this.btnContinue.removeClass('btn_active');
     });
 
-    this.appendNodes(this.btnContinue);
+    this.appendNodes(this.btnContinue, new BtnCheck());
   }
 
   public update(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'game':
-        this.btnContinue.removeClass('btn-continue_hidden');
+        this.btnContinue.removeClass('visibility_hidden');
         break;
       default:
         break;

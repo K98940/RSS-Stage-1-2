@@ -1,6 +1,7 @@
 import { MyElement } from '../../../../components/app/Element/my-element';
+import { check } from '../../../../components/app/utils/check';
 import { getRandom } from '../../../../components/app/utils/random';
-import { Cell, Html, PageCollection } from '../../../../types/types';
+import { Cell, PageCollection } from '../../../../types/types';
 import './field.css';
 
 let currentLine = 0;
@@ -31,21 +32,8 @@ export class Field extends MyElement {
     this.containerSource = new MyElement({
       classNames: ['container-source'],
     });
-    document.addEventListener('continue', () => {
-      if (this.destination) {
-        const lastWord = this.destination[currentLine].length - 1;
-        this.destination[currentLine][lastWord].node.setAttribute(
-          'complete',
-          '',
-        );
-        currentLine += 1;
-        this.render();
-        const restWords = this.source?.flat().length;
-        if (restWords === 0) {
-          document.dispatchEvent(new CustomEvent('new-level'));
-        }
-      }
-    });
+    document.addEventListener('continue', () => this.clickBtnContinue());
+    document.addEventListener('check', () => this.clickBtnCheck());
   }
 
   public render() {
@@ -178,6 +166,7 @@ export class Field extends MyElement {
         line === currentLine.toString()
       ) {
         // if clicked to Destination block
+        this.clearCheckClasses(this.destination[currentLine]);
         const index = this.destination[currentLine]?.findIndex((word) => {
           return target === word.node;
         });
@@ -194,8 +183,9 @@ export class Field extends MyElement {
 
         this.source[currentLine].push(cell);
 
-        if (this.source[currentLine].length !== 0)
+        if (this.source[currentLine].length !== 0) {
           document.dispatchEvent(new CustomEvent('line-not-complete'));
+        }
         this.render();
       }
     }
@@ -211,19 +201,19 @@ export class Field extends MyElement {
     return result;
   };
 
-  private lineComplete() {
+  private lineComplete(): void {
     if (this.destination) {
       const restWords = this.source?.flat().length;
       const textButton = restWords ? 'Continue' : 'Next Page';
-
       const completedSentence = this.destination[currentLine];
+
       if (this.isCorrectSequence(completedSentence)) {
         document.dispatchEvent(
-          new CustomEvent('line', {
+          new CustomEvent('correct-sequence', {
             detail: { textButton },
           }),
         );
-      }
+      } else document.dispatchEvent(new CustomEvent('wrong-sequence'));
     }
   }
 
@@ -234,5 +224,31 @@ export class Field extends MyElement {
       .trim();
     const answer = this.correctAnswers[currentLine];
     return result === answer;
+  }
+
+  private clickBtnContinue(): void {
+    if (this.destination) {
+      const lastWord = this.destination[currentLine].length - 1;
+      this.destination[currentLine][lastWord].node.setAttribute('complete', '');
+      currentLine += 1;
+      this.render();
+      const restWords = this.source?.flat().length;
+      if (restWords === 0) {
+        document.dispatchEvent(new CustomEvent('new-level'));
+      }
+    }
+  }
+
+  private clickBtnCheck(): void {
+    if (this.destination)
+      check(this.destination[currentLine], this.correctAnswers[currentLine]);
+  }
+
+  private clearCheckClasses(sentence: Cell[]): void {
+    sentence.forEach((word, i) => {
+      if (i === 0) return;
+      word.node.classList.remove('word_correct');
+      word.node.classList.remove('word_wrong');
+    });
   }
 }

@@ -1,9 +1,11 @@
 .footer {
   --background-color: rgb(222, 184, 135);
   --btn-background-color: rgb(222, 190, 140);
-  --btn-active-bg-color: rgb(172,223,3);
+  --btn-active-bg-color: rgb(125, 255, 0);
+  --btn-check-active-bg-color: rgb(0,127,255);
   --text-color: rgb(150, 120, 70);
   --text-active-color: rgb(0, 0, 0);
+  --border-active-color: rgb(100, 70, 0);
   --btn-shadow: rgb(255, 255, 230);
 
   display: flex;
@@ -12,11 +14,12 @@
   justify-content: center;
   width: 100%;
   padding: 0.5rem 1rem;
+  gap: 2rem;
 
   background-color: var(--background-color);
 }
 
-.footer__btn-continue {
+.footer__btn {
   padding: 1rem;
   border: 1px solid grey;
   border-radius: 0.3rem;
@@ -28,9 +31,9 @@
   user-select: none;
 }
 
-.btn-continue_active {
+.btn_active {
   pointer-events: all;
-  border: 1px solid black;
+  border: 1px solid var(--border-active-color);
   color: var(--text-active-color);
   background-color: var(--btn-active-bg-color);
 
@@ -42,6 +45,10 @@
   }
 }
 
-.btn-continue_hidden {
+.btn_check {
+  background-color: var(--btn-check-active-bg-color);
+}
+
+.visibility_hidden {
   visibility: hidden;
 }

@@ -55,3 +55,7 @@ export type Matrix = {
   source: Cell[][];
   destination: Cell[][];
 };
+
+export type MyCustomEvent = {
+  textButton?: string;
+};

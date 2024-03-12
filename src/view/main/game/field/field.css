@@ -29,6 +29,7 @@
 
     & .field__word {
       box-shadow: none;
+      background-color: rgb(225, 255, 210);
     }
   }
 }
@@ -40,6 +41,8 @@
   --color-shadow: rgb(187, 107, 2);
   --background-color-hover: rgb(187, 107, 2);
   --color-hover: rgb(255, 255, 200);
+  --background-color-correct: rgb(125, 255, 0);
+  --background-color-wrong: rgb(255, 128, 0);
 
   display: flex;
   position: relative;
@@ -137,6 +140,14 @@
     z-index: -1;
     padding-left: 1rem;
   }
+}
+
+.word_wrong {
+  background-color: var(--background-color-wrong);
+}
+
+.word_correct {
+  background-color: var(--background-color-correct);
 }
 
 @keyframes word-go-away {
