@@ -68,10 +68,10 @@ export class MyElement {
     });
   }
 
-  protected setCallback(calback: Callback) {
+  public setCallback(calback: Callback, eventtype?: string) {
     const event = this.constructor.name === 'Input' ? 'keyup' : 'click';
     if (typeof calback === 'function') {
-      this.getNode().addEventListener(event, calback);
+      this.getNode().addEventListener(eventtype || event, calback);
     }
   }
 

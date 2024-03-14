@@ -6,7 +6,6 @@ export const autoComplete = (sentence: Cell[], delay: number): void => {
     .sort((a, b) => a.id - b.id)
     .forEach((word, i) => {
       setTimeout(() => {
-        console.log(i);
         word.node.dispatchEvent(clickEvent);
       }, i * delay);
     });

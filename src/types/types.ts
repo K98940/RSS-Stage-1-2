@@ -1,5 +1,5 @@
 export type Callback = {
-  (e: Event): void;
+  (e: Event | DragEvent): void;
 };
 
 export type HTMLAttributes = [string, string];
@@ -69,4 +69,10 @@ export enum Actions {
   correctSequence = 'correct-sequence',
   wrongSequence = 'wrong-sequence',
   autoComplete = 'auto-complete',
+  lineComplete = 'line-complete',
+}
+
+export enum Place {
+  destination = 'destination',
+  source = 'source',
 }

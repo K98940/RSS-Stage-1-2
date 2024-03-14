@@ -8,20 +8,23 @@
 }
 
 .field__row {
+  --color-complete: rgb(150, 150, 150);
+  --color-incomplete: rgb(0, 0, 0);
+  --color-droparea-border: rgb(0, 127, 255);
+  --color-droparea-bg: rgb(225, 255, 210);
+
   flex: 1 1 100%;
   flex-wrap: wrap;
   min-height: var(--row-height);
-
-
-  --color-complete: rgb(150, 150, 150);
-  --color-incomplete: rgb(0, 0, 0);
 
   display: flex;
   align-items: center;
   gap: 0.4rem;
 
+  border: 2px dashed transparent;
   color: var(--color-incomplete);
   user-select: none;
+  animation-name: none;
 
   &:has([complete]) {
     pointer-events: none;
@@ -29,8 +32,14 @@
 
     & .field__word {
       box-shadow: none;
-      background-color: rgb(225, 255, 210);
+      background-color: var(--color-droparea-bg);
     }
+  }
+
+  &[droppable] {
+    transition-duration: 300ms;
+    border: 2px dashed var(--color-droparea-border);
+    background-color: var(--color-droparea-bg);
   }
 }
 
@@ -39,6 +48,7 @@
   --x-coord: 0;
   --y-coord: 0;
   --color-shadow: rgb(187, 107, 2);
+  --background-color-word: rgb(255, 248, 220);
   --background-color-hover: rgb(187, 107, 2);
   --color-hover: rgb(255, 255, 200);
   --background-color-correct: rgb(125, 255, 0);
@@ -58,9 +68,10 @@
   font-size: var(--font-size);
   font-weight: 700;
   cursor: pointer;
-  user-select: none;
   box-shadow: 0.2rem 0.2rem 0.5rem var(--color-shadow);
-  background-color: var(--background-color);
+  background-color: var(--background-color-word);
+  transition-duration: 500ms;
+  touch-action: none;
 
   &[go-away] {
     z-index: 1;
@@ -89,6 +100,22 @@
   @container (max-width: 425px) {
     --font-size: 1rem;
     --row-height: 1.6rem;
+  }
+}
+
+.ghost-element {
+  --ghost-size: 1rem;
+  position: relative;
+  transition-duration: 200ms;
+  transform: translateX(var(--ghost-size));
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: calc(var(--ghost-size)*-1);
+    width: var(--ghost-size);
+    height: 2rem;
   }
 }
 
@@ -121,8 +148,8 @@
   padding: 0.5rem;
 
   font-size: 1.5rem;
-  background-color: gainsboro;
-  border-bottom: 2px solid grey;
+  background-color: rgb(220, 220, 220);
+  border-bottom: 2px solid rgb(128, 128, 128);
 
   & .field__row {
     justify-content: center;

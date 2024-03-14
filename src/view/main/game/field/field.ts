@@ -2,11 +2,15 @@ import { MyElement } from '../../../../components/app/Element/my-element';
 import { autoComplete } from '../../../../components/app/utils/auto-complete';
 import { check } from '../../../../components/app/utils/check';
 import { randomizeArray } from '../../../../components/app/utils/randomize-array';
-import { Actions, Cell, PageCollection } from '../../../../types/types';
+import { Actions, Cell, PageCollection, Place } from '../../../../types/types';
 import './field.css';
+import dragImage from './drag-image.webp';
 
 let currentLine = 0;
 const ANIMATION_DELAY = 300;
+const imgDrag = new Image();
+imgDrag.src = dragImage;
+imgDrag.classList.add('drag-image');
 
 export class Field extends MyElement {
   parent;
@@ -35,6 +39,7 @@ export class Field extends MyElement {
     });
     document.addEventListener(Actions.continue, () => this.clickBtnContinue());
     document.addEventListener(Actions.check, () => this.clickBtnCheck());
+    document.addEventListener(Actions.lineComplete, () => this.lineComplete());
     document.addEventListener(Actions.autoComplete, () => {
       if (this.source) autoComplete(this.source[currentLine], ANIMATION_DELAY);
     });
@@ -64,7 +69,10 @@ export class Field extends MyElement {
   }
 
   private createCellsRow(cells: Cell[], wrapContainer?: boolean): MyElement {
-    const row = new MyElement({ classNames: ['field__row'] });
+    const row = new MyElement({
+      classNames: ['field__row'],
+      attributes: wrapContainer ? undefined : [['source', Place.source]],
+    });
     cells.forEach((cell, i) => {
       if (wrapContainer && i === 0) return;
 
@@ -105,16 +113,21 @@ export class Field extends MyElement {
   public createMatrix(data: PageCollection) {
     currentLine = 0;
     this.correctAnswers.length = 0;
-    this.source = data.words.map((sentence) => {
+    this.source = data.words.map((sentence, i) => {
       this.correctAnswers.push(sentence.textExample);
       const words = sentence.textExample.split(' ');
       const cellsRow: Cell[] = words.map((word, id) => {
         const node = new MyElement({
           textContent: word,
           classNames: ['field__word'],
-          attributes: [['place', 'source']],
+          attributes: [
+            ['id', `word-${i}-${id}`],
+            ['place', Place.source],
+            ['draggable', 'true'],
+          ],
           callback: this.handleWordClick,
         });
+        node.setCallback(this.dragstartHandler.bind(this), 'dragstart');
 
         return { id, text: word, node: node.getNode() };
       });
@@ -142,13 +155,13 @@ export class Field extends MyElement {
       const place = target.getAttribute('place');
       const line = target.getAttribute('line');
 
-      if (this.source && place === 'source') {
+      if (this.source && place === Place.source) {
         // if clicked to Source block
         const index = this.source[currentLine]?.findIndex((word) => {
           return target === word.node;
         });
         const cell = this.source[currentLine].splice(index, 1)[0];
-        cell.node.setAttribute('place', 'destination');
+        cell.node.setAttribute('place', Place.destination);
         cell.node.setAttribute('line', `${currentLine}`);
 
         // ============== go-away word
@@ -168,7 +181,7 @@ export class Field extends MyElement {
 
       if (
         this.destination &&
-        place === 'destination' &&
+        place === Place.destination &&
         line === currentLine.toString()
       ) {
         // if clicked to Destination block
@@ -177,7 +190,7 @@ export class Field extends MyElement {
           return target === word.node;
         });
         const cell = this.destination[currentLine].splice(index, 1)[0];
-        cell.node.setAttribute('place', 'source');
+        cell.node.setAttribute('place', Place.source);
 
         // ============== go-away word
         const coord = cell.node.getBoundingClientRect();
@@ -203,6 +216,7 @@ export class Field extends MyElement {
       const textButton = restWords ? 'Continue' : 'Next Page';
       const completedSentence = this.destination[currentLine];
 
+      this.clearCheckClasses(this.destination[currentLine]);
       if (this.isCorrectSequence(completedSentence)) {
         document.dispatchEvent(
           new CustomEvent(Actions.correctSequence, {
@@ -246,5 +260,177 @@ export class Field extends MyElement {
       word.node.classList.remove('word_correct');
       word.node.classList.remove('word_wrong');
     });
+  }
+
+  private dragstartHandler(e: Event | DragEvent): void {
+    if (!(e instanceof DragEvent && e.target instanceof HTMLElement)) return;
+    if (!e.dataTransfer) return;
+    if (!this.source || !this.destination) return;
+
+    const currentPlace = e.target.getAttribute('place');
+    e.dataTransfer.setDragImage(imgDrag, imgDrag.width / 2, imgDrag.height / 2);
+    e.dataTransfer.setData('text/plain', `${e.target.id};${currentPlace}`);
+    const destElement =
+      this.containerDestination.getNode().children[currentLine].children[1];
+    const sourceElemet = this.containerSource.getNode().children[0];
+    const sourceLine = this.source[currentLine];
+    const destinationLine = this.destination[currentLine];
+
+    sourceElemet.addEventListener(
+      'drop',
+      this.dropHandler.bind({
+        ...this,
+        sourceLine,
+        destinationLine,
+      }),
+      { once: true },
+    );
+    sourceElemet.addEventListener('dragover', this.dragoverHandler);
+    sourceElemet.addEventListener('dragleave', this.dragleaveHandler);
+
+    destElement.addEventListener(
+      'drop',
+      this.dropHandler.bind({
+        ...this,
+        sourceLine,
+        destinationLine,
+      }),
+      { once: true },
+    );
+    destElement.addEventListener(
+      'dragover',
+      this.dragoverHandler.bind({
+        ...this,
+        sourceLine,
+        destinationLine,
+      }),
+    );
+    destElement.addEventListener('dragleave', this.dragleaveHandler);
+    e.target.addEventListener(
+      'dragend',
+      () => {
+        function clearElement(element: Element): void {
+          [...element.children].forEach((children) =>
+            children.classList.remove('ghost-element'),
+          );
+          element.removeAttribute('droppable');
+        }
+
+        clearElement(destElement);
+        clearElement(sourceElemet);
+      },
+      { once: true },
+    );
+    destElement.setAttribute('droppable', '');
+    sourceElemet.setAttribute('droppable', '');
+  }
+
+  private dropHandler(e: Event | DragEvent): void {
+    const selectSourceAndDestination = (
+      transferElementID: string,
+      dragFrom: Place | string,
+      target: Element,
+    ) => {
+      const dropedToSource = target
+        ?.closest('.field__row')
+        ?.getAttribute('source');
+
+      if (dragFrom === Place.source) {
+        const transferElementNode = this.containerSource
+          .getNode()
+          .querySelector(`#${transferElementID}`);
+        transferElementNode?.setAttribute(
+          'place',
+          dropedToSource ? Place.source : Place.destination,
+        );
+        transferElementNode?.setAttribute('line', `${currentLine}`);
+        if (this.source)
+          return {
+            source: this.source[currentLine],
+            destination: dropedToSource ? this.source : this.destination,
+            transferElementNode,
+          };
+      }
+      const transferElementNode = this.containerDestination
+        .getNode()
+        .querySelector(`#${transferElementID}`);
+      transferElementNode?.setAttribute(
+        'place',
+        dropedToSource ? Place.source : Place.destination,
+      );
+      transferElementNode?.setAttribute('line', `${currentLine}`);
+      if (!this.destination)
+        return {
+          source: null,
+          transferElementNode,
+          destination: dropedToSource ? this.source : this.destination,
+        };
+      return {
+        source: this.destination[currentLine],
+        transferElementNode,
+        destination: dropedToSource ? this.source : this.destination,
+      };
+    };
+
+    e.preventDefault();
+    if (this instanceof HTMLElement) this.removeAttribute('droppable');
+    if (!(e instanceof DragEvent && e.dataTransfer)) return;
+    if (!(e.target instanceof Element)) return;
+
+    const [transferElementID, from] = e.dataTransfer
+      .getData('text/plain')
+      .split(';');
+    const destinationNode = e.target.closest('.field__row');
+    const target = e.target; // the card droped on this target
+    const { source, destination, transferElementNode } =
+      selectSourceAndDestination(transferElementID, from, target);
+    if (!transferElementNode || !destinationNode || !source) return;
+    if (!destination || !source || !this.source) return;
+
+    const indexSource = source.findIndex(
+      (cell) => cell.node.id === transferElementID,
+    );
+    if (target.classList.contains('field__word')) {
+      // insert mode
+      const childrens = [...destinationNode.children];
+      const indexDestination = childrens.indexOf(target);
+
+      const transferElement = source.splice(indexSource, 1);
+      destination[currentLine].splice(
+        indexDestination + 1,
+        0,
+        ...transferElement,
+      );
+      target.insertAdjacentElement('beforebegin', transferElementNode);
+    } else {
+      // append to end of line
+      const transferElement = source.splice(indexSource, 1);
+      destination[currentLine].push(...transferElement);
+      destinationNode.appendChild(transferElementNode);
+    }
+
+    if (this.source[currentLine].length === 0) {
+      // here always only this.source
+      document.dispatchEvent(new CustomEvent(Actions.lineComplete));
+    } else document.dispatchEvent(new CustomEvent(Actions.lineNotComplete));
+  }
+
+  private dragoverHandler(e: Event | DragEvent): void {
+    e.preventDefault();
+    if (!(e instanceof DragEvent && e.dataTransfer)) return;
+    e.dataTransfer.dropEffect = 'move';
+    const targetNode = e.target;
+    if (!(targetNode instanceof Element)) return;
+    if (targetNode.classList.contains('field__word')) {
+      targetNode.classList.add('ghost-element');
+    }
+  }
+
+  private dragleaveHandler(e: Event | DragEvent): void {
+    e.preventDefault();
+    if (!(e instanceof DragEvent && e.dataTransfer)) return;
+    const targetNode = e.target;
+    if (!(targetNode instanceof Element)) return;
+    targetNode.classList.remove('ghost-element');
   }
 }
