@@ -1,10 +1,15 @@
 import { MyElement } from '../../../../components/app/Element/my-element';
 import { autoComplete } from '../../../../components/app/utils/auto-complete';
 import { check } from '../../../../components/app/utils/check';
-import { randomizeArray } from '../../../../components/app/utils/randomize-array';
+import {
+  randomizeArray,
+  setCardsWidth,
+} from '../../../../components/app/utils/randomize-array';
 import { Actions, Cell, PageCollection, Place } from '../../../../types/types';
 import './field.css';
 import dragImage from './drag-image.webp';
+import { Puzzle } from '../../../../components/puzzle/puzzle';
+import { getTarget } from '../../../../components/app/utils/getTarget';
 
 let currentLine = 0;
 const ANIMATION_DELAY = 300;
@@ -50,6 +55,7 @@ export class Field extends MyElement {
     this.getNode().innerHTML = '';
     this.containerDestination.getNode().innerHTML = '';
     this.containerSource.getNode().innerHTML = '';
+    document.documentElement.style.setProperty('--trantition-duration', `0`);
 
     if (this.destination)
       this.destination.forEach((sentence) => {
@@ -64,7 +70,9 @@ export class Field extends MyElement {
         this.containerSource.appendNodes(row);
       }
     });
+    setCardsWidth(this.containerSource);
     this.appendNodes(this.containerSource);
+
     this.parent.appendNodes(this.containerDestination, this.containerSource);
   }
 
@@ -117,14 +125,16 @@ export class Field extends MyElement {
       this.correctAnswers.push(sentence.textExample);
       const words = sentence.textExample.split(' ');
       const cellsRow: Cell[] = words.map((word, id) => {
-        const node = new MyElement({
+        const classFirstElement = id === 0 ? '' : 'puzzle-element_mask';
+        const node = new Puzzle({
           textContent: word,
-          classNames: ['field__word'],
+          classNames: ['field__word', classFirstElement],
           attributes: [
             ['id', `word-${i}-${id}`],
             ['place', Place.source],
             ['draggable', 'true'],
           ],
+          design: 'middle',
           callback: this.handleWordClick,
         });
         node.setCallback(this.dragstartHandler.bind(this), 'dragstart');
@@ -132,6 +142,8 @@ export class Field extends MyElement {
         return { id, text: word, node: node.getNode() };
       });
 
+      const lastCell = cellsRow[cellsRow.length - 1].node;
+      lastCell.classList.add('puzzle-element_last');
       const randomWords = randomizeArray(cellsRow);
       return randomWords;
     });
@@ -149,7 +161,7 @@ export class Field extends MyElement {
   }
 
   private handleWordClick = (e: Event) => {
-    const target = e?.target;
+    const target = e?.currentTarget;
 
     if (target instanceof HTMLElement) {
       const place = target.getAttribute('place');
@@ -267,9 +279,12 @@ export class Field extends MyElement {
     if (!e.dataTransfer) return;
     if (!this.source || !this.destination) return;
 
-    const currentPlace = e.target.getAttribute('place');
     e.dataTransfer.setDragImage(imgDrag, imgDrag.width / 2, imgDrag.height / 2);
-    e.dataTransfer.setData('text/plain', `${e.target.id};${currentPlace}`);
+    const puzzle = e.currentTarget;
+    if (puzzle instanceof HTMLElement) {
+      const currentPlace = puzzle.getAttribute('place');
+      e.dataTransfer.setData('text/plain', `${puzzle?.id};${currentPlace}`);
+    }
     const destElement =
       this.containerDestination.getNode().children[currentLine].children[1];
     const sourceElemet = this.containerSource.getNode().children[0];
@@ -381,7 +396,9 @@ export class Field extends MyElement {
       .getData('text/plain')
       .split(';');
     const destinationNode = e.target.closest('.field__row');
-    const target = e.target; // the card droped on this target
+    const target = getTarget(e, 'field__word');
+    if (!target) return;
+
     const { source, destination, transferElementNode } =
       selectSourceAndDestination(transferElementID, from, target);
     if (!transferElementNode || !destinationNode || !source) return;
@@ -390,27 +407,24 @@ export class Field extends MyElement {
     const indexSource = source.findIndex(
       (cell) => cell.node.id === transferElementID,
     );
-    if (target.classList.contains('field__word')) {
-      // insert mode
-      const childrens = [...destinationNode.children];
-      const indexDestination = childrens.indexOf(target);
-
-      const transferElement = source.splice(indexSource, 1);
-      destination[currentLine].splice(
-        indexDestination + 1,
-        0,
-        ...transferElement,
-      );
-      target.insertAdjacentElement('beforebegin', transferElementNode);
-    } else {
-      // append to end of line
-      const transferElement = source.splice(indexSource, 1);
-      destination[currentLine].push(...transferElement);
-      destinationNode.appendChild(transferElementNode);
-    }
+    // insert mode
+    const childrens = [...destinationNode.children];
+    const indexDestination =
+      childrens.indexOf(target) === -1
+        ? destination[currentLine].length
+        : childrens.indexOf(target);
+    const insertMethod =
+      childrens.indexOf(target) === -1 ? 'beforeend' : 'beforebegin';
+    const transferElement = source.splice(indexSource, 1);
+    destination[currentLine].splice(
+      indexDestination + 1,
+      0,
+      ...transferElement,
+    );
+    target.insertAdjacentElement(insertMethod, transferElementNode);
 
     if (this.source[currentLine].length === 0) {
-      // here always only this.source
+      // here exactly this.source
       document.dispatchEvent(new CustomEvent(Actions.lineComplete));
     } else document.dispatchEvent(new CustomEvent(Actions.lineNotComplete));
   }
@@ -421,9 +435,14 @@ export class Field extends MyElement {
     e.dataTransfer.dropEffect = 'move';
     const targetNode = e.target;
     if (!(targetNode instanceof Element)) return;
-    if (targetNode.classList.contains('field__word')) {
+
+    if (targetNode.id) {
       targetNode.classList.add('ghost-element');
+      return;
     }
+
+    const puzzle = targetNode.closest('.field__word');
+    puzzle?.classList.add('ghost-element');
   }
 
   private dragleaveHandler(e: Event | DragEvent): void {
@@ -431,6 +450,13 @@ export class Field extends MyElement {
     if (!(e instanceof DragEvent && e.dataTransfer)) return;
     const targetNode = e.target;
     if (!(targetNode instanceof Element)) return;
-    targetNode.classList.remove('ghost-element');
+
+    if (targetNode.id) {
+      targetNode.classList.remove('ghost-element');
+      return;
+    }
+
+    const puzzle = targetNode.closest('.field__word');
+    puzzle?.classList.remove('ghost-element');
   }
 }

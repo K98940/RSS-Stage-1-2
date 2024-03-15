@@ -47,9 +47,9 @@ export class MyElement {
     });
   }
 
-  public setClasses(classes: string[]) {
+  public setClasses(classes: (string | null)[]) {
     classes.forEach((className) => {
-      this.node.classList.add(className);
+      if (className) this.node.classList.add(className);
     });
   }
 

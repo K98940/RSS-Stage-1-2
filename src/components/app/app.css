@@ -8,6 +8,7 @@
   --form-label-invalid: rgb(255, 0, 0);
 
   --main-padding-lr: 2rem;
+  --trantition-duration: 0;
 }
 
 * {

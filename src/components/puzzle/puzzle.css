@@ -1,0 +1,115 @@
+.puzzle-element {
+  --width-element: 0;
+  --color: rgb(240, 240, 240);
+  --color-word-correct: rgb(240, 240, 240);
+  --color-word-wrong: rgb(0, 0, 0);
+  --background-color: rgb(2, 89, 177);
+  --background-color-hover: color-mix(in srgb, var(--background-color) 80%, black 20%);
+  --background-color-correct: rgb(70, 110, 30);
+  --background-color-wrong: rgb(235, 120, 0);
+
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 2.2rem;
+
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition-duration: var(--trantition-duration);
+
+  color: var(--color);
+
+  &[width] {
+    width: var(--width-element);
+  }
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    left: -0.8rem;
+    width: 0.8rem;
+    height: 100%;
+    z-index: 1;
+
+    background-color: var(--background-color);
+
+    mask-image: url("./mask.webp");
+    mask-size: 7rem 100%;
+    mask-repeat: no-repeat;
+    mask-position: 0;
+  }
+
+  &:has(+.puzzle-element_mask) {
+    & .puzzle-right-part {
+      width: 0.8rem;
+    }
+  }
+}
+
+.puzzle-element ~ .puzzle-element_mask {
+  margin-left: 0rem;
+}
+
+.puzzle-core {
+  display: flex;
+  flex: 1 1 1rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 0.7rem 0 0.5rem;
+
+  background-color: var(--background-color);
+}
+
+.puzzle-right-part {
+  width: 0.8rem;
+  height: 1rem;
+  border-radius: 10% 50% 50% 10%;
+
+  z-index: 1;
+
+  background-color: var(--background-color);
+}
+
+.puzzle-element_mask {
+  margin-left: 1rem;
+  &::before {
+    content: "";
+  }
+}
+
+.puzzle-element_last {
+  & .puzzle-right-part {
+    width: 0.1rem;
+    border-radius: 0;
+    background-color: transparent !important;
+  }
+}
+
+.word_wrong {
+  &::before,
+  & .puzzle-core,
+  & .puzzle-right-part {
+    color: var(--color-word-wrong);
+    background-color: var(--background-color-wrong);
+  }
+}
+
+.word_correct {
+  &::before,
+  .puzzle-core,
+  .puzzle-right-part {
+    color: var(--color-word-correct);
+    background-color: var(--background-color-correct);
+  }
+}
+
+@media (hover: hover) {
+  .puzzle-element:hover::before,
+  .puzzle-element:hover .puzzle-core,
+  .puzzle-element:hover .puzzle-right-part {
+    background-color: var(--background-color-hover);
+  }
+}
