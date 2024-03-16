@@ -12,10 +12,13 @@ export type InputProps = {
   callback?: Callback;
 };
 
+export type TranslateMode = 'before' | 'after';
+
 export type StateObect = {
   firstName: string | null;
   surname: string | null;
   _level: number;
+  _hintTranslateMode: TranslateMode;
   process?: 'login' | 'start' | 'game';
   DOM?: {
     [index: string]: HTMLElement;
@@ -72,6 +75,7 @@ export enum Actions {
   autoComplete = 'auto-complete',
   lineComplete = 'line-complete',
   showTranslate = 'show-translate',
+  hideTranslate = 'hide-translate',
   setTranslate = 'set-translate',
 }
 

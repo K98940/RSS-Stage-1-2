@@ -1,10 +1,11 @@
-import { StateObect } from './../../../types/types';
+import { StateObect, TranslateMode } from './../../../types/types';
 import { MyElement } from '../Element/my-element';
 
 export const initialState: StateObect = {
   firstName: null,
   surname: null,
   _level: 0,
+  _hintTranslateMode: 'after',
 };
 
 export class State {
@@ -59,5 +60,13 @@ export class State {
       return;
     }
     this.state._level = lvl;
+  }
+
+  get hintTranslateMode(): TranslateMode {
+    return this.state._hintTranslateMode;
+  }
+
+  set hintTranslateMode(mode: TranslateMode) {
+    this.state._hintTranslateMode = mode;
   }
 }

@@ -17,6 +17,7 @@ export class HintTranslate extends MyElement {
     this.hints = [];
     this.state = new State();
     document.addEventListener(Actions.showTranslate, this.showHint.bind(this));
+    document.addEventListener(Actions.hideTranslate, this.hideHint.bind(this));
     document.addEventListener(Actions.setTranslate, this.setHint.bind(this));
   }
 
@@ -38,6 +39,10 @@ export class HintTranslate extends MyElement {
   }
 
   public showHint(): void {
-    this.getNode().classList.toggle('hint-translate_show');
+    this.getNode().classList.add('hint-translate_show');
+  }
+
+  public hideHint(): void {
+    this.getNode().classList.remove('hint-translate_show');
   }
 }

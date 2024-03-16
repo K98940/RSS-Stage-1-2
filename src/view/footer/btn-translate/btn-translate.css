@@ -1,8 +1,12 @@
 .btn_show-translate {
   --color-btn-border: rgb(0, 0, 0);
   --color-text: var(--color-btn-border);
+  --color-bg-after: rgb(0, 10, 225);
+  --color-bg-before: rgb(20, 225, 20);
+  --color-text-after: rgb(255, 255, 255);
 
   position: relative;
+  padding-top: 1rem;
   border: 1px solid var(--color-btn-border);
   border-radius: 0.3rem;
 
@@ -13,6 +17,15 @@
   cursor: pointer;
   user-select: none;
 
+  &::after {
+  content: 'after';
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    padding: 0 0.2rem;
+    color: var(--color-text);
+  }
+
   @media (hover: hover) {
     &:hover {
       background-color: color-mix(in srgb, var(--btn-background-color) 95%, black 5%);
@@ -20,18 +33,14 @@
   }
 }
 
-.btn_show-indicator::after {
-  --color-bg: rgb(50, 255, 50);
-
-  content: '';
-  display: block;
+.btn_show-always::after {
+  content: 'before';
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 0.5rem;
-  height: 0.5rem;
+  top: 0.2rem;
+  right: 0.2rem;
+  padding: 0 0.2rem;
+  color: var(--color-text);
 
-  border-radius: 50%;
-  background-color: var(--color-bg);
-  box-shadow: 0 0 0.5rem var(--color-bg);
+  background-color: var(--color-bg-before);
+  box-shadow: 0 0 0.5rem var(--color-bg-before);
 }

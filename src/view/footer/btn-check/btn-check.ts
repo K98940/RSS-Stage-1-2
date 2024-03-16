@@ -27,6 +27,8 @@ export class BtnCheck extends MyElement {
       this.action = Actions.continue;
       this.removeClass('btn_active');
       this.removeClass('btn_check');
+      if (this.state.hintTranslateMode === 'after')
+        document.dispatchEvent(new CustomEvent(Actions.hideTranslate));
     });
 
     document.addEventListener(Actions.correctSequence, () => {

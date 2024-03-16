@@ -246,6 +246,7 @@ export class Field extends MyElement {
 
       this.clearCheckClasses(this.destination[this.state.level]);
       if (this.isCorrectSequence(completedSentence)) {
+        document.dispatchEvent(new CustomEvent(Actions.showTranslate));
         document.dispatchEvent(
           new CustomEvent(Actions.correctSequence, {
             detail: { textButton },

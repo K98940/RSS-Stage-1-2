@@ -30,7 +30,17 @@ export class BtnShowTranslate extends MyElement {
   }
 
   private handleClick(): void {
-    this.getNode().classList.toggle('btn_show-indicator');
-    document.dispatchEvent(new CustomEvent(Actions.showTranslate));
+    switch (this.state.hintTranslateMode) {
+      case 'after':
+        this.state.hintTranslateMode = 'before';
+        this.getNode().classList.add('btn_show-always');
+        document.dispatchEvent(new CustomEvent(Actions.showTranslate));
+        break;
+      case 'before':
+        this.state.hintTranslateMode = 'after';
+        this.getNode().classList.remove('btn_show-always');
+        document.dispatchEvent(new CustomEvent(Actions.hideTranslate));
+        break;
+    }
   }
 }
