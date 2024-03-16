@@ -77,6 +77,8 @@ export enum Actions {
   showTranslate = 'show-translate',
   hideTranslate = 'hide-translate',
   setTranslate = 'set-translate',
+  playHint = 'play-hint',
+  setAudioHints = 'set-audio-hints',
 }
 
 export enum Place {

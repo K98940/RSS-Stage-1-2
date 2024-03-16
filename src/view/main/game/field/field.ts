@@ -1,3 +1,4 @@
+import { HintAudio } from './../../../../components/hint-audio/hint-audio';
 import { HintTranslate } from './../../../../components/hint-translate/hint-translate';
 import { MyElement } from '../../../../components/app/Element/my-element';
 import { autoComplete } from '../../../../components/app/utils/auto-complete';
@@ -35,6 +36,8 @@ export class Field extends MyElement {
 
   hintTranslate: HintTranslate;
 
+  HintAudio: HintAudio;
+
   constructor(parent: MyElement) {
     super({});
     this.parent = parent;
@@ -48,6 +51,7 @@ export class Field extends MyElement {
       classNames: ['container-source'],
     });
     this.hintTranslate = new HintTranslate();
+    this.HintAudio = new HintAudio();
     this.state = new State();
     document.addEventListener(Actions.continue, () => this.clickBtnContinue());
     document.addEventListener(Actions.check, () => this.clickBtnCheck());
@@ -135,10 +139,12 @@ export class Field extends MyElement {
     this.state.level = 0;
     this.correctAnswers.length = 0;
     this.hintTranslate.clearHints();
+    this.HintAudio.clearHints();
 
     this.source = data.words.map((sentence, i) => {
       this.correctAnswers.push(sentence.textExample);
       this.hintTranslate.addHint(sentence.textExampleTranslate);
+      this.HintAudio.addHint(sentence.audioExample);
       const words = sentence.textExample.split(' ');
       const cellsRow: Cell[] = words.map((word, id) => {
         const classFirstElement = id === 0 ? '' : 'puzzle-element_mask';
