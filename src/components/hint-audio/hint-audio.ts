@@ -3,14 +3,24 @@ import { State } from '../app/State/state';
 const BASE_URL =
   'https://github.com/rolling-scopes-school/rss-puzzle-data/raw/main/';
 
-export class HintAudio {
-  urls: string[];
+type Subscriber = { (): void };
+const subscribersPlay: Subscriber[] = [];
+const subscribersEnded: Subscriber[] = [];
 
-  state: State;
+export class HintAudio {
+  private urls: string[];
+
+  private state: State;
+
+  private audio;
 
   constructor() {
     this.urls = [];
     this.state = new State();
+    this.audio = new Audio();
+    this.audio.addEventListener('ended', this.handlerEnded.bind(this));
+    this.audio.addEventListener('play', this.handlerPlay.bind(this));
+    this.audio.addEventListener('canplay', this.handleCanPlay.bind(this));
     document.addEventListener(Actions.playHint, this.playHint.bind(this));
   }
 
@@ -26,7 +36,23 @@ export class HintAudio {
     const url = this.urls[this.state.level];
     if (!url) return;
 
-    const audio = new Audio(BASE_URL + url);
-    audio.play();
+    this.audio.src = BASE_URL + url;
+  }
+
+  public subscribe(fooStart: Subscriber, fooEnd: Subscriber): void {
+    subscribersPlay.push(fooStart);
+    subscribersEnded.push(fooEnd);
+  }
+
+  private handleCanPlay() {
+    this.audio.play();
+  }
+
+  private handlerPlay() {
+    subscribersPlay.forEach((foo) => foo());
+  }
+
+  private handlerEnded() {
+    subscribersEnded.forEach((foo) => foo());
   }
 }

@@ -12,7 +12,12 @@
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-text);
+
   background-color: var(--btn-background-color);
+  background-image: url("./btn-aydio-hint-white.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 
   cursor: pointer;
   user-select: none;
@@ -22,4 +27,16 @@
       background-color: color-mix(in srgb, var(--btn-background-color) 95%, black 5%);
     }
   }
+}
+
+.audio-hint_wait {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.audio-hint_play {
+  pointer-events: none;
+  opacity: 1;
+  mix-blend-mode: darken;
+  background-image: url("./btn-aydio-hint.gif");
 }
