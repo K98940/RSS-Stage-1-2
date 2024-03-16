@@ -45,6 +45,13 @@
   }
 }
 
+.btn-group-1 {
+  height: 100%;
+  width: 5rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
 .btn_check {
   background-color: var(--btn-check-active-bg-color);
 }

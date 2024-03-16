@@ -11,7 +11,7 @@ export class BtnCheck extends MyElement {
     super({
       tag: 'button',
       textContent: 'Check',
-      classNames: ['footer__btn', 'visibility_hidden'],
+      classNames: ['footer__btn', 'visibility_hidden', 'btn-group-1'],
       callback: () => {
         document.dispatchEvent(new CustomEvent(this.action));
         this.removeClass('btn_active');

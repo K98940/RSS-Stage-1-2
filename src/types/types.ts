@@ -15,6 +15,7 @@ export type InputProps = {
 export type StateObect = {
   firstName: string | null;
   surname: string | null;
+  _level: number;
   process?: 'login' | 'start' | 'game';
   DOM?: {
     [index: string]: HTMLElement;
@@ -70,6 +71,8 @@ export enum Actions {
   wrongSequence = 'wrong-sequence',
   autoComplete = 'auto-complete',
   lineComplete = 'line-complete',
+  showTranslate = 'show-translate',
+  setTranslate = 'set-translate',
 }
 
 export enum Place {

@@ -4,6 +4,7 @@ import { MyElement } from '../Element/my-element';
 export const initialState: StateObect = {
   firstName: null,
   surname: null,
+  _level: 0,
 };
 
 export class State {
@@ -46,5 +47,17 @@ export class State {
     const state = this.getState();
 
     this.state = { ...state, ...{ DOM: { ...element } } };
+  }
+
+  get level(): number {
+    return this.state._level;
+  }
+
+  set level(lvl: number) {
+    if (lvl < 0) {
+      console.error('level < 0');
+      return;
+    }
+    this.state._level = lvl;
   }
 }

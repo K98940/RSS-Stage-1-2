@@ -1,0 +1,37 @@
+.btn_show-translate {
+  --color-btn-border: rgb(0, 0, 0);
+  --color-text: var(--color-btn-border);
+
+  position: relative;
+  border: 1px solid var(--color-btn-border);
+  border-radius: 0.3rem;
+
+  font-weight: 700;
+  color: var(--color-text);
+  background-color: var(--btn-background-color);
+
+  cursor: pointer;
+  user-select: none;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: color-mix(in srgb, var(--btn-background-color) 95%, black 5%);
+    }
+  }
+}
+
+.btn_show-indicator::after {
+  --color-bg: rgb(50, 255, 50);
+
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  box-shadow: 0 0 0.5rem var(--color-bg);
+}
