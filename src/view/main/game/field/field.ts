@@ -1,7 +1,10 @@
 import { HintAudio } from './../../../../components/hint-audio/hint-audio';
 import { HintTranslate } from './../../../../components/hint-translate/hint-translate';
 import { MyElement } from '../../../../components/app/Element/my-element';
-import { autoComplete } from '../../../../components/app/utils/auto-complete';
+import {
+  autoComplete,
+  resetCurrentLevel,
+} from '../../../../components/app/utils/auto-complete';
 import { check } from '../../../../components/app/utils/check';
 import {
   randomizeArray,
@@ -58,8 +61,16 @@ export class Field extends MyElement {
     document.addEventListener(Actions.lineComplete, () => this.lineComplete());
 
     document.addEventListener(Actions.autoComplete, () => {
-      if (this.source)
+      if (this.source && this.destination) {
+        this.clearCheckClasses(this.destination[this.state.level]);
+        resetCurrentLevel(
+          this.source[this.state.level],
+          this.destination[this.state.level],
+          this.containerSource.getNode().children[this.state.level],
+          this.containerDestination.getNode().children[this.state.level],
+        );
         autoComplete(this.source[this.state.level], ANIMATION_DELAY);
+      }
     });
   }
 
