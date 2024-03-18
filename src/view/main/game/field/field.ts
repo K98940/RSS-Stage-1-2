@@ -1,3 +1,4 @@
+import { State } from './../../../../components/app/State/state';
 import { HintAudio } from './../../../../components/hint-audio/hint-audio';
 import { HintTranslate } from './../../../../components/hint-translate/hint-translate';
 import { MyElement } from '../../../../components/app/Element/my-element';
@@ -15,7 +16,6 @@ import './field.css';
 import dragImage from './drag-image.webp';
 import { Puzzle } from '../../../../components/puzzle/puzzle';
 import { getTarget } from '../../../../components/app/utils/getTarget';
-import { State } from '../../../../components/app/State/state';
 
 const ANIMATION_DELAY = 300;
 const imgDrag = new Image();
@@ -292,12 +292,22 @@ export class Field extends MyElement {
   }
 
   private clickBtnContinue(): void {
+    const resetCardsWidth = () => {
+      if (this.destination) {
+        const cards = this.destination[this.state.currentLine];
+        cards.forEach((card) => {
+          card.node.style.width = '';
+        });
+      }
+    };
+
     if (this.destination) {
       const lastWord = this.destination[this.state.currentLine].length - 1;
       this.destination[this.state.currentLine][lastWord].node.setAttribute(
         'complete',
         '',
       );
+      resetCardsWidth();
       this.state.currentLine += 1;
       this.render();
       const restWords = this.source?.flat().length;
