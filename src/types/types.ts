@@ -17,7 +17,9 @@ export type TranslateMode = 'before' | 'after';
 export type StateObect = {
   firstName: string | null;
   surname: string | null;
-  _level: number;
+  _round?: number;
+  _level?: string;
+  _currentLine?: number;
   _hintTranslateMode: TranslateMode;
   process?: 'login' | 'start' | 'game';
   DOM?: {
@@ -79,6 +81,7 @@ export enum Actions {
   setTranslate = 'set-translate',
   playHint = 'play-hint',
   setAudioHints = 'set-audio-hints',
+  changeLevel = 'change-level',
 }
 
 export enum Place {

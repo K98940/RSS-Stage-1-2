@@ -33,7 +33,7 @@ export class HintAudio {
   }
 
   public playHint(): void {
-    const url = this.urls[this.state.level];
+    const url = this.urls[this.state.currentLine];
     if (!url) return;
 
     this.audio.src = BASE_URL + url;

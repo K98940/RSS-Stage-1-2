@@ -62,7 +62,7 @@ export class BtnCheck extends MyElement {
     );
   }
 
-  public update(): void {
+  public updateValue(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'game':

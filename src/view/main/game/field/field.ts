@@ -62,14 +62,14 @@ export class Field extends MyElement {
 
     document.addEventListener(Actions.autoComplete, () => {
       if (this.source && this.destination) {
-        this.clearCheckClasses(this.destination[this.state.level]);
+        this.clearCheckClasses(this.destination[this.state.currentLine]);
         resetCurrentLevel(
-          this.source[this.state.level],
-          this.destination[this.state.level],
-          this.containerSource.getNode().children[this.state.level],
-          this.containerDestination.getNode().children[this.state.level],
+          this.source[this.state.currentLine],
+          this.destination[this.state.currentLine],
+          this.containerSource.getNode().children[this.state.currentLine],
+          this.containerDestination.getNode().children[this.state.currentLine],
         );
-        autoComplete(this.source[this.state.level], ANIMATION_DELAY);
+        autoComplete(this.source[this.state.currentLine], ANIMATION_DELAY);
       }
     });
   }
@@ -90,7 +90,7 @@ export class Field extends MyElement {
     this.appendNodes(this.containerDestination);
 
     this.source.forEach((sentence, line) => {
-      if (line === this.state.level) {
+      if (line === this.state.currentLine) {
         const row = this.createCellsRow(sentence);
         this.containerSource.appendNodes(row);
       }
@@ -147,7 +147,9 @@ export class Field extends MyElement {
   }
 
   public createMatrix(data: PageCollection) {
-    this.state.level = 0;
+    if (!data) return;
+
+    this.state.currentLine = 0;
     this.correctAnswers.length = 0;
     this.hintTranslate.clearHints();
     this.HintAudio.clearHints();
@@ -202,12 +204,12 @@ export class Field extends MyElement {
 
       if (this.source && place === Place.source) {
         // if clicked to Source block
-        const index = this.source[this.state.level]?.findIndex((word) => {
+        const index = this.source[this.state.currentLine]?.findIndex((word) => {
           return target === word.node;
         });
-        const cell = this.source[this.state.level].splice(index, 1)[0];
+        const cell = this.source[this.state.currentLine].splice(index, 1)[0];
         cell.node.setAttribute('place', Place.destination);
-        cell.node.setAttribute('line', `${this.state.level}`);
+        cell.node.setAttribute('line', `${this.state.currentLine}`);
 
         // ============== go-away word
         const coord = cell.node.getBoundingClientRect();
@@ -215,26 +217,32 @@ export class Field extends MyElement {
         cell.y = Math.round(coord.y);
 
         if (!this.destination) this.destination = [];
-        while (this.destination.length <= this.state.level)
+        while (this.destination.length <= this.state.currentLine)
           this.destination.push([]);
 
-        this.destination[this.state.level].push(cell);
+        this.destination[this.state.currentLine].push(cell);
 
-        if (this.source[this.state.level].length === 0) this.lineComplete();
+        if (this.source[this.state.currentLine].length === 0)
+          this.lineComplete();
         this.render();
       }
 
       if (
         this.destination &&
         place === Place.destination &&
-        line === this.state.level.toString()
+        line === this.state.currentLine.toString()
       ) {
         // if clicked to Destination block
-        this.clearCheckClasses(this.destination[this.state.level]);
-        const index = this.destination[this.state.level]?.findIndex((word) => {
-          return target === word.node;
-        });
-        const cell = this.destination[this.state.level].splice(index, 1)[0];
+        this.clearCheckClasses(this.destination[this.state.currentLine]);
+        const index = this.destination[this.state.currentLine]?.findIndex(
+          (word) => {
+            return target === word.node;
+          },
+        );
+        const cell = this.destination[this.state.currentLine].splice(
+          index,
+          1,
+        )[0];
         cell.node.setAttribute('place', Place.source);
 
         // ============== go-away word
@@ -243,11 +251,12 @@ export class Field extends MyElement {
         cell.y = Math.round(coord.y);
 
         if (!this.source) this.source = [];
-        while (this.source.length <= this.state.level) this.source.push([]);
+        while (this.source.length <= this.state.currentLine)
+          this.source.push([]);
 
-        this.source[this.state.level].push(cell);
+        this.source[this.state.currentLine].push(cell);
 
-        if (this.source[this.state.level].length !== 0) {
+        if (this.source[this.state.currentLine].length !== 0) {
           document.dispatchEvent(new CustomEvent(Actions.lineNotComplete));
         }
         this.render();
@@ -259,9 +268,9 @@ export class Field extends MyElement {
     if (this.destination) {
       const restWords = this.source?.flat().length;
       const textButton = restWords ? 'Continue' : 'Next Page';
-      const completedSentence = this.destination[this.state.level];
+      const completedSentence = this.destination[this.state.currentLine];
 
-      this.clearCheckClasses(this.destination[this.state.level]);
+      this.clearCheckClasses(this.destination[this.state.currentLine]);
       if (this.isCorrectSequence(completedSentence)) {
         document.dispatchEvent(new CustomEvent(Actions.showTranslate));
         document.dispatchEvent(
@@ -278,18 +287,18 @@ export class Field extends MyElement {
       .map((word, i) => (i === 0 ? '' : word.text))
       .join(' ')
       .trim();
-    const answer = this.correctAnswers[this.state.level];
+    const answer = this.correctAnswers[this.state.currentLine];
     return result === answer;
   }
 
   private clickBtnContinue(): void {
     if (this.destination) {
-      const lastWord = this.destination[this.state.level].length - 1;
-      this.destination[this.state.level][lastWord].node.setAttribute(
+      const lastWord = this.destination[this.state.currentLine].length - 1;
+      this.destination[this.state.currentLine][lastWord].node.setAttribute(
         'complete',
         '',
       );
-      this.state.level += 1;
+      this.state.currentLine += 1;
       this.render();
       const restWords = this.source?.flat().length;
       if (restWords === 0) {
@@ -301,8 +310,8 @@ export class Field extends MyElement {
   private clickBtnCheck(): void {
     if (this.destination)
       check(
-        this.destination[this.state.level],
-        this.correctAnswers[this.state.level],
+        this.destination[this.state.currentLine],
+        this.correctAnswers[this.state.currentLine],
       );
   }
 
@@ -326,11 +335,11 @@ export class Field extends MyElement {
       e.dataTransfer.setData('text/plain', `${puzzle?.id};${currentPlace}`);
     }
     const destElement =
-      this.containerDestination.getNode().children[this.state.level]
+      this.containerDestination.getNode().children[this.state.currentLine]
         .children[1];
     const sourceElemet = this.containerSource.getNode().children[0];
-    const sourceLine = this.source[this.state.level];
-    const destinationLine = this.destination[this.state.level];
+    const sourceLine = this.source[this.state.currentLine];
+    const destinationLine = this.destination[this.state.currentLine];
 
     sourceElemet.addEventListener(
       'drop',
@@ -399,10 +408,10 @@ export class Field extends MyElement {
           'place',
           dropedToSource ? Place.source : Place.destination,
         );
-        transferElementNode?.setAttribute('line', `${this.state.level}`);
+        transferElementNode?.setAttribute('line', `${this.state.currentLine}`);
         if (this.source)
           return {
-            source: this.source[this.state.level],
+            source: this.source[this.state.currentLine],
             destination: dropedToSource ? this.source : this.destination,
             transferElementNode,
           };
@@ -414,7 +423,7 @@ export class Field extends MyElement {
         'place',
         dropedToSource ? Place.source : Place.destination,
       );
-      transferElementNode?.setAttribute('line', `${this.state.level}`);
+      transferElementNode?.setAttribute('line', `${this.state.currentLine}`);
       if (!this.destination)
         return {
           source: null,
@@ -422,7 +431,7 @@ export class Field extends MyElement {
           destination: dropedToSource ? this.source : this.destination,
         };
       return {
-        source: this.destination[this.state.level],
+        source: this.destination[this.state.currentLine],
         transferElementNode,
         destination: dropedToSource ? this.source : this.destination,
       };
@@ -452,19 +461,19 @@ export class Field extends MyElement {
     const childrens = [...destinationNode.children];
     const indexDestination =
       childrens.indexOf(target) === -1
-        ? destination[this.state.level].length
+        ? destination[this.state.currentLine].length
         : childrens.indexOf(target);
     const insertMethod =
       childrens.indexOf(target) === -1 ? 'beforeend' : 'beforebegin';
     const transferElement = source.splice(indexSource, 1);
-    destination[this.state.level].splice(
+    destination[this.state.currentLine].splice(
       indexDestination + 1,
       0,
       ...transferElement,
     );
     target.insertAdjacentElement(insertMethod, transferElementNode);
 
-    if (this.source[this.state.level].length === 0) {
+    if (this.source[this.state.currentLine].length === 0) {
       // here exactly this.source
       document.dispatchEvent(new CustomEvent(Actions.lineComplete));
     } else document.dispatchEvent(new CustomEvent(Actions.lineNotComplete));

@@ -5,8 +5,8 @@
 }
 
 .field__row {
-  --bg-color-word--complete: rgb(200, 180, 120);
-  --color-word-complete: rgb(0, 0, 0);
+  --bg-color-word--complete: rgb(19, 153, 75);
+  --color-word-complete: rgb(255, 255, 203);
   --color-droparea-border: rgb(0, 127, 255);
   --color-droparea-bg: rgb(225, 255, 210);
 
@@ -103,6 +103,8 @@
   --font-size: 1.5rem;
   --row-height: calc(var(--font-size) * 1.7);
 
+  width: clamp(40rem, 100%, var(--max-width-game));
+  align-self: center;
   container-type: inline-size;
   display: flex;
   font-size: inherit;
@@ -110,28 +112,27 @@
 }
 
 .container-destination {
-  --background-color: rgb(255, 248, 220);
-
   flex: 1 1 auto;
   flex-wrap: nowrap;
   flex-direction: column;
   padding: 1rem 2rem;
 
-  background-color: var(--background-color);
-  background-image: url("./bg-container.webp");
+  background-image: url("./bg-container-level1.webp");
   background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: 20%;
+  background-position: 95% bottom;
+  background-size: clamp(6rem, 10%, 12rem);
 }
 
 .container-source {
+  --background-color-source: rgb(223, 197, 166);
   flex: 0 1 calc(var(--row-height) * 2.5);
   justify-content: center;
   align-items: flex-start;
   padding: 0.2rem 2rem;
 
-  background-color: rgb(220, 220, 220);
+  background-color: var(--background-color-source);
   border-bottom: 2px solid rgb(128, 128, 128);
+  border-radius: 0 0 1rem 1rem;
 
   & .field__row {
     justify-content: center;

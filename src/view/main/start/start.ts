@@ -45,7 +45,7 @@ export default class Start extends MyElement {
     this.appendNodes(h1, p, btnStart);
   }
 
-  update(): void {
+  updateValue(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'start':

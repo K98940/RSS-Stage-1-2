@@ -17,6 +17,7 @@ export const setCardsWidth = (container: MyElement): void => {
     const sourceHTMLElement = container.getNode().children[0];
     if (sourceHTMLElement instanceof HTMLElement) {
       sourceHTMLElement.style.gap = '0';
+      sourceHTMLElement.style.flexWrap = 'nowrap';
     }
 
     const nodes = [...container.getNode().children[0].children];
@@ -25,20 +26,22 @@ export const setCardsWidth = (container: MyElement): void => {
       const isAlreadyWidth = node.getAttribute('width');
       if (isAlreadyWidth) return;
 
-      const newWidth = window.getComputedStyle(node).getPropertyValue('width');
+      const width = window.getComputedStyle(node).getPropertyValue('width');
+      const newWidth = parseFloat(width);
       node.style.width = `${newWidth}px`;
-      node.setAttribute('width', newWidth);
+      node.setAttribute('width', `${newWidth}`);
       node.style.setProperty('--width-element', `${newWidth}`);
     });
 
     if (sourceHTMLElement instanceof HTMLElement) {
       sourceHTMLElement.style.gap = '1rem';
+      sourceHTMLElement.style.flexWrap = 'wrap';
       setTimeout(() => {
         document.documentElement.style.setProperty(
           '--trantition-duration',
           `500ms`,
         );
-      }, 1000);
+      }, 500);
     }
   }, 0);
 };

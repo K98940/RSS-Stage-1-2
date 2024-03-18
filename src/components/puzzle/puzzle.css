@@ -1,11 +1,11 @@
 .puzzle-element {
   --width-element: 0;
   --color: rgb(240, 240, 240);
-  --color-word-correct: rgb(240, 240, 240);
+  --color-word-correct: rgb(3, 3, 3);
   --color-word-wrong: rgb(0, 0, 0);
   --background-color: rgb(2, 89, 177);
   --background-color-hover: color-mix(in srgb, var(--background-color) 80%, black 20%);
-  --background-color-correct: rgb(70, 110, 30);
+  --background-color-correct: rgb(0, 174, 38);
   --background-color-wrong: rgb(235, 120, 0);
 
   position: relative;

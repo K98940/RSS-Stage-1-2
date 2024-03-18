@@ -8,6 +8,7 @@ import {
 import Button from '../../components/app/tags/button/button';
 import { Dialog } from '../dialog/dialog';
 import { Welcome } from './welcome/welcome';
+import { Selectors } from './Selectors/selectors';
 
 export default class Header extends MyElement {
   private state;
@@ -25,7 +26,7 @@ export default class Header extends MyElement {
     this.state.subscribe(this);
   }
 
-  public update(): void {
+  public updateValue(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'start':
@@ -40,6 +41,10 @@ export default class Header extends MyElement {
         break;
       case 'login':
         this.getNode().innerHTML = '';
+        break;
+      case 'game':
+        const selectors = new Selectors();
+        this.getNode().prepend(selectors.getNode());
         break;
       default:
         break;

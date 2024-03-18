@@ -17,6 +17,9 @@ export class LocalStorage {
     if (typeof data === 'object') {
       delete data.process;
       delete data.DOM;
+      delete data._level;
+      delete data._round;
+      delete data._currentLine;
       const str = JSON.stringify(data);
       localStorage.setItem(LS_KEY, str);
     }

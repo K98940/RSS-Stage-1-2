@@ -30,7 +30,7 @@ export class HintTranslate extends MyElement {
   }
 
   private getHintText(): string {
-    return this.hints[this.state.level];
+    return this.hints[this.state.currentLine];
   }
 
   public setHint(): void {

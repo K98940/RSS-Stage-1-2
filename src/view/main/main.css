@@ -2,5 +2,6 @@
   flex: 1 1 auto;
 
   text-align: center;
-  background-color: rgb(187, 255, 225);
+  width: clamp(40rem, 100%, var(--max-width-game));
+  align-self: center;
 }

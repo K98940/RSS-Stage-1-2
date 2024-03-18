@@ -24,7 +24,7 @@ export class BtnAudioHint extends MyElement {
     );
   }
 
-  public update(): void {
+  public updateValue(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'game':

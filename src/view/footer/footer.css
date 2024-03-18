@@ -59,7 +59,8 @@
 .btn_auto-complete {
   --icon-size: 3rem;
 
-  position: absolute;
+  position: relative;
+  margin-left: 3rem;
   right: var(--main-padding-lr);
   pointer-events: all;
   border: 1px solid var(--border-active-color);

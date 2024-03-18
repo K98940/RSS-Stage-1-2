@@ -75,5 +75,5 @@ export class MyElement {
     }
   }
 
-  update() {}
+  updateValue(value?: string | number) {}
 }

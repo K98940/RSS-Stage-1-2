@@ -22,7 +22,7 @@ export default class Main extends MyElement {
     this.state.saveDOMElemt({ main: this.getNode() });
   }
 
-  public update() {
+  public updateValue() {
     const { process } = this.state.getState();
     switch (process) {
       case 'start':

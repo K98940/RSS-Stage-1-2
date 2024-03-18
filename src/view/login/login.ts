@@ -193,7 +193,7 @@ export default class LoginForm extends MyElement {
     this.getNode().remove();
   }
 
-  update(): void {
+  updateValue(): void {
     const { firstName, surname, DOM } = this.state.getState();
     if (firstName && surname) {
       this.hide();

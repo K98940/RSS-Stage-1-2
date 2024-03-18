@@ -19,7 +19,7 @@ export class BtnAutoComplete extends MyElement {
     this.state.subscribe(this);
   }
 
-  public update(): void {
+  public updateValue(): void {
     const { process } = this.state.getState();
     switch (process) {
       case 'game':

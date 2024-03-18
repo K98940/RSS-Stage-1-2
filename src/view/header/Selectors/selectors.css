@@ -1,0 +1,35 @@
+.selectors-container {
+  --color-bg-select: rgb(255, 248, 220);
+
+  margin-right: auto;
+  font-size: 1rem;
+}
+
+.selectors-fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1rem;
+  height: 100%;
+  border-radius: 0.3rem;
+  font-size: inherit;
+}
+
+.selectors-legend {
+  padding: 0 1rem;
+  font-size: inherit;
+}
+
+.select {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  font-size: inherit;
+  background-color: var(--color-bg-select);
+  border-radius: 0.3rem;
+}
+
+.selectors-options {
+  font-size: inherit;
+  padding: 0.5rem;
+}

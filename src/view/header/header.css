@@ -1,12 +1,15 @@
 .header {
   display: flex;
+  width: clamp(40rem, 100%, var(--max-width-game));
+  margin: 0 auto;
   flex: 0 0 5rem;
+  align-self: center;
   justify-content: flex-end;
   padding: 1rem 2rem;
   gap: 1rem;
 
   text-align: center;
-  background-color: burlywood;
+  background-color: var(--background-color);
 }
 
 .header__btn-logout {
