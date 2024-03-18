@@ -1,5 +1,8 @@
 .dialog {
   --font-size: 1.5rem;
+  --border-color-logout: rgb(119, 168, 180);
+  --color-text-logout: rgb(255, 255, 255);
+  --background-color-logout: rgb(20, 10, 88);
 
   position: fixed;
   width: clamp(5rem, 100%, 20rem);
@@ -9,9 +12,11 @@
   margin: 0 auto;
   padding: 2rem;
 
-  border: 4px solid grey;
+  border: 4px solid var(--border-color-logout);
   border-radius: 0.5rem;
-  box-shadow: 1rem 1rem 1rem grey;
+  box-shadow: 1rem 1rem 1rem var(--background-color-logout);
+  color: var(--color-text-logout);
+  background-color: var(--background-color-logout);
 
   & button {
     font-size: var(--font-size);

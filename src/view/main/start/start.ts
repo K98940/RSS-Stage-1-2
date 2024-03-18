@@ -16,6 +16,8 @@ export default class Start extends MyElement {
 
   parent;
 
+  game;
+
   constructor(parent: Html) {
     const prop: MyElementProps = {
       tag: 'article',
@@ -23,6 +25,7 @@ export default class Start extends MyElement {
     };
     super(prop);
     this.state = new State();
+    this.game = new Game();
     this.state.subscribe(this);
     this.localstorage = new LocalStorage();
     this.parent = parent;
@@ -54,7 +57,8 @@ export default class Start extends MyElement {
         break;
       case 'game':
         this.parent.innerHTML = '';
-        this.parent.append(new Game().getNode());
+        this.game.resetGame();
+        this.parent.append(this.game.getNode());
         break;
       default:
         break;

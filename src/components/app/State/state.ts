@@ -4,7 +4,7 @@ import { MyElement } from '../Element/my-element';
 export const initialState: StateObect = {
   firstName: null,
   surname: null,
-  _round: 2,
+  _round: 0,
   _level: 'level1',
   _currentLine: 0,
   _hintTranslateMode: 'after',

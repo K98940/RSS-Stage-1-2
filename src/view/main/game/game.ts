@@ -80,4 +80,11 @@ export class Game extends MyElement {
       node.style.backgroundImage = `url(${img})`;
     }
   }
+
+  public resetGame(): void {
+    this.state.level = `level1`;
+    this.state.round = 0;
+    this.changeBackGroundImage(this.state.level);
+    this.config();
+  }
 }
