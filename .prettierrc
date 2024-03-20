@@ -1,0 +1,8 @@
+{
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "singleQuote": true,
+  "tabWidth": 2,
+  "endOfLine": "crlf",
+  "Semicolons": true,
+  "trailingComma": "all"
+}
