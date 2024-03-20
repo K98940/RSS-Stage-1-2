@@ -15,7 +15,7 @@
     "src/**/*.{ts}": "eslint"
   },
   "validate-branch-name": {
-    "pattern": "(feat|fix|chore|refactor|init)/async-race/([a-zA-Z0-9]+)",
+    "pattern": "(feat|fix|chore|refactor|init)/async-race-[0-9]+/([a-zA-Z0-9]+)",
     "errorMsg": "the branch name not valid"
   },
   "devDependencies": {
