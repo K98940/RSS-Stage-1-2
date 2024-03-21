@@ -8,8 +8,21 @@ export type Vewis = {
 };
 
 export type Callback = {
-  (e: Event | DragEvent): void;
+  (e?: Event | DragEvent): void;
 };
 
 export type HTMLAttributes = [string, string];
 export type Html = HTMLTemplateElement | HTMLElement;
+
+export type APICar = {
+  name: string;
+  color: string;
+  id: number;
+  error?: string;
+};
+
+export type TCar = {
+  name: string;
+  color: string;
+  id: number;
+};

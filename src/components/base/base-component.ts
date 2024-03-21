@@ -75,5 +75,9 @@ export class BaseComponent {
     }
   }
 
+  public value() {
+    if (this.node instanceof HTMLInputElement) return this.node.value;
+  }
+
   update(value?: string | number) {}
 }

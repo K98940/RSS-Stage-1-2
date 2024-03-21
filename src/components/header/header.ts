@@ -1,6 +1,6 @@
 import { View } from './../../types/types';
 import { BaseComponent } from '../base/base-component';
-import { Button } from '../button/button';
+import { Button } from '../base/button/button';
 import './header.css';
 
 const buttons = {

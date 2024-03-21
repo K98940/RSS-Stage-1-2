@@ -1,27 +1,28 @@
+import { Callback, TCar } from './../types/types';
+
 type StoreKey = string;
-type StoreValue = string | number | object;
+type StoreValue = string | number | object | [];
 type Store = {
-  [index: string]: string | number | object;
-};
-type Test = {
-  [index: string]: string;
+  cars: TCar[];
+  [index: string]: StoreValue;
 };
 const initialStore: Store = {
-  test: 'my test',
+  cars: [],
 };
+type Subscribers = {
+  [index: string]: Callback[];
+};
+const subscribers: Subscribers = {};
 
 const storeHandler = {
-  get: (target: Test, key: StoreKey) => {
-    // if (typeof target[key] === 'object' && target[key] !== null) {
-    //   return new Proxy(target[key], storeHandler);
-    // }
+  get: (target: Store, key: StoreKey) => {
     return target[key];
   },
   set: (target: Store, prop: StoreKey, value: StoreValue) => {
     target[prop] = value;
     switch (prop) {
-      case 'test':
-        console.log('--> store. test changed to', value);
+      case 'cars':
+        subscribers.cars.forEach((callback) => callback());
         break;
 
       default:
@@ -29,6 +30,11 @@ const storeHandler = {
     }
     return true;
   },
+};
+
+export const subscribe = (event: string, calback: Callback) => {
+  if (!subscribers.hasOwnProperty(event)) subscribers[event] = [];
+  subscribers[event].push(calback);
 };
 
 export default new Proxy(initialStore, storeHandler);
