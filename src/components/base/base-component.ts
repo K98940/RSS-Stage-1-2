@@ -5,7 +5,7 @@ export type Props = {
   classNames?: string[];
   attributes?: HTMLAttributes[];
   textContent?: string;
-  callback?: Callback | null;
+  callback?: Callback<Event> | null;
 };
 
 export class BaseComponent {
@@ -68,7 +68,7 @@ export class BaseComponent {
     });
   }
 
-  public setCallback(calback: Callback, eventtype?: string) {
+  public setCallback(calback: Callback<Event>, eventtype?: string) {
     const event = this.constructor.name === 'Input' ? 'keyup' : 'click';
     if (typeof calback === 'function') {
       this.getNode().addEventListener(eventtype || event, calback);

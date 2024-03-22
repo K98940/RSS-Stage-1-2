@@ -1,4 +1,6 @@
 .car {
-  padding: 1rem;
-  border: 1px solid grey;
+  padding: 0.3rem;
+
+  border: 2px solid transparent;
+  border-left: 8px solid transparent;
 }

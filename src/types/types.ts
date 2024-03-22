@@ -7,9 +7,12 @@ export type Vewis = {
   [index in View]: HTMLParagraphElement;
 };
 
-export type Callback = {
-  (e?: Event | DragEvent): void;
+export type Callback<T> = {
+  (e?: T): void;
 };
+// export type Callback = {
+//   (e?: Event | DragEvent | number | string): void;
+// };
 
 export type HTMLAttributes = [string, string];
 export type Html = HTMLTemplateElement | HTMLElement;

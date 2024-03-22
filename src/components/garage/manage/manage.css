@@ -1,3 +1,6 @@
 .manage {
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem 0;
+  gap: 0.3rem;
 }

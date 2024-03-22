@@ -1,3 +1,4 @@
+import { Car } from '../components/car/car';
 import { APICar } from '../types/types';
 import { BASE_URL } from './config';
 const URL = '/garage';
@@ -11,7 +12,7 @@ export const get = {
       const response = await fetch(BASE_URL + URL + query);
       if (!response.ok)
         throw new Error(`(${response.status}) ${response.statusText}`);
-      const data: APICar[] = await response.json();
+      const data: Car[] = await response.json();
       return data;
     } catch (error) {
       return [{ color: '', id: 0, name: '', error: `${error}` }];

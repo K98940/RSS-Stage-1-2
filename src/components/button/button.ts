@@ -6,7 +6,7 @@ type ButtonProps = {
   classNames?: string[];
   attributes?: HTMLAttributes[];
   textContent?: string;
-  callback?: Callback;
+  callback?: Callback<Event>;
 };
 
 export class Button extends BaseComponent {

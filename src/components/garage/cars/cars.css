@@ -1,0 +1,5 @@
+.car_selected {
+  filter: brightness(1.05);
+  border: 2px solid red;
+  border-left: 8px solid red;
+}

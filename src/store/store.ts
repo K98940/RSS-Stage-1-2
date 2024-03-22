@@ -4,13 +4,15 @@ type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
   cars: TCar[];
+  currentID: number;
   [index: string]: StoreValue;
 };
 const initialStore: Store = {
+  currentID: 1,
   cars: [],
 };
 type Subscribers = {
-  [index: string]: Callback[];
+  [index: string]: Callback<number>[];
 };
 const subscribers: Subscribers = {};
 
@@ -22,7 +24,10 @@ const storeHandler = {
     target[prop] = value;
     switch (prop) {
       case 'cars':
-        subscribers.cars.forEach((callback) => callback());
+        subscribers.cars?.forEach((callback) => callback());
+        break;
+      case 'currentID':
+        subscribers.currentID?.forEach((callback) => callback());
         break;
 
       default:
@@ -32,7 +37,7 @@ const storeHandler = {
   },
 };
 
-export const subscribe = (event: string, calback: Callback) => {
+export const subscribe = (event: string, calback: Callback<number>) => {
   if (!subscribers.hasOwnProperty(event)) subscribers[event] = [];
   subscribers[event].push(calback);
 };
