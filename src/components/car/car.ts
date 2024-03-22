@@ -1,8 +1,7 @@
-import { data } from '../../data/data';
-import store from '../../store/store';
 import { BaseComponent } from '../base/base-component';
-import { Span } from '../base/span/span';
-import { Button } from '../button/button';
+import { CarEngine } from './car-engine/car-engine';
+import { CarHeader } from './car-header/car-header';
+import { CarModel } from './car-model/car-model';
 import './car.css';
 
 export type CarProps = {
@@ -12,10 +11,6 @@ export type CarProps = {
 };
 
 export class Car extends BaseComponent {
-  btnSelect;
-
-  btnDelete;
-
   name;
 
   color;
@@ -23,6 +18,8 @@ export class Car extends BaseComponent {
   id;
 
   error;
+
+  carModel;
 
   constructor(props: CarProps) {
     super({
@@ -32,27 +29,18 @@ export class Car extends BaseComponent {
     this.name = props.name;
     this.color = props.color;
     this.id = props.id || -1;
-    this.btnDelete = new Button({
-      textContent: 'REMOVE',
-      callback: this.clickRemove.bind(this),
-    });
-    this.btnSelect = new Button({
-      textContent: 'SELECT',
-      callback: this.clickSelect.bind(this),
-    });
-    this.appendNodes(this.btnSelect, this.btnDelete, new Span(props.name));
-    this.setColor(props.color);
+
+    this.carModel = new CarModel(this);
+    const conteiner = new BaseComponent({ classNames: ['car-main'] });
+    conteiner.appendNodes(new CarEngine(this), this.carModel);
+
+    this.appendNodes(new CarHeader(this), conteiner);
+    this.carModel.setColor(props.color);
   }
 
-  public setColor(color: string): void {
-    this.node.style.backgroundColor = color;
-  }
-
-  private clickRemove(): void {
-    if (this.id) data.removeCar(this.id);
-  }
-
-  private clickSelect(): void {
-    if (this.id) store.currentID = this.id;
+  public getContainerRigth(): number {
+    const coord = this.node.getBoundingClientRect();
+    const containerRight = coord.right;
+    return containerRight;
   }
 }

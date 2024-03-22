@@ -20,7 +20,6 @@ export class CreateCar extends BaseComponent {
   }
 
   private createCar() {
-    console.log('create car');
     const name = this.inputCreateName.value()?.trim();
     if (name) {
       data.createCar({ name, color: 'green' });

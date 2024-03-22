@@ -1,6 +1,9 @@
+import { MyResponse } from './../types/types';
 import { create } from '../api/create-car';
 import { remove } from '../api/delete-car';
+import { drive } from '../api/drive-mode';
 import { get } from '../api/get-car';
+import { engine } from '../api/start-engine';
 import { update } from '../api/update-car';
 import { CarProps } from '../components/car/car';
 import store from '../store/store';
@@ -56,5 +59,27 @@ export const data = {
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  startEngine(id: number): Promise<MyResponse | Error> {
+    return new Promise((resolve, reject) => {
+      engine
+        .setStatus(id, 'started')
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error: Error) => reject(error));
+    });
+  },
+
+  go(id: number) {
+    return new Promise((resolve, reject) => {
+      drive
+        .go(id)
+        .then((response) => resolve(response))
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
 };

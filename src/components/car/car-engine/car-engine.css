@@ -1,0 +1,10 @@
+.car-engine {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.engine__btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.2rem;
+}

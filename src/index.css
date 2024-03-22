@@ -5,7 +5,7 @@
 }
 
 html {
-  --max-width: 31rem;
+  --max-width: 71rem;
   --background-color-html: rgb(50, 50, 50);
 
   background-color: var(--background-color-html);
@@ -13,4 +13,9 @@ html {
 
 html, body {
   height: 100dvh;
+}
+
+.btn_disabled {
+  pointer-events: none;
+  filter: brightness(0.9);
 }
