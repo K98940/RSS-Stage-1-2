@@ -1,10 +1,10 @@
-import { CarProps } from './../components/car/car';
+import { TCar } from '../types/types';
 import { BASE_URL, Method } from './config';
 
 const URL = '/garage';
 
 export const create = {
-  async car(car: CarProps): Promise<boolean> {
+  async car(car: TCar): Promise<TCar | Error> {
     return new Promise((resolve, reject) => {
       fetch(BASE_URL + URL, {
         method: Method.POST,
@@ -15,9 +15,10 @@ export const create = {
       })
         .then((response) => {
           if (!response.ok) throw new Error();
-          resolve(true);
+          return response.json();
         })
-        .catch(() => reject(false));
+        .then((response: Promise<TCar>) => resolve(response))
+        .catch((e: Error) => reject(e));
     });
   },
 };

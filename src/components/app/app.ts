@@ -4,8 +4,6 @@ import { Garage } from '../garage/garage';
 import { Header } from '../header/header';
 import { Winners } from '../winners/winners';
 import './app.css';
-import { data } from '../../data/data';
-import store from '../../store/store';
 
 export class App extends BaseComponent {
   header;
@@ -19,18 +17,13 @@ export class App extends BaseComponent {
     this.header = new Header();
     this.garage = new Garage();
     this.winners = new Winners();
-    this.appendNodes(this.header, this.garage);
+    this.appendNodes(this.header, this.garage.node);
     this.config();
     window.addEventListener('hashchange', this.router);
   }
 
   private async config() {
-    const cars = await data.getCars(1);
-    if (cars[0].error) {
-      console.log(cars[0].error);
-      return;
-    }
-    store.cars = cars;
+    this.garage.getCars(1);
   }
 
   router = () => {
@@ -38,10 +31,10 @@ export class App extends BaseComponent {
     switch (hash) {
       case View.garage:
         this.getNode().removeChild(this.winners.getNode());
-        this.appendNodes(this.garage);
+        this.appendNodes(this.garage.node);
         break;
       case View.winners:
-        this.getNode().removeChild(this.garage.getNode());
+        this.garage.node.getNode().remove();
         this.appendNodes(this.winners);
         break;
     }

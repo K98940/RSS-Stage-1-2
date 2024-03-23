@@ -1,4 +1,3 @@
-import './car-model.css';
 import { Car } from '../car';
 import { BaseComponent } from '../../base/base-component';
 
@@ -16,13 +15,15 @@ export class CarModel extends BaseComponent {
 
   public startEngine(raceTime: number): void {
     const distance = this.calcDistance();
-    this.car.getNode().style.setProperty('--path-length', distance);
-    this.car.getNode().style.setProperty('--animation-time', `${raceTime}ms`);
+    this.car.node.getNode().style.setProperty('--path-length', distance);
+    this.car.node
+      .getNode()
+      .style.setProperty('--animation-time', `${raceTime}ms`);
     this.setClasses(['car_move']);
   }
 
   public stopEngine(): void {
-    this.car.getNode().style.setProperty('--path-length', ``);
+    this.car.node.getNode().style.setProperty('--path-length', ``);
     this.removeClass('car_move');
     this.removeClass('car_broken');
   }

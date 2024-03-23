@@ -17,5 +17,4 @@ html, body {
 
 .btn_disabled {
   pointer-events: none;
-  filter: brightness(0.9);
 }

@@ -12,7 +12,8 @@ export const drive = {
       fetch(BASE_URL + URL + query, { method: Method.PATCH })
         .then((response) => {
           if (!response.ok) {
-            reject(response.status);
+            throw new Error(`${response.status}`);
+            // reject(response.status);
           }
           resolve(`${response.status}`);
         })

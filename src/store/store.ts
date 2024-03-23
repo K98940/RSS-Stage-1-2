@@ -1,14 +1,19 @@
-import { Callback, TCar } from './../types/types';
+import { Car } from '../components/car/car';
+import { Callback } from './../types/types';
 
 type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
-  cars: TCar[];
+  carName: string;
+  updateCarName: string;
+  cars: Car[];
   currentID: number;
   [index: string]: StoreValue;
 };
 const initialStore: Store = {
-  currentID: 1,
+  carName: '',
+  updateCarName: '',
+  currentID: 0,
   cars: [],
 };
 type Subscribers = {
@@ -28,6 +33,12 @@ const storeHandler = {
         break;
       case 'currentID':
         subscribers.currentID?.forEach((callback) => callback());
+        break;
+      case 'carName':
+        subscribers.carName?.forEach((callback) => callback());
+        break;
+      case 'updateCarName':
+        subscribers.updateCarName?.forEach((callback) => callback());
         break;
 
       default:

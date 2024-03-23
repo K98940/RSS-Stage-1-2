@@ -1,6 +1,25 @@
+.engine__btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.2rem;
+}
+
+.engine-a_on {
+  background-color: rgba(124, 243, 120, 0.7);
+}
+
+.engine-b_on {
+  background-color: rgba(255, 106, 0, 0.643);
+}
+
+.car-engine {
+  display: flex;
+  gap: 0.3rem;
+}
+
 .car {
   position: relative;
-  --color-car: "#999999";
+  --color-car: #999999;
   --path-length: 100px;
   --animation-time: 1000ms;
 
@@ -27,4 +46,41 @@
   align-items: center;
   overflow: hidden;
   gap: 0.5rem;
+}
+
+.car_selected {
+  filter: brightness(1.05);
+  border: 2px solid red;
+  border-left: 8px solid red;
+}
+
+.car-model {
+  width: 4rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  background-color: var(--color-car);
+}
+
+.car_move {
+  animation-name: car-move;
+  animation-duration: var(--animation-time);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  transition-duration: 1s;
+}
+
+@keyframes car-move {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(var(--path-length));
+  }
+}
+
+.car_broken {
+  animation-play-state: paused;
 }

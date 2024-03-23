@@ -11,15 +11,12 @@ export type Callback<T> = {
   (e?: T): void;
 };
 
+export type TCallback = {
+  (): void;
+};
+
 export type HTMLAttributes = [string, string];
 export type Html = HTMLTemplateElement | HTMLElement;
-
-export type APICar = {
-  name: string;
-  color: string;
-  id: number;
-  error?: string;
-};
 
 export type TCar = {
   name: string;

@@ -1,9 +1,7 @@
-import { data } from '../../../../data/data';
+import './update-car.css';
 import { BaseComponent } from '../../../base/base-component';
 import { Input } from '../../../base/input/input';
 import { Button } from '../../../base/button/button';
-import './update-car.css';
-import store from '../../../../store/store';
 
 export class UpdateCar extends BaseComponent {
   inputUpdateName;
@@ -21,11 +19,14 @@ export class UpdateCar extends BaseComponent {
   }
 
   private updateCar() {
-    const name = this.inputUpdateName.value()?.trim();
-    const id = store.currentID;
-    const color = store.cars.filter((car) => car.id === id)[0].color;
-    if (name && id >= 0) {
-      data.updateCar(id, { name, color });
+    const node = this.inputUpdateName.getNode();
+    if (node instanceof HTMLInputElement) {
+      const name = node.value.trim();
+      node.value = '';
+      if (!name) return;
+      document.dispatchEvent(
+        new CustomEvent('clickUpdate', { detail: { name } }),
+      );
     }
   }
 }

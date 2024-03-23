@@ -5,8 +5,9 @@
   "extends": [
     "airbnb-typescript",
     "plugin:prettier/recommended",
-    "prettier",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,

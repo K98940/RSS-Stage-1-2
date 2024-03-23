@@ -1,7 +1,6 @@
+import { Car } from '../../car/car';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
-import { Car } from '../../car/car';
-import './cars.css';
 
 export class Cars extends BaseComponent {
   constructor() {
@@ -15,13 +14,8 @@ export class Cars extends BaseComponent {
     if (cars instanceof Array) {
       this.node.innerHTML = '';
       cars.forEach((car) => {
-        const newCar = new Car({
-          color: car.color,
-          id: car.id,
-          name: car.name,
-        });
-        this.setSelectedClass(car.id, newCar);
-        this.appendNodes(newCar);
+        this.setSelectedClass(car.id, car);
+        this.appendNodes(car.node);
       });
     }
   }
@@ -37,7 +31,19 @@ export class Cars extends BaseComponent {
   private setSelectedClass(id: number, car: Car) {
     const currentID = store.currentID;
     if (currentID === id) {
-      car.setClasses(['car_selected']);
-    } else car.removeClass('car_selected');
+      car.node.setClasses(['car_selected']);
+    } else car.node.removeClass('car_selected');
+  }
+
+  public startRace(): void {
+    store.cars.forEach((car) => {
+      car.startMove();
+    });
+  }
+
+  public resetAllCars(): void {
+    store.cars.forEach((car) => {
+      car.stopEngine();
+    });
   }
 }

@@ -1,10 +1,9 @@
-import { data } from './../../../data/data';
-import { Button } from './../../button/button';
-import { BaseComponent } from '../../base/base-component';
 import './car-header.css';
 import { Car } from '../car';
-import { Span } from '../../base/span/span';
 import store from '../../../store/store';
+import { Span } from '../../base/span/span';
+import { Button } from './../../button/button';
+import { BaseComponent } from '../../base/base-component';
 
 export class CarHeader extends BaseComponent {
   btnSelect;
@@ -28,7 +27,10 @@ export class CarHeader extends BaseComponent {
   }
 
   private clickRemove(): void {
-    if (this.car.id) data.removeCar(this.car.id);
+    if (this.car.id)
+      document.dispatchEvent(
+        new CustomEvent('removeCar', { detail: { id: this.car.id } }),
+      );
   }
 
   private clickSelect(): void {

@@ -1,8 +1,8 @@
-import { data } from '../../../../data/data';
 import { BaseComponent } from '../../../base/base-component';
 import { Input } from '../../../base/input/input';
 import { Button } from '../../../base/button/button';
 import './create-car.css';
+import store from '../../../../store/store';
 
 export class CreateCar extends BaseComponent {
   inputCreateName;
@@ -14,15 +14,14 @@ export class CreateCar extends BaseComponent {
     this.inputCreateName = new Input(['create__input']);
     this.buttonCreateCar = new Button({
       textContent: 'CREATE',
-      callback: this.createCar.bind(this),
+      callback: () => this.createCar(),
     });
     this.appendNodes(this.inputCreateName, this.buttonCreateCar);
   }
 
   private createCar() {
-    const name = this.inputCreateName.value()?.trim();
-    if (name) {
-      data.createCar({ name, color: 'green' });
-    }
+    const node = this.inputCreateName.getNode();
+    store.carName = this.inputCreateName.value()?.trim() || '';
+    if (node instanceof HTMLInputElement) node.value = '';
   }
 }

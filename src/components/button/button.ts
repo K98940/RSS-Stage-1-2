@@ -1,4 +1,4 @@
-import { HTMLAttributes, Callback } from './../../types/types';
+import { HTMLAttributes, Callback, TCallback } from './../../types/types';
 import { BaseComponent } from '../base/base-component';
 import './button.css';
 
@@ -6,7 +6,7 @@ type ButtonProps = {
   classNames?: string[];
   attributes?: HTMLAttributes[];
   textContent?: string;
-  callback?: Callback<Event>;
+  callback?: Callback<Event> | TCallback;
 };
 
 export class Button extends BaseComponent {
