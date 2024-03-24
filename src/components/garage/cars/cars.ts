@@ -1,6 +1,7 @@
 import { Car } from '../../car/car';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
+import { Color, l } from '../../../utils/utils';
 
 export class Cars extends BaseComponent {
   constructor() {
@@ -36,9 +37,23 @@ export class Cars extends BaseComponent {
   }
 
   public startRace(): void {
+    const carPromises: Promise<number>[] = [];
     store.cars.forEach((car) => {
-      car.startMove();
+      carPromises.push(car.startMove());
     });
+
+    Promise.allSettled(carPromises)
+      .then(() => {
+        l('The RACE Over', Color.green);
+      })
+      .catch((e) => {
+        l('The RACE ERROR ' + e, Color.orange);
+      });
+    Promise.any(carPromises)
+      .then((time) => {
+        l('FIRST PLACE IS THE ' + time + ' seconds!', Color.green);
+      })
+      .catch(() => {});
   }
 
   public resetAllCars(): void {

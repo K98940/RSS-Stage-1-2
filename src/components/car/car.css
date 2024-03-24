@@ -68,7 +68,6 @@
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
-  transition-duration: 1s;
 }
 
 @keyframes car-move {
@@ -81,6 +80,7 @@
   }
 }
 
-.car_broken {
+.car_stopped {
   animation-play-state: paused;
+  animation-duration: 0;
 }

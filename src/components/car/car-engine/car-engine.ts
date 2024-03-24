@@ -25,11 +25,11 @@ export class Engine {
     });
   }
 
-  public drive(id: number) {
+  public drive(id: number, raceTime: number) {
     return new Promise((resolve, reject) => {
       drive
         .go(id)
-        .then((response) => resolve(response))
+        .then(() => resolve(raceTime))
         .catch((error) => {
           reject(error);
         });

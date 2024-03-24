@@ -19,11 +19,7 @@ export class Garage {
     this.cars = new Cars();
     this.node = new BaseComponent({ tag: 'section', classNames: ['garage'] });
     this.node.appendNodes(
-      new Manage(
-        this.startRace.bind(this),
-        this.reset.bind(this),
-        this.generate100cars.bind(this),
-      ),
+      new Manage(this.startRace.bind(this), this.reset.bind(this), this.generate100cars.bind(this)),
       this.cars,
     );
     subscribe('carName', () => this.clickCreateCar());
@@ -65,7 +61,6 @@ export class Garage {
 
   protected clickCreateCar() {
     this.createCar({ name: store.carName, color: 'green', id: 0 });
-    this.getCars(1);
   }
 
   public carsToStore(response: TCar[]) {
@@ -74,9 +69,12 @@ export class Garage {
   }
 
   protected createCar(car: TCar) {
-    create.car(car).catch((error) => {
-      console.log(error);
-    });
+    create
+      .car(car)
+      .then(() => this.getCars(1))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   public getCars(page: number, limit?: number) {

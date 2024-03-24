@@ -16,20 +16,18 @@ export class CarModel extends BaseComponent {
   public startEngine(raceTime: number): void {
     const distance = this.calcDistance();
     this.car.node.getNode().style.setProperty('--path-length', distance);
-    this.car.node
-      .getNode()
-      .style.setProperty('--animation-time', `${raceTime}ms`);
+    this.car.node.getNode().style.setProperty('--animation-time', `${raceTime}ms`);
     this.setClasses(['car_move']);
   }
 
   public stopEngine(): void {
     this.car.node.getNode().style.setProperty('--path-length', ``);
     this.removeClass('car_move');
-    this.removeClass('car_broken');
+    this.removeClass('car_stopped');
   }
 
-  public carBroken(): void {
-    this.setClasses(['car_broken']);
+  public carStopped(): void {
+    this.setClasses(['car_stopped']);
   }
 
   private calcDistance(): string {

@@ -9,3 +9,8 @@
 
   background-color: gainsboro;
 }
+
+.hidden {
+  position: absolute;
+  visibility: hidden;
+}

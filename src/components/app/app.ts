@@ -19,6 +19,7 @@ export class App extends BaseComponent {
     this.winners = new Winners();
     this.appendNodes(this.header, this.garage.node);
     this.config();
+    window.location.hash = View.garage;
     window.addEventListener('hashchange', this.router);
   }
 
@@ -30,12 +31,13 @@ export class App extends BaseComponent {
     const hash = window.location.hash.replace('#', '');
     switch (hash) {
       case View.garage:
-        this.getNode().removeChild(this.winners.getNode());
-        this.appendNodes(this.garage.node);
+        this.winners.node.getNode().remove();
+        this.garage.node.removeClass('hidden');
         break;
       case View.winners:
-        this.garage.node.getNode().remove();
-        this.appendNodes(this.winners);
+        this.garage.node.setClasses(['hidden']);
+        this.winners.render();
+        this.appendNodes(this.winners.node.getNode());
         break;
     }
   };
