@@ -4,7 +4,6 @@ import { Cars } from './cars/cars';
 import { get } from '../../api/get-car';
 import { TCar } from '../../types/types';
 import { Manage } from './manage/manage';
-import { generateCarName, random } from '../../utils/utils';
 import { create } from '../../api/create-car';
 import { remove } from './../../api/delete-car';
 import { update } from './../../api/update-car';
@@ -12,6 +11,7 @@ import store, { subscribe } from '../../store/store';
 import { BaseComponent } from '../base/base-component';
 import { GarageTitle } from './garage-titel/garage-titel';
 import { Pagination } from './cars/pagination/pagination';
+import { generateCarName, random } from '../../utils/utils';
 
 export class Garage {
   node;
@@ -98,10 +98,11 @@ export class Garage {
       .then((cars) => {
         if (!cars) return;
         this.carsToStore(cars);
-        get.carsCount().then((countStr) => {
-          const countNum = Number(countStr);
-          if (isNaN(countNum)) return;
-          store.carsCount = countNum;
+        get.carsCount().then((carsTotal) => {
+          if (carsTotal instanceof Array) {
+            store.carsCount = carsTotal.length;
+            store.carsTotal = carsTotal;
+          }
         });
       })
       .catch((error) => {

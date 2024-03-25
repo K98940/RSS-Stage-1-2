@@ -12,7 +12,7 @@ export class RegistrationResults extends Statistic {
 
   public saveResultRace(car: Car, timeRace: number): Promise<number> {
     return new Promise((resolve, reject) => {
-      l('The car ' + car.name + ' is FINISHED', Color.white);
+      l('The car ' + car.name + ' is FINISHED', Color.green);
       this.stat
         .getWinneR({ id: car.id })
         .then(
@@ -21,7 +21,7 @@ export class RegistrationResults extends Statistic {
               const { wins, time } = winner;
               if (timeRace < time) {
                 // <--- new personal record
-                this.stat.updateWinner({ id: car.id, time: timeRace, wins: wins + 1 }).then((newRecord) => {
+                this.stat.updateWinner({ id: car.id, time: timeRace, wins: wins + 1 }).then(() => {
                   l(`The car ${car.name} got New Record: ${timeRace} seconds!`, Color.green);
                   resolve(time);
                 });

@@ -1,9 +1,10 @@
 import { Car } from '../components/car/car';
-import { Callback } from './../types/types';
+import { Callback, TCar } from './../types/types';
 
 type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
+  carsTotal: TCar[];
   carsPerPage: number;
   carsCount: number;
   page: number;
@@ -14,6 +15,7 @@ type Store = {
   [index: string]: StoreValue;
 };
 const initialStore: Store = {
+  carsTotal: [],
   carsPerPage: 7,
   carsCount: 0,
   page: 1,

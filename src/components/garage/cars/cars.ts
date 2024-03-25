@@ -2,8 +2,12 @@ import { Car } from '../../car/car';
 import { Color, l } from '../../../utils/utils';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
+import { RaceResult } from '../../../types/types';
+import { RegistrationResults } from '../../winners/registration';
 
 export class Cars extends BaseComponent {
+  registration = new RegistrationResults();
+
   constructor() {
     super({ classNames: ['cars'] });
     subscribe('cars', this.renderListCars.bind(this));
@@ -37,7 +41,7 @@ export class Cars extends BaseComponent {
   }
 
   public startRace(): void {
-    const carPromises: Promise<number>[] = [];
+    const carPromises: Promise<RaceResult | Error>[] = [];
     store.cars.forEach((car) => {
       carPromises.push(car.startMove());
     });
@@ -50,8 +54,11 @@ export class Cars extends BaseComponent {
         l('The RACE ERROR ' + e, Color.orange);
       });
     Promise.any(carPromises)
-      .then((time) => {
-        l('FIRST PLACE IS THE ' + time + ' seconds!', Color.green);
+      .then((result) => {
+        if (!(result instanceof Error)) {
+          l('FIRST PLACE IS THE ' + result.car.name + ' ' + result.time + ' seconds!', Color.green);
+          this.registration.saveResultRace(result.car, result.time);
+        }
       })
       .catch(() => {});
   }

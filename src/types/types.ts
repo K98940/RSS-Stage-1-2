@@ -1,3 +1,5 @@
+import { Car } from '../components/car/car';
+
 export enum View {
   garage = 'garage',
   winners = 'winners',
@@ -23,8 +25,5 @@ export type TCar = {
   color: string;
   id: number;
 };
-
-export type MyResponse = {
-  velocity: number;
-  distance: number;
-};
+export type MyResponse = { velocity: number; distance: number };
+export type RaceResult = { car: Car; time: number };

@@ -1,6 +1,6 @@
 import './car.css';
 import { Button } from '../button/button';
-import { TCar } from './../../types/types';
+import { RaceResult, TCar } from './../../types/types';
 import { Color, l } from '../../utils/utils';
 import { CarModel } from './car-model/car-model';
 import { Engine } from './car-engine/car-engine';
@@ -58,7 +58,7 @@ export class Car extends Engine {
     });
   }
 
-  public startMove(): Promise<number> {
+  public startMove(): Promise<RaceResult | Error> {
     return new Promise((resolve, reject) => {
       this.btnStartOFF();
       this.start(this.id).then((response) => {
@@ -68,11 +68,9 @@ export class Car extends Engine {
         const raceTimeSec = Number((raceTime / 1000).toFixed(2));
         this.carModel.startEngine(raceTime);
         this.drive(this.id, raceTimeSec)
-          // BUG в победители должна записываться только первая машина, а не все
-          .then(() => this.registration.saveResultRace(this, raceTimeSec))
-          .then((result) => {
+          .then(() => {
             this.carModel.carStopped();
-            resolve(result);
+            resolve({ car: this, time: raceTimeSec });
           })
           .catch((error) => {
             l(`The car ${this.name} BROKEN!!!`, Color.orange);
