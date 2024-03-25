@@ -4,11 +4,14 @@ import { Cars } from './cars/cars';
 import { get } from '../../api/get-car';
 import { TCar } from '../../types/types';
 import { Manage } from './manage/manage';
+import { generateCarName, random } from '../../utils/utils';
 import { create } from '../../api/create-car';
 import { remove } from './../../api/delete-car';
 import { update } from './../../api/update-car';
 import store, { subscribe } from '../../store/store';
 import { BaseComponent } from '../base/base-component';
+import { GarageTitle } from './garage-titel/garage-titel';
+import { Pagination } from './cars/pagination/pagination';
 
 export class Garage {
   node;
@@ -20,9 +23,12 @@ export class Garage {
     this.node = new BaseComponent({ tag: 'section', classNames: ['garage'] });
     this.node.appendNodes(
       new Manage(this.startRace.bind(this), this.reset.bind(this), this.generate100cars.bind(this)),
+      new GarageTitle(),
       this.cars,
+      new Pagination(),
     );
     subscribe('carName', () => this.clickCreateCar());
+    subscribe('page', () => this.clickPage());
     document.addEventListener('clickUpdate', (e) => {
       if (e instanceof CustomEvent) {
         this.clickUpdateCar(e);
@@ -35,12 +41,21 @@ export class Garage {
     });
   }
 
+  private clickPage(): void {
+    this.getCars(store.page);
+    this.cars.renderListCars();
+  }
+
   protected generate100cars(): void {
-    // l('100 cars', Color.blue);
-    // for (let i = 0; i < 50; i += 1) {
-    //   this.createCar({ id: 0, name: `car-${i}`, color: 'green' });
-    // }
-    // this.getCars(1);
+    // TODO переделать на Promise.settledAll -> getCars
+    for (let i = 0; i < 100; i += 1) {
+      const r = random(0, 255);
+      const g = random(0, 255);
+      const b = random(0, 255);
+      const { brand, name } = generateCarName();
+      this.createCar({ id: 0, name: `${brand} ${name}`, color: `rgb(${r}, ${g}, ${b})` });
+    }
+    this.getCars(store.page);
   }
 
   protected reset(): void {
@@ -71,7 +86,7 @@ export class Garage {
   protected createCar(car: TCar) {
     create
       .car(car)
-      .then(() => this.getCars(1))
+      .then(() => this.getCars(store.page))
       .catch((error) => {
         console.log(error);
       });
@@ -83,6 +98,11 @@ export class Garage {
       .then((cars) => {
         if (!cars) return;
         this.carsToStore(cars);
+        get.carsCount().then((countStr) => {
+          const countNum = Number(countStr);
+          if (isNaN(countNum)) return;
+          store.carsCount = countNum;
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -92,7 +112,7 @@ export class Garage {
   protected removeCar(id: number) {
     remove
       .car(id)
-      .then(() => this.getCars(1))
+      .then(() => this.getCars(store.page))
       .catch((error) => {
         console.log(error);
       });
@@ -101,7 +121,7 @@ export class Garage {
   protected updateCar(id: number, car: TCar) {
     update
       .car(id, car)
-      .then(() => this.getCars(1))
+      .then(() => this.getCars(store.page))
       .catch((error) => {
         console.log(error);
       });

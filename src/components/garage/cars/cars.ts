@@ -1,7 +1,7 @@
 import { Car } from '../../car/car';
+import { Color, l } from '../../../utils/utils';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
-import { Color, l } from '../../../utils/utils';
 
 export class Cars extends BaseComponent {
   constructor() {
@@ -10,7 +10,7 @@ export class Cars extends BaseComponent {
     subscribe('currentID', this.renderSelectedCar.bind(this));
   }
 
-  public renderListCars() {
+  public renderListCars(): void {
     const cars = store.cars;
     if (cars instanceof Array) {
       this.node.innerHTML = '';

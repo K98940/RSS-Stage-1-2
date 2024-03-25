@@ -6,11 +6,7 @@ import { RaceButtons } from './race-buttons/race-buttons';
 import { Callback } from '../../../types/types';
 
 export class Manage extends BaseComponent {
-  constructor(
-    startRace: Callback<Event>,
-    reset: Callback<Event>,
-    generate: Callback<Event>,
-  ) {
+  constructor(startRace: Callback<Event>, reset: Callback<Event>, generate: Callback<Event>) {
     super({ classNames: ['manage'] });
     const createCar = new CreateCar();
     const updateCar = new UpdateCar();
