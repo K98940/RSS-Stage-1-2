@@ -79,5 +79,5 @@ export class BaseComponent {
     if (this.node instanceof HTMLInputElement) return this.node.value;
   }
 
-  update(value?: string | number) {}
+  updateCarsCount(value?: string | number) {}
 }

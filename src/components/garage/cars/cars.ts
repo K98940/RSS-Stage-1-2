@@ -49,6 +49,7 @@ export class Cars extends BaseComponent {
     Promise.allSettled(carPromises)
       .then(() => {
         l('The RACE Over', Color.green);
+        store.state = 'idle';
       })
       .catch((e) => {
         l('The RACE ERROR ' + e, Color.orange);

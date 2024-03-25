@@ -2,12 +2,37 @@ import './race-buttons.css';
 import { Button } from '../../../button/button';
 import { Callback } from '../../../../types/types';
 import { BaseComponent } from '../../../base/base-component';
+import store, { subscribe } from '../../../../store/store';
 // FIX кнопки должны блокироваться
 export class RaceButtons extends BaseComponent {
-  constructor(star: Callback<Event>, reset: Callback<Event>, generate: Callback<Event>) {
+  buttonRace = new Button({ textContent: 'RACE' });
+
+  buttonReset = new Button({ textContent: 'RESET' });
+
+  buttonGenerate = new Button({ textContent: 'GENERATE CARS' });
+
+  constructor(start: Callback<Event>, reset: Callback<Event>, generate: Callback<Event>) {
     super({ classNames: ['race-buttons'] });
-    this.appendNodes(new Button({ textContent: 'RACE', callback: star }));
-    this.appendNodes(new Button({ textContent: 'RESET', callback: reset }));
-    this.appendNodes(new Button({ textContent: 'GENERATE CARS', callback: generate }));
+    this.appendNodes(this.buttonRace, this.buttonReset, this.buttonGenerate);
+
+    this.buttonRace.setCallback(start);
+    this.buttonReset.setCallback(reset);
+    this.buttonGenerate.setCallback(generate);
+    subscribe('state', this.updateCarsCount.bind(this));
+  }
+
+  public updateCarsCount(): void {
+    switch (store.state) {
+      case 'idle':
+        this.buttonRace.removeClass('button_disabled');
+        this.buttonReset.removeClass('button_disabled');
+        this.buttonGenerate.removeClass('button_disabled');
+        break;
+      case 'race':
+        this.buttonRace.setClasses(['button_disabled']);
+        this.buttonReset.setClasses(['button_disabled']);
+        this.buttonGenerate.setClasses(['button_disabled']);
+        break;
+    }
   }
 }

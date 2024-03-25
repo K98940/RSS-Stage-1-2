@@ -63,6 +63,7 @@ export class Garage {
   }
 
   protected startRace(): void {
+    store.state = 'race';
     this.cars.startRace();
   }
 

@@ -4,6 +4,7 @@ import { Callback, TCar } from './../types/types';
 type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
+  state: 'idle' | 'race';
   carsTotal: TCar[];
   carsPerPage: number;
   carsCount: number;
@@ -15,6 +16,7 @@ type Store = {
   [index: string]: StoreValue;
 };
 const initialStore: Store = {
+  state: 'idle',
   carsTotal: [],
   carsPerPage: 7,
   carsCount: 0,
@@ -53,6 +55,9 @@ const storeHandler = {
         break;
       case 'page':
         subscribers.page?.forEach((callback) => callback());
+        break;
+      case 'state':
+        subscribers.state?.forEach((callback) => callback());
         break;
 
       default:

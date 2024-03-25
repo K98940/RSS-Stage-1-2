@@ -15,7 +15,8 @@ export class Pagination extends BaseComponent {
   constructor() {
     super({ classNames: ['pagination'] });
     this.appendNodes(this.btnPrev, this.btnNext);
-    subscribe('carsCount', this.update.bind(this));
+    subscribe('carsCount', this.updateCarsCount.bind(this));
+    subscribe('state', this.updateState.bind(this));
   }
 
   private clickNext() {
@@ -30,9 +31,22 @@ export class Pagination extends BaseComponent {
     if (store.page < 2) this.btnPrev.setClasses(['button_disabled']);
   }
 
-  public update(): void {
+  public updateCarsCount(): void {
     if (store.carsCount / store.carsPerPage <= store.page) {
       this.btnNext.setClasses(['button_disabled']);
     } else this.btnNext.removeClass('button_disabled');
+  }
+
+  public updateState(): void {
+    switch (store.state) {
+      case 'idle':
+        if (store.page > 1) this.btnPrev.removeClass('button_disabled');
+        if (store.carsCount / store.carsPerPage > store.page) this.btnNext.removeClass('button_disabled');
+        break;
+      case 'race':
+        this.btnNext.setClasses(['button_disabled']);
+        this.btnPrev.setClasses(['button_disabled']);
+        break;
+    }
   }
 }

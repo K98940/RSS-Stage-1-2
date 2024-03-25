@@ -1,39 +1,42 @@
 import './car-header.css';
 import { Car } from '../car';
-import store from '../../../store/store';
+import store, { subscribe } from '../../../store/store';
 import { Span } from '../../base/span/span';
 import { Button } from './../../button/button';
 import { BaseComponent } from '../../base/base-component';
 
 export class CarHeader extends BaseComponent {
-  btnSelect;
+  btnSelect = new Button({ textContent: 'SELECT', callback: this.clickSelect.bind(this) });
 
-  btnDelete;
+  btnDelete = new Button({ textContent: 'REMOVE', callback: this.clickRemove.bind(this) });
 
   car;
 
   constructor(car: Car) {
     super({ classNames: ['car-header'] });
     this.car = car;
-    this.btnDelete = new Button({
-      textContent: 'REMOVE',
-      callback: this.clickRemove.bind(this),
-    });
-    this.btnSelect = new Button({
-      textContent: 'SELECT',
-      callback: this.clickSelect.bind(this),
-    });
     this.appendNodes(this.btnSelect, this.btnDelete, new Span(this.car.name));
+    subscribe('state', this.update.bind(this));
   }
 
   private clickRemove(): void {
-    if (this.car.id)
-      document.dispatchEvent(
-        new CustomEvent('removeCar', { detail: { id: this.car.id } }),
-      );
+    if (this.car.id) document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
   }
 
   private clickSelect(): void {
     if (this.car.id) store.currentID = this.car.id;
+  }
+
+  public update(): void {
+    switch (store.state) {
+      case 'idle':
+        this.btnSelect.removeClass('button_disabled');
+        this.btnDelete.removeClass('button_disabled');
+        break;
+      case 'race':
+        this.btnSelect.setClasses(['button_disabled']);
+        this.btnDelete.setClasses(['button_disabled']);
+        break;
+    }
   }
 }
