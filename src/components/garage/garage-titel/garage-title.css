@@ -1,0 +1,8 @@
+.garage-title {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  user-select: none;
+}

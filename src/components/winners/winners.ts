@@ -39,13 +39,17 @@ export class Winners extends Statistic {
     this.render();
   }
 
+  // BUG в статистике отображаются только машины текущей страницы
+  // [ ] в стор добавить загрузку и обновление полного списка машин
   public render(): void {
     let html = ``;
     this.getWinners({ page: this._currentPage, limit: LIMIT_WINNERS, order: this.order, sort: this.sort })
       .then((winners) => {
         winners.forEach((winner) => {
           const { id, time, wins } = winner;
-          const { name, color } = store.cars.filter((car) => car.id === id)[0];
+          const mycar = store.cars.filter((car) => car.id === id);
+          if (mycar.length === 0) return;
+          const { name, color } = mycar[0];
           html += `
           <div>${id}</div>
           <div>${color}</div>
@@ -55,7 +59,9 @@ export class Winners extends Statistic {
         });
         this.page.getNode().innerHTML = html;
       })
-      .catch((e) => {});
+      .catch((e) => {
+        console.warn('getWinners', e);
+      });
   }
 
   private changeSortOrder() {

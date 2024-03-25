@@ -4,6 +4,7 @@ import { Garage } from '../garage/garage';
 import { Header } from '../header/header';
 import { Winners } from '../winners/winners';
 import './app.css';
+import store from '../../store/store';
 
 export class App extends BaseComponent {
   header;
@@ -24,7 +25,7 @@ export class App extends BaseComponent {
   }
 
   private async config() {
-    this.garage.getCars(1);
+    this.garage.getCars(store.page);
   }
 
   router = () => {

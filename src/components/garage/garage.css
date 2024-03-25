@@ -2,3 +2,7 @@
   flex: 1 1 auto;
   background-color: var(--backgound-color-page);
 }
+
+.cars {
+  padding-bottom: 1rem;
+}

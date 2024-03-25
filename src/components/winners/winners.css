@@ -24,8 +24,9 @@
     font-size: 1rem;
     user-select: none;
 
-    &:nth-child(n+4):nth-child(-n+5),
-    &:nth-child(1) {
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(5) {
       cursor: pointer;
 
       @media (hover: hover) {

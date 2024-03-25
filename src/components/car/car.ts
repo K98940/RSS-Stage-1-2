@@ -68,6 +68,7 @@ export class Car extends Engine {
         const raceTimeSec = Number((raceTime / 1000).toFixed(2));
         this.carModel.startEngine(raceTime);
         this.drive(this.id, raceTimeSec)
+          // BUG в победители должна записываться только первая машина, а не все
           .then(() => this.registration.saveResultRace(this, raceTimeSec))
           .then((result) => {
             this.carModel.carStopped();

@@ -4,6 +4,9 @@ import { Callback } from './../types/types';
 type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
+  carsPerPage: number;
+  carsCount: number;
+  page: number;
   carName: string;
   updateCarName: string;
   cars: Car[];
@@ -11,6 +14,9 @@ type Store = {
   [index: string]: StoreValue;
 };
 const initialStore: Store = {
+  carsPerPage: 7,
+  carsCount: 0,
+  page: 1,
   carName: '',
   updateCarName: '',
   currentID: 0,
@@ -39,6 +45,12 @@ const storeHandler = {
         break;
       case 'updateCarName':
         subscribers.updateCarName?.forEach((callback) => callback());
+        break;
+      case 'carsCount':
+        subscribers.carsCount?.forEach((callback) => callback());
+        break;
+      case 'page':
+        subscribers.page?.forEach((callback) => callback());
         break;
 
       default:
