@@ -1,0 +1,6 @@
+.car-model {
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 0.3rem;
+  user-select: none;
+}
