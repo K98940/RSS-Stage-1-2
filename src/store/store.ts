@@ -10,7 +10,9 @@ type Store = {
   carsCount: number;
   page: number;
   carName: string;
+  carColor: string;
   updateCarName: string;
+  updateCarColor: string;
   cars: Car[];
   currentID: number;
   [index: string]: StoreValue;
@@ -22,7 +24,9 @@ const initialStore: Store = {
   carsCount: 0,
   page: 1,
   carName: '',
+  carColor: '',
   updateCarName: '',
+  updateCarColor: '',
   currentID: 0,
   cars: [],
 };

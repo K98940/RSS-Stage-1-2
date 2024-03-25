@@ -44,6 +44,9 @@ export class CarModel extends BaseComponent {
     this.removeClass('car_move');
     this.removeClass('car_stopped');
   }
+  // TODO можно сделать отдельные классы car-stopped и car-broken
+  // и по ним выбирать color для финишного флага
+  // классу car-broken повесить эффект сломаной машины
 
   public carStopped(): void {
     this.setClasses(['car_stopped']);

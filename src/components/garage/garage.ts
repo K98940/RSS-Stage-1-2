@@ -49,11 +49,11 @@ export class Garage {
   protected generate100cars(): void {
     // TODO переделать на Promise.settledAll -> getCars
     for (let i = 0; i < 100; i += 1) {
-      const r = random(0, 255);
-      const g = random(0, 255);
-      const b = random(0, 255);
+      const r = random(0, 255).toString(16);
+      const g = random(0, 255).toString(16);
+      const b = random(0, 255).toString(16);
       const { brand, name } = generateCarName();
-      this.createCar({ id: 0, name: `${brand} ${name}`, color: `rgb(${r}, ${g}, ${b})` });
+      this.createCar({ id: 0, name: `${brand} ${name}`, color: `#${r}${g}${b}` });
     }
     this.getCars(store.page);
   }
@@ -70,13 +70,13 @@ export class Garage {
   protected clickUpdateCar(e: CustomEvent) {
     const id = store.currentID;
     const name = e.detail.name;
+    const color = store.carColor;
     if (!id || !name) return;
-    const color = store.cars.filter((car) => car.id === id)[0].color;
     this.updateCar(id, { id, name, color });
   }
 
   protected clickCreateCar() {
-    this.createCar({ name: store.carName, color: 'green', id: 0 });
+    this.createCar({ name: store.carName, color: store.carColor, id: 0 });
   }
 
   public carsToStore(response: TCar[]) {

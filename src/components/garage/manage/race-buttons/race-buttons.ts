@@ -3,7 +3,7 @@ import { Button } from '../../../button/button';
 import { Callback } from '../../../../types/types';
 import { BaseComponent } from '../../../base/base-component';
 import store, { subscribe } from '../../../../store/store';
-// FIX кнопки должны блокироваться
+
 export class RaceButtons extends BaseComponent {
   buttonRace = new Button({ textContent: 'RACE' });
 

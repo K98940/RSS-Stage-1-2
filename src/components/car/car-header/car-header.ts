@@ -20,11 +20,21 @@ export class CarHeader extends BaseComponent {
   }
 
   private clickRemove(): void {
-    if (this.car.id) document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
+    // TODO с машиной надо также удалить рекорды
+    if (this.car.id) {
+      document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
+      store.updateCarColor = '';
+      store.updateCarName = '';
+      store.currentID = 0;
+    }
   }
 
   private clickSelect(): void {
-    if (this.car.id) store.currentID = this.car.id;
+    if (this.car.id) {
+      store.updateCarColor = this.car.color;
+      store.updateCarName = this.car.name;
+      store.currentID = this.car.id;
+    }
   }
 
   public update(): void {
