@@ -8,6 +8,7 @@ type Store = {
   carsTotal: TCar[];
   carsPerPage: number;
   carsCount: number;
+  winnersCount: number;
   page: number;
   carName: string;
   carColor: string;
@@ -22,11 +23,12 @@ const initialStore: Store = {
   carsTotal: [],
   carsPerPage: 7,
   carsCount: 0,
+  winnersCount: 0,
   page: 1,
   carName: '',
   carColor: '',
   updateCarName: '',
-  updateCarColor: '',
+  updateCarColor: '#000000',
   currentID: 0,
   cars: [],
 };
@@ -56,6 +58,9 @@ const storeHandler = {
         break;
       case 'carsCount':
         subscribers.carsCount?.forEach((callback) => callback());
+        break;
+      case 'winnersCount':
+        subscribers.winnersCount?.forEach((callback) => callback());
         break;
       case 'page':
         subscribers.page?.forEach((callback) => callback());

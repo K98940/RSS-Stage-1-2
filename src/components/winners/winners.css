@@ -3,9 +3,18 @@
   background-color: var(--backgound-color-page);
 }
 
+.winners_h2 {
+  padding: 0.5rem 0;
+}
+
+.winners_h3 {
+  padding-bottom: 0.5rem;
+}
+
 .page {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+  padding-bottom: 1rem;
 
   & div {
     padding: 0.2rem;
@@ -15,7 +24,8 @@
 
 .winners-header {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+  text-align: center;
 
   & div {
     padding: 0.2rem;
@@ -36,4 +46,19 @@
       }
     }
   }
+}
+
+.winners-car1 {
+  background-color: black;
+  mask-image: url("./car-icon.webp");
+  mask-size: auto 70%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.winners-car {
+  mask-image: url("./car-icon.webp");
+  mask-size: auto 130%;
+  mask-repeat: no-repeat;
+  mask-position: center;
 }

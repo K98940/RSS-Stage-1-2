@@ -1,3 +1,4 @@
+import store from '../../store/store';
 import { Color, l } from '../../utils/utils';
 import { Car } from '../car/car';
 import { Statistic } from './statistic';
@@ -40,6 +41,9 @@ export class RegistrationResults extends Statistic {
         .catch((error) => {
           l('Error ' + error, Color.orange);
           reject();
+        })
+        .finally(() => {
+          this.stat.getWinnersCount().then((winnerCount) => (store.winnersCount = winnerCount));
         });
     });
   }

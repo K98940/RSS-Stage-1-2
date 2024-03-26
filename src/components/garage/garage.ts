@@ -49,9 +49,9 @@ export class Garage {
   protected generate100cars(): void {
     // TODO переделать на Promise.settledAll -> getCars
     for (let i = 0; i < 100; i += 1) {
-      const r = random(0, 255).toString(16);
-      const g = random(0, 255).toString(16);
-      const b = random(0, 255).toString(16);
+      const r = random(0, 255).toString(16).padStart(2, '0');
+      const g = random(0, 255).toString(16).padStart(2, '0');
+      const b = random(0, 255).toString(16).padStart(2, '0');
       const { brand, name } = generateCarName();
       this.createCar({ id: 0, name: `${brand} ${name}`, color: `#${r}${g}${b}` });
     }

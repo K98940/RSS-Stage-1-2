@@ -57,6 +57,7 @@ export class Cars extends BaseComponent {
     Promise.any(carPromises)
       .then((result) => {
         if (!(result instanceof Error)) {
+          // TODO показать всплывашку о победителе
           l('FIRST PLACE IS THE ' + result.car.name + ' ' + result.time + ' seconds!', Color.green);
           this.registration.saveResultRace(result.car, result.time);
         }

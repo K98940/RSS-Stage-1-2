@@ -20,7 +20,7 @@ export class CarHeader extends BaseComponent {
   }
 
   private clickRemove(): void {
-    // TODO с машиной надо также удалить рекорды
+    // BUG с машиной надо также удалить рекорды
     if (this.car.id) {
       document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
       store.updateCarColor = '';

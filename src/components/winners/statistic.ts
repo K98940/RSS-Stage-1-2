@@ -24,7 +24,7 @@ type PropsCreateWinner = {
   time: number;
 };
 
-// const HEADER_X_TOTAL = 'X-Total-Count';
+const HEADER_X_TOTAL = 'X-Total-Count';
 
 export class Statistic {
   public async getWinners({ page = 1, limit = 10, sort = 'time', order = 'ASC' }: PropsGetWinnerS): Promise<Winner[]> {
@@ -37,6 +37,22 @@ export class Statistic {
           if (!result.ok) throw new Error(result.statusText);
           // const totalCount = result.headers.get(HEADER_X_TOTAL);
           return result.json();
+        })
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    });
+  }
+
+  public async getWinnersCount(): Promise<number> {
+    const URL = '/winners';
+    const QUERY = `/?_page=1&_limit=1`;
+
+    return new Promise((resolve, reject) => {
+      fetch(BASE_URL + URL + QUERY)
+        .then((result) => {
+          if (!result.ok) throw new Error(result.statusText);
+          const totalCount = result.headers.get(HEADER_X_TOTAL);
+          return Number(totalCount) || 0;
         })
         .then((data) => resolve(data))
         .catch((error) => reject(error));

@@ -3,7 +3,8 @@ import { Button } from '../../../button/button';
 import { Callback } from '../../../../types/types';
 import { BaseComponent } from '../../../base/base-component';
 import store, { subscribe } from '../../../../store/store';
-
+// FIX добавить состояние race-over когда гонка закончена
+// но машины еще на финише
 export class RaceButtons extends BaseComponent {
   buttonRace = new Button({ textContent: 'RACE' });
 
