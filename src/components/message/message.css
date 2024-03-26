@@ -1,0 +1,37 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: clamp(10rem, 70%, 30rem);
+  height: clamp(7rem, 50%, 10rem);
+  padding: 1rem;
+
+  border: 1rem;
+  border: 8px solid black;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.5);
+  transition-duration: 1s;
+}
+
+.message__h1 {
+  text-align: center;
+  color: rgb(170, 255, 140);
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+
+.message__content {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+}
+
+.message_out {
+  opacity: 0;
+}

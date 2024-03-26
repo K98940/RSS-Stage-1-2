@@ -33,6 +33,7 @@ export class UpdateCar extends BaseComponent {
     const name = this.inputUpdateName.getNode();
     if (name instanceof HTMLInputElement) name.value = store.updateCarName;
     const color = this.inputCreateColor.getNode();
+    // FIX если строка пустая - не записывать в инпут
     if (color instanceof HTMLInputElement) color.value = store.updateCarColor;
 
     switch (store.state) {

@@ -42,7 +42,11 @@ export class Car extends Engine {
     this.btnStartEngine = new Button({
       textContent: 'A',
       classNames: ['engine__btn', 'engine-a_on'],
-      callback: this.startMove.bind(this),
+      callback: () => {
+        this.startMove().catch((e) => {
+          l('stop', Color.orange);
+        });
+      },
     });
     this.btnStopEngine = new Button({
       textContent: 'B',

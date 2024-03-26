@@ -1,12 +1,15 @@
 import { Car } from '../../car/car';
+import { Message } from '../../message/message';
 import { Color, l } from '../../../utils/utils';
+import { RaceResult } from '../../../types/types';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
-import { RaceResult } from '../../../types/types';
 import { RegistrationResults } from '../../winners/registration';
 
 export class Cars extends BaseComponent {
   registration = new RegistrationResults();
+
+  msg = new Message();
 
   constructor() {
     super({ classNames: ['cars'] });
@@ -57,9 +60,8 @@ export class Cars extends BaseComponent {
     Promise.any(carPromises)
       .then((result) => {
         if (!(result instanceof Error)) {
-          // TODO показать всплывашку о победителе
-          l('FIRST PLACE IS THE ' + result.car.name + ' ' + result.time + ' seconds!', Color.green);
           this.registration.saveResultRace(result.car, result.time);
+          this.msg.show('WINNER', `${result.car.name} with ${result.time} seconds!`, 5);
         }
       })
       .catch(() => {});
