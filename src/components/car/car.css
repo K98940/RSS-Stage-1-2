@@ -41,6 +41,18 @@
   }
 }
 
+.car:has(div.car-finised) {
+  &::after {
+    text-shadow: 0 0 1rem green;
+  }
+}
+
+.car:has(div.car-broken) {
+  &::after {
+    text-shadow: 0 0 1rem red;
+  }
+}
+
 .car-main {
   display: flex;
   align-items: center;

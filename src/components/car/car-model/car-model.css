@@ -1,6 +1,54 @@
 .car-model {
+  position: relative;
   width: 7rem;
   height: 2.5rem;
   border-radius: 0.3rem;
   user-select: none;
 }
+
+.car-broken {
+  --light-size: 1rem;
+  --light-color: red;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--light-size)*-0.35);
+    top: calc(var(--light-size)*.8);
+    width: calc(var(--light-size)*.5);
+    height: var(--light-size);
+    border-radius: 0 100% 100% 0;
+    background-color: rgba(255, 0, 0, 0.6);
+    box-shadow: -0.1rem 0 0.5rem var(--light-color);
+
+    animation-name: broken-car;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0.6rem;
+    top: -0.6rem;
+    width: 3rem;
+    height: 2rem;
+    background-image: url("./smoke.gif");
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes broken-car {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  }

@@ -78,11 +78,13 @@ export class Car extends Engine {
         this.drive(this.id, raceTimeSec)
           .then(() => {
             this.carModel.carStopped();
+            this.carModel.setClasses(['car-finised']);
             resolve({ car: this, time: raceTimeSec });
           })
           .catch((error) => {
             l(`The car ${this.name} BROKEN!!!`, Color.orange);
             this.carModel.carStopped();
+            this.carModel.setClasses(['car-broken']);
             reject(error);
           });
       });
@@ -98,6 +100,8 @@ export class Car extends Engine {
           this.carModel.stopEngine();
           this.btnStopOFF();
           this.btnStartON();
+          this.carModel.removeClass('car-broken');
+          this.carModel.removeClass('car-finised');
           resolve(true);
         })
         .catch((error) => reject(error));
