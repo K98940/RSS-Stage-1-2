@@ -4,7 +4,7 @@ import { Callback, TCar } from './../types/types';
 type StoreKey = string;
 type StoreValue = string | number | object | [];
 type Store = {
-  state: 'idle' | 'race';
+  state: 'idle' | 'race' | 'race-over' | 'reset';
   carsTotal: TCar[];
   carsPerPage: number;
   carsCount: number;

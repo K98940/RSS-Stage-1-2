@@ -3,12 +3,11 @@ import { Button } from '../../../button/button';
 import { Callback } from '../../../../types/types';
 import { BaseComponent } from '../../../base/base-component';
 import store, { subscribe } from '../../../../store/store';
-// FIX добавить состояние race-over когда гонка закончена
-// но машины еще на финише
+
 export class RaceButtons extends BaseComponent {
   buttonRace = new Button({ textContent: 'RACE' });
 
-  buttonReset = new Button({ textContent: 'RESET' });
+  buttonReset = new Button({ textContent: 'RESET', classNames: ['button_disabled'] });
 
   buttonGenerate = new Button({ textContent: 'GENERATE CARS' });
 
@@ -26,13 +25,23 @@ export class RaceButtons extends BaseComponent {
     switch (store.state) {
       case 'idle':
         this.buttonRace.removeClass('button_disabled');
-        this.buttonReset.removeClass('button_disabled');
+        this.buttonReset.setClasses(['button_disabled']);
         this.buttonGenerate.removeClass('button_disabled');
         break;
       case 'race':
         this.buttonRace.setClasses(['button_disabled']);
         this.buttonReset.setClasses(['button_disabled']);
         this.buttonGenerate.setClasses(['button_disabled']);
+        break;
+      case 'reset':
+        this.buttonRace.setClasses(['button_disabled']);
+        this.buttonReset.setClasses(['button_disabled']);
+        this.buttonGenerate.setClasses(['button_disabled']);
+        break;
+      case 'race-over':
+        this.buttonRace.setClasses(['button_disabled']);
+        this.buttonReset.removeClass('button_disabled');
+        this.buttonGenerate.removeClass('button_disabled');
         break;
     }
   }

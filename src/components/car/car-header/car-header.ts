@@ -20,7 +20,6 @@ export class CarHeader extends BaseComponent {
   }
 
   private clickRemove(): void {
-    // BUG с машиной надо также удалить рекорды
     if (this.car.id) {
       document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
       store.updateCarColor = '';
@@ -38,6 +37,7 @@ export class CarHeader extends BaseComponent {
   }
 
   public update(): void {
+    // TODO отрефакторить такие места
     switch (store.state) {
       case 'idle':
         this.btnSelect.removeClass('button_disabled');
@@ -46,6 +46,14 @@ export class CarHeader extends BaseComponent {
       case 'race':
         this.btnSelect.setClasses(['button_disabled']);
         this.btnDelete.setClasses(['button_disabled']);
+        break;
+      case 'reset':
+        this.btnSelect.setClasses(['button_disabled']);
+        this.btnDelete.setClasses(['button_disabled']);
+        break;
+      case 'race-over':
+        this.btnSelect.removeClass('button_disabled');
+        this.btnDelete.removeClass('button_disabled');
         break;
     }
   }

@@ -19,14 +19,16 @@ export class RegistrationResults extends Statistic {
         .then(
           (winner) => {
             if ('time' in winner) {
-              const { wins, time } = winner;
+              let { wins, time } = winner;
+              wins += 1;
               if (timeRace < time) {
                 // <--- new personal record
-                this.stat.updateWinner({ id: car.id, time: timeRace, wins: wins + 1 }).then(() => {
-                  l(`The car ${car.name} got New Record: ${timeRace} seconds!`, Color.green);
-                  resolve(time);
-                });
+                time = timeRace;
               }
+              this.stat.updateWinner({ id: car.id, time, wins }).then(() => {
+                l(`The car ${car.name} got New Record: ${timeRace} seconds!`, Color.green);
+                resolve(time);
+              });
             }
             resolve(timeRace);
           },

@@ -35,7 +35,6 @@ export class Statistic {
       fetch(BASE_URL + URL + QUERY)
         .then((result) => {
           if (!result.ok) throw new Error(result.statusText);
-          // const totalCount = result.headers.get(HEADER_X_TOTAL);
           return result.json();
         })
         .then((data) => resolve(data))
@@ -67,7 +66,6 @@ export class Statistic {
       fetch(BASE_URL + URL + QUERY)
         .then((result) => {
           if (!result.ok) throw new Error(result.statusText);
-          // const totalCount = result.headers.get(HEADER_X_TOTAL);
           return result.json();
         })
         .then((data) => resolve(data))

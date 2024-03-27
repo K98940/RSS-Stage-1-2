@@ -44,32 +44,34 @@ export class Cars extends BaseComponent {
   }
 
   public startRace(): void {
-    const carPromises: Promise<RaceResult | Error>[] = [];
-    store.cars.forEach((car) => {
-      carPromises.push(car.startMove());
-    });
-
-    Promise.allSettled(carPromises)
+    const stopAll = store.cars.map((car) => car.stopEngine());
+    Promise.allSettled(stopAll)
       .then(() => {
-        l('The RACE Over', Color.green);
-        store.state = 'idle';
+        const startAll = store.cars.map((car) => car.startMove());
+        Promise.allSettled(startAll)
+          .then(() => {
+            store.state = 'race-over';
+          })
+          .catch((e) => {
+            l('The RACE ERROR ' + e, Color.orange);
+          });
+        Promise.any(startAll).then((result) => {
+          if (!(result instanceof Error)) {
+            this.registration.saveResultRace(result.car, result.time);
+            this.msg.show('WINNER', `${result.car.name} with ${result.time} seconds!`, 5);
+          }
+        });
       })
       .catch((e) => {
-        l('The RACE ERROR ' + e, Color.orange);
+        console.log(e);
       });
-    Promise.any(carPromises)
-      .then((result) => {
-        if (!(result instanceof Error)) {
-          this.registration.saveResultRace(result.car, result.time);
-          this.msg.show('WINNER', `${result.car.name} with ${result.time} seconds!`, 5);
-        }
-      })
-      .catch(() => {});
   }
 
   public resetAllCars(): void {
-    store.cars.forEach((car) => {
-      car.stopEngine();
+    store.state = 'reset';
+    const stops = store.cars.map((car) => car.stopEngine());
+    Promise.allSettled(stops).then(() => {
+      store.state = 'idle';
     });
   }
 }

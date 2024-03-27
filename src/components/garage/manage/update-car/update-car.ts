@@ -33,8 +33,7 @@ export class UpdateCar extends BaseComponent {
     const name = this.inputUpdateName.getNode();
     if (name instanceof HTMLInputElement) name.value = store.updateCarName;
     const color = this.inputCreateColor.getNode();
-    // FIX если строка пустая - не записывать в инпут
-    if (color instanceof HTMLInputElement) color.value = store.updateCarColor;
+    if (color instanceof HTMLInputElement && store.updateCarColor) color.value = store.updateCarColor;
 
     switch (store.state) {
       case 'idle':
@@ -44,6 +43,14 @@ export class UpdateCar extends BaseComponent {
       case 'race':
         this.inputUpdateName.setClasses(['button_disabled']);
         this.buttonUpdateCar.setClasses(['button_disabled']);
+        break;
+      case 'reset':
+        this.inputUpdateName.removeClass('button_disabled');
+        this.buttonUpdateCar.removeClass('button_disabled');
+        break;
+      case 'race-over':
+        this.inputUpdateName.removeClass('button_disabled');
+        this.buttonUpdateCar.removeClass('button_disabled');
         break;
     }
   }

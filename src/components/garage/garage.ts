@@ -12,15 +12,16 @@ import { BaseComponent } from '../base/base-component';
 import { GarageTitle } from './garage-titel/garage-titel';
 import { Pagination } from './cars/pagination/pagination';
 import { generateCarName, random } from '../../utils/utils';
+import { Statistic } from '../winners/statistic';
 
 export class Garage {
-  node;
+  node = new BaseComponent({ tag: 'section', classNames: ['garage'] });
 
-  cars;
+  cars = new Cars();
+
+  stat = new Statistic();
 
   constructor() {
-    this.cars = new Cars();
-    this.node = new BaseComponent({ tag: 'section', classNames: ['garage'] });
     this.node.appendNodes(
       new Manage(this.startRace.bind(this), this.reset.bind(this), this.generate100cars.bind(this)),
       new GarageTitle(),
@@ -35,9 +36,7 @@ export class Garage {
       }
     });
     document.addEventListener('removeCar', (e) => {
-      if (e instanceof CustomEvent) {
-        this.removeCar(e.detail.id);
-      }
+      if (e instanceof CustomEvent) this.removeCar(e.detail.id);
     });
   }
 
@@ -115,6 +114,10 @@ export class Garage {
     remove
       .car(id)
       .then(() => this.getCars(store.page))
+      .then(() => this.stat.getWinneR({ id }))
+      .then((winner) => {
+        if (!(winner instanceof Error)) if (winner.id) this.stat.deleteWinner({ id: winner.id });
+      })
       .catch((error) => {
         console.log(error);
       });

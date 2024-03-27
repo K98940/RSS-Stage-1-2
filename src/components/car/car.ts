@@ -51,7 +51,11 @@ export class Car extends Engine {
     this.btnStopEngine = new Button({
       textContent: 'B',
       classNames: ['engine__btn', 'btn_disabled'],
-      callback: this.stopEngine.bind(this),
+      callback: () => {
+        this.stopEngine().then((result) => {
+          if (!(result instanceof Error)) store.state = 'idle';
+        });
+      },
     });
     this.carModel.setColor(props.color);
     const conteiner = new BaseComponent({ classNames: ['car-main'] });
@@ -85,13 +89,18 @@ export class Car extends Engine {
     });
   }
 
-  public stopEngine(): void {
+  public stopEngine(): Promise<boolean | Error> {
     this.btnStopEngine.setClasses(['btn_disabled']);
-    this.stop(this.id).then((response) => {
-      if (response instanceof Error) throw new Error();
-      this.carModel.stopEngine();
-      this.btnStopOFF();
-      this.btnStartON();
+    return new Promise((resolve, reject) => {
+      this.stop(this.id)
+        .then((response) => {
+          if (response instanceof Error) throw new Error();
+          this.carModel.stopEngine();
+          this.btnStopOFF();
+          this.btnStartON();
+          resolve(true);
+        })
+        .catch((error) => reject(error));
     });
   }
 
