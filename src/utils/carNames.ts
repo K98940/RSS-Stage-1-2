@@ -57,4 +57,18 @@ export default [
     'Granta',
     'X-Cross 5',
   ],
+  ['FSO', 'Warszawa', 'Syrena', '125p', 'Polonez', 'Lanos', 'Matiz'],
+  [
+    'Geely',
+    'SC7',
+    'LC-Cross',
+    'Emgrand GT',
+    'Emgrand X7',
+    'Atlas',
+    'GS',
+    'Coolray',
+    'Atlas Pro',
+    'Emgrand 7',
+    'Tugella',
+  ],
 ];

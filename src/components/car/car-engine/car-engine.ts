@@ -35,4 +35,8 @@ export class Engine {
         });
     });
   }
+
+  public abort(id: string) {
+    drive.abort(id);
+  }
 }

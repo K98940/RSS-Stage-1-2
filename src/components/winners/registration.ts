@@ -13,7 +13,6 @@ export class RegistrationResults extends Statistic {
 
   public saveResultRace(car: Car, timeRace: number): Promise<number> {
     return new Promise((resolve, reject) => {
-      l('The car ' + car.name + ' is FINISHED', Color.green);
       this.stat
         .getWinneR({ id: car.id })
         .then(
@@ -26,7 +25,6 @@ export class RegistrationResults extends Statistic {
                 time = timeRace;
               }
               this.stat.updateWinner({ id: car.id, time, wins }).then(() => {
-                l(`The car ${car.name} got New Record: ${timeRace} seconds!`, Color.green);
                 resolve(time);
               });
             }
@@ -35,7 +33,6 @@ export class RegistrationResults extends Statistic {
           () => {
             // <-- record not found, create new record
             this.stat.createWinner({ id: car.id, wins: 1, time: timeRace }).then(() => {
-              l(`The car ${car.name} got New Record: ${timeRace} seconds!`, Color.green);
               resolve(timeRace);
             });
           },

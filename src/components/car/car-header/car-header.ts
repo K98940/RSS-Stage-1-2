@@ -24,7 +24,7 @@ export class CarHeader extends BaseComponent {
       document.dispatchEvent(new CustomEvent('removeCar', { detail: { id: this.car.id } }));
       store.updateCarColor = '';
       store.updateCarName = '';
-      store.currentID = 0;
+      if (store.currentID === this.car.id) store.currentID = -1;
     }
   }
 

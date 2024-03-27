@@ -43,6 +43,8 @@ export class CarModel extends BaseComponent {
     this.car.node.getNode().style.setProperty('--path-length', ``);
     this.removeClass('car_move');
     this.removeClass('car_stopped');
+    this.removeClass('car-broken');
+    this.removeClass('car-finised');
   }
 
   public carStopped(): void {

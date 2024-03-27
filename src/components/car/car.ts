@@ -43,9 +43,7 @@ export class Car extends Engine {
       textContent: 'A',
       classNames: ['engine__btn', 'engine-a_on'],
       callback: () => {
-        this.startMove().catch((e) => {
-          l('stop', Color.orange);
-        });
+        this.startMove().catch((e) => {});
       },
     });
     this.btnStopEngine = new Button({
@@ -81,10 +79,13 @@ export class Car extends Engine {
             this.carModel.setClasses(['car-finised']);
             resolve({ car: this, time: raceTimeSec });
           })
-          .catch((error) => {
-            l(`The car ${this.name} BROKEN!!!`, Color.orange);
+          .catch((error: string) => {
             this.carModel.carStopped();
-            this.carModel.setClasses(['car-broken']);
+            if (error !== 'The user aborted a request.') {
+              this.btnStartOFF();
+              this.btnStopON();
+              this.carModel.setClasses(['car-broken']);
+            }
             reject(error);
           });
       });
@@ -94,17 +95,16 @@ export class Car extends Engine {
   public stopEngine(): Promise<boolean | Error> {
     this.btnStopEngine.setClasses(['btn_disabled']);
     return new Promise((resolve, reject) => {
+      this.abort(`${this.id}`);
       this.stop(this.id)
         .then((response) => {
           if (response instanceof Error) throw new Error();
           this.carModel.stopEngine();
           this.btnStopOFF();
           this.btnStartON();
-          this.carModel.removeClass('car-broken');
-          this.carModel.removeClass('car-finised');
           resolve(true);
         })
-        .catch((error) => reject(error));
+        .catch((error: string) => reject(error));
     });
   }
 
