@@ -37,24 +37,13 @@ export class CarHeader extends BaseComponent {
   }
 
   public update(): void {
-    // TODO отрефакторить такие места
-    switch (store.state) {
-      case 'idle':
-        this.btnSelect.removeClass('button_disabled');
-        this.btnDelete.removeClass('button_disabled');
-        break;
-      case 'race':
-        this.btnSelect.setClasses(['button_disabled']);
-        this.btnDelete.setClasses(['button_disabled']);
-        break;
-      case 'reset':
-        this.btnSelect.setClasses(['button_disabled']);
-        this.btnDelete.setClasses(['button_disabled']);
-        break;
-      case 'race-over':
-        this.btnSelect.removeClass('button_disabled');
-        this.btnDelete.removeClass('button_disabled');
-        break;
+    if (store.state === 'idle' || store.state === 'race-over') {
+      this.btnSelect.removeClass('button_disabled');
+      this.btnDelete.removeClass('button_disabled');
+    }
+    if (store.state === 'race' || store.state === 'reset') {
+      this.btnSelect.setClasses(['button_disabled']);
+      this.btnDelete.setClasses(['button_disabled']);
     }
   }
 }

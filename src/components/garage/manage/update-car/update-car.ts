@@ -35,23 +35,13 @@ export class UpdateCar extends BaseComponent {
     const color = this.inputCreateColor.getNode();
     if (color instanceof HTMLInputElement && store.updateCarColor) color.value = store.updateCarColor;
 
-    switch (store.state) {
-      case 'idle':
-        this.inputUpdateName.removeClass('button_disabled');
-        this.buttonUpdateCar.removeClass('button_disabled');
-        break;
-      case 'race':
-        this.inputUpdateName.setClasses(['button_disabled']);
-        this.buttonUpdateCar.setClasses(['button_disabled']);
-        break;
-      case 'reset':
-        this.inputUpdateName.removeClass('button_disabled');
-        this.buttonUpdateCar.removeClass('button_disabled');
-        break;
-      case 'race-over':
-        this.inputUpdateName.removeClass('button_disabled');
-        this.buttonUpdateCar.removeClass('button_disabled');
-        break;
+    if (store.state === 'idle' || store.state === 'reset' || store.state === 'race-over') {
+      this.inputUpdateName.removeClass('button_disabled');
+      this.buttonUpdateCar.removeClass('button_disabled');
+    }
+    if (store.state === 'race') {
+      this.inputUpdateName.setClasses(['button_disabled']);
+      this.buttonUpdateCar.setClasses(['button_disabled']);
     }
   }
 }

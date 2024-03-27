@@ -38,23 +38,13 @@ export class Pagination extends BaseComponent {
   }
 
   public updateState(): void {
-    switch (store.state) {
-      case 'idle':
-        if (store.page > 1) this.btnPrev.removeClass('button_disabled');
-        if (store.carsCount / store.carsPerPage > store.page) this.btnNext.removeClass('button_disabled');
-        break;
-      case 'reset':
-        if (store.page > 1) this.btnPrev.removeClass('button_disabled');
-        if (store.carsCount / store.carsPerPage > store.page) this.btnNext.removeClass('button_disabled');
-        break;
-      case 'race':
-        this.btnNext.setClasses(['button_disabled']);
-        this.btnPrev.setClasses(['button_disabled']);
-        break;
-      case 'race-over':
-        if (store.page > 1) this.btnPrev.removeClass('button_disabled');
-        if (store.carsCount / store.carsPerPage > store.page) this.btnNext.removeClass('button_disabled');
-        break;
+    if (store.state === 'idle' || store.state === 'reset' || store.state === 'race-over') {
+      if (store.page > 1) this.btnPrev.removeClass('button_disabled');
+      if (store.carsCount / store.carsPerPage > store.page) this.btnNext.removeClass('button_disabled');
+    }
+    if (store.state === 'race') {
+      this.btnNext.setClasses(['button_disabled']);
+      this.btnPrev.setClasses(['button_disabled']);
     }
   }
 }
