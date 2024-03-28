@@ -50,14 +50,14 @@
 
 .winners-car1 {
   background-color: black;
-  mask-image: url("./car-icon.webp");
+  mask-image: url('./car-icon.webp');
   mask-size: auto 70%;
   mask-repeat: no-repeat;
   mask-position: center;
 }
 
 .winners-car {
-  mask-image: url("./car-icon.webp");
+  mask-image: url('./car-icon.webp');
   mask-size: auto 130%;
   mask-repeat: no-repeat;
   mask-position: center;

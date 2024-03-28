@@ -1,6 +1,5 @@
 import './winners.css';
 import store, { subscribe } from '../../store/store';
-import { Color, l } from '../../utils/utils';
 import { Order, Sort, Statistic } from './statistic';
 import { Pagination } from './pagination/pagination';
 import { BaseComponent } from '../base/base-component';

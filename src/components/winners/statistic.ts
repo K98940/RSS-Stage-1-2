@@ -16,7 +16,6 @@ type PropsGetWinnerS = {
 type PropsGetWinneR = {
   id: number;
 };
-type WinnerS = Winner[] | Error;
 type WinneR = Winner | Error;
 type PropsCreateWinner = {
   id: number;

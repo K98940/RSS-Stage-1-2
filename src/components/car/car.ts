@@ -1,7 +1,6 @@
 import './car.css';
 import { Button } from '../button/button';
 import { RaceResult, TCar } from './../../types/types';
-import { Color, l } from '../../utils/utils';
 import { CarModel } from './car-model/car-model';
 import { Engine } from './car-engine/car-engine';
 import { CarHeader } from './car-header/car-header';
@@ -43,7 +42,7 @@ export class Car extends Engine {
       textContent: 'A',
       classNames: ['engine__btn', 'engine-a_on'],
       callback: () => {
-        this.startMove().catch((e) => {});
+        this.startMove().catch(() => {});
       },
     });
     this.btnStopEngine = new Button({

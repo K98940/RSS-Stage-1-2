@@ -9,7 +9,7 @@ const baseConfig = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  plugins: [new ESLintPlugin()],
+  plugins: [new ESLintPlugin({ extensions: ['ts'] })],
   module: {
     rules: [
       {

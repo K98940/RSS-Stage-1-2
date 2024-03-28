@@ -1,5 +1,4 @@
 import './pagination.css';
-import { subscribe } from '../../../store/store';
 import { Button } from '../../button/button';
 import { BaseComponent } from '../../base/base-component';
 import { TCallback } from '../../../types/types';
@@ -22,7 +21,6 @@ export class Pagination extends BaseComponent {
     this.next = next;
     this.prev = prev;
     this.appendNodes(this.btnPrev, this.btnNext);
-    subscribe('carsCount', this.updateCarsCount.bind(this));
   }
 
   public enablePrev(state: boolean) {

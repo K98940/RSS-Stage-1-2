@@ -19,10 +19,6 @@ export const get = {
   },
 
   async carsCount(): Promise<Response | unknown> {
-    // async carsCount(): Promise<string | null | undefined> {
-    const limitQuery = `&_limit=0`;
-    const query = `?_page=1`;
-
     try {
       const response = await fetch(BASE_URL + URL);
       if (!response.ok) throw new Error(`(${response.status}) ${response.statusText}`);

@@ -12,7 +12,8 @@ html {
   background-color: var(--background-color-html);
 }
 
-html, body {
+html,
+body {
   height: 100dvh;
 }
 

@@ -4,10 +4,7 @@ import { BASE_URL, Method } from './config';
 const URL = '/engine';
 
 export const engine = {
-  async setStatus(
-    id: number,
-    status: 'started' | 'stopped',
-  ): Promise<Error | MyResponse> {
+  async setStatus(id: number, status: 'started' | 'stopped'): Promise<Error | MyResponse> {
     return new Promise((resolve, reject) => {
       const query = `?id=${id}&status=${status}`;
       fetch(BASE_URL + URL + query, { method: Method.PATCH })

@@ -33,7 +33,7 @@
   border-bottom: 2px dashed grey;
 
   &::after {
-    content: "🏁";
+    content: '🏁';
     position: absolute;
     top: 1rem;
     right: 5rem;

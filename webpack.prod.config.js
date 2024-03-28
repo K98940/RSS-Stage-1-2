@@ -5,7 +5,7 @@ module.exports = {
   // mode: 'production',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'RSS Puzzle',
+      title: 'Async Race',
       favicon: './src/favicon.webp',
     }),
   ],

@@ -1,7 +1,6 @@
 import { Car } from '../../car/car';
 import { Message } from '../../message/message';
 import { Color, l } from '../../../utils/utils';
-import { RaceResult } from '../../../types/types';
 import store, { subscribe } from '../../../store/store';
 import { BaseComponent } from '../../base/base-component';
 import { RegistrationResults } from '../../winners/registration';
