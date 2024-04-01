@@ -43,35 +43,7 @@ const storeHandler = {
   },
   set: (target: Store, prop: StoreKey, value: StoreValue) => {
     target[prop] = value;
-    switch (prop) {
-      case 'cars':
-        subscribers.cars?.forEach((callback) => callback());
-        break;
-      case 'currentID':
-        subscribers.currentID?.forEach((callback) => callback());
-        break;
-      case 'carName':
-        subscribers.carName?.forEach((callback) => callback());
-        break;
-      case 'updateCarName':
-        subscribers.updateCarName?.forEach((callback) => callback());
-        break;
-      case 'carsCount':
-        subscribers.carsCount?.forEach((callback) => callback());
-        break;
-      case 'winnersCount':
-        subscribers.winnersCount?.forEach((callback) => callback());
-        break;
-      case 'page':
-        subscribers.page?.forEach((callback) => callback());
-        break;
-      case 'state':
-        subscribers.state?.forEach((callback) => callback());
-        break;
-
-      default:
-        break;
-    }
+    subscribers[prop]?.forEach((callback) => callback());
     return true;
   },
 };

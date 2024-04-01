@@ -22,6 +22,7 @@ export class Pagination extends BaseComponent {
   private clickNext() {
     if (store.carsCount / store.carsPerPage <= store.page) return;
     store.page += 1;
+    store.currentID = -1;
     store.state = 'idle';
     this.btnPrev.removeClass('button_disabled');
     if (store.carsCount / store.carsPerPage <= store.page) this.btnNext.setClasses(['button_disabled']);
@@ -29,6 +30,7 @@ export class Pagination extends BaseComponent {
 
   private clickPrev() {
     store.page = store.page > 1 ? store.page - 1 : 1;
+    store.currentID = -1;
     store.state = 'idle';
     if (store.page < 2) this.btnPrev.setClasses(['button_disabled']);
   }

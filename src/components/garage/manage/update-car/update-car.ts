@@ -9,7 +9,11 @@ export class UpdateCar extends BaseComponent {
 
   inputCreateColor = new Input(['color__input']);
 
-  buttonUpdateCar = new Button({ textContent: 'UPDATE', callback: this.updateCar.bind(this) });
+  buttonUpdateCar = new Button({
+    textContent: 'UPDATE',
+    classNames: ['button_disabled'],
+    callback: this.updateCar.bind(this),
+  });
 
   constructor() {
     super({ classNames: ['container-update'] });
@@ -31,15 +35,17 @@ export class UpdateCar extends BaseComponent {
 
   public update(): void {
     const name = this.inputUpdateName.getNode();
-    if (name instanceof HTMLInputElement) name.value = store.updateCarName;
     const color = this.inputCreateColor.getNode();
-    if (color instanceof HTMLInputElement && store.updateCarColor) color.value = store.updateCarColor;
+    if (name instanceof HTMLInputElement && color instanceof HTMLInputElement) {
+      name.value = store.currentID > 0 ? store.updateCarName : '';
+      if (store.updateCarColor) color.value = store.updateCarColor;
+    }
 
-    if (store.state === 'idle' || store.state === 'reset' || store.state === 'race-over') {
+    if (store.state === 'idle' || store.state === 'reset') {
       this.inputUpdateName.removeClass('button_disabled');
       this.buttonUpdateCar.removeClass('button_disabled');
     }
-    if (store.state === 'race') {
+    if (store.state === 'race' || store.state === 'race-over' || store.currentID < 0) {
       this.inputUpdateName.setClasses(['button_disabled']);
       this.buttonUpdateCar.setClasses(['button_disabled']);
     }
