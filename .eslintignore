@@ -1,0 +1,11 @@
+node_modules/
+build/
+coverage/
+__mocks__/
+__test__/
+webpack.dev.config.js
+webpack.prod.config.js
+webpack.config.js
+jest.config.ts
+setupJest.js
+global.d.ts
