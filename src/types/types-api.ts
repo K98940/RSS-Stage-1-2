@@ -1,12 +1,33 @@
+export enum Requests {
+  USER_LOGIN = 'USER_LOGIN',
+  USER_LOGOUT = 'USER_LOGOUT',
+  USER_EXTERNAL_LOGIN = 'USER_EXTERNAL_LOGIN',
+  USER_EXTERNAL_LOGOUT = 'USER_EXTERNAL_LOGOUT',
+  USER_ACTIVE = 'USER_ACTIVE',
+  USER_INACTIVE = 'USER_INACTIVE',
+  MSG_SEND = 'MSG_SEND',
+  MSG_FROM_USER = 'MSG_FROM_USER',
+  MSG_DELIVER = 'MSG_DELIVER',
+  MSG_READ = 'MSG_READ',
+  MSG_DELETE = 'MSG_DELETE',
+  MSG_EDIT = 'MSG_EDIT',
+  ERROR = 'ERROR',
+}
+
 export interface GeneralRequest {
   id: string | null;
   type: string;
   payload: unknown;
 }
 
+export type AuthTypes =
+  | Requests.USER_LOGIN
+  | Requests.USER_EXTERNAL_LOGIN
+  | Requests.USER_LOGOUT
+  | Requests.USER_EXTERNAL_LOGOUT;
 export interface AuthenticationRequest {
   id: string;
-  type: 'USER_LOGIN';
+  type: AuthTypes;
   payload: {
     user: {
       login: string;
@@ -14,10 +35,9 @@ export interface AuthenticationRequest {
     };
   };
 }
-
 export interface AuthenticationResponse {
   id: string;
-  type: 'USER_LOGIN';
+  type: AuthTypes;
   payload: {
     user: {
       login: string;
@@ -26,81 +46,23 @@ export interface AuthenticationResponse {
   };
 }
 
-export interface LogoutRequest {
-  id: string;
-  type: 'USER_LOGOUT';
-  payload: {
-    user: {
-      login: string;
-      password: string;
-    };
-  };
-}
-
-export interface LogoutResponse {
-  id: string;
-  type: 'USER_LOGOUT';
-  payload: {
-    user: {
-      login: string;
-      isLogined: boolean;
-    };
-  };
-}
-
-export interface ThirdPartyUserAuthentication {
-  id: null;
-  type: 'USER_EXTERNAL_LOGIN';
-  payload: {
-    user: {
-      login: string;
-      isLogined: boolean;
-    };
-  };
-}
-
-export interface ThirdPartyUserLogout {
-  id: null;
-  type: 'USER_EXTERNAL_LOGOUT';
-  payload: {
-    user: {
-      login: string;
-      isLogined: boolean;
-    };
-  };
-}
-
+export type UsersTypes = Requests.USER_ACTIVE | Requests.USER_INACTIVE;
 export interface AllAuthenticatedUsersRequest {
   id: string;
-  type: 'USER_ACTIVE';
+  type: UsersTypes;
   payload: null;
 }
-
 export interface AllAuthenticatedUsersResponse {
   id: string;
-  type: 'USER_ACTIVE';
+  type: UsersTypes;
   payload: {
     users: [];
   };
 }
 
-export interface AllUnauthorizedUsersRequest {
+export interface MessageRequest {
   id: string;
-  type: 'USER_INACTIVE';
-  payload: null;
-}
-
-export interface AllUnauthorizedUsersResponse {
-  id: string;
-  type: 'USER_INACTIVE';
-  payload: {
-    users: [];
-  };
-}
-
-export interface MessageSendingRequest {
-  id: string;
-  type: 'MSG_SEND';
+  type: Requests.MSG_SEND;
   payload: {
     message: {
       to: string;
@@ -108,29 +70,9 @@ export interface MessageSendingRequest {
     };
   };
 }
-
-export interface MessageSendingResponse {
+export interface MessageResponse {
   id: string;
-  type: 'MSG_SEND';
-  payload: {
-    message: {
-      id: string;
-      from: string;
-      to: string;
-      text: string;
-      datetime: number;
-      status: {
-        isDelivered: boolean;
-        isReaded: boolean;
-        isEdited: boolean;
-      };
-    };
-  };
-}
-
-export interface MessageReceivingRequest {
-  id: null;
-  type: 'MSG_SEND';
+  type: Requests.MSG_SEND;
   payload: {
     message: {
       id: string;
@@ -149,17 +91,16 @@ export interface MessageReceivingRequest {
 
 export interface MessageHistoryRequest {
   id: string;
-  type: 'MSG_FROM_USER';
+  type: Requests.MSG_FROM_USER;
   payload: {
     user: {
       login: string;
     };
   };
 }
-
 export interface MessageHistoryResponse {
   id: string;
-  type: 'MSG_FROM_USER';
+  type: Requests.MSG_FROM_USER;
   payload: {
     messages: [];
   };
@@ -167,7 +108,7 @@ export interface MessageHistoryResponse {
 
 export interface NotificationMsgDeliveryStatusChange {
   id: null;
-  type: 'MSG_DELIVER';
+  type: Requests.MSG_DELIVER;
   payload: {
     message: {
       id: string;
@@ -177,20 +118,18 @@ export interface NotificationMsgDeliveryStatusChange {
     };
   };
 }
-
 export interface MessageReadStatusChangeRequest {
   id: string;
-  type: 'MSG_READ';
+  type: Requests.MSG_READ;
   payload: {
     message: {
       id: string;
     };
   };
 }
-
 export interface MessageReadStatusChange {
   id: string;
-  type: 'MSG_READ';
+  type: Requests.MSG_READ;
   payload: {
     message: {
       id: string;
@@ -200,10 +139,9 @@ export interface MessageReadStatusChange {
     };
   };
 }
-
 export interface NotificationMessageReadStatusChange {
   id: null;
-  type: 'MSG_READ';
+  type: Requests.MSG_READ;
   payload: {
     message: {
       id: string;
@@ -213,20 +151,9 @@ export interface NotificationMessageReadStatusChange {
     };
   };
 }
-
-export interface MessageDeletion {
-  id: string;
-  type: 'MSG_DELETE';
-  payload: {
-    message: {
-      id: string;
-    };
-  };
-}
-
 export interface NotificationMessageDeletion {
   id: string;
-  type: 'MSG_DELETE';
+  type: Requests.MSG_DELETE;
   payload: {
     message: {
       id: string;
@@ -237,9 +164,19 @@ export interface NotificationMessageDeletion {
   };
 }
 
+export interface MessageDeletion {
+  id: string;
+  type: Requests.MSG_DELETE;
+  payload: {
+    message: {
+      id: string;
+    };
+  };
+}
+
 export interface MessageTextEditingRequest {
   id: string;
-  type: 'MSG_EDIT';
+  type: Requests.MSG_EDIT;
   payload: {
     message: {
       id: string;
@@ -250,7 +187,7 @@ export interface MessageTextEditingRequest {
 
 export interface MessageTextEditingResponse {
   id: string;
-  type: 'MSG_EDIT';
+  type: Requests.MSG_EDIT;
   payload: {
     message: {
       id: string;
@@ -264,7 +201,7 @@ export interface MessageTextEditingResponse {
 
 export interface ServerResponsesError {
   id: string;
-  type: 'ERROR';
+  type: Requests.ERROR;
   payload: {
     error: string;
   };

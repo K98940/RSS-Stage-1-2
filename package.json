@@ -21,7 +21,7 @@
     ]
   },
   "validate-branch-name": {
-    "pattern": "(feat|fix|chore|refactor|init)/\\w+",
+    "pattern": "(feat|fix|chore|refactor|init)/\\w+/?\\w+",
     "errorMsg": "the branch name are not valid"
   },
   "devDependencies": {
