@@ -20,6 +20,14 @@ export interface GeneralRequest {
   payload: unknown;
 }
 
+export interface GeneralResponse {
+  id: string;
+  type: Requests;
+  payload: {
+    error: string;
+  };
+}
+
 export type AuthTypes =
   | Requests.USER_LOGIN
   | Requests.USER_EXTERNAL_LOGIN

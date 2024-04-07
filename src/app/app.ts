@@ -8,35 +8,11 @@ import { PageChat } from './components/pages/chat/chat';
 import { Component } from './components/component/component';
 import state, { subscribe } from '../state/state';
 import { Color, l } from '../utils/utils';
-import { AuthenticationRequest, AllAuthenticatedUsersRequest, Requests } from './../types/types-api';
-
-const testAuthRequest: AuthenticationRequest = {
-  id: '202404051704',
-  type: Requests.USER_LOGIN,
-  payload: {
-    user: {
-      login: 'test user',
-      password: 'my password 12345',
-    },
-  },
-};
-const testUsersActive: AllAuthenticatedUsersRequest = {
-  id: '',
-  type: Requests.USER_ACTIVE,
-  payload: null,
-};
-const testUsersInactive: AllAuthenticatedUsersRequest = {
-  id: '',
-  type: Requests.USER_INACTIVE,
-  payload: null,
-};
+import { Notifications } from '../api/notifications';
 
 const connect = new Connect();
 const auth = new AuthUser();
 const users = new Users();
-// auth.request(testAuthRequest);
-// users.request(testUsersActive);
-// users.request(testUsersInactive);
 
 export class App {
   pageLogin: PageLogin;
@@ -45,7 +21,10 @@ export class App {
 
   node: Component;
 
+  notifications;
+
   constructor() {
+    this.notifications = new Notifications();
     this.pageLogin = new PageLogin();
     this.pageChat = new PageChat();
     this.node = new Component({ classNames: ['app'] });
@@ -71,4 +50,5 @@ export class App {
     }
   }
 }
+// TODO chat page - добавить список пользователей (on-line и off-line)
 // TODO добавить сохранение и загрузку состояния в LS

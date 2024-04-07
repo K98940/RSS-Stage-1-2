@@ -32,10 +32,10 @@ export class PageLogin extends Component {
       this.auth.request({ login, password });
     }
   }
-  // TODO хороший сценарий готов. Надо добавить обработку ошибок.
 
   public responseAuthUser(data: unknown): void {
     l('получен ответ', data, Color.green);
+
     if (isAuthResponse(data)) {
       const { login, isLogined } = data.payload.user;
       if (isLogined && login === state.user.login) {
