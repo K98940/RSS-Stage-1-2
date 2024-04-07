@@ -1,11 +1,10 @@
 import './login.css';
-import state, { subscribe } from '../../../../state/state';
 import { HTML } from '../../../../types/types';
 import { LoginForm } from './login-form/login-form';
 import { Component } from '../../component/component';
-import { Color, l } from '../../../../utils/utils';
 import { AuthUser } from '../../../../api/auth-user';
 import { Requests } from '../../../../types/types-api';
+import state, { subscribe } from '../../../../state/state';
 import { isAuthResponse } from '../../../../utils/predicates';
 
 export class PageLogin extends Component {
@@ -34,8 +33,6 @@ export class PageLogin extends Component {
   }
 
   public responseAuthUser(data: unknown): void {
-    l('получен ответ', data, Color.green);
-
     if (isAuthResponse(data)) {
       const { login, isLogined } = data.payload.user;
       if (isLogined && login === state.user.login) {

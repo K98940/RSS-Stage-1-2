@@ -1,14 +1,15 @@
 import { HTML } from '../../../../types/types';
 import { Component } from '../../component/component';
-import { Users } from './users-list/users-list';
+import { Users } from './users-list/users-list-view';
 
 export class PageChat extends Component {
   users;
 
   constructor() {
     super({});
-    this.users = new Users();
-    this.appendNodes(this.users);
+    const usersContainer = new Component({ classNames: ['users'] });
+    this.appendNodes(usersContainer);
+    this.users = new Users(usersContainer);
   }
 
   public render(context: HTML): void {

@@ -12,7 +12,12 @@ type State = {
     login: string;
     password: string;
   };
-  users: string[];
+  activeUsers: {
+    [index: string]: boolean;
+  };
+  inactiveUsers: {
+    [index: string]: boolean;
+  };
   [index: string]: StateValue;
 };
 
@@ -30,7 +35,8 @@ const initialState: State = {
     login: '',
     password: '',
   },
-  users: [],
+  activeUsers: {},
+  inactiveUsers: {},
 };
 
 type Subscribers = {
