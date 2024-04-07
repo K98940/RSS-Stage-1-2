@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import './app.css';
 import { Users } from '../api/auth-users';
 import { Connect } from '../api/connect';
 import { AuthUser } from '../api/auth-user';
-import { AuthenticationRequest, AllAuthenticatedUsersRequest, Requests } from './../types/types-api';
 import { PageLogin } from './components/pages/login/login';
 import { PageChat } from './components/pages/chat/chat';
 import { Component } from './components/component/component';
-import state from '../state/state';
+import state, { subscribe } from '../state/state';
 import { Color, l } from '../utils/utils';
+import { AuthenticationRequest, AllAuthenticatedUsersRequest, Requests } from './../types/types-api';
 
 const testAuthRequest: AuthenticationRequest = {
   id: '202404051704',
@@ -33,7 +34,7 @@ const testUsersInactive: AllAuthenticatedUsersRequest = {
 const connect = new Connect();
 const auth = new AuthUser();
 const users = new Users();
-auth.request(testAuthRequest);
+// auth.request(testAuthRequest);
 // users.request(testUsersActive);
 // users.request(testUsersInactive);
 
@@ -47,23 +48,27 @@ export class App {
   constructor() {
     this.pageLogin = new PageLogin();
     this.pageChat = new PageChat();
-    this.node = new Component({});
-    this.node.appendNodes(this.pageLogin.node);
-    window.location.hash = state.currentPage;
+    this.node = new Component({ classNames: ['app'] });
+    this.pageLogin.render(this.node.getNode());
+
     window.addEventListener('hashchange', () => this.router());
+    subscribe('currentPage', () => (window.location.hash = state.currentPage));
+    window.location.hash = state.currentPage;
+    document.title = state.pages[state.currentPage].title;
   }
 
   private router(): void {
     const hash = window.location.hash.slice(1);
+    document.title = state.pages[state.currentPage].title;
     switch (hash) {
       case 'login':
-        this.node.getNode().innerHTML = '';
-        this.node.appendNodes(this.pageLogin.node);
+        this.pageLogin.render(this.node.getNode());
         break;
       case 'chat':
         this.node.getNode().innerHTML = '';
-        this.node.appendNodes(this.pageChat.node);
+        this.node.appendNodes(this.pageChat);
         break;
     }
   }
 }
+// TODO добавить сохранение и загрузку состояния в LS

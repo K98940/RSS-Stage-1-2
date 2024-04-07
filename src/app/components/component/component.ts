@@ -5,7 +5,7 @@ export type Props = {
   classNames?: string[];
   attributes?: HTMLAttributes[];
   textContent?: string;
-  callback?: Callback | null;
+  callback?: Callback<unknown> | null;
 };
 
 export class Component {
@@ -20,6 +20,11 @@ export class Component {
     if (prop.attributes) this.setAttributes(prop.attributes);
     if (prop.textContent) this.setTextContent(prop.textContent);
     if (prop.callback) this.setCallback(prop.callback);
+  }
+
+  public render(context: HTML): void {
+    context.innerHTML = '';
+    context.append(this.node);
   }
 
   public getNode(): HTML {
@@ -68,14 +73,20 @@ export class Component {
     });
   }
 
-  public setCallback(calback: Callback, eventtype?: string) {
+  public setCallback(calback: Callback<Event>, eventtype?: string) {
     const event = this.constructor.name === 'Input' ? 'keyup' : 'click';
     if (typeof calback === 'function') {
       this.getNode().addEventListener(eventtype || event, calback);
     }
   }
 
-  public value() {
-    if (this.node instanceof HTMLInputElement) return this.node.value;
+  public value(value?: string) {
+    if (!(this.node instanceof HTMLInputElement)) {
+      console.warn(this.node, ' is not instance of HTMLInputElement!');
+      return;
+    }
+    if (value !== undefined) {
+      this.node.value = value;
+    } else return this.node.value;
   }
 }

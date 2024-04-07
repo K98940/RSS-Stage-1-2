@@ -1,0 +1,16 @@
+.notice {
+  margin-left: 2rem;
+  line-height: normal;
+}
+
+.error {
+  color: rgb(255, 151, 151);
+}
+
+.warning {
+  color: rgb(255, 246, 151);
+}
+
+.inform {
+  color: rgb(225, 255, 218);
+}

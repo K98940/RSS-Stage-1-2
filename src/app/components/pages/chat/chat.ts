@@ -1,9 +1,8 @@
 import { Component } from '../../component/component';
 
-export class PageChat {
-  node;
-
+export class PageChat extends Component {
   constructor() {
-    this.node = new Component({ textContent: 'CHAT' });
+    super({ textContent: 'CHAT' });
+    return this;
   }
 }

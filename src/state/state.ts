@@ -4,31 +4,37 @@ type StateValue = string | number | object | [];
 type State = {
   currentPage: `${Pages}`;
   pages: {
-    [key in `${Pages}`]: object;
+    [key in `${Pages}`]: {
+      title: string;
+    };
   };
   user: {
-    name: string;
+    login: string;
     password: string;
   };
-  users: [];
+  users: string[];
   [index: string]: StateValue;
 };
 
 const initialState: State = {
-  currentPage: 'chat',
+  currentPage: 'login',
   pages: {
-    chat: {},
-    login: {},
+    chat: {
+      title: 'chat',
+    },
+    login: {
+      title: 'login',
+    },
   },
   user: {
-    name: '',
+    login: '',
     password: '',
   },
   users: [],
 };
 
 type Subscribers = {
-  [index: string]: Callback[];
+  [index: string]: Callback<unknown>[];
 };
 
 const subscribers: Subscribers = {};
@@ -44,7 +50,7 @@ const stateHandler = {
   },
 };
 
-export const subscribe = (event: string, calback: Callback) => {
+export const subscribe = (event: string, calback: Callback<unknown>) => {
   if (!subscribers.hasOwnProperty(event)) subscribers[event] = [];
   subscribers[event].push(calback);
 };

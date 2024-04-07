@@ -1,5 +1,3 @@
-// import { Color, l } from '../utils/utils';
-
 const BASE_URL = 'ws://127.0.0.1:4000';
 
 type Status = 'open' | 'closed' | 'error';
@@ -70,7 +68,6 @@ export class Connect {
       }
       const query = JSON.stringify(req);
       this.ws?.send(query);
-      // l('send message', req, Color.green);
     } catch (error) {
       console.error(error);
     }
@@ -79,7 +76,6 @@ export class Connect {
   private getResponse(e: MessageEvent): void {
     try {
       const data = JSON.parse(e.data);
-      // l('response', data, Color.orange);
       if ('type' in data) {
         if (this.subscribers[data.type]) this.subscribers[data.type].forEach((callback) => callback(data));
       }
