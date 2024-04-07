@@ -1,5 +1,4 @@
 import { Connect } from './connect';
-import { Color, l } from '../utils/utils';
 import { Requests } from '../types/types-api';
 import { MessageHistoryRequest } from '../types/types-api';
 import { isGeneralResponse } from '../utils/predicates';
@@ -23,10 +22,8 @@ export class Notifications {
   }
 
   public handleEvent = (data: unknown): void => {
-    l('получен notifications ответ', data, Color.blue);
     if (isGeneralResponse(data)) {
       const { type } = data;
-      l('type', type, Color.green);
       switch (type) {
         case 'ERROR':
           this.modal.show(data.payload.error);

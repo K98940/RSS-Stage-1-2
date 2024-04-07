@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './app.css';
-import { Users } from '../api/auth-users';
+import { AuthUsers } from '../api/auth-users';
 import { Connect } from '../api/connect';
 import { AuthUser } from '../api/auth-user';
 import { PageLogin } from './components/pages/login/login';
@@ -12,7 +12,7 @@ import { Notifications } from '../api/notifications';
 
 const connect = new Connect();
 const auth = new AuthUser();
-const users = new Users();
+const users = new AuthUsers();
 
 export class App {
   pageLogin: PageLogin;
@@ -44,11 +44,10 @@ export class App {
         this.pageLogin.render(this.node.getNode());
         break;
       case 'chat':
-        this.node.getNode().innerHTML = '';
-        this.node.appendNodes(this.pageChat);
+        this.pageChat.render(this.node.getNode());
         break;
     }
   }
 }
-// TODO chat page - добавить список пользователей (on-line и off-line)
+// TODO чат
 // TODO добавить сохранение и загрузку состояния в LS

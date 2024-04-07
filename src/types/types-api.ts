@@ -54,6 +54,10 @@ export interface AuthenticationResponse {
   };
 }
 
+export interface User {
+  login: string;
+  isLogined: boolean;
+}
 export type UsersTypes = Requests.USER_ACTIVE | Requests.USER_INACTIVE;
 export interface AllAuthenticatedUsersRequest {
   id: string;
@@ -64,7 +68,7 @@ export interface AllAuthenticatedUsersResponse {
   id: string;
   type: UsersTypes;
   payload: {
-    users: [];
+    users: User[];
   };
 }
 

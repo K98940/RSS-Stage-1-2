@@ -1,0 +1,17 @@
+.users {
+  color: var(--text-color-normal);
+  padding: 1rem 1rem 1rem 2rem;
+  font-size: var(--font-size-normal);
+  line-height: calc(var(--font-size-normal) * 1.4);
+
+  &::marker {
+    line-height: calc(var(--font-size-normal) * 1.4);
+  }
+}
+
+.users li[active] {
+  &::marker {
+    color: greenyellow;
+    font-size: calc(var(--font-size-normal) * 1.3);
+  }
+}
