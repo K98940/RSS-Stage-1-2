@@ -1,8 +1,10 @@
-import { Callback, Pages } from './../types/types';
+import { Callback, ChatMessage, Pages } from './../types/types';
 type StateKey = string;
 type StateValue = string | number | object | [];
 type State = {
   currentPage: `${Pages}`;
+  currentUser: string;
+  currentInput: string;
   pages: {
     [key in `${Pages}`]: {
       title: string;
@@ -18,11 +20,16 @@ type State = {
   inactiveUsers: {
     [index: string]: boolean;
   };
+  chat: {
+    [index: string]: ChatMessage[] | [];
+  };
   [index: string]: StateValue;
 };
 
 const initialState: State = {
   currentPage: 'login',
+  currentUser: '',
+  currentInput: '',
   pages: {
     chat: {
       title: 'chat',
@@ -37,6 +44,7 @@ const initialState: State = {
   },
   activeUsers: {},
   inactiveUsers: {},
+  chat: {},
 };
 
 type Subscribers = {

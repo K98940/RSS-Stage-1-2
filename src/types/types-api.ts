@@ -54,7 +54,7 @@ export interface AuthenticationResponse {
   };
 }
 
-export interface User {
+export interface UserResponse {
   login: string;
   isLogined: boolean;
 }
@@ -68,7 +68,7 @@ export interface AllAuthenticatedUsersResponse {
   id: string;
   type: UsersTypes;
   payload: {
-    users: User[];
+    users: UserResponse[];
   };
 }
 

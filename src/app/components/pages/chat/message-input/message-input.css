@@ -1,0 +1,30 @@
+.message-input-container {
+  font-size: var(--font-size-normal);
+  line-height: calc(var(--font-size-normal) * 1.5);
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & input {
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0.3rem 0.5rem;
+  }
+
+  & button {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: 700;
+    line-height: calc(var(--font-size-normal) * 2);
+  }
+
+  & form,
+  input,
+  button {
+    width: 100%;
+    border-radius: 0.3rem;
+  }
+}

@@ -1,20 +1,32 @@
+import { Api } from './api';
 import { Connect } from './connect';
-import { Color, l } from '../utils/utils';
 import { Requests } from '../types/types-api';
 import { MessageRequest } from './../types/types-api';
+import { isMessageResponse } from '../utils/predicates';
 
-export class Message {
+export class Message extends Api {
   connect = new Connect();
 
   constructor() {
-    this.connect.subscribe(Requests.MSG_SEND, this.handleEvent);
+    super();
+    this.connect.subscribe(Requests.MSG_SEND, (data) => this.handleEvent(data));
   }
 
-  public request(request: MessageRequest) {
+  public request(text: string, to: string) {
+    const request: MessageRequest = {
+      id: '',
+      type: Requests.MSG_SEND,
+      payload: {
+        message: { to, text },
+      },
+    };
     this.connect.request(request);
   }
 
   public handleEvent(data: unknown) {
-    l('получен messages ответ', data, Color.blue);
+    if (isMessageResponse(data)) {
+      const type = data.type;
+      this.subscribers[type]?.forEach((callback) => callback(data));
+    }
   }
 }

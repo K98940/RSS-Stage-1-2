@@ -2,13 +2,18 @@ import './users-list.css';
 import { UsersController } from './users-list-controller';
 import { Component } from '../../../component/component';
 import state, { subscribe } from '../../../../../state/state';
+import { ListItem } from './list-item';
+import { Callback } from '../../../../../types/types';
 
 export class Users extends UsersController {
   container;
 
-  constructor(container: Component) {
+  callback;
+
+  constructor(container: Component, callback: Callback<string>) {
     super();
     this.container = container;
+    this.callback = callback;
     subscribe('activeUsers', () => this.render());
     subscribe('inactiveUsers', () => this.render());
   }
@@ -16,8 +21,9 @@ export class Users extends UsersController {
   public render(): void {
     const allUsers = [...Object.entries(state.activeUsers), ...Object.entries(state.inactiveUsers)];
     const users = allUsers.filter(([login]) => login !== state.user.login);
-    const template =
-      users.reduce((html, [login, status]) => `${html}<li ${status ? 'active' : ''}>${login}</li>`, '<ul>') + '</ul>';
-    this.container.getNode().innerHTML = template;
+    this.container.getNode().innerHTML = '';
+    users.forEach(([login, status]) => {
+      this.container.appendNodes(new ListItem({ login: login, isLogined: status, callback: this.callback }));
+    });
   }
 }

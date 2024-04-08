@@ -4,7 +4,7 @@ import { AuthUsers } from '../api/auth-users';
 import { Connect } from '../api/connect';
 import { AuthUser } from '../api/auth-user';
 import { PageLogin } from './components/pages/login/login';
-import { PageChat } from './components/pages/chat/chat';
+import { PageChat } from './components/pages/chat/chat-view';
 import { Component } from './components/component/component';
 import state, { subscribe } from '../state/state';
 import { Color, l } from '../utils/utils';
