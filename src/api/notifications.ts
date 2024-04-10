@@ -1,27 +1,26 @@
 import { Connect } from './connect';
 import { Requests } from '../types/types-api';
-import { MessageHistoryRequest } from '../types/types-api';
 import { isGeneralResponse } from '../utils/predicates';
 import { ModalMessage } from '../app/components/component/modal-message/modal-message';
+import { Api } from './api';
 
-export class Notifications {
+export class Notifications extends Api {
   connect = new Connect();
 
   modal = new ModalMessage();
 
   constructor() {
-    this.connect.subscribe(Requests.MSG_DELIVER, this.handleEvent);
-    this.connect.subscribe(Requests.MSG_READ, this.handleEvent);
-    this.connect.subscribe(Requests.MSG_DELETE, this.handleEvent);
-    this.connect.subscribe(Requests.ERROR, this.handleEvent);
-    this.connect.subscribe(Requests.USER_LOGIN, this.handleEvent);
+    super();
+    this.connect.subscribe(Requests.MSG_DELIVER, (data) => this.handleEvent(data));
+    this.connect.subscribe(Requests.MSG_READ, (data) => this.handleEvent(data));
+    this.connect.subscribe(Requests.MSG_DELETE, (data) => this.handleEvent(data));
+    this.connect.subscribe(Requests.ERROR, (data) => this.handlErrorMsg(data));
+    this.connect.subscribe(Requests.USER_LOGIN, (data) => this.handleEvent(data));
   }
 
-  public request(request: MessageHistoryRequest) {
-    this.connect.request(request);
-  }
+  public request() {}
 
-  public handleEvent = (data: unknown): void => {
+  public handlErrorMsg = (data: unknown): void => {
     if (isGeneralResponse(data)) {
       const { type } = data;
       switch (type) {
@@ -29,6 +28,13 @@ export class Notifications {
           this.modal.show(data.payload.error);
           break;
       }
+    }
+  };
+
+  public handleEvent = (data: unknown): void => {
+    if (isGeneralResponse(data)) {
+      const { type } = data;
+      this.subscribers[type]?.forEach((callback) => callback(data));
     }
   };
 }

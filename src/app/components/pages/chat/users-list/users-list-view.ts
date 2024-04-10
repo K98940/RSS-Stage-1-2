@@ -16,6 +16,7 @@ export class Users extends UsersController {
     this.callback = callback;
     subscribe('activeUsers', () => this.render());
     subscribe('inactiveUsers', () => this.render());
+    subscribe('currentUser', () => this.render());
   }
 
   public render(): void {

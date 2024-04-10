@@ -38,7 +38,8 @@ export class App {
 
   private router(): void {
     const hash = window.location.hash.slice(1);
-    document.title = state.pages[state.currentPage].title;
+    document.title = ` ${state.user.login || ''}`;
+    // document.title = state.pages[state.currentPage].title + ` ${state.user.login || ''}`;
     switch (hash) {
       case 'login':
         this.pageLogin.render(this.node.getNode());
@@ -49,5 +50,5 @@ export class App {
     }
   }
 }
-// TODO чат
+// TODO список пользователей: no action на текущего
 // TODO добавить сохранение и загрузку состояния в LS

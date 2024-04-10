@@ -4,6 +4,8 @@ import {
   GeneralResponse,
   MessageHistoryResponse,
   MessageResponse,
+  NotificationMsgDelivery,
+  Requests,
 } from '../types/types-api';
 
 export function isAuthResponse(data: unknown | AuthenticationResponse): data is AuthenticationResponse {
@@ -24,4 +26,11 @@ export function isMessagesResponse(data: unknown | MessageHistoryResponse): data
 
 export function isMessageResponse(data: unknown | MessageResponse): data is MessageResponse {
   return (data as MessageResponse)?.payload?.message?.status?.isDelivered !== undefined;
+}
+
+export function isMsgDelivery(data: unknown | NotificationMsgDelivery): data is NotificationMsgDelivery {
+  return (
+    (data as NotificationMsgDelivery)?.type === Requests.MSG_DELIVER &&
+    (data as NotificationMsgDelivery)?.payload.message.status.isDelivered !== undefined
+  );
 }

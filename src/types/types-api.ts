@@ -118,7 +118,7 @@ export interface MessageHistoryResponse {
   };
 }
 
-export interface NotificationMsgDeliveryStatusChange {
+export interface NotificationMsgDelivery {
   id: null;
   type: Requests.MSG_DELIVER;
   payload: {

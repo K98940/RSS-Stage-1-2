@@ -9,12 +9,12 @@ export type Props = {
 };
 
 export class Component {
-  protected children: Component[];
+  protected kids: Component[];
 
   protected node: HTML;
 
   constructor(prop: Props) {
-    this.children = [];
+    this.kids = [];
     this.node = document.createElement(prop.tag || 'div');
     if (prop.classNames) this.setClasses(prop.classNames);
     if (prop.attributes) this.setAttributes(prop.attributes);
@@ -32,14 +32,14 @@ export class Component {
   }
 
   public getChildren(): Component[] {
-    return this.children;
+    return this.kids;
   }
 
   public appendNodes(...elements: HTML[] | Component[]) {
     elements.forEach((element) => {
       if (element instanceof Component) {
         this.node.append(element.getNode());
-        this.children.push(element);
+        this.kids.push(element);
       } else this.node.append(element);
     });
   }
@@ -66,6 +66,10 @@ export class Component {
     this.node.textContent = text;
   }
 
+  public getTextContent(): string | null {
+    return this.node.textContent;
+  }
+
   public setAttributes(attributes: HTMLAttributes[]) {
     attributes.forEach((attribute) => {
       const [attr, value] = attribute;
@@ -89,4 +93,8 @@ export class Component {
       this.node.value = value;
     } else return this.node.value;
   }
+
+  // public remove(): void {
+  //   this.node.remove();
+  // }
 }
