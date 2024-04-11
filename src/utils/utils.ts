@@ -25,3 +25,8 @@ export const generateCarName = (): CarName => {
   const carname = brand[random(1, brand.length - 1)];
   return { brand: brand[0], name: carname };
 };
+
+export function responceToJSON<T>(response: Response): T {
+  if (!response.ok) throw new Error(response.statusText);
+  return response.json() as T;
+}

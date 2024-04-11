@@ -51,19 +51,17 @@ export class Cars extends BaseComponent {
           .then(() => {
             store.state = 'race-over';
           })
-          .catch((e) => {
-            l('The RACE ERROR ' + e, Color.orange);
-          });
-        Promise.any(startAll).then((result) => {
-          if (!(result instanceof Error)) {
-            this.registration.saveResultRace(result.car, result.time);
-            this.msg.show('WINNER', `${result.car.name} with ${result.time} seconds!`, 5);
-          }
-        });
+          .catch((e) => l(e, Color.red));
+        Promise.any(startAll)
+          .then((result) => {
+            if (!(result instanceof Error)) {
+              this.registration.saveResultRace(result.car, result.time);
+              this.msg.show('WINNER', `${result.car.name} with ${result.time} seconds!`, 5);
+            }
+          })
+          .catch((e) => l(e, Color.red));
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => l(e, Color.red));
   }
 
   public resetAllCars(): void {
