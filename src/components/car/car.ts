@@ -67,7 +67,11 @@ export class Car extends Engine {
     return new Promise((resolve, reject) => {
       this.btnStartOFF();
       this.start(this.id).then((response) => {
-        if (response instanceof Error) throw new Error();
+        if (response instanceof Error) {
+          this.btnStopOFF();
+          this.btnStartON();
+          return;
+        }
         this.btnStopON();
         const raceTime = response.distance / response.velocity;
         const raceTimeSec = Number((raceTime / 1000).toFixed(2));

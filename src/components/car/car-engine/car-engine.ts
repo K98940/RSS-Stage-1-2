@@ -7,20 +7,17 @@ export class Engine {
     return new Promise((resolve, reject) => {
       engine
         .setStatus(id, 'started')
-        .then((response) => {
-          resolve(response);
-        })
+        .then((response) => resolve(response))
         .catch((error: Error) => reject(error));
     });
   }
 
+  // TODO start() + stop()
   public stop(id: number): Promise<MyResponse | Error> {
     return new Promise((resolve, reject) => {
       engine
         .setStatus(id, 'stopped')
-        .then((response) => {
-          resolve(response);
-        })
+        .then((response) => resolve(response))
         .catch((error: Error) => reject(error));
     });
   }
@@ -30,9 +27,7 @@ export class Engine {
       drive
         .go(id)
         .then(() => resolve(raceTime))
-        .catch((error) => {
-          reject(error);
-        });
+        .catch((error) => reject(error));
     });
   }
 
