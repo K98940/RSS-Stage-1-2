@@ -2,17 +2,17 @@ import './garage.css';
 import { Car } from '../car/car';
 import { Cars } from './cars/cars';
 import { get } from '../../api/get-car';
-import { TCar } from '../../types/types';
 import { Manage } from './manage/manage';
 import { create } from '../../api/create-car';
 import { remove } from './../../api/delete-car';
 import { update } from './../../api/update-car';
+import { Statistic } from '../winners/statistic';
 import store, { subscribe } from '../../store/store';
+import { ResponseCar, TCar } from '../../types/types';
 import { BaseComponent } from '../base/base-component';
 import { GarageTitle } from './garage-titel/garage-titel';
 import { Pagination } from './cars/pagination/pagination';
 import { generateCarName, random } from '../../utils/utils';
-import { Statistic } from '../winners/statistic';
 
 export class Garage {
   node = new BaseComponent({ tag: 'section', classNames: ['garage'] });
@@ -46,7 +46,6 @@ export class Garage {
   }
 
   protected generate100cars(): void {
-    // TODO переделать на Promise.settledAll -> getCars
     for (let i = 0; i < 100; i += 1) {
       const r = random(0, 255).toString(16).padStart(2, '0');
       const g = random(0, 255).toString(16).padStart(2, '0');
@@ -78,36 +77,28 @@ export class Garage {
     this.createCar({ name: store.carName, color: store.carColor, id: 0 });
   }
 
-  public carsToStore(response: TCar[]) {
-    const newCars = response.map((car) => new Car(car));
+  public carsToStore(cars: ResponseCar) {
+    const newCars = cars.json.map((car) => new Car(car));
     store.cars = [...newCars];
+    store.carsCount = Number(cars.count) || 0;
   }
 
   protected createCar(car: TCar) {
     create
       .car(car)
       .then(() => this.getCars(store.page))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }
 
   public getCars(page: number, limit?: number) {
     get
       .cars(page, limit)
       .then((cars) => {
-        if (!cars) return;
+        console.log(cars);
         this.carsToStore(cars);
-        get.carsCount().then((carsTotal) => {
-          if (carsTotal instanceof Array) {
-            store.carsCount = carsTotal.length;
-            store.carsTotal = carsTotal;
-          }
-        });
+        get.carsCount().then((carsTotal) => (store.carsTotal = carsTotal));
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }
 
   protected removeCar(id: number) {
@@ -116,19 +107,15 @@ export class Garage {
       .then(() => this.getCars(store.page))
       .then(() => this.stat.getWinneR({ id }))
       .then((winner) => {
-        if (!(winner instanceof Error)) if (winner.id) this.stat.deleteWinner({ id: winner.id });
+        if (!(winner instanceof Error) && winner.id) this.stat.deleteWinner({ id: winner.id });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }
 
   protected updateCar(id: number, car: TCar) {
     update
       .car(id, car)
       .then(() => this.getCars(store.page))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }
 }

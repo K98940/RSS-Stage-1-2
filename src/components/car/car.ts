@@ -66,7 +66,7 @@ export class Car extends Engine {
   public startMove(): Promise<RaceResult | Error> {
     return new Promise((resolve, reject) => {
       this.btnStartOFF();
-      this.start(this.id).then((response) => {
+      this.setDrive(this.id, 'started').then((response) => {
         if (response instanceof Error) {
           this.btnStopOFF();
           this.btnStartON();
@@ -99,7 +99,7 @@ export class Car extends Engine {
     this.btnStopEngine.setClasses(['btn_disabled']);
     return new Promise((resolve, reject) => {
       this.abort(`${this.id}`);
-      this.stop(this.id)
+      this.setDrive(this.id, 'stopped')
         .then((response) => {
           if (response instanceof Error) throw new Error();
           this.carModel.stopEngine();

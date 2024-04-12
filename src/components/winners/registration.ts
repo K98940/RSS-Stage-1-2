@@ -42,7 +42,9 @@ export class RegistrationResults extends Statistic {
           reject();
         })
         .finally(() => {
-          this.stat.getWinnersCount().then((winnerCount) => (store.winnersCount = winnerCount));
+          this.stat.getWinners({ page: 1, limit: 1, order: 'ASC', sort: 'id' }).then((response) => {
+            store.winnersCount = Number(response.count) || 0;
+          });
         });
     });
   }

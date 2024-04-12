@@ -30,3 +30,9 @@ export function responceToJSON<T>(response: Response): T {
   if (!response.ok) throw new Error(response.statusText);
   return response.json() as T;
 }
+
+export async function processResponse<T>(response: Response) {
+  const HEADER_X_TOTAL = 'X-Total-Count';
+  if (!response.ok) throw new Error(response.statusText);
+  return { response, count: response.headers.get(HEADER_X_TOTAL), json: (await response.json()) as T };
+}

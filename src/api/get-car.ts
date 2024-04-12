@@ -1,18 +1,24 @@
 import { TCar } from '../types/types';
 import { BASE_URL } from './config';
+import { processResponse, responceToJSON } from '../utils/utils';
 const URL = '/garage';
 const LIMIT_WINNERS = 7;
-import { responceToJSON } from '../utils/utils';
 
 export const get = {
   cars(page: number, limit?: number) {
     const limitQuery = limit ? `&_limit=${limit}` : `&_limit=${LIMIT_WINNERS}`;
     const query = `?_page=${page}` + limitQuery;
-    return fetch(BASE_URL + URL + query).then(responceToJSON<Promise<TCar[] | undefined>>);
+    return fetch(BASE_URL + URL + query).then(processResponse<TCar[]>);
   },
 
-  // TODO cars() + carsCount()
+  // метод необходим, т.к. от api /winners данные приходят в виде:
+  // {
+  //  "id": 16,
+  //  "wins": 1,
+  //  "time": 2.92
+  // }
+  // и дополнительно нужны данные по всем машинам
   carsCount() {
-    return fetch(BASE_URL + URL).then(responceToJSON<Promise<Response | unknown>>);
+    return fetch(BASE_URL + URL).then(responceToJSON<Promise<TCar[]>>);
   },
 };

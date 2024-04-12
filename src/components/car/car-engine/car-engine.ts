@@ -1,22 +1,12 @@
 import { drive } from './../../../api/drive-mode';
 import { engine } from '../../../api/start-engine';
-import { MyResponse } from './../../../types/types';
+import { DriveStatus, MyResponse } from './../../../types/types';
 
 export class Engine {
-  public start(id: number): Promise<MyResponse | Error> {
+  public setDrive(id: number, status: DriveStatus): Promise<MyResponse | Error> {
     return new Promise((resolve, reject) => {
       engine
-        .setStatus(id, 'started')
-        .then((response) => resolve(response))
-        .catch((error: Error) => reject(error));
-    });
-  }
-
-  // TODO start() + stop()
-  public stop(id: number): Promise<MyResponse | Error> {
-    return new Promise((resolve, reject) => {
-      engine
-        .setStatus(id, 'stopped')
+        .setStatus(id, status)
         .then((response) => resolve(response))
         .catch((error: Error) => reject(error));
     });

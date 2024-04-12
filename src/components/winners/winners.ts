@@ -51,33 +51,26 @@ export class Winners extends Statistic {
 
   public render(): void {
     let html = ``;
-    this.getWinnersCount()
-      .then((winnerCount) => {
-        if (store.winnersCount !== winnerCount) store.winnersCount = winnerCount;
+    this.getWinners({ page: this._currentPage, limit: LIMIT_WINNERS, order: this.order, sort: this.sort })
+      .then((response) => {
+        const winnersCount = Number(response.count) || 0;
+        if (store.winnersCount !== winnersCount) store.winnersCount = winnersCount;
         this.h2.setTextContent(`Winners (${store.winnersCount})`);
         this.h3.setTextContent(`Page (${this.currentPage})`);
-      })
-      .then(() => {
-        this.getWinners({ page: this._currentPage, limit: LIMIT_WINNERS, order: this.order, sort: this.sort }).then(
-          (winners) => {
-            winners.forEach((winner) => {
-              const { id, time, wins } = winner;
-              const mycar = store.carsTotal.filter((car) => car.id === id);
-              if (mycar.length === 0) return;
-              const { name, color } = mycar[0];
-              html += `<div>${id}</div>
+        response.json?.forEach((winner) => {
+          const { id, time, wins } = winner;
+          const mycar = store.carsTotal.filter((car) => car.id === id);
+          if (mycar.length === 0) return;
+          const { name, color } = mycar[0];
+          html += `<div>${id}</div>
               <div>
               <div class="winners-car1"><div style="background-color: ${color}" class="winners-car"></div></div>
               </div>
               <div>${name}</div><div>${wins}</div><div>${time}</div>`;
-            });
-            this.page.getNode().innerHTML = html;
-          },
-        );
+        });
+        this.page.getNode().innerHTML = html;
       })
-      .catch((e) => {
-        console.warn('getWinners', e);
-      });
+      .catch((e) => console.warn('getWinners', e));
     if (this.currentPage >= store.winnersCount / LIMIT_WINNERS) {
       this.pagination.enableNext(false);
     } else this.pagination.enableNext(true);

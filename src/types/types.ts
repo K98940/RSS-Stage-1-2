@@ -27,3 +27,9 @@ export type TCar = {
 };
 export type MyResponse = { velocity: number; distance: number };
 export type RaceResult = { car: Car; time: number };
+export type DriveStatus = 'started' | 'stopped';
+export type ResponseCar = {
+  response: Response;
+  count: string | null;
+  json: TCar[];
+};
