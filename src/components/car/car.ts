@@ -6,7 +6,7 @@ import { Engine } from './car-engine/car-engine';
 import { CarHeader } from './car-header/car-header';
 import store, { subscribe } from '../../store/store';
 import { BaseComponent } from '../base/base-component';
-import { Statistic } from '../winners/statistic';
+import { Statistic } from '../../api/statistic';
 import { RegistrationResults } from '../winners/registration';
 
 export class Car extends Engine {

@@ -1,20 +1,9 @@
-import { processResponse, responceToJSON } from '../../utils/utils';
-import { BASE_URL, Method } from '../../api/config';
-
-type Winner = {
-  id: number;
-  wins: number;
-  time: number;
-};
-export type Sort = 'id' | 'wins' | 'time';
-export type Order = 'ASC' | 'DESC';
-type PropsGetWinneR = {
-  id: number;
-};
-type WinneR = Winner | Error;
+import { PropsGetWinneR, Winner, WinnersPage } from '../types/types';
+import { processResponse, responceToJSON } from '../utils/utils';
+import { BASE_URL, Method } from './config';
 
 export class Statistic {
-  public getWinners({ page = 1, limit = 10, sort = 'time', order = 'ASC' }) {
+  public getPage({ page = 1, limit = 10, sort = 'time', order = 'ASC' }): Promise<WinnersPage> {
     const URL = '/winners';
     const QUERY = `/?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`;
     return fetch(BASE_URL + URL + QUERY).then(processResponse<Winner[]>);
@@ -49,7 +38,7 @@ export class Statistic {
         'Content-Type': APPLICATION_JSON,
       },
       body: JSON.stringify(QUERY),
-    }).then(responceToJSON<Promise<WinneR | Error>>);
+    }).then(responceToJSON<Promise<Winner | Error>>);
   }
 
   public deleteWinner({ id }: { id: number }) {

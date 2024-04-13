@@ -1,7 +1,7 @@
 import store from '../../store/store';
 import { Color, l } from '../../utils/utils';
 import { Car } from '../car/car';
-import { Statistic } from './statistic';
+import { Statistic } from '../../api/statistic';
 
 export class RegistrationResults extends Statistic {
   stat;
@@ -42,7 +42,7 @@ export class RegistrationResults extends Statistic {
           reject();
         })
         .finally(() => {
-          this.stat.getWinners({ page: 1, limit: 1, order: 'ASC', sort: 'id' }).then((response) => {
+          this.stat.getPage({ page: 1, limit: 1, order: 'ASC', sort: 'id' }).then((response) => {
             store.winnersCount = Number(response.count) || 0;
           });
         });

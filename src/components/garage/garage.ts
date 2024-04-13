@@ -6,7 +6,7 @@ import { Manage } from './manage/manage';
 import { create } from '../../api/create-car';
 import { remove } from './../../api/delete-car';
 import { update } from './../../api/update-car';
-import { Statistic } from '../winners/statistic';
+import { Statistic } from '../../api/statistic';
 import store, { subscribe } from '../../store/store';
 import { ResponseCar, TCar } from '../../types/types';
 import { BaseComponent } from '../base/base-component';
@@ -92,12 +92,8 @@ export class Garage {
 
   public getCars(page: number, limit?: number) {
     get
-      .cars(page, limit)
-      .then((cars) => {
-        console.log(cars);
-        this.carsToStore(cars);
-        get.carsCount().then((carsTotal) => (store.carsTotal = carsTotal));
-      })
+      .carsPage(page, limit)
+      .then(this.carsToStore)
       .catch((error) => console.log(error));
   }
 

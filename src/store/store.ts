@@ -1,5 +1,5 @@
 import { Car } from '../components/car/car';
-import { Callback, TCar } from './../types/types';
+import { Callback, TCar, Winner } from './../types/types';
 
 type StoreKey = string;
 type StoreValue = string | number | object | [];
@@ -15,6 +15,7 @@ type Store = {
   updateCarName: string;
   updateCarColor: string;
   cars: Car[];
+  winners: Winner[];
   currentID: number;
   [index: string]: StoreValue;
 };
@@ -31,6 +32,7 @@ const initialStore: Store = {
   updateCarColor: '#000000',
   currentID: 0,
   cars: [],
+  winners: [],
 };
 type Subscribers = {
   [index: string]: Callback<number>[];

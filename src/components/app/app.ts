@@ -2,7 +2,7 @@ import { View } from './../../types/types';
 import { BaseComponent } from '../base/base-component';
 import { Garage } from '../garage/garage';
 import { Header } from '../header/header';
-import { Winners } from '../winners/winners';
+import { Winners } from '../winners/winners-view';
 import './app.css';
 import store from '../../store/store';
 
@@ -37,7 +37,7 @@ export class App extends BaseComponent {
         break;
       case View.winners:
         this.garage.node.setClasses(['hidden']);
-        this.winners.render();
+        this.winners.update().then(() => this.winners.render());
         this.appendNodes(this.winners.node.getNode());
         break;
     }

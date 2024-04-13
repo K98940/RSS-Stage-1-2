@@ -19,7 +19,17 @@ export type TCallback = {
 
 export type HTMLAttributes = [string, string];
 export type Html = HTMLTemplateElement | HTMLElement;
-
+export type Winner = {
+  id: number;
+  wins: number;
+  time: number;
+};
+export type WinneR = Winner | Error;
+export type Order = 'ASC' | 'DESC';
+export type PropsGetWinneR = {
+  id: number;
+};
+export type Sort = 'id' | 'wins' | 'time';
 export type TCar = {
   name: string;
   color: string;
@@ -33,3 +43,4 @@ export type ResponseCar = {
   count: string | null;
   json: TCar[];
 };
+export type WinnersPage = { response: Response; count: string | null; json: Winner[] };
