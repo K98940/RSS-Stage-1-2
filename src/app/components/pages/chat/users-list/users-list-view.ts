@@ -3,17 +3,17 @@ import { UsersController } from './users-list-controller';
 import { Component } from '../../../component/component';
 import state, { subscribe } from '../../../../../state/state';
 import { ListItem } from './list-item';
-import { Callback } from '../../../../../types/types';
+import { Dispatch } from '../../../../../types/types';
 
 export class Users extends UsersController {
   container;
 
-  callback;
+  dispatch;
 
-  constructor(container: Component, callback: Callback<string>) {
+  constructor(container: Component, dispatch: Dispatch) {
     super();
     this.container = container;
-    this.callback = callback;
+    this.dispatch = dispatch;
     subscribe('activeUsers', () => this.render());
     subscribe('inactiveUsers', () => this.render());
     subscribe('currentUser', () => this.render());
@@ -24,7 +24,7 @@ export class Users extends UsersController {
     const users = allUsers.filter(([login]) => login !== state.user.login);
     this.container.getNode().innerHTML = '';
     users.forEach(([login, status]) => {
-      this.container.appendNodes(new ListItem({ login: login, isLogined: status, callback: this.callback }));
+      this.container.appendNodes(new ListItem({ login: login, isLogined: status, dispatch: this.dispatch }));
     });
   }
 }

@@ -1,9 +1,10 @@
 import { Message } from '../../../../api/message';
 import { Messages } from '../../../../api/messages';
 import { Requests } from '../../../../types/types-api';
+import { Actions } from '../../../../types/types';
 import state, { subscribe } from '../../../../state/state';
 import { Notifications } from '../../../../api/notifications';
-import { isMessageResponse, isMessagesResponse, isMsgDelivery } from '../../../../utils/predicates';
+import { isMessageResponse, isMessagesResponse, isMsgDelete, isMsgDelivery } from '../../../../utils/predicates';
 
 export class ChatController {
   message;
@@ -18,11 +19,24 @@ export class ChatController {
     this.notification = new Notifications();
     this.messages.subscribe(Requests.MSG_FROM_USER, (data) => this.handleRecieveMessages(data));
     this.message.subscribe(Requests.MSG_SEND, (data) => this.handleRecieveMessages(data));
+    this.message.subscribe(Requests.MSG_DELETE, (data) => this.handleMSG_DELETE(data));
     this.notification.subscribe(Requests.MSG_DELIVER, (data) => this.handleMSG_DELIVER(data));
-    subscribe('currentInput', () => this.handleSendMessage());
+    subscribe('currentInput', () => this.message.send(state.currentInput, state.currentUser));
   }
 
-  public handleChangeCurrentUser = (login: string | undefined): void => {
+  public dispatch = (action: Actions) => {
+    const { type, payload } = action;
+    switch (type) {
+      case 'message-delete':
+        if (typeof payload?.id === 'string') this.message.delete(payload.id);
+        break;
+      case 'select-user':
+        if (typeof payload?.login === 'string') this.selectUser(payload?.login);
+        break;
+    }
+  };
+
+  private selectUser = (login: string | undefined): void => {
     if (login) {
       state.currentUser = login;
       this.messages.request(login);
@@ -48,10 +62,6 @@ export class ChatController {
     }
   }
 
-  public handleSendMessage(): void {
-    this.message.request(state.currentInput, state.currentUser);
-  }
-
   private handleMSG_DELIVER(data: unknown) {
     if (isMsgDelivery(data)) {
       const { users, newChat } = this.getChat();
@@ -62,6 +72,16 @@ export class ChatController {
         }),
       );
       state.chat = { ...state.chat, ...newChat };
+    }
+  }
+
+  private handleMSG_DELETE(data: unknown): void {
+    if (isMsgDelete(data)) {
+      const id = data.payload.message.id;
+      const user = state.currentUser;
+      const newChat = this.getChat().newChat;
+      state.chat[user] = newChat[user].filter((msg) => msg.id !== id);
+      state.chat = { ...state.chat };
     }
   }
 

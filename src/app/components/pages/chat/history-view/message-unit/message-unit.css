@@ -16,6 +16,12 @@
   gap: 0.5rem;
 }
 
+.message-item__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .message-item__header,
 .footer__statuses {
   line-height: calc(var(--font-size-normal) * 0.7);

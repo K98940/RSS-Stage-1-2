@@ -1,5 +1,5 @@
 type Handler = {
-  (...args: unknown[]): void;
+  (...args: string[]): void;
 };
 type Handlers = {
   [index: string]: Handler[];
@@ -15,7 +15,7 @@ export class EventEmmiter {
     this.handlers[event].push(handler);
   }
 
-  protected event(eventName: string, ...arg: unknown[]): void {
+  protected event(eventName: string, ...arg: string[]): void {
     if (!(eventName in this.handlers)) return;
     this.handlers[eventName].forEach((handler) => handler(...arg));
   }

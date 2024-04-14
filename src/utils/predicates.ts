@@ -4,6 +4,7 @@ import {
   GeneralResponse,
   MessageHistoryResponse,
   MessageResponse,
+  NotificationMessageDeletion,
   NotificationMsgDelivery,
   Requests,
 } from '../types/types-api';
@@ -32,5 +33,12 @@ export function isMsgDelivery(data: unknown | NotificationMsgDelivery): data is 
   return (
     (data as NotificationMsgDelivery)?.type === Requests.MSG_DELIVER &&
     (data as NotificationMsgDelivery)?.payload.message.status.isDelivered !== undefined
+  );
+}
+
+export function isMsgDelete(data: unknown | NotificationMessageDeletion): data is NotificationMessageDeletion {
+  return (
+    (data as NotificationMessageDeletion)?.type === Requests.MSG_DELETE &&
+    (data as NotificationMessageDeletion)?.payload.message.status.isDeleted !== undefined
   );
 }

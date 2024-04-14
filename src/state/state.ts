@@ -21,7 +21,7 @@ type State = {
     [index: string]: boolean;
   };
   chat: {
-    [index: string]: ChatMessage[] | [];
+    [index: string]: ChatMessage[];
   };
   [index: string]: StateValue;
 };

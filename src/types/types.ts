@@ -21,3 +21,12 @@ export type ChatMessage = {
     isEdited: boolean;
   };
 };
+export type Actions = {
+  type: 'message-delete' | 'message-send' | 'message-read' | 'select-user';
+  payload?: {
+    [index: string]: unknown;
+  };
+};
+export type Dispatch = {
+  (action: Actions): void;
+};

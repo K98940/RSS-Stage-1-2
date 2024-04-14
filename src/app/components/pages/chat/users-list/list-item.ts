@@ -1,11 +1,11 @@
 import state from '../../../../../state/state';
-import { Callback } from '../../../../../types/types';
+import { Dispatch } from '../../../../../types/types';
 import { Component } from '../../../component/component';
 
 interface Props {
   login: string;
   isLogined: boolean;
-  callback: Callback<string>;
+  dispatch: Dispatch;
 }
 
 export class ListItem extends Component {
@@ -18,7 +18,7 @@ export class ListItem extends Component {
       tag: 'li',
       textContent: props.login,
       attributes: [[props.isLogined ? 'active' : 'inactive', '']],
-      callback: () => props.callback(this.login),
+      callback: () => props.dispatch({ type: 'select-user', payload: { login: this.login } }),
     });
     if (props.login === state.currentUser) this.setAttributes([['selected', '']]);
     this.login = props.login;

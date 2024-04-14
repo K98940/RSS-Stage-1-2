@@ -17,13 +17,16 @@ export class PageChat extends Component {
 
   constructor() {
     super({ classNames: ['chat'] });
+    this.controller = new ChatController();
+    const dispatch = this.controller.dispatch;
+
     const usersContainer = new Component({ classNames: ['users'] });
     const chatContainer = new Component({ classNames: ['chat-container'] });
-    this.appendNodes(usersContainer);
-    this.controller = new ChatController();
-    this.users = new Users(usersContainer, this.controller.handleChangeCurrentUser);
-    this.history = new HistoryView();
+    this.users = new Users(usersContainer, dispatch);
+    this.history = new HistoryView(dispatch);
     this.inputSendMessage = new InputMessage();
+
+    this.appendNodes(usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
     this.appendNodes(chatContainer);
   }

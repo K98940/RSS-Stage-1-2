@@ -1,4 +1,4 @@
-import { Callback, HTML, HTMLAttributes } from './../../../types/types';
+import { Callback, Dispatch, HTML, HTMLAttributes } from './../../../types/types';
 
 export type Props = {
   tag?: keyof HTMLElementTagNameMap;
@@ -6,20 +6,24 @@ export type Props = {
   attributes?: HTMLAttributes[];
   textContent?: string;
   callback?: Callback<unknown> | null;
+  dispatch?: Dispatch;
 };
 
 export class Component {
-  protected kids: Component[];
+  protected children: Component[];
 
   protected node: HTML;
 
+  protected dispatch;
+
   constructor(prop: Props) {
-    this.kids = [];
+    this.children = [];
     this.node = document.createElement(prop.tag || 'div');
     if (prop.classNames) this.setClasses(prop.classNames);
     if (prop.attributes) this.setAttributes(prop.attributes);
     if (prop.textContent) this.setTextContent(prop.textContent);
     if (prop.callback) this.setCallback(prop.callback);
+    this.dispatch = prop.dispatch;
   }
 
   public render(context: HTML): void {
@@ -32,14 +36,14 @@ export class Component {
   }
 
   public getChildren(): Component[] {
-    return this.kids;
+    return this.children;
   }
 
   public appendNodes(...elements: HTML[] | Component[]) {
     elements.forEach((element) => {
       if (element instanceof Component) {
         this.node.append(element.getNode());
-        this.kids.push(element);
+        this.children.push(element);
       } else this.node.append(element);
     });
   }
