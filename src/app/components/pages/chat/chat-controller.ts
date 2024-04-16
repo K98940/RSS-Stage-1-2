@@ -1,10 +1,17 @@
 import { Message } from '../../../../api/message';
 import { Messages } from '../../../../api/messages';
 import { Requests } from '../../../../types/types-api';
-import { Actions } from '../../../../types/types';
+import { Actions, Btn, EditReturn } from '../../../../types/types';
 import state, { subscribe } from '../../../../state/state';
 import { Notifications } from '../../../../api/notifications';
-import { isMessageResponse, isMessagesResponse, isMsgDelete, isMsgDelivery } from '../../../../utils/predicates';
+import {
+  isMessageResponse,
+  isMessagesResponse,
+  isMsgDelete,
+  isMsgDelivery,
+  isMsgEdited,
+} from '../../../../utils/predicates';
+import { MessageEdit } from './message-edit/message-edit';
 
 export class ChatController {
   message;
@@ -18,6 +25,7 @@ export class ChatController {
     this.message = new Message();
     this.notification = new Notifications();
     this.messages.subscribe(Requests.MSG_FROM_USER, (data) => this.handleRecieveMessages(data));
+    this.message.subscribe(Requests.MSG_EDIT, (data) => this.handleMSG_EDIT(data));
     this.message.subscribe(Requests.MSG_SEND, (data) => this.handleRecieveMessages(data));
     this.message.subscribe(Requests.MSG_DELETE, (data) => this.handleMSG_DELETE(data));
     this.notification.subscribe(Requests.MSG_DELIVER, (data) => this.handleMSG_DELIVER(data));
@@ -28,10 +36,16 @@ export class ChatController {
     const { type, payload } = action;
     switch (type) {
       case 'message-delete':
-        if (typeof payload?.id === 'string') this.message.delete(payload.id);
+        if (payload?.id) this.message.delete(payload.id);
+        break;
+      case 'message-edit':
+        if (payload?.id && payload?.text) {
+          const { id, text } = payload;
+          new MessageEdit().openDialog(id, text).then(this.editRequest);
+        }
         break;
       case 'select-user':
-        if (typeof payload?.login === 'string') this.selectUser(payload?.login);
+        if (payload?.login) this.selectUser(payload?.login);
         break;
     }
   };
@@ -75,6 +89,18 @@ export class ChatController {
     }
   }
 
+  private handleMSG_EDIT(data: unknown) {
+    if (isMsgEdited(data)) {
+      const { users, newChat } = this.getChat();
+      users.forEach((user) =>
+        newChat[user].forEach((message) => {
+          if (message.id === data.payload.message.id) message.text = data.payload.message.text;
+        }),
+      );
+      state.chat = { ...state.chat, ...newChat };
+    }
+  }
+
   private handleMSG_DELETE(data: unknown): void {
     if (isMsgDelete(data)) {
       const id = data.payload.message.id;
@@ -90,4 +116,9 @@ export class ChatController {
     const newChat = { ...state.chat };
     return { users, newChat };
   }
+
+  private editRequest = (dialog: EditReturn): void => {
+    const { id, text, button } = dialog;
+    if (button === Btn.OK) this.message.editRequest(id, text);
+  };
 }

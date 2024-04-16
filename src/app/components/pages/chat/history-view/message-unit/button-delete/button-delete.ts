@@ -1,4 +1,3 @@
-import './button-delete.css';
 import { Dispatch } from '../../../../../../../types/types';
 import { Component } from '../../../../../component/component';
 
@@ -9,7 +8,7 @@ export class ButtonDelete extends Component {
     super({
       tag: 'button',
       textContent: `delete`,
-      classNames: ['footer_btn-delete'],
+      classNames: ['footer_btn'],
       callback: () => dispatch({ type: 'message-delete', payload: { id: this.id } }),
     });
     this.id = id;

@@ -1,8 +1,8 @@
 import { Api } from './api';
 import { Connect } from './connect';
-import { MessageDeletion, Requests } from '../types/types-api';
 import { MessageRequest } from './../types/types-api';
-import { isMessageResponse, isMsgDelete } from '../utils/predicates';
+import { isMessageResponse, isMsgDelete, isMsgEdited } from '../utils/predicates';
+import { MessageDeletion, MessageTextEditingRequest, Requests } from '../types/types-api';
 
 export class Message extends Api {
   connect = new Connect();
@@ -11,6 +11,7 @@ export class Message extends Api {
     super();
     this.connect.subscribe(Requests.MSG_SEND, (data) => this.handleEvent(data));
     this.connect.subscribe(Requests.MSG_DELETE, (data) => this.handleEvent(data));
+    this.connect.subscribe(Requests.MSG_EDIT, (data) => this.handleEvent(data));
   }
 
   public send(text: string, to: string) {
@@ -35,8 +36,19 @@ export class Message extends Api {
     this.connect.request(request);
   }
 
+  public editRequest(id: string, text: string) {
+    const request: MessageTextEditingRequest = {
+      id: '',
+      type: Requests.MSG_EDIT,
+      payload: {
+        message: { id, text },
+      },
+    };
+    this.connect.request(request);
+  }
+
   public handleEvent(data: unknown) {
-    if (isMessageResponse(data) || isMsgDelete(data)) {
+    if (isMessageResponse(data) || isMsgDelete(data) || isMsgEdited(data)) {
       const type = data.type;
       this.subscribers[type]?.forEach((callback) => callback(data));
     }

@@ -89,7 +89,7 @@ export class Component {
   }
 
   public value(value?: string) {
-    if (!(this.node instanceof HTMLInputElement)) {
+    if (!(this.node instanceof HTMLInputElement || this.node instanceof HTMLTextAreaElement)) {
       console.warn(this.node, ' is not instance of HTMLInputElement!');
       return;
     }

@@ -43,7 +43,24 @@
   text-align: right;
 }
 
+.footer_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.2rem 0.7rem 0.2rem 0.5rem;
+  color: #d1d1d1;
+  background-color: rgb(96, 91, 56);
+  border-radius: 0.6rem 0 0.6rem 0;
+}
+
 .footer__statuses {
   display: flex;
   justify-content: flex-end;
+}
+
+@media (hover: hover) {
+  .footer_btn:hover {
+    background-color: color-mix(in srgb, rgb(96, 91, 56) 80%, white 20%);
+  }
 }

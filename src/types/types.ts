@@ -22,11 +22,22 @@ export type ChatMessage = {
   };
 };
 export type Actions = {
-  type: 'message-delete' | 'message-send' | 'message-read' | 'select-user';
+  type: 'message-delete' | 'message-edit' | 'message-send' | 'message-read' | 'select-user';
   payload?: {
-    [index: string]: unknown;
+    id?: string;
+    text?: string;
+    login?: string;
   };
 };
 export type Dispatch = {
   (action: Actions): void;
+};
+export enum Btn {
+  OK = 'OK',
+  CANCEL = 'CANCEL',
+}
+export type EditReturn = {
+  id: string;
+  text: string;
+  button: string;
 };

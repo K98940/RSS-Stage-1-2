@@ -4,6 +4,7 @@ import {
   GeneralResponse,
   MessageHistoryResponse,
   MessageResponse,
+  MessageTextEditingResponse,
   NotificationMessageDeletion,
   NotificationMsgDelivery,
   Requests,
@@ -40,5 +41,12 @@ export function isMsgDelete(data: unknown | NotificationMessageDeletion): data i
   return (
     (data as NotificationMessageDeletion)?.type === Requests.MSG_DELETE &&
     (data as NotificationMessageDeletion)?.payload.message.status.isDeleted !== undefined
+  );
+}
+
+export function isMsgEdited(data: unknown | MessageTextEditingResponse): data is MessageTextEditingResponse {
+  return (
+    (data as MessageTextEditingResponse)?.type === Requests.MSG_EDIT &&
+    (data as MessageTextEditingResponse)?.payload.message.status.isEdited !== undefined
   );
 }

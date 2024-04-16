@@ -1,8 +1,9 @@
 import './message-unit.css';
-import { ChatMessage, Dispatch } from '../../../../../../types/types';
-import { Component } from '../../../../component/component';
 import state from '../../../../../../state/state';
+import { ButtonEdit } from './button-edit/button-edit';
+import { Component } from '../../../../component/component';
 import { ButtonDelete } from './button-delete/button-delete';
+import { ChatMessage, Dispatch } from '../../../../../../types/types';
 
 export class MessageUnitView {
   private message;
@@ -12,8 +13,6 @@ export class MessageUnitView {
   private from;
 
   private datetime;
-
-  private btnDelete;
 
   private footer;
 
@@ -28,7 +27,6 @@ export class MessageUnitView {
     this.node = new Component({});
     this.footer = new Component({});
     this.isDelivered = new Component({});
-    this.btnDelete = new Component({});
     this.datetime = new Component({});
     this.from = new Component({});
     this.text = new Component({});
@@ -62,8 +60,11 @@ export class MessageUnitView {
     if (this.message.from === state.user.login) {
       this.node.setClasses(['message-item_owner']);
       this.from.setTextContent('You:');
-      this.btnDelete = new ButtonDelete(this.message.id, this.dispatch);
-      this.footer.appendNodes(this.btnDelete);
+      const btnDelete = new ButtonDelete(this.message.id, this.dispatch);
+      const btnEdit = new ButtonEdit(this.message.id, this.message.text, this.dispatch);
+      const btnContainer = new Component({ classNames: ['btn-container'] });
+      btnContainer.appendNodes(btnDelete, btnEdit);
+      this.footer.appendNodes(btnContainer);
     }
     this.footer.appendNodes(statuses);
     this.node.appendNodes(header, contentContainer, this.footer);
