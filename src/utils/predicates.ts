@@ -1,3 +1,4 @@
+import { State } from '../types/types';
 import {
   AllAuthenticatedUsersResponse,
   AuthenticationResponse,
@@ -49,4 +50,8 @@ export function isMsgEdited(data: unknown | MessageTextEditingResponse): data is
     (data as MessageTextEditingResponse)?.type === Requests.MSG_EDIT &&
     (data as MessageTextEditingResponse)?.payload.message.status.isEdited !== undefined
   );
+}
+
+export function isState(data: unknown | State): data is State {
+  return (data as State)?.user.login !== undefined && (data as State)?.user.password !== undefined;
 }

@@ -1,3 +1,4 @@
+import { session } from '../../Session/session';
 import { Message } from '../../../../api/message';
 import { Messages } from '../../../../api/messages';
 import { Requests } from '../../../../types/types-api';
@@ -53,6 +54,7 @@ export class ChatController {
   private selectUser = (login: string | undefined): void => {
     if (login) {
       state.currentUser = login;
+      session.write(state);
       this.messages.request(login);
     }
   };

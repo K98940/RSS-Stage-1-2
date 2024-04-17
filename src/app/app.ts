@@ -1,35 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './app.css';
-import { AuthUsers } from '../api/auth-users';
 import { Connect } from '../api/connect';
-import { AuthUser } from '../api/auth-user';
+import state, { subscribe } from '../state/state';
+import { session } from './components/Session/session';
 import { PageLogin } from './components/pages/login/login';
 import { PageChat } from './components/pages/chat/chat-view';
 import { Component } from './components/component/component';
-import state, { subscribe } from '../state/state';
-import { Color, l } from '../utils/utils';
-import { Notifications } from '../api/notifications';
+import { State } from '../types/types';
 
 const connect = new Connect();
-const auth = new AuthUser();
-const users = new AuthUsers();
 
 export class App {
-  pageLogin: PageLogin;
+  pageLogin: PageLogin | undefined;
 
-  pageChat: PageChat;
+  pageChat: PageChat | undefined;
 
   node: Component;
 
-  notifications;
-
   constructor() {
-    this.notifications = new Notifications();
-    this.pageLogin = new PageLogin();
-    this.pageChat = new PageChat();
+    window.location.hash = '';
+    this.pageLogin = PageLogin.getInstance();
     this.node = new Component({ classNames: ['app'] });
-    this.pageLogin.render(this.node.getNode());
-
     window.addEventListener('hashchange', () => this.router());
     subscribe('currentPage', () => (window.location.hash = state.currentPage));
     window.location.hash = state.currentPage;
@@ -37,18 +28,51 @@ export class App {
   }
 
   private router(): void {
-    const hash = window.location.hash.slice(1);
-    document.title = ` ${state.user.login || ''}`;
-    // document.title = state.pages[state.currentPage].title + ` ${state.user.login || ''}`;
-    switch (hash) {
+    switch (this.getHash()) {
       case 'login':
-        this.pageLogin.render(this.node.getNode());
+        const sessionState = session.read();
+        if (sessionState) {
+          this.restoreState(sessionState);
+        } else {
+          this.openPageLogin();
+        }
         break;
       case 'chat':
-        this.pageChat.render(this.node.getNode());
+        this.openPageChat();
+        break;
+      default:
+        window.location.hash = 'chat';
         break;
     }
   }
+
+  private getHash(): string {
+    const { login, password } = state.user;
+    const hash = login.length > 0 && password.length > 0 ? window.location.hash.slice(1) : 'login';
+    window.location.hash = hash;
+    return hash;
+  }
+
+  private openPageChat(): void {
+    document.title = `${state.pages[state.currentPage].title}: ${state.user.login}`;
+    this.pageChat = PageChat.getInstance();
+    this.pageChat.render(this.node.getNode());
+  }
+
+  private openPageLogin(): void {
+    document.title = state.pages[state.currentPage].title;
+    this.pageLogin = PageLogin.getInstance();
+    this.pageLogin.render(this.node.getNode());
+  }
+
+  private restoreState(sessionState: State): void {
+    state.user = sessionState.user; // restore auth
+    window.location.hash = 'chat'; // redirect to chat page
+    // but chat page not exist yet, so wait...
+    setTimeout(() => {
+      // now we can request update and rerender chat
+      state.currentUser = sessionState.currentUser;
+      state.chat = sessionState.chat;
+    }, 0);
+  }
 }
-// TODO список пользователей: no action на текущего
-// TODO добавить сохранение и загрузку состояния в LS

@@ -1,5 +1,6 @@
 import './login.css';
 import { HTML } from '../../../../types/types';
+import { session } from '../../Session/session';
 import { LoginForm } from './login-form/login-form';
 import { Component } from '../../component/component';
 import { AuthUser } from '../../../../api/auth-user';
@@ -8,17 +9,24 @@ import state, { subscribe } from '../../../../state/state';
 import { isAuthResponse } from '../../../../utils/predicates';
 
 export class PageLogin extends Component {
-  form;
+  private form;
 
-  auth;
+  private auth;
 
-  constructor() {
+  private static instance: PageLogin;
+
+  private constructor() {
     super({ tag: 'article', classNames: ['login-page', 'login-page_flex'] });
     this.auth = new AuthUser();
     this.auth.subscribe(Requests.USER_LOGIN, (data) => this.responseAuthUser(data));
     this.form = new LoginForm();
     this.form.render(this.node);
     subscribe('user', () => this.requestAuthUser());
+  }
+
+  public static getInstance(): PageLogin {
+    if (!PageLogin.instance) PageLogin.instance = new PageLogin();
+    return PageLogin.instance;
   }
 
   public render(context: HTML): void {
@@ -38,6 +46,7 @@ export class PageLogin extends Component {
       if (isLogined && login === state.user.login) {
         this.form.resetInputs();
         state.currentPage = 'chat';
+        session.write(state);
       }
     }
   }

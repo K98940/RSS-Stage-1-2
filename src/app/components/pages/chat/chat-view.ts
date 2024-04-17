@@ -7,15 +7,17 @@ import { Users } from './users-list/users-list-view';
 import { InputMessage } from './message-input/message-input';
 
 export class PageChat extends Component {
-  users;
+  private users;
 
-  history;
+  private history;
 
-  inputSendMessage;
+  private inputSendMessage;
 
-  controller;
+  private controller;
 
-  constructor() {
+  private static instance: PageChat | undefined;
+
+  private constructor() {
     super({ classNames: ['chat'] });
     this.controller = new ChatController();
     const dispatch = this.controller.dispatch;
@@ -29,6 +31,11 @@ export class PageChat extends Component {
     this.appendNodes(usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
     this.appendNodes(chatContainer);
+  }
+
+  public static getInstance(): PageChat {
+    if (!PageChat.instance) PageChat.instance = new PageChat();
+    return PageChat.instance;
   }
 
   public render(context: HTML): void {

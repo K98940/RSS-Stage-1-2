@@ -41,3 +41,29 @@ export type EditReturn = {
   text: string;
   button: string;
 };
+export type StateKey = string;
+export type StateValue = string | number | object | [];
+export type State = {
+  currentPage: `${Pages}`;
+  currentUser: string;
+  currentInput: string;
+  pages: {
+    [key in `${Pages}`]: {
+      title: string;
+    };
+  };
+  user: {
+    login: string;
+    password: string;
+  };
+  activeUsers: {
+    [index: string]: boolean;
+  };
+  inactiveUsers: {
+    [index: string]: boolean;
+  };
+  chat: {
+    [index: string]: ChatMessage[];
+  };
+  [index: string]: StateValue;
+};
