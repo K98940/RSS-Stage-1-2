@@ -1,6 +1,5 @@
 import './login.css';
 import { HTML } from '../../../../types/types';
-import { session } from '../../Session/session';
 import { LoginForm } from './login-form/login-form';
 import { Component } from '../../component/component';
 import { AuthUser } from '../../../../api/auth-user';
@@ -46,7 +45,7 @@ export class PageLogin extends Component {
       if (isLogined && login === state.user.login) {
         this.form.resetInputs();
         state.currentPage = 'chat';
-        session.write(state);
+        // session.write(state);
       }
     }
   }

@@ -1,3 +1,4 @@
+import { session } from '../app/components/Session/session';
 import { Callback, State, StateKey, StateValue } from './../types/types';
 
 const initialState: State = {
@@ -33,6 +34,7 @@ const stateHandler = {
   },
   set: (target: State, prop: StateKey, value: StateValue) => {
     target[prop] = value;
+    session.write(target);
     subscribers[prop]?.forEach((callback) => callback());
     return true;
   },

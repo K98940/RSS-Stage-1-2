@@ -1,8 +1,14 @@
 import './message-edit.css';
+import { TextArea } from './text-area/text-area';
 import { Component } from '../../../component/component';
 import { Btn, EditReturn } from '../../../../../types/types';
+import { Button } from '../../../component/button';
 
 export class MessageEdit {
+  textArea: TextArea | undefined;
+
+  btnOK: Button | undefined;
+
   text: string;
 
   id: string;
@@ -23,28 +29,23 @@ export class MessageEdit {
       classNames: ['dialog__form'],
       attributes: [['method', 'dialog']],
     });
-    const textArea = new Component({
-      tag: 'textarea',
-      textContent: text,
-      classNames: ['form__textarea'],
-      attributes: [['placeholder', 'message...']],
-    });
+    this.textArea = new TextArea((e) => this.handleKeyDown(e), text);
     const btnContainer = new Component({ classNames: ['btn-container'] });
-    const btnOK = new Component({
-      tag: 'button',
+
+    const styleInactiveBtn = this.textArea.isEmpty ? '__inactive-element' : '';
+    this.btnOK = new Button({
       textContent: 'OK',
-      classNames: ['form__button'],
+      classNames: ['form__button', styleInactiveBtn],
       attributes: [['value', Btn.OK]],
     });
-    const btnCancel = new Component({
-      tag: 'button',
+    const btnCancel = new Button({
       textContent: 'NOT OK',
       classNames: ['form__button'],
       attributes: [['value', Btn.CANCEL]],
     });
-    btnContainer.appendNodes(btnOK, btnCancel);
+    btnContainer.appendNodes(this.btnOK, btnCancel);
 
-    form.appendNodes(textArea, btnContainer);
+    form.appendNodes(this.textArea, btnContainer);
     container.appendNodes(form);
     dialog.appendChild(container.getNode());
     document.body.append(dialog);
@@ -55,11 +56,21 @@ export class MessageEdit {
         dialog.remove();
         resolve({
           id: this.id,
-          text: textArea.value() || '',
+          text: this.textArea?.value() || '',
           button: dialog.returnValue,
         });
       };
       dialog.addEventListener('close', close);
     });
+  }
+
+  private handleKeyDown(e: unknown): void {
+    if (e instanceof Event && this.btnOK) {
+      if (this.textArea?.isEmpty) {
+        this.btnOK.active = false;
+      } else {
+        this.btnOK.active = true;
+      }
+    }
   }
 }

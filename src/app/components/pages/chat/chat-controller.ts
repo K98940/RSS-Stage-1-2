@@ -1,10 +1,3 @@
-import { session } from '../../Session/session';
-import { Message } from '../../../../api/message';
-import { Messages } from '../../../../api/messages';
-import { Requests } from '../../../../types/types-api';
-import { Actions, Btn, EditReturn } from '../../../../types/types';
-import state, { subscribe } from '../../../../state/state';
-import { Notifications } from '../../../../api/notifications';
 import {
   isMessageResponse,
   isMessagesResponse,
@@ -12,7 +5,13 @@ import {
   isMsgDelivery,
   isMsgEdited,
 } from '../../../../utils/predicates';
+import { Message } from '../../../../api/message';
+import { Messages } from '../../../../api/messages';
+import { Requests } from '../../../../types/types-api';
 import { MessageEdit } from './message-edit/message-edit';
+import state, { subscribe } from '../../../../state/state';
+import { Notifications } from '../../../../api/notifications';
+import { Actions, Btn, EditReturn } from '../../../../types/types';
 
 export class ChatController {
   message;
@@ -30,7 +29,10 @@ export class ChatController {
     this.message.subscribe(Requests.MSG_SEND, (data) => this.handleRecieveMessages(data));
     this.message.subscribe(Requests.MSG_DELETE, (data) => this.handleMSG_DELETE(data));
     this.notification.subscribe(Requests.MSG_DELIVER, (data) => this.handleMSG_DELIVER(data));
-    subscribe('currentInput', () => this.message.send(state.currentInput, state.currentUser));
+    subscribe('currentInput', () => {
+      if (!state.currentInput) return;
+      this.message.send(state.currentInput, state.currentUser);
+    });
   }
 
   public dispatch = (action: Actions) => {
@@ -54,7 +56,6 @@ export class ChatController {
   private selectUser = (login: string | undefined): void => {
     if (login) {
       state.currentUser = login;
-      session.write(state);
       this.messages.request(login);
     }
   };

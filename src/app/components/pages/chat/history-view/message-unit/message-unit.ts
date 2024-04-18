@@ -46,18 +46,18 @@ export class MessageUnitView {
     const contentContainer = new Component({ classNames: ['content__container'] });
     this.text = new Component({
       tag: 'p',
-      textContent: this.message.text,
+      // textContent: this.message.text,
       classNames: ['message-item__content'],
     });
+    this.text.getNode().innerText = this.message.text;
     contentContainer.appendNodes(this.text);
 
     this.footer = new Component({ tag: 'footer', classNames: ['message-item__footer'] });
     const statuses = new Component({ classNames: ['footer__statuses'] });
-    const deliveredMsg = this.message.status.isDelivered ? 'delivered' : 'not delivered';
-    this.isDelivered = new Component({ tag: 'span', textContent: `${deliveredMsg}` });
-    statuses.appendNodes(this.isDelivered);
 
     if (this.message.from === state.user.login) {
+      const deliveredMsg = this.message.status.isDelivered ? 'delivered' : 'not delivered';
+      this.isDelivered = new Component({ tag: 'span', textContent: `${deliveredMsg}` });
       this.node.setClasses(['message-item_owner']);
       this.from.setTextContent('You:');
       const btnDelete = new ButtonDelete(this.message.id, this.dispatch);
@@ -66,6 +66,7 @@ export class MessageUnitView {
       btnContainer.appendNodes(btnDelete, btnEdit);
       this.footer.appendNodes(btnContainer);
     }
+    statuses.appendNodes(this.isDelivered);
     this.footer.appendNodes(statuses);
     this.node.appendNodes(header, contentContainer, this.footer);
   }

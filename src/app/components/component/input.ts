@@ -30,4 +30,9 @@ export class Input extends Component {
     this.notice.getNode().innerHTML = msg;
     this.node.after(this.notice.getNode());
   }
+
+  get isEmpty(): boolean {
+    const countChars = this.value()?.length;
+    return countChars === 0;
+  }
 }
