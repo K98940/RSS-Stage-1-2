@@ -39,17 +39,16 @@ export class MessageUnitView {
     this.node = new Component({ tag: 'section', classNames: ['message-item'] });
     const header = new Component({ tag: 'header', classNames: ['message-item__header'] });
     this.from = new Component({ tag: 'span', textContent: `${this.message.from}:`, classNames: ['header__from'] });
-    const time = new Date(this.message.datetime).toLocaleString();
+    const time = new Date(this.message.datetime).toLocaleString('en-US', { hourCycle: 'h24' }).toLowerCase();
     this.datetime = new Component({ tag: 'span', textContent: `${time || ''}`, classNames: ['header__datetime'] });
     header.appendNodes(this.from, this.datetime);
 
     const contentContainer = new Component({ classNames: ['content__container'] });
     this.text = new Component({
       tag: 'p',
-      // textContent: this.message.text,
+      textContent: this.message.text,
       classNames: ['message-item__content'],
     });
-    this.text.getNode().innerText = this.message.text;
     contentContainer.appendNodes(this.text);
 
     this.footer = new Component({ tag: 'footer', classNames: ['message-item__footer'] });

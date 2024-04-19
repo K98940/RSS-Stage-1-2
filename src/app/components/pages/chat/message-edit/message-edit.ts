@@ -1,11 +1,11 @@
 import './message-edit.css';
-import { TextArea } from './text-area/text-area';
+import { TextInput } from './text-area/text-area';
 import { Component } from '../../../component/component';
 import { Btn, EditReturn } from '../../../../../types/types';
 import { Button } from '../../../component/button';
 
 export class MessageEdit {
-  textArea: TextArea | undefined;
+  textArea: TextInput | undefined;
 
   btnOK: Button | undefined;
 
@@ -29,7 +29,7 @@ export class MessageEdit {
       classNames: ['dialog__form'],
       attributes: [['method', 'dialog']],
     });
-    this.textArea = new TextArea((e) => this.handleKeyDown(e), text);
+    this.textArea = new TextInput((e) => this.handleKeyDown(e), text);
     const btnContainer = new Component({ classNames: ['btn-container'] });
 
     const styleInactiveBtn = this.textArea.isEmpty ? '__inactive-element' : '';

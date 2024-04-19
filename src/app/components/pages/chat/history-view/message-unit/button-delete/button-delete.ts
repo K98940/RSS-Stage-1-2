@@ -8,7 +8,7 @@ export class ButtonDelete extends Component {
     super({
       tag: 'button',
       textContent: `delete`,
-      classNames: ['footer_btn'],
+      classNames: ['footer_btn', 'btn__delete'],
       callback: () => dispatch({ type: 'message-delete', payload: { id: this.id } }),
     });
     this.id = id;

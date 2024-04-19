@@ -10,7 +10,7 @@ export class ButtonEdit extends Component {
     super({
       tag: 'button',
       textContent: `edit`,
-      classNames: ['footer_btn'],
+      classNames: ['footer_btn', 'btn__edit'],
       callback: () => dispatch({ type: 'message-edit', payload: { id: this.id, text: this.text } }),
     });
     this.id = id;

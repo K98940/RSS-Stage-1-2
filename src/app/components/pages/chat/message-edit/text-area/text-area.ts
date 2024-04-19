@@ -1,17 +1,19 @@
 import { Callback } from '../../../../../../types/types';
 import { Component } from '../../../../component/component';
 
-export class TextArea extends Component {
+export class TextInput extends Component {
   text: string;
 
   callback: Callback<Event>;
 
   constructor(callback: Callback<Event>, text: string = '') {
     super({
-      tag: 'textarea',
-      textContent: text,
-      classNames: ['form__textarea'],
-      attributes: [['placeholder', 'message...']],
+      tag: 'input',
+      classNames: ['form__input'],
+      attributes: [
+        ['placeholder', 'message...'],
+        ['value', text],
+      ],
     });
     this.text = text;
     this.callback = callback;

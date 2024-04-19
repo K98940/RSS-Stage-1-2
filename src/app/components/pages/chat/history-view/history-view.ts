@@ -21,6 +21,7 @@ export class HistoryView extends Component {
     const user = state.currentUser;
     const chat = state.chat[user];
     this.node.innerHTML = '';
+    this.children = [];
     chat?.forEach((message) => this.createNewMessageItem(message));
   }
 
@@ -28,5 +29,6 @@ export class HistoryView extends Component {
     const messageItem = new MessageUnitView(message, this.dispath);
     this.messages.push(messageItem);
     this.appendNodes(messageItem.node);
+    messageItem.node.getNode().scrollIntoView();
   }
 }

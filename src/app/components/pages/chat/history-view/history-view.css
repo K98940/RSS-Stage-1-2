@@ -20,10 +20,10 @@
   }
 
   &::-webkit-scrollbar-track-piece {
-    background: #bde3ff;
+    background: rgb(13, 65, 117);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #899bbd;
+    background: rgb(189, 227, 255);
   }
 }
