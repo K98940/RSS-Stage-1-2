@@ -5,8 +5,10 @@ import {
   isMsgDelivery,
   isMsgEdited,
 } from '../../../../utils/predicates';
+import { session } from '../../Session/session';
 import { Message } from '../../../../api/message';
 import { Messages } from '../../../../api/messages';
+import { AuthUser } from '../../../../api/auth-user';
 import { Requests } from '../../../../types/types-api';
 import { MessageEdit } from './message-edit/message-edit';
 import state, { subscribe } from '../../../../state/state';
@@ -20,7 +22,10 @@ export class ChatController {
 
   notification;
 
+  auth;
+
   constructor() {
+    this.auth = new AuthUser();
     this.messages = new Messages();
     this.message = new Message();
     this.notification = new Notifications();
@@ -52,6 +57,9 @@ export class ChatController {
         break;
       case 'select-user':
         if (payload?.login) this.updateUserChat(payload?.login);
+        break;
+      case 'logout':
+        this.handleLogout();
         break;
     }
   };
@@ -127,4 +135,13 @@ export class ChatController {
     const { id, text, button } = dialog;
     if (button === Btn.OK) this.message.editRequest(id, text);
   };
+
+  private handleLogout(): void {
+    const { login, password } = state.user;
+    state.user = { ...state, login: '', password: '', isRequested: false, isLogined: false };
+    state.currentUser = '';
+    session.reset();
+    this.auth.logout({ login, password });
+    window.location.hash = 'login';
+  }
 }

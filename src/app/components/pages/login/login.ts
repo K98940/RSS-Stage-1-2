@@ -36,7 +36,7 @@ export class PageLogin extends Component {
     if (state.user.login && state.user.password && !state.user.isRequested) {
       state.user.isRequested = true;
       const { login, password } = state.user;
-      this.auth.request({ login, password });
+      this.auth.login({ login, password });
     }
   }
 

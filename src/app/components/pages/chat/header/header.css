@@ -1,0 +1,30 @@
+.header {
+  --header-ft-size: 2rem;
+
+  display: flex;
+  padding: 0.5rem 0;
+  justify-content: space-between;
+  grid-area: h;
+}
+
+.header__span {
+  align-self: center;
+  font-size: var(--header-ft-size);
+  color: color-mix(in srgb, var(--text-color-normal) 70%, black 30%);
+}
+
+.header-right-side {
+  display: flex;
+  gap: 1rem;
+}
+
+.header__btn {
+  padding: 0 0.2rem;
+  font-size: calc(var(--header-ft-size) * 0.7);
+}
+
+@media (max-width: 600px) {
+  .header {
+    --header-ft-size: 1rem;
+  }
+}

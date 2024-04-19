@@ -2,6 +2,7 @@ import { session } from '../app/components/Session/session';
 import { Callback, State, StateKey, StateValue } from './../types/types';
 
 const initialState: State = {
+  appName: 'fun-chat :(',
   currentPage: 'login',
   currentUser: '',
   currentInput: '',

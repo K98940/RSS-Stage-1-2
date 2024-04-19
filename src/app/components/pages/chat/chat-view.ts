@@ -5,6 +5,7 @@ import { ChatController } from './chat-controller';
 import { HistoryView } from './history-view/history-view';
 import { Users } from './users-list/users-list-view';
 import { InputMessage } from './message-input/message-input';
+import { Header } from './header/header';
 
 export class PageChat extends Component {
   private users;
@@ -22,13 +23,14 @@ export class PageChat extends Component {
     this.controller = new ChatController();
     const dispatch = this.controller.dispatch;
 
+    const header = new Header(dispatch);
     const usersContainer = new Component({ classNames: ['users'] });
     const chatContainer = new Component({ classNames: ['chat-container'] });
     this.users = new Users(usersContainer, dispatch);
     this.history = new HistoryView(dispatch);
     this.inputSendMessage = new InputMessage();
 
-    this.appendNodes(usersContainer);
+    this.appendNodes(header, usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
     this.appendNodes(chatContainer);
   }

@@ -1,5 +1,11 @@
 .chat {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 4rem auto 4rem;
+  grid-template-areas:
+    'h h h h h h h h h h h h'
+    'u u u c c c c c c c c c'
+    'f f f f f f f f f f f f';
   width: clamp(0px, 100%, 75rem);
   height: 100%;
   padding: 1rem;
@@ -7,6 +13,7 @@
 }
 
 .chat-container {
+  grid-area: c;
   display: flex;
   flex: 1 1 80%;
   flex-direction: column;

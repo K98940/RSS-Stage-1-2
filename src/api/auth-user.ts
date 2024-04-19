@@ -20,10 +20,18 @@ export class AuthUser extends Api {
     this.connect.subscribe(Requests.USER_EXTERNAL_LOGOUT, (data) => this.handleEvent(data));
   }
 
-  public request(request: Request) {
+  public login(request: Request): void {
+    this.request(request, Requests.USER_LOGIN);
+  }
+
+  public logout(request: Request): void {
+    this.request(request, Requests.USER_LOGOUT);
+  }
+
+  private request(request: Request, action: Requests.USER_LOGIN | Requests.USER_LOGOUT) {
     const authRequest: AuthenticationRequest = {
       id: '',
-      type: Requests.USER_LOGIN,
+      type: action,
       payload: {
         user: {
           login: request.login,

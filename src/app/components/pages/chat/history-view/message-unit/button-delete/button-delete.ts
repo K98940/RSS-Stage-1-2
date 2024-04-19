@@ -1,12 +1,11 @@
+import { Button } from '../../../../../component/button';
 import { Dispatch } from '../../../../../../../types/types';
-import { Component } from '../../../../../component/component';
 
-export class ButtonDelete extends Component {
+export class ButtonDelete extends Button {
   private id: string;
 
   constructor(id: string, dispatch: Dispatch) {
     super({
-      tag: 'button',
       textContent: `delete`,
       classNames: ['footer_btn', 'btn__delete'],
       callback: () => dispatch({ type: 'message-delete', payload: { id: this.id } }),

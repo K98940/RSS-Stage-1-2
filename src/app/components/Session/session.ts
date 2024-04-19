@@ -22,4 +22,7 @@ export const session = {
       console.warn('session.write.error', err);
     }
   },
+  reset(): void {
+    sessionStorage.clear();
+  },
 };
