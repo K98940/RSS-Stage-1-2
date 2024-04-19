@@ -32,6 +32,8 @@
   line-height: calc(var(--font-size-normal) * 2);
   color: rgb(220, 220, 255);
   font-size: var(--font-size-normal);
+  pointer-events: none;
+  user-select: none;
 }
 
 .dialog__btn-close {

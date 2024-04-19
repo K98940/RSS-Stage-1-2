@@ -49,7 +49,7 @@ export class LoginForm extends Component {
   }
 
   private userAuthorise(login: string, password: string): void {
-    state.user = { login, password };
+    state.user = { login, password, isLogined: false, isRequested: false };
   }
 
   private getInputs(): Inputs {

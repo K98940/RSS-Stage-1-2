@@ -32,8 +32,9 @@ export class PageLogin extends Component {
     super.render(context);
   }
 
-  private requestAuthUser(): void {
-    if (state.user.login && state.user.password) {
+  public requestAuthUser(): void {
+    if (state.user.login && state.user.password && !state.user.isRequested) {
+      state.user.isRequested = true;
       const { login, password } = state.user;
       this.auth.request({ login, password });
     }
@@ -45,7 +46,7 @@ export class PageLogin extends Component {
       if (isLogined && login === state.user.login) {
         this.form.resetInputs();
         state.currentPage = 'chat';
-        // session.write(state);
+        state.user = { ...state.user, isLogined };
       }
     }
   }

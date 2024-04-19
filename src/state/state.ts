@@ -16,6 +16,8 @@ const initialState: State = {
   user: {
     login: '',
     password: '',
+    isLogined: false,
+    isRequested: false,
   },
   activeUsers: {},
   inactiveUsers: {},

@@ -5,7 +5,7 @@ import { isMessageResponse, isMsgDelete, isMsgEdited } from '../utils/predicates
 import { MessageDeletion, MessageTextEditingRequest, Requests } from '../types/types-api';
 
 export class Message extends Api {
-  connect = new Connect();
+  connect = Connect.getInstance();
 
   constructor() {
     super();

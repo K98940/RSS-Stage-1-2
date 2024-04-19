@@ -5,7 +5,7 @@ import { Api } from './api';
 import { isAuthResponse } from '../utils/predicates';
 
 export class AuthUsers extends Api {
-  connect = new Connect();
+  connect = Connect.getInstance();
 
   constructor() {
     super();

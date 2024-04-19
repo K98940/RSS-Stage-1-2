@@ -1,6 +1,6 @@
 const BASE_URL = 'ws://127.0.0.1:4000';
+const CONNECTION_OK = 1;
 
-type Status = 'open' | 'closed' | 'error';
 interface CallbackRequest {
   (data: unknown): void;
 }
@@ -9,21 +9,17 @@ type Subscribers = {
 };
 
 export class Connect {
-  static instance: undefined | Connect;
+  private static instance: Connect;
 
-  public status: Status;
-
-  protected ws: WebSocket;
+  protected ws: WebSocket | undefined;
 
   private pendingRequestQueue: unknown[];
 
   private subscribers: Subscribers;
 
-  constructor(url?: string) {
+  private constructor() {
     this.subscribers ??= {};
-    this.status ??= 'closed';
     this.pendingRequestQueue ??= [];
-    this.ws ??= new WebSocket(url || BASE_URL);
     this.init();
     if (Connect.instance instanceof Connect) {
       return Connect.instance;
@@ -31,19 +27,23 @@ export class Connect {
     Connect.instance = this;
   }
 
+  public static getInstance(): Connect {
+    if (!Connect.instance) Connect.instance = new Connect();
+    return this.instance;
+  }
+
   private init(): void {
+    this.ws = new WebSocket(BASE_URL);
     let timerReconnect: NodeJS.Timeout;
-    let timeOutReconnect = 500;
+    const timeOutReconnect = 2000;
 
     this.ws.addEventListener('open', () => {
-      this.status = 'open';
+      this.subscribers?.open?.forEach((callback) => callback('ws is opened'));
       clearTimeout(timerReconnect);
-      timeOutReconnect = 500;
     });
 
     this.ws.addEventListener('error', () => {
-      this.status = 'error';
-      this.ws.close();
+      this.ws?.close();
     });
 
     this.ws.addEventListener('message', (e) => {
@@ -51,17 +51,16 @@ export class Connect {
     });
 
     this.ws.addEventListener('close', () => {
-      this.status = 'closed';
+      this.subscribers?.close?.forEach((callback) => callback('ws is closed'));
       timerReconnect = setTimeout(() => {
         this.init();
-        timeOutReconnect = timeOutReconnect > 60000 ? 500 : timeOutReconnect * 2;
       }, timeOutReconnect);
     });
   }
 
   public request(req: unknown): void {
     try {
-      if (this.status !== 'open') {
+      if (this.ws?.readyState !== CONNECTION_OK) {
         this.pendingRequestQueue.push(req);
         this.waitConnection();
         return;
@@ -90,17 +89,15 @@ export class Connect {
   }
 
   private waitConnection(): void {
-    let timeOut = 500;
+    const timeOut = 2000;
     const timerID = setTimeout(() => {
-      if (this.status === 'open') {
+      if (this.ws?.readyState === CONNECTION_OK) {
         clearTimeout(timerID);
-        timeOut = 1000;
         this.pendingRequestQueue.forEach((request) => {
           this.request(request);
         });
         this.pendingRequestQueue.length = 0;
       } else {
-        timeOut = timeOut < 32000 ? timeOut * 2 : 32000;
         this.waitConnection();
       }
     }, timeOut);

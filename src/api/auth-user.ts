@@ -10,7 +10,7 @@ interface Request {
 }
 
 export class AuthUser extends Api {
-  connect = new Connect();
+  connect = Connect.getInstance();
 
   constructor() {
     super();

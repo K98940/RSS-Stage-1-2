@@ -5,7 +5,7 @@ import { ModalMessage } from '../app/components/component/modal-message/modal-me
 import { Api } from './api';
 
 export class Notifications extends Api {
-  connect = new Connect();
+  connect = Connect.getInstance();
 
   modal = new ModalMessage();
 

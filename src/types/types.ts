@@ -55,6 +55,8 @@ export type State = {
   user: {
     login: string;
     password: string;
+    isLogined: boolean;
+    isRequested: boolean;
   };
   activeUsers: {
     [index: string]: boolean;

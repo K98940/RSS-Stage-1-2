@@ -5,7 +5,7 @@ import { MessageHistoryRequest } from '../types/types-api';
 import { isMessagesResponse } from '../utils/predicates';
 
 export class Messages extends Api {
-  connect = new Connect();
+  connect = Connect.getInstance();
 
   constructor() {
     super();

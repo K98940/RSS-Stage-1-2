@@ -33,6 +33,9 @@ export class ChatController {
       if (!state.currentInput) return;
       this.message.send(state.currentInput, state.currentUser);
     });
+    subscribe('user', () => {
+      if (state.user.isLogined) this.updateUserChat(state.currentUser);
+    });
   }
 
   public dispatch = (action: Actions) => {
@@ -48,12 +51,12 @@ export class ChatController {
         }
         break;
       case 'select-user':
-        if (payload?.login) this.selectUser(payload?.login);
+        if (payload?.login) this.updateUserChat(payload?.login);
         break;
     }
   };
 
-  private selectUser = (login: string | undefined): void => {
+  public updateUserChat = (login: string | undefined): void => {
     if (login) {
       state.currentUser = login;
       this.messages.request(login);
