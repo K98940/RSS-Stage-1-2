@@ -1,35 +1,15 @@
-import './login.css';
-import { HTML } from '../../../../types/types';
-import { LoginForm } from './login-form/login-form';
-import { Component } from '../../component/component';
 import { AuthUser } from '../../../../api/auth-user';
-import { Requests } from '../../../../types/types-api';
 import state, { subscribe } from '../../../../state/state';
+import { Requests } from '../../../../types/types-api';
 import { isAuthResponse } from '../../../../utils/predicates';
 
-export class PageLogin extends Component {
-  private form;
-
+export class LoginController {
   private auth;
 
-  private static instance: PageLogin;
-
-  private constructor() {
-    super({ tag: 'article', classNames: ['login-page', 'login-page_flex'] });
+  constructor() {
     this.auth = new AuthUser();
     this.auth.subscribe(Requests.USER_LOGIN, (data) => this.responseAuthUser(data));
-    this.form = new LoginForm();
-    this.form.render(this.node);
     subscribe('user', () => this.requestAuthUser());
-  }
-
-  public static getInstance(): PageLogin {
-    if (!PageLogin.instance) PageLogin.instance = new PageLogin();
-    return PageLogin.instance;
-  }
-
-  public render(context: HTML): void {
-    super.render(context);
   }
 
   public requestAuthUser(): void {
@@ -40,11 +20,10 @@ export class PageLogin extends Component {
     }
   }
 
-  public responseAuthUser(data: unknown): void {
+  private responseAuthUser(data: unknown): void {
     if (isAuthResponse(data)) {
       const { login, isLogined } = data.payload.user;
       if (isLogined && login === state.user.login) {
-        this.form.resetInputs();
         state.currentPage = 'chat';
         state.user = { ...state.user, isLogined };
       }

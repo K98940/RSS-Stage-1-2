@@ -1,4 +1,4 @@
-import state from '../../../../../state/state';
+import state, { subscribe } from '../../../../../state/state';
 import { Validation } from '../../../../../types/types';
 import {
   compose,
@@ -28,9 +28,19 @@ export class LoginForm extends Component {
     this.iLogin = new Input({ attributes: [['name', 'login']] });
     this.iPass = new Input({ attributes: [['name', 'password']] });
     this.btn = new Button({ textContent: 'Login' });
-
+    const btnAbout = new Button({
+      textContent: 'About',
+      classNames: [''],
+    });
+    btnAbout.setCallback((e) => {
+      e?.preventDefault();
+      window.location.hash = 'about';
+    }, 'click');
     this.btn.setCallback((e) => this.handleClick(e), 'click');
-    this.appendNodes(this.iLogin, this.iPass, this.btn);
+    this.appendNodes(this.iLogin, this.iPass, this.btn, btnAbout);
+    subscribe('user', () => {
+      if (state.user.isLogined) this.resetInputs();
+    });
   }
 
   private handleClick(e: Event | undefined) {
@@ -39,11 +49,9 @@ export class LoginForm extends Component {
       const { login, password } = this.getInputs();
       const validLogin = this.validateInput(login);
       const validPassword = this.validateInput(password);
-      if (!validLogin.validate || !validPassword.validate) {
-        this.iLogin.showNotice(validLogin.errors, 'error');
-        this.iPass.showNotice(validPassword.errors, 'error');
-        return;
-      }
+      this.iLogin.showNotice(validLogin.errors, 'error');
+      this.iPass.showNotice(validPassword.errors, 'error');
+      if (!validLogin.validate || !validPassword.validate) return;
       this.userAuthorise(login, password);
     }
   }

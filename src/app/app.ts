@@ -3,26 +3,33 @@ import './app.css';
 import { State } from '../types/types';
 import { Connect } from '../api/connect';
 import state, { subscribe } from '../state/state';
+import { Page } from './components/component/page';
 import { session } from './components/Session/session';
-import { PageLogin } from './components/pages/login/login';
 import { PageChat } from './components/pages/chat/chat-view';
 import { Component } from './components/component/component';
+import { PageLogin } from './components/pages/login/login-view';
+import { PageAbout } from './components/pages/about/about-view';
+import { LoginController } from './components/pages/login/login-controller';
 import { BlockUIMessage } from './components/component/block-UI-message/block-UI-message';
 
 const NO_COMMUNICATION = 'NO COMMUNICATION WITH THE SERVER';
 const connect = Connect.getInstance();
 
 export class App {
-  pageLogin: PageLogin | undefined;
+  loginController: LoginController;
 
-  pageChat: PageChat | undefined;
+  pageChat: Page | undefined;
 
   node: Component;
 
   constructor() {
-    window.location.hash = '';
-    this.pageLogin = PageLogin.getInstance();
+    this.loginController = new LoginController();
     this.node = new Component({ classNames: ['app'] });
+    this.init();
+  }
+
+  private init(): void {
+    window.location.hash = '';
     window.addEventListener('hashchange', () => this.router());
     connect.subscribe('close', () => this.handleDisconnect());
     connect.subscribe('open', () => this.handleConnect());
@@ -33,16 +40,19 @@ export class App {
 
   private router(): void {
     switch (this.getHash()) {
+      case 'about':
+        this.openPage(PageAbout.getInstance());
+        break;
       case 'login':
         const sessionState = session.read();
         if (sessionState) {
           this.restoreState(sessionState);
         } else {
-          this.openPageLogin();
+          this.openPage(PageLogin.getInstance());
         }
         break;
       case 'chat':
-        this.openPageChat();
+        this.openPage(PageChat.getInstance());
         break;
       default:
         window.location.hash = 'chat';
@@ -52,21 +62,17 @@ export class App {
 
   private getHash(): string {
     const { login, password } = state.user;
-    const hash = login.length > 0 && password.length > 0 ? window.location.hash.slice(1) : 'login';
+    const isLogined = login.length > 0 && password.length > 0;
+    let hash = window.location.hash.slice(1);
+    if (hash === 'about') return hash;
+    if (!isLogined) hash = 'login';
     window.location.hash = hash;
     return hash;
   }
 
-  private openPageChat(): void {
-    document.title = `${state.pages[state.currentPage].title}: ${state.user.login}`;
-    this.pageChat = PageChat.getInstance();
-    this.pageChat.render(this.node.getNode());
-  }
-
-  private openPageLogin(): void {
-    document.title = state.pages[state.currentPage].title;
-    this.pageLogin = PageLogin.getInstance();
-    this.pageLogin.render(this.node.getNode());
+  private openPage(page: Page): void {
+    document.title = `${state.pages[state.currentPage].title} ${state.user.login}`;
+    page.render(this.node.getNode());
   }
 
   private restoreState(sessionState: State): void {
@@ -92,8 +98,8 @@ export class App {
   }
 
   private handleConnect(): void {
-    if (!state.user.isLogined) this.pageLogin?.requestAuthUser();
-    const block = BlockUIMessage.getInstance();
-    block.hide();
+    if (!state.user.isLogined) this.loginController?.requestAuthUser();
+    const message = BlockUIMessage.getInstance();
+    message.hide();
   }
 }

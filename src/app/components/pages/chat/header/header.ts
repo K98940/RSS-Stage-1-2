@@ -12,6 +12,11 @@ export class Header extends Component {
     container.appendNodes(
       new Component({ tag: 'span', textContent: state.appName, classNames: ['header__span'] }),
       new Button({
+        textContent: 'About',
+        classNames: ['header__btn'],
+        callback: () => dispatch({ type: 'about' }),
+      }),
+      new Button({
         textContent: 'Logout',
         classNames: ['header__btn'],
         callback: () => dispatch({ type: 'logout' }),

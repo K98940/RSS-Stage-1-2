@@ -13,6 +13,9 @@ const initialState: State = {
     login: {
       title: 'login',
     },
+    about: {
+      title: 'about',
+    },
   },
   user: {
     login: '',

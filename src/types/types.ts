@@ -3,7 +3,7 @@ export type Callback<T> = {
 };
 export type HTMLAttributes = [string, string];
 export type HTML = HTMLTemplateElement | HTMLElement;
-export type Pages = 'login' | 'chat';
+export type Pages = 'login' | 'chat' | 'about';
 export interface Validation {
   readonly subject: string;
   validate: boolean;
@@ -22,7 +22,7 @@ export type ChatMessage = {
   };
 };
 export type Actions = {
-  type: 'message-delete' | 'message-edit' | 'message-send' | 'message-read' | 'select-user' | 'logout';
+  type: 'message-delete' | 'message-edit' | 'message-send' | 'message-read' | 'select-user' | 'logout' | 'about';
   payload?: {
     id?: string;
     text?: string;

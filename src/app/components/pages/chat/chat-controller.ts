@@ -61,6 +61,9 @@ export class ChatController {
       case 'logout':
         this.handleLogout();
         break;
+      case 'about':
+        window.location.hash = 'about';
+        break;
     }
   };
 
@@ -140,6 +143,8 @@ export class ChatController {
     const { login, password } = state.user;
     state.user = { ...state, login: '', password: '', isRequested: false, isLogined: false };
     state.currentUser = '';
+    state.currentPage = 'login';
+    state.chat = {};
     session.reset();
     this.auth.logout({ login, password });
     window.location.hash = 'login';

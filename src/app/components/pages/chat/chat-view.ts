@@ -1,13 +1,14 @@
 import './chat.css';
-import { HTML } from '../../../../types/types';
-import { Component } from '../../component/component';
-import { ChatController } from './chat-controller';
-import { HistoryView } from './history-view/history-view';
-import { Users } from './users-list/users-list-view';
-import { InputMessage } from './message-input/message-input';
 import { Header } from './header/header';
+import { Page } from '../../component/page';
+import { HTML } from '../../../../types/types';
+import { ChatController } from './chat-controller';
+import { Users } from './users-list/users-list-view';
+import { Component } from '../../component/component';
+import { HistoryView } from './history-view/history-view';
+import { InputMessage } from './message-input/message-input';
 
-export class PageChat extends Component {
+export class PageChat extends Page {
   private users;
 
   private history;
@@ -16,10 +17,9 @@ export class PageChat extends Component {
 
   private controller;
 
-  private static instance: PageChat | undefined;
-
   private constructor() {
-    super({ classNames: ['chat'] });
+    super();
+    this.node = new Component({ classNames: ['chat'] });
     this.controller = new ChatController();
     const dispatch = this.controller.dispatch;
 
@@ -30,18 +30,18 @@ export class PageChat extends Component {
     this.history = new HistoryView(dispatch);
     this.inputSendMessage = new InputMessage();
 
-    this.appendNodes(header, usersContainer);
+    this.node.appendNodes(header, usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
-    this.appendNodes(chatContainer);
+    this.node.appendNodes(chatContainer);
   }
 
-  public static getInstance(): PageChat {
+  public static getInstance(): Page {
     if (!PageChat.instance) PageChat.instance = new PageChat();
     return PageChat.instance;
   }
 
   public render(context: HTML): void {
     this.users.requestUsers();
-    super.render(context);
+    this.node?.render(context);
   }
 }

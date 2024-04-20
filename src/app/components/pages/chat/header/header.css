@@ -9,6 +9,11 @@
 
 .header__span {
   align-self: center;
+  padding-right: 1rem;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: var(--header-ft-size);
   color: color-mix(in srgb, var(--text-color-normal) 70%, black 30%);
 }
@@ -19,6 +24,7 @@
 }
 
 .header__btn {
+  width: 6rem;
   padding: 0 0.2rem;
   font-size: calc(var(--header-ft-size) * 0.7);
 }
@@ -26,5 +32,8 @@
 @media (max-width: 600px) {
   .header {
     --header-ft-size: 1rem;
+  }
+  .header__btn {
+    width: 3rem;
   }
 }
