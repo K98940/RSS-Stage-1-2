@@ -7,6 +7,7 @@ import { Users } from './users-list/users-list-view';
 import { Component } from '../../component/component';
 import { HistoryView } from './history-view/history-view';
 import { InputMessage } from './message-input/message-input';
+import { Footer } from './footer/footer';
 
 export class PageChat extends Page {
   private users;
@@ -24,7 +25,8 @@ export class PageChat extends Page {
     const dispatch = this.controller.dispatch;
 
     const header = new Header(dispatch);
-    const usersContainer = new Component({ classNames: ['users'] });
+    const footer = new Footer();
+    const usersContainer = new Component({ classNames: ['users', 'scroll-bar'] });
     const chatContainer = new Component({ classNames: ['chat-container'] });
     this.users = new Users(usersContainer, dispatch);
     this.history = new HistoryView(dispatch);
@@ -32,7 +34,7 @@ export class PageChat extends Page {
 
     this.node.appendNodes(header, usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
-    this.node.appendNodes(chatContainer);
+    this.node.appendNodes(chatContainer, footer);
   }
 
   public static getInstance(): Page {

@@ -5,6 +5,7 @@
   flex: 1 1 30%;
   color: var(--text-color-normal);
   line-height: calc(var(--users-ft-size) * 1.4);
+  overflow-y: scroll;
 }
 
 .users li {

@@ -1,10 +1,11 @@
 .header {
   --header-ft-size: 2rem;
 
+  grid-area: h;
   display: flex;
   padding: 0.5rem 0;
   justify-content: space-between;
-  grid-area: h;
+  border-bottom: 1px solid rgb(13, 65, 117);
 }
 
 .header__span {

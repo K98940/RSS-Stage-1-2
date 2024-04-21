@@ -11,7 +11,7 @@ export class HistoryView extends Component {
   dispath;
 
   constructor(dispatch: Dispatch) {
-    super({ classNames: ['history'] });
+    super({ classNames: ['history', 'scroll-bar'] });
     this.dispath = dispatch;
     subscribe('chat', () => this.render());
   }

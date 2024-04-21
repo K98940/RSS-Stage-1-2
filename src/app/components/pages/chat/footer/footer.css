@@ -1,0 +1,40 @@
+.footer {
+  grid-area: f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgb(13, 65, 117);
+}
+
+.footer-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 100%;
+  user-select: none;
+  text-decoration: none;
+  color: var(--text-color-normal);
+
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+}
+
+.footer-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert();
+}
+
+.footer-year {
+  user-select: none;
+  font-size: var(--font-size-normal);
+  color: var(--text-color-normal);
+}
+
+.footer__author-name {
+}

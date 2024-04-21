@@ -32,3 +32,21 @@ body {
   pointer-events: none;
   cursor: default;
 }
+
+.scroll-bar {
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-button {
+    background: rgb(13, 65, 117);
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: rgb(13, 65, 117);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(189, 227, 255);
+  }
+}
