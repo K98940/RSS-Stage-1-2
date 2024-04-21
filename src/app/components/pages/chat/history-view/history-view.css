@@ -11,3 +11,34 @@
 
   color: var(--text-color-normal);
 }
+
+.history__divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 98%;
+  height: 30px;
+  margin: 0 auto;
+}
+
+.history__divider-line {
+  --divider-ft-size: 0.8rem;
+  --divider-color: rgb(255, 115, 115);
+  width: 100%;
+  height: 1px;
+  background-color: var(--divider-color);
+
+  &::after {
+    content: 'unread';
+    display: inline-block;
+    position: relative;
+    padding: 0 1rem;
+    inset: 0;
+    left: 50%;
+    top: calc(var(--divider-ft-size) * -1.2);
+    transform: translateX(-50%);
+    font-size: var(--divider-ft-size);
+    color: var(--divider-color);
+    background-color: rgb(47, 47, 47);
+  }
+}

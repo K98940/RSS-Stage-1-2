@@ -1,6 +1,6 @@
 import { Api } from './api';
 import { Connect } from './connect';
-import { MessageRequest } from './../types/types-api';
+import { MessageReadStatusChange, MessageRequest } from './../types/types-api';
 import { isMessageResponse, isMsgDelete, isMsgEdited } from '../utils/predicates';
 import { MessageDeletion, MessageTextEditingRequest, Requests } from '../types/types-api';
 
@@ -42,6 +42,17 @@ export class Message extends Api {
       type: Requests.MSG_EDIT,
       payload: {
         message: { id, text },
+      },
+    };
+    this.connect.request(request);
+  }
+
+  public setRead(id: string) {
+    const request: MessageReadStatusChange = {
+      id: '',
+      type: Requests.MSG_READ,
+      payload: {
+        message: { id },
       },
     };
     this.connect.request(request);

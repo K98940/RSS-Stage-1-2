@@ -30,7 +30,7 @@ export class PageChat extends Page {
     const chatContainer = new Component({ classNames: ['chat-container'] });
     this.users = new Users(usersContainer, dispatch);
     this.history = new HistoryView(dispatch);
-    this.inputSendMessage = new InputMessage();
+    this.inputSendMessage = new InputMessage(dispatch);
 
     this.node.appendNodes(header, usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);

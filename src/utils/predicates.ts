@@ -7,6 +7,7 @@ import {
   MessageResponse,
   MessageTextEditingResponse,
   NotificationMessageDeletion,
+  NotificationMessageRead,
   NotificationMsgDelivery,
   Requests,
 } from '../types/types-api';
@@ -35,6 +36,13 @@ export function isMsgDelivery(data: unknown | NotificationMsgDelivery): data is 
   return (
     (data as NotificationMsgDelivery)?.type === Requests.MSG_DELIVER &&
     (data as NotificationMsgDelivery)?.payload.message.status.isDelivered !== undefined
+  );
+}
+
+export function isMsgRead(data: unknown | NotificationMessageRead): data is NotificationMessageRead {
+  return (
+    (data as NotificationMessageRead)?.type === Requests.MSG_READ &&
+    (data as NotificationMessageRead)?.payload.message.status.isReaded !== undefined
   );
 }
 

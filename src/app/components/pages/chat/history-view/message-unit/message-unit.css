@@ -66,9 +66,50 @@
 .btn__edit {
 }
 
-.footer__statuses {
+.footer__status {
+  position: relative;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+
+  width: 1rem;
+  height: 1rem;
+
+  &::before {
+    position: absolute;
+    font-size: 1rem;
+    inset: 0;
+    left: -1rem;
+  }
+
+  &::after {
+    position: absolute;
+    font-size: 1rem;
+    inset: 0;
+    left: -0.5rem;
+    /* top: -0.1rem; */
+  }
+}
+
+.status_not-delivered {
+  &::before {
+    content: '✔️';
+    filter: grayscale(1);
+  }
+}
+
+.status_delivered {
+  &::before {
+    content: '✔️';
+    filter: grayscale(0);
+  }
+}
+
+.status_read {
+  &::after {
+    content: '✔️';
+    /* left: -1rem; */
+  }
 }
 
 @media (hover: hover) {

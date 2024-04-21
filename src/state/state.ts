@@ -1,4 +1,5 @@
 import { session } from '../app/components/Session/session';
+import { Requests } from '../types/types-api';
 import { Callback, State, StateKey, StateValue } from './../types/types';
 
 const initialState: State = {
@@ -6,6 +7,7 @@ const initialState: State = {
   currentPage: 'login',
   currentUser: '',
   currentInput: '',
+  lastNotification: Requests.USER_LOGIN,
   pages: {
     chat: {
       title: 'chat',

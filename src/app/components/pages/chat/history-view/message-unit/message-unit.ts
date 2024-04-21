@@ -18,15 +18,18 @@ export class MessageUnitView {
 
   private isDelivered;
 
+  private isReaded;
+
   public node;
 
   private dispatch;
 
-  constructor(msg: ChatMessage, dispatch: Dispatch) {
+  constructor(msg: ChatMessage, dispatch: Dispatch, isReaded?: boolean) {
     this.dispatch = dispatch;
     this.node = new Component({});
     this.footer = new Component({});
     this.isDelivered = new Component({});
+    this.isReaded = isReaded;
     this.datetime = new Component({});
     this.from = new Component({});
     this.text = new Component({});
@@ -52,13 +55,18 @@ export class MessageUnitView {
     contentContainer.appendNodes(this.text);
 
     this.footer = new Component({ tag: 'footer', classNames: ['message-item__footer'] });
-    const statuses = new Component({ classNames: ['footer__statuses'] });
+    const statuses = new Component({ classNames: ['footer__status'] });
 
     if (this.message.from === state.user.login) {
-      const deliveredMsg = this.message.status.isDelivered ? 'delivered' : 'not delivered';
-      this.isDelivered = new Component({ tag: 'span', textContent: `${deliveredMsg}` });
+      if (this.message.status.isDelivered) {
+        statuses.setClasses(['status_delivered']);
+      } else {
+        statuses.setClasses(['status_not-delivered']);
+      }
+      if (this.message.status.isReaded) statuses.setClasses(['status_read']);
+
       this.node.setClasses(['message-item_owner']);
-      this.from.setTextContent('You:');
+      this.from.setTextContent('you:');
       const btnDelete = new ButtonDelete(this.message.id, this.dispatch);
       const btnEdit = new ButtonEdit(this.message.id, this.message.text, this.dispatch);
       const btnContainer = new Component({ classNames: ['btn-container'] });

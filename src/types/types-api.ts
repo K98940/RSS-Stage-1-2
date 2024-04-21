@@ -145,13 +145,10 @@ export interface MessageReadStatusChange {
   payload: {
     message: {
       id: string;
-      status: {
-        isReaded: boolean;
-      };
     };
   };
 }
-export interface NotificationMessageReadStatusChange {
+export interface NotificationMessageRead {
   id: null;
   type: Requests.MSG_READ;
   payload: {

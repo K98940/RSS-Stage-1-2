@@ -3,6 +3,7 @@ import state from '../../../../../state/state';
 import { Input } from '../../../component/input';
 import { Button } from '../../../component/button';
 import { Component } from '../../../component/component';
+import { Dispatch } from '../../../../../types/types';
 
 export class InputMessage extends Component {
   form;
@@ -11,8 +12,9 @@ export class InputMessage extends Component {
 
   btnSend;
 
-  constructor() {
+  constructor(dispatch: Dispatch) {
     super({ classNames: ['message-input-container'] });
+    this.dispatch = dispatch;
     this.form = new Component({ tag: 'form' });
     this.input = new Input({ attributes: [['placeholder', 'message...']] });
     this.input.setCallback(() => this.handleInput(), 'keyup');
@@ -26,6 +28,7 @@ export class InputMessage extends Component {
           state.currentInput = value;
           this.input.value('');
           this.btnSend.active = false;
+          if (this.dispatch) this.dispatch({ type: 'message-read' });
         }
       },
     });

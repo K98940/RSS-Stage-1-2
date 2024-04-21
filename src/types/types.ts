@@ -1,3 +1,5 @@
+import { Requests } from './types-api';
+
 export type Callback<T> = {
   (e?: T): void;
 };
@@ -48,6 +50,7 @@ export type State = {
   currentPage: `${Pages}`;
   currentUser: string;
   currentInput: string;
+  lastNotification: Requests;
   pages: {
     [key in `${Pages}`]: {
       title: string;
