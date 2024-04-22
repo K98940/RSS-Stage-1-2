@@ -53,9 +53,14 @@
 }
 
 @media (hover: hover) {
-  .form__button:hover {
-    color: white;
-    background-color: #7b6bdf;
+  .form__button {
+    font-size: calc(var(--font-size-normal) * 1);
+    line-height: calc(var(--font-size-normal) * 1.5);
+
+    &:hover {
+      color: white;
+      background-color: #7b6bdf;
+    }
   }
 }
 

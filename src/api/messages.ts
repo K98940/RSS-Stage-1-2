@@ -12,9 +12,9 @@ export class Messages extends Api {
     this.connect.subscribe(Requests.MSG_FROM_USER, (data) => this.handleEvent(data));
   }
 
-  public request(login: string) {
+  public request(login: string, id?: string) {
     const request: MessageHistoryRequest = {
-      id: '',
+      id: id || '',
       type: Requests.MSG_FROM_USER,
       payload: {
         user: {

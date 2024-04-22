@@ -1,32 +1,38 @@
-import state, { subscribe } from '../../../../../state/state';
+import { CB } from '../../../../../types/types';
+import { Messages } from '../../../../../api/messages';
 import { AuthUser } from '../../../../../api/auth-user';
 import { AuthUsers } from '../../../../../api/auth-users';
 import { Requests } from '../../../../../types/types-api';
+import state, { subscribe } from '../../../../../state/state';
 import { isUsersResponse } from '../../../../../utils/predicates';
-import { CB } from '../../../../../types/types';
-import { Messages } from '../../../../../api/messages';
 
-interface UserList {
+type UserList = {
   [index: string]: boolean;
-}
-
-type Subscriber = CB<Props[]>;
-let subscriber: Subscriber;
-
+};
 type Props = {
   login: string;
   isLogined: boolean;
   countNewMessages: number;
 };
 
+type LocalState = {
+  currentUser: string;
+  users: Props[];
+};
+type Subscriber = CB<Props[]>;
+let subscriber: Subscriber;
+
 export class UsersController {
-  authUsers;
+  private authUsers;
 
-  authUser;
+  private authUser;
 
-  messages;
+  private messages;
+
+  private localState: LocalState | null;
 
   constructor() {
+    this.localState = null;
     this.authUser = new AuthUser();
     this.authUsers = new AuthUsers();
     this.messages = new Messages();
@@ -76,7 +82,7 @@ export class UsersController {
     subscriber = calback;
   };
 
-  handleUpdate(): void {
+  private handleUpdate(): void {
     const allUsers = [...Object.entries(state.activeUsers), ...Object.entries(state.inactiveUsers)];
     const filteredUsers = allUsers.filter(([login]) => login !== state.user.login);
     const renderUsers = filteredUsers.map(([login, isLogined]) => {
@@ -86,11 +92,20 @@ export class UsersController {
       return { login, isLogined, countNewMessages };
     });
 
-    subscriber(renderUsers);
+    if (this.isStateChanged(renderUsers)) subscriber(renderUsers);
   }
 
-  responseMessages(user: string): void {
+  private isStateChanged(renderUsers: Props[]): boolean {
+    const oldState = JSON.stringify(this.localState);
+    const newState = JSON.stringify(renderUsers);
+    if (oldState !== newState && this.localState) {
+      this.localState.currentUser = state.currentUser;
+      this.localState.users = renderUsers;
+    }
+    return oldState !== newState;
+  }
+
+  private responseMessages(user: string): void {
     this.messages.request(user);
   }
 }
-// TODO добавить предыдущее состояние и их сравнение для оптимизации рендера

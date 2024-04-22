@@ -73,7 +73,7 @@ export class ChatController {
   public updateUserChat = (login: string | undefined): void => {
     if (login) {
       state.currentUser = login;
-      this.messages.request(login);
+      this.messages.request(login, login);
     }
   };
 
@@ -84,8 +84,11 @@ export class ChatController {
         data.payload.messages[0]?.from === state.user.login
           ? data.payload.messages[0]?.to
           : data.payload.messages[0]?.from;
+      const chatName = data.id || userName;
+      if (!chatName) return;
+
       const newChat = {
-        [userName || state.currentUser]: data.payload.messages,
+        [chatName]: data.payload.messages,
       };
       state.chat = { ...state.chat, ...newChat };
     }

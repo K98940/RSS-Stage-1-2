@@ -1,27 +1,37 @@
 import './history-view.css';
-import { Color, l } from '../../../../../utils/utils';
 import { Component } from '../../../component/component';
+import { Requests } from '../../../../../types/types-api';
 import state, { subscribe } from '../../../../../state/state';
 import { MessageUnitView } from './message-unit/message-unit';
 import { ChatMessage, Dispatch } from '../../../../../types/types';
-import { Requests } from '../../../../../types/types-api';
 
 export class HistoryView extends Component {
   private messages: MessageUnitView[] = [];
 
   private divider: Component | null;
 
+  private localState: ChatMessage[] | null;
+
   constructor(dispatch: Dispatch) {
     super({ classNames: ['history', 'scroll-bar'] });
     this.divider = null;
+    this.localState = null;
     this.dispatch = dispatch;
     subscribe('chat', () => this.render());
   }
 
+  private isStateChanged(chat: ChatMessage[]): boolean {
+    const oldState = JSON.stringify(this.localState);
+    const newState = JSON.stringify(chat);
+    if (oldState !== newState) this.localState = JSON.parse(newState || '{}');
+    return oldState !== newState;
+  }
+
   public render(): void {
-    l('state', state, Color.blue);
     const user = state.currentUser;
     const chat = state.chat[user];
+    if (!this.isStateChanged(chat)) return;
+
     this.node.innerHTML = '';
     this.divider = null;
     this.children = [];
