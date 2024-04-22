@@ -66,7 +66,8 @@ export class MessageEdit {
 
   private handleKeyDown(e: unknown): void {
     if (e instanceof Event && this.btnOK) {
-      if (this.textArea?.isEmpty) {
+      const isEmpty = !this.textArea?.value()?.trim();
+      if (isEmpty) {
         this.btnOK.active = false;
       } else {
         this.btnOK.active = true;

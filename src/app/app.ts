@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import './app.css';
 import { State } from '../types/types';
 import { Connect } from '../api/connect';
@@ -103,3 +102,4 @@ export class App {
     message.hide();
   }
 }
+// TODO (+5) Implements user search by name. The search will be case sensitive or case-insensitive at the student's discretion.

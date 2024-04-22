@@ -66,6 +66,15 @@
 .btn__edit {
 }
 
+.footer__edited {
+  margin-left: auto;
+  padding-right: 1rem;
+  display: flex;
+  align-items: flex-end;
+  font-size: calc(var(--message-ft-size) * 0.8);
+  filter: opacity(0.7);
+}
+
 .footer__status {
   position: relative;
   display: flex;
@@ -87,7 +96,6 @@
     font-size: 1rem;
     inset: 0;
     left: -0.5rem;
-    /* top: -0.1rem; */
   }
 }
 
@@ -108,7 +116,6 @@
 .status_read {
   &::after {
     content: '✔️';
-    /* left: -1rem; */
   }
 }
 

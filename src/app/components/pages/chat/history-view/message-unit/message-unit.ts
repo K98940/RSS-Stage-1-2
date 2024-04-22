@@ -55,15 +55,20 @@ export class MessageUnitView {
     contentContainer.appendNodes(this.text);
 
     this.footer = new Component({ tag: 'footer', classNames: ['message-item__footer'] });
-    const statuses = new Component({ classNames: ['footer__status'] });
+    const edited = new Component({
+      tag: 'span',
+      textContent: this.message.status.isEdited ? 'edited...' : '',
+      classNames: ['footer__edited'],
+    });
+    const status = new Component({ classNames: ['footer__status'] });
 
     if (this.message.from === state.user.login) {
       if (this.message.status.isDelivered) {
-        statuses.setClasses(['status_delivered']);
+        status.setClasses(['status_delivered']);
       } else {
-        statuses.setClasses(['status_not-delivered']);
+        status.setClasses(['status_not-delivered']);
       }
-      if (this.message.status.isReaded) statuses.setClasses(['status_read']);
+      if (this.message.status.isReaded) status.setClasses(['status_read']);
 
       this.node.setClasses(['message-item_owner']);
       this.from.setTextContent('you:');
@@ -73,8 +78,8 @@ export class MessageUnitView {
       btnContainer.appendNodes(btnDelete, btnEdit);
       this.footer.appendNodes(btnContainer);
     }
-    statuses.appendNodes(this.isDelivered);
-    this.footer.appendNodes(statuses);
+    status.appendNodes(this.isDelivered);
+    this.footer.appendNodes(edited, status);
     this.node.appendNodes(header, contentContainer, this.footer);
   }
 }

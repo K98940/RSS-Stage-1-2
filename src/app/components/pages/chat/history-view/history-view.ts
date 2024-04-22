@@ -4,6 +4,10 @@ import { Requests } from '../../../../../types/types-api';
 import state, { subscribe } from '../../../../../state/state';
 import { MessageUnitView } from './message-unit/message-unit';
 import { ChatMessage, Dispatch } from '../../../../../types/types';
+import { BlankMessageUnitView } from './blank-message-unit';
+
+const BLANK_MESSAGE = 'you can text...';
+const BLANK_USER = 'you can select a user';
 
 export class HistoryView extends Component {
   private messages: MessageUnitView[] = [];
@@ -38,7 +42,16 @@ export class HistoryView extends Component {
 
     this.node.removeEventListener('wheel', this.actionMessageRead);
     this.node.removeEventListener('click', this.actionMessageRead);
-    chat?.forEach((message) => this.createNewMessageItem(message));
+    if (chat?.length > 0) {
+      chat?.forEach((message) => this.createNewMessageItem(message));
+    }
+    if (!chat || chat?.length === 0) {
+      if (state.currentUser === '') {
+        this.appendNodes(new BlankMessageUnitView(BLANK_USER).node);
+      } else {
+        this.appendNodes(new BlankMessageUnitView(BLANK_MESSAGE).node);
+      }
+    }
   }
 
   private createNewMessageItem(message: ChatMessage): void {

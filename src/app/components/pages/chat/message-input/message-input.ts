@@ -1,5 +1,5 @@
 import './message-input.css';
-import state from '../../../../../state/state';
+import state, { subscribe } from '../../../../../state/state';
 import { Input } from '../../../component/input';
 import { Button } from '../../../component/button';
 import { Component } from '../../../component/component';
@@ -22,25 +22,39 @@ export class InputMessage extends Component {
     this.btnSend = new Button({
       textContent: 'SEND',
       classNames: [styleInactiveBtn],
-      callback: () => {
-        const value = this.input.value();
-        if (typeof value === 'string') {
-          state.currentInput = value;
-          this.input.value('');
-          this.btnSend.active = false;
-          if (this.dispatch) this.dispatch({ type: 'message-read' });
-        }
-      },
+      callback: this.handleSubmit,
     });
     this.form.appendNodes(this.input, this.btnSend);
+    this.form.getNode().addEventListener('submit', this.handleSubmit);
     this.appendNodes(this.form);
+    subscribe('currentUser', () => this.handleUserSelect());
   }
 
   private handleInput(): void {
-    if (this.input.isEmpty) {
+    const isEmpty = !this.input?.value()?.trim();
+    if (isEmpty) {
       this.btnSend.active = false;
     } else {
       this.btnSend.active = true;
+    }
+  }
+
+  private handleSubmit = (e?: Event | unknown): void => {
+    if (e instanceof Event) e.preventDefault();
+    const value = this.input.value()?.trim();
+    if (value !== '') {
+      state.currentInput = value || '';
+      this.input.value('');
+      this.btnSend.active = false;
+      if (this.dispatch) this.dispatch({ type: 'message-read' });
+    }
+  };
+
+  private handleUserSelect(): void {
+    if (state.currentUser === '') {
+      this.input.setClasses(['__inactive-element']);
+    } else {
+      this.input.removeClass('__inactive-element');
     }
   }
 }

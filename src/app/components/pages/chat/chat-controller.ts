@@ -124,7 +124,10 @@ export class ChatController {
       const { users, newChat } = this.getChat();
       users.forEach((user) =>
         newChat[user].forEach((message) => {
-          if (message.id === data.payload.message.id) message.text = data.payload.message.text;
+          if (message.id === data.payload.message.id) {
+            message.text = data.payload.message.text;
+            message.status.isEdited = data.payload.message.status.isEdited;
+          }
         }),
       );
       state.chat = { ...state.chat, ...newChat };

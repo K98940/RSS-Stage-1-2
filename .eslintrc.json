@@ -30,5 +30,6 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
     "max-len": "off"
-  }
+  },
+  "noInlineConfig": true
 }
