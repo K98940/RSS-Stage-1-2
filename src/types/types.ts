@@ -3,6 +3,9 @@ import { Requests } from './types-api';
 export type Callback<T> = {
   (e?: T): void;
 };
+export type CB<T> = {
+  (cbProps: T): void;
+};
 export type HTMLAttributes = [string, string];
 export type HTML = HTMLTemplateElement | HTMLElement;
 export type Pages = 'login' | 'chat' | 'about';

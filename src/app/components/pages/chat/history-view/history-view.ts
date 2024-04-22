@@ -20,14 +20,13 @@ export class HistoryView extends Component {
 
   public render(): void {
     l('state', state, Color.blue);
-    console.log('state.lastNotification', state.lastNotification);
     const user = state.currentUser;
     const chat = state.chat[user];
     this.node.innerHTML = '';
     this.divider = null;
     this.children = [];
 
-    this.node.removeEventListener('scroll', this.actionMessageRead);
+    this.node.removeEventListener('wheel', this.actionMessageRead);
     this.node.removeEventListener('click', this.actionMessageRead);
     chat?.forEach((message) => this.createNewMessageItem(message));
   }
@@ -70,7 +69,7 @@ export class HistoryView extends Component {
     if (!this.divider) {
       if (message.to === state.user.login && !message.status.isReaded) {
         setTimeout(() => {
-          this.node.addEventListener('scroll', this.actionMessageRead, { once: true });
+          this.node.addEventListener('wheel', this.actionMessageRead, { once: true });
           this.node.addEventListener('click', this.actionMessageRead, { once: true });
         }, 50);
         return true;

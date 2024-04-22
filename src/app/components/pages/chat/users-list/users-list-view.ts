@@ -1,30 +1,33 @@
 import './users-list.css';
-import { UsersController } from './users-list-controller';
-import { Component } from '../../../component/component';
-import state, { subscribe } from '../../../../../state/state';
 import { ListItem } from './list-item';
 import { Dispatch } from '../../../../../types/types';
+import { Component } from '../../../component/component';
+import { UsersController } from './users-list-controller';
+// import state from '../../../../../state/state';
+// import state, { subscribe } from '../../../../../state/state';
 
-export class Users extends UsersController {
+type Props = {
+  login: string;
+  isLogined: boolean;
+  countNewMessages: number;
+};
+
+export class Users {
   container;
 
   dispatch;
 
   constructor(container: Component, dispatch: Dispatch) {
-    super();
     this.container = container;
+    const controller = new UsersController();
     this.dispatch = dispatch;
-    subscribe('activeUsers', () => this.render());
-    subscribe('inactiveUsers', () => this.render());
-    subscribe('currentUser', () => this.render());
+    controller.subscribe((props) => this.render(props));
   }
 
-  public render(): void {
-    const allUsers = [...Object.entries(state.activeUsers), ...Object.entries(state.inactiveUsers)];
-    const users = allUsers.filter(([login]) => login !== state.user.login);
+  public render(props: Props[]): void {
     this.container.getNode().innerHTML = '';
-    users.forEach(([login, status]) => {
-      this.container.appendNodes(new ListItem({ login: login, isLogined: status, dispatch: this.dispatch }));
+    props.forEach(({ login, isLogined, countNewMessages }) => {
+      this.container.appendNodes(new ListItem({ login: login, isLogined, dispatch: this.dispatch, countNewMessages }));
     });
   }
 }

@@ -1,5 +1,6 @@
 import './chat.css';
 import { Header } from './header/header';
+import { Footer } from './footer/footer';
 import { Page } from '../../component/page';
 import { HTML } from '../../../../types/types';
 import { ChatController } from './chat-controller';
@@ -7,7 +8,7 @@ import { Users } from './users-list/users-list-view';
 import { Component } from '../../component/component';
 import { HistoryView } from './history-view/history-view';
 import { InputMessage } from './message-input/message-input';
-import { Footer } from './footer/footer';
+import { UsersController } from './users-list/users-list-controller';
 
 export class PageChat extends Page {
   private users;
@@ -16,13 +17,16 @@ export class PageChat extends Page {
 
   private inputSendMessage;
 
-  private controller;
+  private chatController;
+
+  private usersController;
 
   private constructor() {
     super();
     this.node = new Component({ classNames: ['chat'] });
-    this.controller = new ChatController();
-    const dispatch = this.controller.dispatch;
+    this.chatController = new ChatController();
+    this.usersController = new UsersController();
+    const dispatch = this.chatController.dispatch;
 
     const header = new Header(dispatch);
     const footer = new Footer();
@@ -43,7 +47,7 @@ export class PageChat extends Page {
   }
 
   public render(context: HTML): void {
-    this.users.requestUsers();
+    this.usersController.requestUsers();
     this.node?.render(context);
   }
 }

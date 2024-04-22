@@ -6,6 +6,7 @@ interface Props {
   login: string;
   isLogined: boolean;
   dispatch: Dispatch;
+  countNewMessages?: number;
 }
 
 export class ListItem extends Component {
@@ -17,7 +18,11 @@ export class ListItem extends Component {
     super({
       tag: 'li',
       textContent: props.login,
-      attributes: [[props.isLogined ? 'active' : 'inactive', '']],
+      attributes: [
+        [props.isLogined ? 'active' : 'inactive', ''],
+        ['data-new-messages', `${props.countNewMessages || ''}`],
+      ],
+      classNames: [`${props.countNewMessages && props.countNewMessages > 0 ? 'user-has-new-message' : ''}`],
       callback: () => props.dispatch({ type: 'select-user', payload: { login: this.login } }),
     });
     if (props.login === state.currentUser) this.setAttributes([['selected', '']]);

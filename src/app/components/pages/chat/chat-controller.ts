@@ -78,20 +78,23 @@ export class ChatController {
   };
 
   private handleRecieveMessages(data: unknown): void {
+    state.lastNotification = Requests.MSG_SEND;
     if (isMessagesResponse(data)) {
-      state.lastNotification = Requests.MSG_SEND;
+      const userName =
+        data.payload.messages[0]?.from === state.user.login
+          ? data.payload.messages[0]?.to
+          : data.payload.messages[0]?.from;
       const newChat = {
-        [state.currentUser]: data.payload.messages,
+        [userName || state.currentUser]: data.payload.messages,
       };
       state.chat = { ...state.chat, ...newChat };
     }
     if (isMessageResponse(data)) {
-      state.lastNotification = Requests.MSG_SEND;
       const { users, newChat } = this.getChat();
-      users.forEach((user) => {
-        if (user === data.payload.message.from || user === data.payload.message.to) {
+      users.forEach((userName) => {
+        if (userName === data.payload.message.from || userName === data.payload.message.to) {
           const message = data.payload.message;
-          newChat[user] = [...newChat[user], message];
+          newChat[userName] = [...newChat[userName], message];
         }
       });
       state.chat = { ...state.chat, ...newChat };
@@ -180,4 +183,3 @@ export class ChatController {
     }
   }
 }
-// TODO счетчик непрочитанных

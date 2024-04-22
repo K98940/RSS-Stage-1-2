@@ -82,22 +82,25 @@ export interface MessageRequest {
     };
   };
 }
+
+export interface Message {
+  id: string;
+  from: string;
+  to: string;
+  text: string;
+  datetime: number;
+  status: {
+    isDelivered: boolean;
+    isReaded: boolean;
+    isEdited: boolean;
+  };
+}
+
 export interface MessageResponse {
   id: string;
   type: Requests.MSG_SEND;
   payload: {
-    message: {
-      id: string;
-      from: string;
-      to: string;
-      text: string;
-      datetime: number;
-      status: {
-        isDelivered: boolean;
-        isReaded: boolean;
-        isEdited: boolean;
-      };
-    };
+    message: Message;
   };
 }
 
@@ -114,7 +117,7 @@ export interface MessageHistoryResponse {
   id: string;
   type: Requests.MSG_FROM_USER;
   payload: {
-    messages: [];
+    messages: Message[];
   };
 }
 
