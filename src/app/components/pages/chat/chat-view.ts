@@ -2,6 +2,7 @@ import './chat.css';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
 import { Page } from '../../component/page';
+import { Input } from '../../component/input';
 import { HTML } from '../../../../types/types';
 import { ChatController } from './chat-controller';
 import { Users } from './users-list/users-list-view';
@@ -32,11 +33,18 @@ export class PageChat extends Page {
     const footer = new Footer();
     const usersContainer = new Component({ classNames: ['users', 'scroll-bar'] });
     const chatContainer = new Component({ classNames: ['chat-container'] });
+    const filter = new Input({
+      attributes: [['placeholder', 'filter...']],
+      classNames: ['chat-filter'],
+      callback: () => {
+        dispatch({ type: 'filter', payload: { text: filter.value() } });
+      },
+    });
     this.users = new Users(usersContainer, dispatch);
     this.history = new HistoryView(dispatch);
     this.inputSendMessage = new InputMessage(dispatch);
 
-    this.node.appendNodes(header, usersContainer);
+    this.node.appendNodes(header, filter, usersContainer);
     chatContainer.appendNodes(this.history, this.inputSendMessage);
     this.node.appendNodes(chatContainer, footer);
   }

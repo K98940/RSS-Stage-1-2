@@ -1,10 +1,10 @@
-import { CB } from '../../../../../types/types';
+import { CB, ChatMessage } from '../../../../../types/types';
 import { Messages } from '../../../../../api/messages';
 import { AuthUser } from '../../../../../api/auth-user';
 import { AuthUsers } from '../../../../../api/auth-users';
-import { Requests } from '../../../../../types/types-api';
 import state, { subscribe } from '../../../../../state/state';
 import { isUsersResponse } from '../../../../../utils/predicates';
+import { Requests, UserResponse } from '../../../../../types/types-api';
 
 type UserList = {
   [index: string]: boolean;
@@ -20,7 +20,18 @@ type LocalState = {
   users: Props[];
 };
 type Subscriber = CB<Props[]>;
-let subscriber: Subscriber;
+let subscriberGetUsers: Subscriber;
+
+const filterRemoveMe = ({ login }: UserResponse) => login !== state.user.login;
+const filterUsers = ([login]: [string, boolean]) =>
+  login.toLocaleLowerCase().includes(state.filter.toLocaleLowerCase());
+const filterUnreadMessages = (message: ChatMessage) => {
+  return message.to === state.user.login && message.status.isReaded === false;
+};
+const ConvertToStateFormat = (acc: UserList, user: UserResponse): UserList => ({
+  ...acc,
+  [user.login]: user.isLogined,
+});
 
 export class UsersController {
   private authUsers;
@@ -45,6 +56,7 @@ export class UsersController {
     subscribe('activeUsers', () => this.handleUpdate());
     subscribe('inactiveUsers', () => this.handleUpdate());
     subscribe('currentUser', () => this.handleUpdate());
+    subscribe('filter', () => this.handleUpdate());
   }
 
   public requestUsers(): void {
@@ -55,44 +67,37 @@ export class UsersController {
     if (isUsersResponse(data)) {
       switch (data.type) {
         case Requests.USER_ACTIVE:
-          const activeUsers: UserList = {};
-          data.payload.users.forEach((user) => (activeUsers[user.login] = user.isLogined));
-          state.activeUsers = activeUsers;
-
-          const usersActive = [...Object.entries(state.activeUsers)];
-          const filteredUsersA = usersActive.filter(([login]) => login !== state.user.login);
-          filteredUsersA.forEach(([user]) => {
-            this.responseMessages(user);
-          });
+          state.activeUsers = this.setUsersToState(data.payload.users);
           break;
         case Requests.USER_INACTIVE:
-          const inactiveUsers: UserList = {};
-          data.payload.users.forEach((user) => (inactiveUsers[user.login] = user.isLogined));
-          state.inactiveUsers = inactiveUsers;
-
-          const usersInactive = [...Object.entries(state.inactiveUsers)];
-          const filteredUsersI = usersInactive.filter(([login]) => login !== state.user.login);
-          filteredUsersI.forEach(([user]) => this.responseMessages(user));
+          state.inactiveUsers = this.setUsersToState(data.payload.users);
           break;
       }
     }
   };
 
-  public subscribe = (calback: CB<Props[]>) => {
-    subscriber = calback;
+  private setUsersToState(users: UserResponse[]) {
+    const filteredUsers = users.filter(filterRemoveMe);
+    filteredUsers.forEach((user) => this.responseMessages(user.login));
+    return filteredUsers.reduce(ConvertToStateFormat, {});
+  }
+
+  public getUsers = (calback: CB<Props[]>) => {
+    subscriberGetUsers = calback;
   };
 
   private handleUpdate(): void {
     const allUsers = [...Object.entries(state.activeUsers), ...Object.entries(state.inactiveUsers)];
-    const filteredUsers = allUsers.filter(([login]) => login !== state.user.login);
+    let filteredUsers = allUsers.filter(([login]) => login !== state.user.login);
+
+    if (state.filter !== '') {
+      filteredUsers = allUsers.filter(filterUsers);
+    }
     const renderUsers = filteredUsers.map(([login, isLogined]) => {
-      const countNewMessages =
-        state.chat[login]?.filter((message) => message.to === state.user.login && message.status.isReaded === false)
-          .length || 0;
+      const countNewMessages = state.chat[login]?.filter(filterUnreadMessages).length || 0;
       return { login, isLogined, countNewMessages };
     });
-
-    if (this.isStateChanged(renderUsers)) subscriber(renderUsers);
+    if (this.isStateChanged(renderUsers)) subscriberGetUsers(renderUsers);
   }
 
   private isStateChanged(renderUsers: Props[]): boolean {

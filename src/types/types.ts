@@ -27,7 +27,15 @@ export type ChatMessage = {
   };
 };
 export type Actions = {
-  type: 'message-delete' | 'message-edit' | 'message-send' | 'message-read' | 'select-user' | 'logout' | 'about';
+  type:
+    | 'message-delete'
+    | 'message-edit'
+    | 'message-send'
+    | 'message-read'
+    | 'select-user'
+    | 'logout'
+    | 'about'
+    | 'filter';
   payload?: {
     id?: string;
     text?: string;
@@ -49,6 +57,7 @@ export type EditReturn = {
 export type StateKey = string;
 export type StateValue = string | number | object | [];
 export type State = {
+  filter: string;
   appName: string;
   currentPage: `${Pages}`;
   currentUser: string;

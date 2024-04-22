@@ -1,9 +1,10 @@
 .chat {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 4rem auto 4rem;
+  grid-template-rows: 4rem 2rem auto 4rem;
   grid-template-areas:
     'h h h h h h h h h h h h'
+    'o o o c c c c c c c c c'
     'u u u c c c c c c c c c'
     'f f f f f f f f f f f f';
   width: clamp(0px, 100%, 75rem);
@@ -21,4 +22,20 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.chat-filter {
+  grid-area: o;
+  padding: 0 0.5rem;
+
+  font-size: var(--font-size-normal);
+  letter-spacing: 0.1rem;
+  color: rgb(255, 60, 0);
+  text-shadow: 0 0 5px rgb(0, 0, 0);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: color-mix(in srgb, var(--background-color-html) 90%, white 10%);
+
+  &::placeholder {
+    color: color-mix(in srgb, var(--text-color-normal) 80%, black 20%);
+  }
 }

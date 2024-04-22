@@ -16,7 +16,7 @@ export class InputMessage extends Component {
     super({ classNames: ['message-input-container'] });
     this.dispatch = dispatch;
     this.form = new Component({ tag: 'form' });
-    this.input = new Input({ attributes: [['placeholder', 'message...']] });
+    this.input = new Input({ attributes: [['placeholder', 'message...']], classNames: ['__inactive-element'] });
     this.input.setCallback(() => this.handleInput(), 'keyup');
     const styleInactiveBtn = this.input.isEmpty ? '__inactive-element' : '';
     this.btnSend = new Button({

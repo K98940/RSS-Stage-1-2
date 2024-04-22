@@ -3,7 +3,8 @@ import { Requests } from '../types/types-api';
 import { Callback, State, StateKey, StateValue } from './../types/types';
 
 const initialState: State = {
-  appName: 'fun-chat :(',
+  filter: '',
+  appName: 'fun-chat',
   currentPage: 'login',
   currentUser: '',
   currentInput: '',

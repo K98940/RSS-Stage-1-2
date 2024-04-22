@@ -67,6 +67,9 @@ export class ChatController {
         state.lastNotification = Requests.USER_LOGIN;
         window.location.hash = 'about';
         break;
+      case 'filter':
+        state.filter = payload?.text || '';
+        break;
     }
   };
 
@@ -161,6 +164,7 @@ export class ChatController {
     state.user = { ...state, login: '', password: '', isRequested: false, isLogined: false };
     state.currentUser = '';
     state.currentPage = 'login';
+    state.filter = '';
     state.chat = {};
     session.reset();
     this.auth.logout({ login, password });

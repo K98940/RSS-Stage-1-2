@@ -3,8 +3,6 @@ import { ListItem } from './list-item';
 import { Dispatch } from '../../../../../types/types';
 import { Component } from '../../../component/component';
 import { UsersController } from './users-list-controller';
-// import state from '../../../../../state/state';
-// import state, { subscribe } from '../../../../../state/state';
 
 type Props = {
   login: string;
@@ -21,7 +19,7 @@ export class Users {
     this.container = container;
     const controller = new UsersController();
     this.dispatch = dispatch;
-    controller.subscribe((props) => this.render(props));
+    controller.getUsers((props) => this.render(props));
   }
 
   public render(props: Props[]): void {
