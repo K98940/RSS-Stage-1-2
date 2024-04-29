@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>MACH</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+      .mach {
+        font-weight: 700;
+      }
+      .mach-m {
+        color: rgb(128, 106, 252);
+      }
+      .mach-ma {
+        color: rgb(150, 126, 255);
+      }
+      .mach-mac {
+        color: rgb(170, 146, 255);
+      }
+      .mach-mach {
+        color: rgb(190, 166, 255);
+      }
+
+      img {
+        border-radius: 1rem;
+      }
+    </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <section>
+          <section data-markdown>
+            Just a funny icebreaker code
+            ```js [1-14]
+            function factorial(n) {
+            if (n === 0) return 1;
+            if (n === 1) return 1;
+            if (n === 2) return 2;
+            if (n === 3) return 6;
+            if (n === 4) return 24;
+            if (n === 5) return 120;
+            if (n === 6) return 720;
+            if (n === 7) return 5040;
+            if (n === 8) return 40320;
+            if (n === 9) return 362880;
+            if (n === 10) return 3628800;
+            if (n === 11) return 39916800;
+            if (n > 11 || n < 0) { throw new RangeError(); } }
+            ```
+          </section>
+          <section>
+            <p>Which pattern to choose?</p>
+            <img src="./assets/0-1.webp" alt="">
+          </section>
+
+        </section>
+        <section>
+          <section data-transition="fade-out">
+          <p>MACH architecture</p>
+          <img src="./assets/4.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p class="mach">
+              <span class="mach-m">M</span>
+            </p>
+            <img src="./assets/5.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p class="mach"></p>
+              <span class="mach-m">M</span>
+              <span class="mach-ma">A</span>
+            </p>
+            <img src="./assets/6.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p class="mach"></p>
+              <span class="mach-m">M</span>
+              <span class="mach-ma">A</span>
+              <span class="mach-mac">C</span>
+            </p>
+            <img src="./assets/7.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p class="mach"></p>
+            <span class="mach-m">M</span>
+            <span class="mach-ma">A</span>
+            <span class="mach-mac">C</span>
+            <span class="mach-mach">H</span>
+            </p>
+            <img src="./assets/8.webp" alt="">
+          </section>
+        </section>
+
+        <section>
+          <section data-transition="fade-out">
+            <p>Microservices</p>
+            <img src="./assets/9.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p>A set of independent components</p>
+            <img src="./assets/10.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p>Its own function.</p>
+            <img src="./assets/11.webp" alt="">
+          </section>
+        </section>
+
+        <section>
+          <p>API-First. To share data and functionality</p>
+          <img src="./assets/12.webp" alt="">
+        </section>
+
+        <section>
+          <p>Cloud-Native. Designed for the cloud</p>
+          <img src="./assets/13.webp" alt="">
+        </section>
+
+        <section>
+          <p>Headless. Is separate from the front end</p>
+          <img src="./assets/14.webp" alt="">
+        </section>
+        <section>
+
+          <section data-transition="fade-out">
+            <p>Advantages. Flexible</p>
+            <img src="./assets/16-1.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p>Advantages. Flexible. Any can be changed</p>
+            <img src="./assets/16-2.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p>Advantages. Flexible. Different technologies</p>
+            <img src="./assets/16-3.webp" alt="">
+          </section>
+        </section>
+        <section>
+          <p>Advantages. Scaling based on specific demands</p>
+          <img src="./assets/17.webp" alt="">
+        </section>
+
+        <section>
+          <p>Advantages. Deploy faster</p>
+          <img src="./assets/18.webp" alt="">
+        </section>
+
+        <section>
+          <section data-transition="fade-out">
+            <p>Disadvantages. Team Coordination</p>
+            <img src="./assets/19.webp" alt="">
+          </section>
+          <section data-transition="fade-in">
+            <p>Disadvantages. Team Coordination</p>
+            <img src="./assets/20.webp" alt="">
+          </section>
+          <section>
+            <p>Disadvantages. Communicate over a network</p>
+            <img src="./assets/21.webp" alt="">
+          </section>
+        </section>
+
+        <section>
+            <p>Do you build modern apps?</p>
+            <img src="./assets/22.webp" alt="">
+        </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
